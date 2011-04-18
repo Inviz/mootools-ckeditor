@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 CKEDITOR.skins.add( 'v2', (function()
 {

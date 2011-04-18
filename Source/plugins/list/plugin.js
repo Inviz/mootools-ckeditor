@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * @file Insert and remove numbered and bulleted lists.

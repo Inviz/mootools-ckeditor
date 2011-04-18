@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 CKEDITOR.dialog.add( 'button', function( editor )
 {
 	function commitAttributes( element )

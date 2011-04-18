@@ -17,7 +17,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * @class DocumentFragment is a "lightweight" or "minimal" Document object. It is

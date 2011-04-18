@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 CKEDITOR.dialog.add( 'checkbox', function( editor )
 {
 	return {

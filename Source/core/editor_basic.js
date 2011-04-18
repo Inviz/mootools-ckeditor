@@ -17,7 +17,7 @@ provides:
 
 ...
 */
-﻿
+
 
 if ( !CKEDITOR.editor )
 {

@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 CKEDITOR.plugins.setLang( 'a11yhelp', 'en',
 {

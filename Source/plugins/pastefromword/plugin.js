@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 (function()
 {
 	function forceHtmlMode( evt ) { evt.data.mode = 'html'; }

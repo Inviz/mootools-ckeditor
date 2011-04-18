@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 // Register a plugin named "sample".
 CKEDITOR.plugins.add( 'keystrokes',

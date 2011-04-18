@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * @file Spell checker

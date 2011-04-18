@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 CKEDITOR.dialog.add( 'uicolor', function( editor )
 {

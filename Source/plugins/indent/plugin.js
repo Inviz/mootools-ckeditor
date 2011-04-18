@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * @file Increse and decrease indent commands.

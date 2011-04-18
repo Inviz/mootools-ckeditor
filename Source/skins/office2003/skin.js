@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 CKEDITOR.skins.add( 'office2003', (function()
 {

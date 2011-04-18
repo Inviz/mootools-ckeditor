@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 CKEDITOR.plugins.setLang( 'uicolor', 'he',
 {

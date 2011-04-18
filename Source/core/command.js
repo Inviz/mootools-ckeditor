@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * Creates a command class instance.

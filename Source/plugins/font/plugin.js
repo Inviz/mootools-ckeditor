@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 (function()
 {

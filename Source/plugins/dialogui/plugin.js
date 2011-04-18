@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /** @fileoverview The "dialogui" plugin. */
 

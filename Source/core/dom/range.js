@@ -20,7 +20,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * Creates a CKEDITOR.dom.range instance that can be used inside a specific

@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿( function()
+( function()
 {
 	CKEDITOR.plugins.colordialog =
 	{

@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 CKEDITOR.dialog.add( 'specialchar', function( editor )
 {

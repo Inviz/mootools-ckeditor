@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 CKEDITOR.dialog.add( 'select', function( editor )
 {
 	// Add a new option to a SELECT object (combo or list).

@@ -17,7 +17,7 @@ provides:
 
 ...
 */
-﻿
+
 
 CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 {

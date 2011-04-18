@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * @file DOM iterator, which iterates over list items, lines and paragraphs.

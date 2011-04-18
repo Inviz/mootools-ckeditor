@@ -18,7 +18,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * A lightweight representation of an HTML element.

@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 CKEDITOR.dialog.add( 'textfield', function( editor )
 {
 	var autoAttributes =

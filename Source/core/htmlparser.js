@@ -14,7 +14,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * Creates a {@link CKEDITOR.htmlParser} class instance.

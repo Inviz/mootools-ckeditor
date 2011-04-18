@@ -17,7 +17,7 @@ provides:
 
 ...
 */
-﻿
+
 
 /**
  * A lightweight representation of an HTML comment.
