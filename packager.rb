@@ -6,9 +6,9 @@ require 'pathname'
 class CKEditor
   attr_accessor :input, :output, :dependencies
   
-  R_NEWLINE = /\r\n/
   R_DEPENDENCIES = /var scripts =[^{]*(.[^}]*?\})\s*;/m
-  R_COPYRIGHT = /\/\*\s*Copyright.*?\*\//m
+  R_COPYRIGHT = /\/\*\s*Copyright.*?\*\/\n*/m
+  R_BOM = /^\357\273\277/m
   R_COMMENTS = /\/\*.*?\*\//m
   R_DESCRIPTION = /\/\*\*.*?@fileOverview\s*?(.*?)\s*\*\//m
   R_DESCRIPTION_SPLITTER = /^\s*\*\s*$/
@@ -49,8 +49,8 @@ class CKEditor
             end       
     vars << array(relative.to_s.sub('.js', ''))
     content = File.read(path).
+      sub(R_BOM, "").
       gsub(R_COPYRIGHT, '').
-      gsub(R_NEWLINE, "\n").
       gsub(R_PACKAGER_CLEANER, '').
       sub(R_DESCRIPTION) do |description|
         description = description.
@@ -62,11 +62,13 @@ class CKEditor
           gsub(R_DESCRIPTION_IDENTER, "\n" + (" " * 14))  if description && !description.empty?
         ''
       end
+    p header
+    p content
     (header % vars) + content
   end
   
   def extract_dependencies!(path = input + '_source/core/loader.js')
-    deps = File.read(path).match(R_DEPENDENCIES)[1].gsub(R_COMMENTS, '').gsub(R_NEWLINE, " ").gsub("'", '"')
+    deps = File.read(path).match(R_DEPENDENCIES)[1].gsub(R_COMMENTS, '').gsub("'", '"')
     p deps
     self.dependencies = JSON.parse(deps)
   end
