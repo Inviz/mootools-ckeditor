@@ -25,11 +25,11 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 	{
 		this._ =
 		{
-			output : []
+			output  []
 		};
 	},
 
-	proto :
+	proto 
 	{
 		/**
 		 * Writes the tag opening part for a opener tag.
@@ -38,9 +38,9 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 *		attributes could be used to inspect the tag.
 		 * @example
 		 * // Writes "&lt;p".
-		 * writer.openTag( 'p', { class : 'MyClass', id : 'MyId' } );
+		 * writer.openTag( 'p', { class  'MyClass', id  'MyId' } );
 		 */
-		openTag : function( tagName, attributes )
+		openTag  function( tagName, attributes )
 		{
 			this._.output.push( '<', tagName );
 		},
@@ -57,7 +57,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * // Writes " /&gt;".
 		 * writer.openTagClose( 'br', true );
 		 */
-		openTagClose : function( tagName, isSelfClose )
+		openTagClose  function( tagName, isSelfClose )
 		{
 			if ( isSelfClose )
 				this._.output.push( ' />' );
@@ -74,7 +74,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * // Writes ' class="MyClass"'.
 		 * writer.attribute( 'class', 'MyClass' );
 		 */
-		attribute : function( attName, attValue )
+		attribute  function( attName, attValue )
 		{
 			// Browsers don't always escape special character in attribute values. (#4683, #4719).
 			if ( typeof attValue == 'string' )
@@ -90,7 +90,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * // Writes "&lt;/p&gt;".
 		 * writer.closeTag( 'p' );
 		 */
-		closeTag : function( tagName )
+		closeTag  function( tagName )
 		{
 			this._.output.push( '</', tagName, '>' );
 		},
@@ -102,7 +102,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * // Writes "Hello Word".
 		 * writer.text( 'Hello Word' );
 		 */
-		text : function( text )
+		text  function( text )
 		{
 			this._.output.push( text );
 		},
@@ -114,7 +114,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * // Writes "&lt;!-- My comment --&gt;".
 		 * writer.comment( ' My comment ' );
 		 */
-		comment : function( comment )
+		comment  function( comment )
 		{
 			this._.output.push( '<!--', comment, '-->' );
 		},
@@ -124,7 +124,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * @example
 		 * writer.write( 'This is an &lt;b&gt;example&lt;/b&gt;.' );
 		 */
-		write : function( data )
+		write  function( data )
 		{
 			this._.output.push( data );
 		},
@@ -134,7 +134,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * @example
 		 * writer.reset();
 		 */
-		reset : function()
+		reset  function()
 		{
 			this._.output = [];
 			this._.indent = false;
@@ -148,7 +148,7 @@ CKEDITOR.htmlParser.basicWriter = CKEDITOR.tools.createClass(
 		 * @example
 		 * var html = writer.getHtml();
 		 */
-		getHtml : function( reset )
+		getHtml  function( reset )
 		{
 			var html = this._.output.join( '' );
 

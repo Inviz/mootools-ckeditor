@@ -69,9 +69,9 @@ provides:
 					 * Retrieves the next range in the list.
 					 * @param {Boolean} mergeConsequent Whether join two adjacent ranges into single, e.g. consequent table cells.
 					 */
-					getNextRange : function( mergeConsequent )
+					getNextRange  function( mergeConsequent )
 					{
-						current = current == undefined ? 0 : current + 1;
+						current = current == undefined ? 0  current + 1;
 
 						var range = rangeList[ current ];
 
@@ -143,7 +143,7 @@ provides:
 				};
 			},
 
-			createBookmarks : function( serializable )
+			createBookmarks  function( serializable )
 			{
 				var retval = [], bookmark;
 				for ( var i = 0; i < this.length ; i++ )
@@ -161,7 +161,7 @@ provides:
 				return retval;
 			},
 
-			createBookmarks2 : function( normalized )
+			createBookmarks2  function( normalized )
 			{
 				var bookmarks = [];
 
@@ -175,7 +175,7 @@ provides:
 			 * Move each range in the list to the position specified by a list of bookmarks.
 			 * @param {Array} bookmarks The list of bookmarks, each one matching a range in the list.
 			 */
-			moveToBookmarks :  function( bookmarks )
+			moveToBookmarks   function( bookmarks )
 			{
 				for ( var i = 0 ; i < this.length ; i++ )
 					this[ i ].moveToBookmark( bookmarks[ i ] );
@@ -187,16 +187,16 @@ provides:
 	function updateDirtyRange( bookmark, dirtyRange, checkEnd )
 	{
 		var serializable = bookmark.serializable,
-			container = dirtyRange[ checkEnd ? 'endContainer' : 'startContainer' ],
-			offset = checkEnd ? 'endOffset' : 'startOffset';
+			container = dirtyRange[ checkEnd ? 'endContainer'  'startContainer' ],
+			offset = checkEnd ? 'endOffset'  'startOffset';
 
 		var bookmarkStart = serializable ?
 				dirtyRange.document.getById( bookmark.startNode )
-				: bookmark.startNode;
+				 bookmark.startNode;
 
 		var bookmarkEnd = serializable ?
 				dirtyRange.document.getById( bookmark.endNode )
-				: bookmark.endNode;
+				 bookmark.endNode;
 
 		if ( container.equals( bookmarkStart.getPrevious() ) )
 		{
@@ -215,7 +215,7 @@ provides:
 		container.equals( bookmarkEnd.getParent() ) && dirtyRange[ offset ]++;
 
 		// Update and return this range.
-		dirtyRange[ checkEnd ? 'endContainer' : 'startContainer' ] = container;
+		dirtyRange[ checkEnd ? 'endContainer'  'startContainer' ] = container;
 		return dirtyRange;
 	}
 })();

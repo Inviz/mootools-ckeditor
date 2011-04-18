@@ -22,10 +22,10 @@ provides:
 (function()
 {
 	// Elements that may be considered the "Block boundary" in an element path.
-	var pathBlockElements = { address1,blockquote:1,dl:1,h1:1,h2:1,h3:1,h4:1,h5:1,h6:1,p:1,pre:1,li:1,dt:1,dd:1, legend:1 };
+	var pathBlockElements = { address1,blockquote1,dl1,h11,h21,h31,h41,h51,h61,p1,pre1,li1,dt1,dd1, legend1 };
 
 	// Elements that may be considered the "Block limit" in an element path.
-	var pathBlockLimitElements = { body:1,div:1,table:1,tbody:1,tr:1,td:1,th:1,caption:1,form:1,fieldset:1 };
+	var pathBlockLimitElements = { body1,div1,table1,tbody1,tr1,td1,th1,caption1,form1,fieldset1 };
 
 	// Check if an element contains any block element.
 	var checkHasBlock = function( element )
@@ -63,7 +63,7 @@ provides:
 
 				var elementName = e.getName();
 				if ( CKEDITOR.env.ie && e.$.scopeName != 'HTML' )
-					elementName = e.$.scopeName.toLowerCase() + ':' + elementName;
+					elementName = e.$.scopeName.toLowerCase() + '' + elementName;
 
 				if ( !blockLimit )
 				{
@@ -104,7 +104,7 @@ CKEDITOR.dom.elementPath.prototype =
 	 * @returns {Boolean} "true" if the paths are equal, containing the same
 	 * number of elements and the same elements in the same order.
 	 */
-	compare : function( otherPath )
+	compare  function( otherPath )
 	{
 		var thisElements = this.elements;
 		var otherElements = otherPath && otherPath.elements;
@@ -121,7 +121,7 @@ CKEDITOR.dom.elementPath.prototype =
 		return true;
 	},
 
-	contains : function( tagNames )
+	contains  function( tagNames )
 	{
 		var elements = this.elements;
 		for ( var i = 0 ; i < elements.length ; i++ )

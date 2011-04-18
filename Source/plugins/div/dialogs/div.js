@@ -162,7 +162,7 @@ provides:
 			var i, iterator;
 
 			// Calcualte a default block tag if we need to create blocks.
-			var blockTag = editor.config.enterMode == CKEDITOR.ENTER_DIV ? 'div' : 'p';
+			var blockTag = editor.config.enterMode == CKEDITOR.ENTER_DIV ? 'div'  'p';
 
 			// collect all included elements from dom-iterator
 			for ( i = 0 ; i < ranges.length ; i++ )
@@ -251,7 +251,7 @@ provides:
 		}
 		/**
 		 * Divide a set of nodes to different groups by their path's blocklimit element.
-		 * Note: the specified nodes should be in source order naturally, which mean they are supposed to producea by following class:
+		 * Note the specified nodes should be in source order naturally, which mean they are supposed to producea by following class
 		 *  * CKEDITOR.dom.range.Iterator
 		 *  * CKEDITOR.dom.domWalker
 		 *  @return {Array []} the grouped nodes
@@ -290,7 +290,7 @@ provides:
 			var length = targetFields.length, field;
 			for ( var i = 0; i < length; i++ )
 			{
-				field = dialog.getContentElement.apply( dialog, targetFields[ i ].split( ':' ) );
+				field = dialog.getContentElement.apply( dialog, targetFields[ i ].split( '' ) );
 				field && field.setup && field.setup( element, true );
 			}
 		}
@@ -306,43 +306,43 @@ provides:
 		 * @type divDialog
 		 */
 		return {
-			title : editor.lang.div.title,
-			minWidth : 400,
-			minHeight : 165,
-			contents :
+			title  editor.lang.div.title,
+			minWidth  400,
+			minHeight  165,
+			contents 
 			[
 			{
-				id :'info',
-				label :editor.lang.common.generalTab,
-				title :editor.lang.common.generalTab,
-				elements :
+				id 'info',
+				label editor.lang.common.generalTab,
+				title editor.lang.common.generalTab,
+				elements 
 				[
 					{
-						type :'hbox',
-						widths : [ '50%', '50%' ],
-						children :
+						type 'hbox',
+						widths  [ '50%', '50%' ],
+						children 
 						[
 							{
-								id :'elementStyle',
-								type :'select',
-								style :'width: 100%;',
-								label :editor.lang.div.styleSelectLabel,
-								'default' : '',
+								id 'elementStyle',
+								type 'select',
+								style 'width 100%;',
+								label editor.lang.div.styleSelectLabel,
+								'default'  '',
 								// Options are loaded dynamically.
-								items :
+								items 
 								[
 									[ editor.lang.common.notSet , '' ]
 								],
-								onChange : function()
+								onChange  function()
 								{
-									commitInternally.call( this, [ 'info:class', 'advanced:dir', 'advanced:style' ] );
+									commitInternally.call( this, [ 'infoclass', 'advanceddir', 'advancedstyle' ] );
 								},
-								setup : function( element )
+								setup  function( element )
 								{
 									for ( var name in styles )
 										styles[ name ].checkElementRemovable( element, true ) && this.setValue( name );
 								},
-								commit: function( element )
+								commit function( element )
 								{
 									var styleName;
 									if ( ( styleName = this.getValue() ) )
@@ -356,56 +356,56 @@ provides:
 								}
 							},
 							{
-								id :'class',
-								type :'text',
-								label :editor.lang.common.cssClass,
-								'default' : ''
+								id 'class',
+								type 'text',
+								label editor.lang.common.cssClass,
+								'default'  ''
 							}
 						]
 					}
 				]
 			},
 			{
-					id :'advanced',
-					label :editor.lang.common.advancedTab,
-					title :editor.lang.common.advancedTab,
-					elements :
+					id 'advanced',
+					label editor.lang.common.advancedTab,
+					title editor.lang.common.advancedTab,
+					elements 
 					[
 					{
-						type :'vbox',
-						padding :1,
-						children :
+						type 'vbox',
+						padding 1,
+						children 
 						[
 							{
-								type :'hbox',
-								widths : [ '50%', '50%' ],
-								children :
+								type 'hbox',
+								widths  [ '50%', '50%' ],
+								children 
 								[
 									{
-										type :'text',
-										id :'id',
-										label :editor.lang.common.id,
-										'default' : ''
+										type 'text',
+										id 'id',
+										label editor.lang.common.id,
+										'default'  ''
 									},
 									{
-										type :'text',
-										id :'lang',
-										label :editor.lang.link.langCode,
-										'default' : ''
+										type 'text',
+										id 'lang',
+										label editor.lang.link.langCode,
+										'default'  ''
 									}
 								]
 							},
 							{
-								type :'hbox',
-								children :
+								type 'hbox',
+								children 
 								[
 										{
-											type :'text',
-											id :'style',
-											style :'width: 100%;',
-											label :editor.lang.common.cssStyle,
-											'default' : '',
-											commit : function( element )
+											type 'text',
+											id 'style',
+											style 'width 100%;',
+											label editor.lang.common.cssStyle,
+											'default'  '',
+											commit  function( element )
 											{
 												// Merge with 'elementStyle', which is of higher priority.
 												var merged = this.getValue() + ( element.getCustomData( 'elementStyle' ) || '' );
@@ -415,25 +415,25 @@ provides:
 								]
 							},
 							{
-								type :'hbox',
-								children :
+								type 'hbox',
+								children 
 								[
 										{
-											type :'text',
-											id :'title',
-											style :'width: 100%;',
-											label :editor.lang.common.advisoryTitle,
-											'default' : ''
+											type 'text',
+											id 'title',
+											style 'width 100%;',
+											label editor.lang.common.advisoryTitle,
+											'default'  ''
 										}
 								]
 							},
 							{
-								type :'select',
-								id :'dir',
-								style :'width: 100%;',
-								label :editor.lang.common.langDir,
-								'default' : '',
-								items :
+								type 'select',
+								id 'dir',
+								style 'width 100%;',
+								label editor.lang.common.langDir,
+								'default'  '',
+								items 
 								[
 									[ editor.lang.common.notSet , '' ],
 									[
@@ -451,7 +451,7 @@ provides:
 					]
 				}
 			],
-			onLoad : function()
+			onLoad  function()
 			{
 				setupFields.call( this );
 
@@ -484,13 +484,13 @@ provides:
 
 					// We should disable the content element
 					// it if no options are available at all.
-					stylesField[ stylesField.items.length > 1 ? 'enable' : 'disable' ]();
+					stylesField[ stylesField.items.length > 1 ? 'enable'  'disable' ]();
 
 					// Now setup the field value manually.
 					setTimeout( function() { stylesField.setup( dialog._element ); }, 0 );
 				} );
 			},
-			onShow : function()
+			onShow  function()
 			{
 				// Whether always create new container regardless of existed
 				// ones.
@@ -503,7 +503,7 @@ provides:
 					div && this.setupContent( this._element = div );
 				}
 			},
-			onOk : function()
+			onOk  function()
 			{
 				if ( command == 'editdiv' )
 					containers = [ this._element ];
@@ -522,7 +522,7 @@ provides:
 
 				this.hide();
 			},
-			onHide : function()
+			onHide  function()
 			{
 				// Remove style only when editing existing DIV. (#6315)
 				if ( command == 'editdiv' )

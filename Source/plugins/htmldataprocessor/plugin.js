@@ -104,19 +104,19 @@ provides:
 			delete blockLikeTags[i];
 	}
 	// We just avoid filler in <pre> right now.
-	// TODO: Support filler for <pre>, line break is also occupy line height.
+	// TODO Support filler for <pre>, line break is also occupy line height.
 	delete blockLikeTags.pre;
 	var defaultDataFilterRules =
 	{
-		elements : {
-			a : function( element )
+		elements  {
+			a  function( element )
 			{
 				var attrs = element.attributes;
 				if ( attrs && attrs[ 'data-cke-saved-name' ] )
-					attrs[ 'class' ] = ( attrs[ 'class' ] ? attrs[ 'class' ] + ' ' : '' ) + 'cke_anchor';
+					attrs[ 'class' ] = ( attrs[ 'class' ] ? attrs[ 'class' ] + ' '  '' ) + 'cke_anchor';
 			}
 		},
-		attributeNames :
+		attributeNames 
 		[
 			// Event attributes (onXYZ) must not be directly set. They can become
 			// active in the editing area (IE|WebKit).
@@ -124,23 +124,23 @@ provides:
 		]
 	};
 
-	var defaultDataBlockFilterRules = { elements : {} };
+	var defaultDataBlockFilterRules = { elements  {} };
 
 	for ( i in blockLikeTags )
 		defaultDataBlockFilterRules.elements[ i ] = getBlockExtension();
 
 	var defaultHtmlFilterRules =
 		{
-			elementNames :
+			elementNames 
 			[
-				// Remove the "cke:" namespace prefix.
-				[ ( /^cke:/ ), '' ],
+				// Remove the "cke" namespace prefix.
+				[ ( /^cke/ ), '' ],
 
-				// Ignore <?xml:namespace> tags.
-				[ ( /^\?xml:namespace$/ ), '' ]
+				// Ignore <?xmlnamespace> tags.
+				[ ( /^\?xmlnamespace$/ ), '' ]
 			],
 
-			attributeNames :
+			attributeNames 
 			[
 				// Attributes saved for changes and protected attributes.
 				[ ( /^data-cke-(saved|pa)-/ ), '' ],
@@ -151,9 +151,9 @@ provides:
 				[ 'hidefocus', '' ]
 			],
 
-			elements :
+			elements 
 			{
-				$ : function( element )
+				$  function( element )
 				{
 					var attribs = element.attributes;
 
@@ -177,17 +177,17 @@ provides:
 				},
 
 				// The contents of table should be in correct order (#4809).
-				table : function( element )
+				table  function( element )
 				{
 					var children = element.children;
 					children.sort( function ( node1, node2 )
 								   {
 									   return node1.type == CKEDITOR.NODE_ELEMENT && node2.type == node1.type ?
-											CKEDITOR.tools.indexOf( tableOrder, node1.name )  > CKEDITOR.tools.indexOf( tableOrder, node2.name ) ? 1 : -1 : 0;
+											CKEDITOR.tools.indexOf( tableOrder, node1.name )  > CKEDITOR.tools.indexOf( tableOrder, node2.name ) ? 1  -1  0;
 								   } );
 				},
 
-				embed : function( element )
+				embed  function( element )
 				{
 					var parent = element.parent;
 
@@ -202,7 +202,7 @@ provides:
 					}
 				},
 				// Restore param elements into self-closing.
-				param : function( param )
+				param  function( param )
 				{
 					param.children = [];
 					param.isEmpty = true;
@@ -210,7 +210,7 @@ provides:
 				},
 
 				// Remove empty link but not empty anchor.(#3829)
-				a : function( element )
+				a  function( element )
 				{
 					if ( !( element.children.length ||
 							element.attributes.name ||
@@ -221,28 +221,28 @@ provides:
 				},
 
 				// Remove dummy span in webkit.
-				span: function( element )
+				span function( element )
 				{
 					if ( element.attributes[ 'class' ] == 'Apple-style-span' )
 						delete element.name;
 				},
 
 				// Empty <pre> in IE is reported with filler node (&nbsp;).
-				pre : function( element ) { CKEDITOR.env.ie && trimFillers( element ); },
+				pre  function( element ) { CKEDITOR.env.ie && trimFillers( element ); },
 
-				html : function( element )
+				html  function( element )
 				{
 					delete element.attributes.contenteditable;
 					delete element.attributes[ 'class' ];
 				},
 
-				body : function( element )
+				body  function( element )
 				{
 					delete element.attributes.spellcheck;
 					delete element.attributes.contenteditable;
 				},
 
-				style : function( element )
+				style  function( element )
 				{
 					var child = element.children[ 0 ];
 					child && child.value && ( child.value = CKEDITOR.tools.trim( child.value ));
@@ -251,19 +251,19 @@ provides:
 						element.attributes.type = 'text/css';
 				},
 
-				title : function( element )
+				title  function( element )
 				{
 					var titleText = element.children[ 0 ];
 					titleText && ( titleText.value = element.attributes[ 'data-cke-title' ] || '' );
 				}
 			},
 
-			attributes :
+			attributes 
 			{
-				'class' : function( value, element )
+				'class'  function( value, element )
 				{
 					// Remove all class names starting with "cke_".
-					return CKEDITOR.tools.ltrim( value.replace( /(?:^|\s+)cke_[^\s]*/g, '' ) ) || false;
+					return CKEDITOR.tools.ltrim( value.replace( /(?^|\s+)cke_[^\s]*/g, '' ) ) || false;
 				}
 			}
 		};
@@ -274,7 +274,7 @@ provides:
 		// them back to lower case, while not hurting the values (#5930)
 		defaultHtmlFilterRules.attributes.style = function( value, element )
 		{
-			return value.replace( /(^|;)([^\:]+)/g, function( match )
+			return value.replace( /(^|;)([^\]+)/g, function( match )
 				{
 					return match.toLowerCase();
 				});
@@ -288,7 +288,7 @@ provides:
 		// We should flag that the element was locked by our code so
 		// it'll be editable by the editor functions (#6046).
 		if ( attrs.contenteditable != "false" )
-			attrs[ 'data-cke-editable' ] = attrs.contenteditable ? 'true' : 1;
+			attrs[ 'data-cke-editable' ] = attrs.contenteditable ? 'true'  1;
 
 		attrs.contenteditable = "false";
 	}
@@ -297,27 +297,27 @@ provides:
 		var attrs = element.attributes;
 		switch( attrs[ 'data-cke-editable' ] )
 		{
-			case 'true':	attrs.contenteditable = 'true';	break;
-			case '1':		delete attrs.contenteditable;	break;
+			case 'true'	attrs.contenteditable = 'true';	break;
+			case '1'		delete attrs.contenteditable;	break;
 		}
 	}
 	// Disable form elements editing mode provided by some browers. (#5746)
-	for ( i in { input : 1, textarea : 1 } )
+	for ( i in { input  1, textarea  1 } )
 	{
 		defaultDataFilterRules.elements[ i ] = protectReadOnly;
 		defaultHtmlFilterRules.elements[ i ] = unprotectReadyOnly;
 	}
 
 	var protectElementRegex = /<(a|area|img|input)\b([^>]*)>/gi,
-		protectAttributeRegex = /\b(href|src|name)\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|(?:[^ "'>]+))/gi;
+		protectAttributeRegex = /\b(href|src|name)\s*=\s*(?(?"[^"]*")|(?'[^']*')|(?[^ "'>]+))/gi;
 
-	var protectElementsRegex = /(?:<style(?=[ >])[^>]*>[\s\S]*<\/style>)|(?:<(:?link|meta|base)[^>]*>)/gi,
-		encodedElementsRegex = /<cke:encoded>([^<]*)<\/cke:encoded>/gi;
+	var protectElementsRegex = /(?<style(?=[ >])[^>]*>[\s\S]*<\/style>)|(?<(?link|meta|base)[^>]*>)/gi,
+		encodedElementsRegex = /<ckeencoded>([^<]*)<\/ckeencoded>/gi;
 
-	var protectElementNamesRegex = /(<\/?)((?:object|embed|param|html|body|head|title)[^>]*>)/gi,
-		unprotectElementNamesRegex = /(<\/?)cke:((?:html|body|head|title)[^>]*>)/gi;
+	var protectElementNamesRegex = /(<\/?)((?object|embed|param|html|body|head|title)[^>]*>)/gi,
+		unprotectElementNamesRegex = /(<\/?)cke((?html|body|head|title)[^>]*>)/gi;
 
-	var protectSelfClosingRegex = /<cke:(param|embed)([^>]*?)\/?>(?!\s*<\/cke:\1)/gi;
+	var protectSelfClosingRegex = /<cke(param|embed)([^>]*?)\/?>(?!\s*<\/cke\1)/gi;
 
 	function protectAttributes( html )
 	{
@@ -338,7 +338,7 @@ provides:
 	{
 		return html.replace( protectElementsRegex, function( match )
 			{
-				return '<cke:encoded>' + encodeURIComponent( match ) + '</cke:encoded>';
+				return '<ckeencoded>' + encodeURIComponent( match ) + '</ckeencoded>';
 			});
 	}
 
@@ -352,7 +352,7 @@ provides:
 
 	function protectElementsNames( html )
 	{
-		return html.replace( protectElementNamesRegex, '$1cke:$2');
+		return html.replace( protectElementNamesRegex, '$1cke$2');
 	}
 
 	function unprotectElementNames( html )
@@ -362,7 +362,7 @@ provides:
 
 	function protectSelfClosingElements( html )
 	{
-		return html.replace( protectSelfClosingRegex, '<cke:$1$2></cke:$1>' );
+		return html.replace( protectSelfClosingRegex, '<cke$1$2></cke$1>' );
 	}
 
 	function protectPreFormatted( html )
@@ -406,7 +406,7 @@ provides:
 	{
 		var protectedHtml = [],
 			protectRegexes = editor.config.protectedSource,
-			store = editor._.dataStore || ( editor._.dataStore = { id : 1 } ),
+			store = editor._.dataStore || ( editor._.dataStore = { id  1 } ),
 			tempRegex = /<\!--\{cke_temp(comment)?\}(\d*?)-->/g;
 
 		var regexes =
@@ -442,13 +442,13 @@ provides:
 
 					// Avoid protecting over protected, e.g. /\{.*?\}/
 					return ( /cke_temp(comment)?/ ).test( match ) ? match
-						: '<!--{cke_temp}' + ( protectedHtml.push( match ) - 1 ) + '-->';
+						 '<!--{cke_temp}' + ( protectedHtml.push( match ) - 1 ) + '-->';
 				});
 		}
 		data = data.replace( tempRegex,	function( $, isComment, id )
 			{
 				return '<!--' + protectedSourceMarker +
-						( isComment ? '{C}' : '' ) +
+						( isComment ? '{C}'  '' ) +
 						encodeURIComponent( protectedHtml[ id ] ).replace( /--/g, '%2D%2D' ) +
 						'-->';
 			}
@@ -468,9 +468,9 @@ provides:
 
 	CKEDITOR.plugins.add( 'htmldataprocessor',
 	{
-		requires : [ 'htmlwriter' ],
+		requires  [ 'htmlwriter' ],
 
-		init : function( editor )
+		init  function( editor )
 		{
 			var dataProcessor = editor.dataProcessor = new CKEDITOR.htmlDataProcessor( editor );
 
@@ -480,14 +480,14 @@ provides:
 			dataProcessor.dataFilter.addRules( defaultDataBlockFilterRules );
 			dataProcessor.htmlFilter.addRules( defaultHtmlFilterRules );
 
-			var defaultHtmlBlockFilterRules = { elements : {} };
+			var defaultHtmlBlockFilterRules = { elements  {} };
 			for ( i in blockLikeTags )
 				defaultHtmlBlockFilterRules.elements[ i ] = getBlockExtension( true, editor.config.fillEmptyBlocks );
 
 			dataProcessor.htmlFilter.addRules( defaultHtmlBlockFilterRules );
 		},
 
-		onLoad : function()
+		onLoad  function()
 		{
 			! ( 'fillEmptyBlocks' in CKEDITOR.config ) && ( CKEDITOR.config.fillEmptyBlocks = 1 );
 		}
@@ -504,7 +504,7 @@ provides:
 
 	CKEDITOR.htmlDataProcessor.prototype =
 	{
-		toHtml : function( data, fixForBody )
+		toHtml  function( data, fixForBody )
 		{
 			// The source data is already HTML, but we need to clean
 			// it up and apply the filter.
@@ -562,7 +562,7 @@ provides:
 			return data;
 		},
 
-		toDataFormat : function( html, fixForBody )
+		toDataFormat  function( html, fixForBody )
 		{
 			var writer = this.writer,
 				fragment = CKEDITOR.htmlParser.fragment.fromHtml( html, fixForBody );
@@ -585,7 +585,7 @@ provides:
 /**
  * Whether to force using "&" instead of "&amp;amp;" in elements attributes
  * values, it's not recommended to change this setting for compliance with the
- * W3C XHTML 1.0 standards (<a href="http://www.w3.org/TR/xhtml1/#C_12">C.12, XHTML 1.0</a>).
+ * W3C XHTML 1.0 standards (<a href="http//www.w3.org/TR/xhtml1/#C_12">C.12, XHTML 1.0</a>).
  * @name CKEDITOR.config.forceSimpleAmpersand
  * @name CKEDITOR.config.forceSimpleAmpersand
  * @type Boolean

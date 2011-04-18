@@ -54,12 +54,12 @@ provides:
 						'</a>' );
 
 				// Build the inner HTML of our new item DIV.
-				var html = '<table style="width:350px;" class="cke_tpl_preview" role="presentation"><tr>';
+				var html = '<table style="width350px;" class="cke_tpl_preview" role="presentation"><tr>';
 
 				if ( template.image && imagesPath )
-					html += '<td class="cke_tpl_preview_img"><img src="' + CKEDITOR.getUrl( imagesPath + template.image ) + '"' + ( CKEDITOR.env.ie6Compat ? ' onload="this.width=this.width"' : '' ) + ' alt="" title=""></td>';
+					html += '<td class="cke_tpl_preview_img"><img src="' + CKEDITOR.getUrl( imagesPath + template.image ) + '"' + ( CKEDITOR.env.ie6Compat ? ' onload="this.width=this.width"'  '' ) + ' alt="" title=""></td>';
 
-				html += '<td style="white-space:normal;"><span class="cke_tpl_title">' + template.title + '</span><br/>';
+				html += '<td style="white-spacenormal;"><span class="cke_tpl_title">' + template.title + '</span><br/>';
 
 				if ( template.description )
 					html += '<span>' + template.description + '</span>';
@@ -131,16 +131,16 @@ provides:
 						{
 							switch ( keystroke )
 							{
-								case 40 :					// ARROW-DOWN
+								case 40 					// ARROW-DOWN
 									focusItem = target.getNext();
 									break;
 
-								case 38 :					// ARROW-UP
+								case 38 					// ARROW-UP
 									focusItem = target.getPrevious();
 									break;
 
-								case 13 :					// ENTER
-								case 32 :					// SPACE
+								case 13 					// ENTER
+								case 32 					// SPACE
 									target.fire( 'click' );
 							}
 						}
@@ -163,45 +163,45 @@ provides:
 				lang = editor.lang.templates,
 				config = editor.config;
 			return {
-				title :editor.lang.templates.title,
+				title editor.lang.templates.title,
 
-				minWidth : CKEDITOR.env.ie ? 440 : 400,
-				minHeight : 340,
+				minWidth  CKEDITOR.env.ie ? 440  400,
+				minHeight  340,
 
-				contents :
+				contents 
 				[
 					{
-						id :'selectTpl',
-						label : lang.title,
-						elements :
+						id 'selectTpl',
+						label  lang.title,
+						elements 
 						[
 							{
-								type : 'vbox',
-								padding : 5,
-								children :
+								type  'vbox',
+								padding  5,
+								children 
 								[
 									{
-										type : 'html',
-										html :
+										type  'html',
+										html 
 											'<span>'  +
 												lang.selectPromptMsg +
 											'</span>'
 									},
 									{
-										id : 'templatesList',
-										type : 'html',
-										focus: true,
-										html :
+										id  'templatesList',
+										type  'html',
+										focus true,
+										html 
 											'<div class="cke_tpl_list" tabIndex="-1" role="listbox" aria-labelledby="' + templateListLabelId+ '">' +
 												'<div class="cke_tpl_loading"><span></span></div>' +
 											'</div>' +
 											'<span class="cke_voice_label" id="' + templateListLabelId + '">' + lang.options+ '</span>'
 									},
 									{
-										id : 'chkInsertOpt',
-										type : 'checkbox',
-										label : lang.insertOption,
-										'default' : config.templates_replaceContent
+										id  'chkInsertOpt',
+										type  'checkbox',
+										label  lang.insertOption,
+										'default'  config.templates_replaceContent
 									}
 								]
 							}
@@ -209,9 +209,9 @@ provides:
 					}
 				],
 
-				buttons : [ CKEDITOR.dialog.cancelButton ],
+				buttons  [ CKEDITOR.dialog.cancelButton ],
 
-				onShow : function()
+				onShow  function()
 				{
 					var templatesListField = this.getContentElement( 'selectTpl' , 'templatesList' );
 					listContainer = templatesListField.getElement();
@@ -237,7 +237,7 @@ provides:
 					this._.element.on( 'keydown', keyNavigation );
 				},
 
-				onHide : function()
+				onHide  function()
 				{
 					this._.element.removeListener( 'keydown', keyNavigation );
 				}

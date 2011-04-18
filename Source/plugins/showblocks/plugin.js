@@ -35,10 +35,10 @@ provides:
 		'.%2 h6'+
 		'{'+
 			'background-repeat no-repeat;'+
-			'background-position: top %3;'+
-			'border: 1px dotted gray;'+
-			'padding-top: 8px;'+
-			'padding-%3: 8px;'+
+			'background-position top %3;'+
+			'border 1px dotted gray;'+
+			'padding-top 8px;'+
+			'padding-%3 8px;'+
 		'}'+
 
 		'.%2 p'+
@@ -100,27 +100,27 @@ provides:
 
 	var commandDefinition =
 	{
-		preserveState : true,
-		editorFocus : false,
+		preserveState  true,
+		editorFocus  false,
 
-		exec : function ( editor )
+		exec  function ( editor )
 		{
 			this.toggleState();
 			this.refresh( editor );
 		},
 
-		refresh : function( editor )
+		refresh  function( editor )
 		{
-			var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
+			var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass'  'removeClass';
 			editor.document.getBody()[ funcName ]( 'cke_show_blocks' );
 		}
 	};
 
 	CKEDITOR.plugins.add( 'showblocks',
 	{
-		requires : [ 'wysiwygarea' ],
+		requires  [ 'wysiwygarea' ],
 
-		init : function( editor )
+		init  function( editor )
 		{
 			var command = editor.addCommand( 'showblocks', commandDefinition );
 			command.canUndo = false;
@@ -129,14 +129,14 @@ provides:
 				command.setState( CKEDITOR.TRISTATE_ON );
 
 			editor.addCss( cssTemplate
-				.replace( cssTemplateRegex, 'background-image: url(' + CKEDITOR.getUrl( this.path ) + 'images/block_' )
+				.replace( cssTemplateRegex, 'background-image url(' + CKEDITOR.getUrl( this.path ) + 'images/block_' )
 				.replace( cssClassRegex, 'cke_show_blocks ' )
-				.replace( backgroundPositionRegex, editor.lang.dir == 'rtl' ? 'right' : 'left' ) );
+				.replace( backgroundPositionRegex, editor.lang.dir == 'rtl' ? 'right'  'left' ) );
 
 			editor.ui.addButton( 'ShowBlocks',
 				{
-					label : editor.lang.showBlocks,
-					command : 'showblocks'
+					label  editor.lang.showBlocks,
+					command  'showblocks'
 				});
 
 			// Refresh the command on setData.

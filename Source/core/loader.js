@@ -35,48 +35,48 @@ if ( !CKEDITOR.loader )
 		var scripts =
 		{
 			'core/_bootstrap'		 [ 'core/config', 'core/ckeditor', 'core/plugins', 'core/scriptloader', 'core/tools', /* The following are entries that we want to force loading at the end to avoid dependence recursion */ 'core/dom/comment', 'core/dom/elementpath', 'core/dom/text', 'core/dom/rangelist' ],
-			'core/ckeditor'			: [ 'core/ckeditor_basic', 'core/dom', 'core/dtd', 'core/dom/document', 'core/dom/element', 'core/editor', 'core/event', 'core/htmlparser', 'core/htmlparser/element', 'core/htmlparser/fragment', 'core/htmlparser/filter', 'core/htmlparser/basicwriter', 'core/tools' ],
-			'core/ckeditor_base'	: [],
-			'core/ckeditor_basic'	: [ 'core/editor_basic', 'core/env', 'core/event' ],
-			'core/command'			: [],
-			'core/config'			: [ 'core/ckeditor_base' ],
-			'core/dom'				: [],
-			'core/dom/comment'		: [ 'core/dom/node' ],
-			'core/dom/document'		: [ 'core/dom', 'core/dom/domobject', 'core/dom/window' ],
-			'core/dom/documentfragment'	: [ 'core/dom/element' ],
-			'core/dom/element'		: [ 'core/dom', 'core/dom/document', 'core/dom/domobject', 'core/dom/node', 'core/dom/nodelist', 'core/tools' ],
-			'core/dom/elementpath'	: [ 'core/dom/element' ],
-			'core/dom/event'		: [],
-			'core/dom/node'			: [ 'core/dom/domobject', 'core/tools' ],
-			'core/dom/nodelist'		: [ 'core/dom/node' ],
-			'core/dom/domobject'	: [ 'core/dom/event' ],
-			'core/dom/range'		: [ 'core/dom/document', 'core/dom/documentfragment', 'core/dom/element', 'core/dom/walker' ],
-			'core/dom/rangelist'    : [ 'core/dom/range' ],
-			'core/dom/text'			: [ 'core/dom/node', 'core/dom/domobject' ],
-			'core/dom/walker'		: [ 'core/dom/node' ],
-			'core/dom/window'		: [ 'core/dom/domobject' ],
-			'core/dtd'				: [ 'core/tools' ],
-			'core/editor'			: [ 'core/command', 'core/config', 'core/editor_basic', 'core/focusmanager', 'core/lang', 'core/plugins', 'core/skins', 'core/themes', 'core/tools', 'core/ui' ],
-			'core/editor_basic'		: [ 'core/event' ],
-			'core/env'				: [],
-			'core/event'			: [],
-			'core/focusmanager'		: [],
-			'core/htmlparser'		: [],
-			'core/htmlparser/comment'	: [ 'core/htmlparser' ],
-			'core/htmlparser/element'	: [ 'core/htmlparser', 'core/htmlparser/fragment' ],
-			'core/htmlparser/fragment'	: [ 'core/htmlparser', 'core/htmlparser/comment', 'core/htmlparser/text', 'core/htmlparser/cdata' ],
-			'core/htmlparser/text'		: [ 'core/htmlparser' ],
-			'core/htmlparser/cdata'		: [ 'core/htmlparser' ],
-			'core/htmlparser/filter'	: [ 'core/htmlparser' ],
-			'core/htmlparser/basicwriter': [ 'core/htmlparser' ],
-			'core/lang'				: [],
-			'core/plugins'			: [ 'core/resourcemanager' ],
-			'core/resourcemanager'	: [ 'core/scriptloader', 'core/tools' ],
-			'core/scriptloader'		: [ 'core/dom/element', 'core/env' ],
-			'core/skins'			: [ 'core/scriptloader' ],
-			'core/themes'			: [ 'core/resourcemanager' ],
-			'core/tools'			: [ 'core/env' ],
-			'core/ui'				: []
+			'core/ckeditor'			 [ 'core/ckeditor_basic', 'core/dom', 'core/dtd', 'core/dom/document', 'core/dom/element', 'core/editor', 'core/event', 'core/htmlparser', 'core/htmlparser/element', 'core/htmlparser/fragment', 'core/htmlparser/filter', 'core/htmlparser/basicwriter', 'core/tools' ],
+			'core/ckeditor_base'	 [],
+			'core/ckeditor_basic'	 [ 'core/editor_basic', 'core/env', 'core/event' ],
+			'core/command'			 [],
+			'core/config'			 [ 'core/ckeditor_base' ],
+			'core/dom'				 [],
+			'core/dom/comment'		 [ 'core/dom/node' ],
+			'core/dom/document'		 [ 'core/dom', 'core/dom/domobject', 'core/dom/window' ],
+			'core/dom/documentfragment'	 [ 'core/dom/element' ],
+			'core/dom/element'		 [ 'core/dom', 'core/dom/document', 'core/dom/domobject', 'core/dom/node', 'core/dom/nodelist', 'core/tools' ],
+			'core/dom/elementpath'	 [ 'core/dom/element' ],
+			'core/dom/event'		 [],
+			'core/dom/node'			 [ 'core/dom/domobject', 'core/tools' ],
+			'core/dom/nodelist'		 [ 'core/dom/node' ],
+			'core/dom/domobject'	 [ 'core/dom/event' ],
+			'core/dom/range'		 [ 'core/dom/document', 'core/dom/documentfragment', 'core/dom/element', 'core/dom/walker' ],
+			'core/dom/rangelist'     [ 'core/dom/range' ],
+			'core/dom/text'			 [ 'core/dom/node', 'core/dom/domobject' ],
+			'core/dom/walker'		 [ 'core/dom/node' ],
+			'core/dom/window'		 [ 'core/dom/domobject' ],
+			'core/dtd'				 [ 'core/tools' ],
+			'core/editor'			 [ 'core/command', 'core/config', 'core/editor_basic', 'core/focusmanager', 'core/lang', 'core/plugins', 'core/skins', 'core/themes', 'core/tools', 'core/ui' ],
+			'core/editor_basic'		 [ 'core/event' ],
+			'core/env'				 [],
+			'core/event'			 [],
+			'core/focusmanager'		 [],
+			'core/htmlparser'		 [],
+			'core/htmlparser/comment'	 [ 'core/htmlparser' ],
+			'core/htmlparser/element'	 [ 'core/htmlparser', 'core/htmlparser/fragment' ],
+			'core/htmlparser/fragment'	 [ 'core/htmlparser', 'core/htmlparser/comment', 'core/htmlparser/text', 'core/htmlparser/cdata' ],
+			'core/htmlparser/text'		 [ 'core/htmlparser' ],
+			'core/htmlparser/cdata'		 [ 'core/htmlparser' ],
+			'core/htmlparser/filter'	 [ 'core/htmlparser' ],
+			'core/htmlparser/basicwriter' [ 'core/htmlparser' ],
+			'core/lang'				 [],
+			'core/plugins'			 [ 'core/resourcemanager' ],
+			'core/resourcemanager'	 [ 'core/scriptloader', 'core/tools' ],
+			'core/scriptloader'		 [ 'core/dom/element', 'core/env' ],
+			'core/skins'			 [ 'core/scriptloader' ],
+			'core/themes'			 [ 'core/resourcemanager' ],
+			'core/tools'			 [ 'core/env' ],
+			'core/ui'				 []
 		};
 
 		var basePath = (function()
@@ -92,7 +92,7 @@ if ( !CKEDITOR.loader )
 
 			for ( var i = 0 ; i < scripts.length ; i++ )
 			{
-				var match = scripts[i].src.match( /(^|.*?[\\\/])(?:_source\/)?core\/loader.js(?:\?.*)?$/i );
+				var match = scripts[i].src.match( /(^|.*?[\\\/])(?_source\/)?core\/loader.js(?\?.*)?$/i );
 
 				if ( match )
 				{
@@ -103,11 +103,11 @@ if ( !CKEDITOR.loader )
 
 			// In IE (only) the script.src string is the raw valued entered in the
 			// HTML. Other browsers return the full resolved URL instead.
-			if ( path.indexOf('://') == -1 )
+			if ( path.indexOf('//') == -1 )
 			{
 				// Absolute path.
 				if ( path.indexOf( '/' ) === 0 )
-					path = location.href.match( /^.*?:\/\/[^\/]*/ )[0] + path;
+					path = location.href.match( /^.*?\/\/[^\/]*/ )[0] + path;
 				// Relative path.
 				else
 					path = location.href.match( /^[^\?]*\// )[0] + path;
@@ -124,7 +124,7 @@ if ( !CKEDITOR.loader )
 				return CKEDITOR.getUrl( resource );
 
 			return basePath + resource +
-				( resource.indexOf( '?' ) >= 0 ? '&' : '?' ) +
+				( resource.indexOf( '?' ) >= 0 ? '&'  '?' ) +
 				't=' + timestamp;
 		};
 
@@ -139,9 +139,9 @@ if ( !CKEDITOR.loader )
 			 * // Alert the loaded script names.
 			 * alert( <b>CKEDITOR.loader.loadedScripts</b> );
 			 */
-			loadedScripts : [],
+			loadedScripts  [],
 
-			loadPending : function()
+			loadPending  function()
 			{
 				var scriptName = pendingLoad.shift();
 
@@ -199,7 +199,7 @@ if ( !CKEDITOR.loader )
 			 * @example
 			 * CKEDITOR.loader.load( 'core/dom/element' );
 			 */
-			load : function( scriptName, defer )
+			load  function( scriptName, defer )
 			{
 				// Check if the script has already been loaded.
 				if ( scriptName in this.loadedScripts )

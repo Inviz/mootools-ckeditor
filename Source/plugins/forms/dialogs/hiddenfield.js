@@ -19,10 +19,10 @@ CKEDITOR.dialog.add( 'hiddenfield', function( editor )
 {
 	return {
 		title  editor.lang.hidden.title,
-		hiddenField : null,
-		minWidth : 350,
-		minHeight : 110,
-		onShow : function()
+		hiddenField  null,
+		minWidth  350,
+		minHeight  110,
+		onShow  function()
 		{
 			delete this.hiddenField;
 
@@ -38,14 +38,14 @@ CKEDITOR.dialog.add( 'hiddenfield', function( editor )
 				selection.selectElement( this.hiddenField );
 			}
 		},
-		onOk : function()
+		onOk  function()
 		{
 			var name = this.getValueOf( 'info', '_cke_saved_name' ),
 				value = this.getValueOf( 'info', 'value' ),
 				editor = this.getParentEditor(),
 				element = CKEDITOR.env.ie && !( CKEDITOR.document.$.documentMode >= 8 ) ?
 					editor.document.createElement( '<input name="' + CKEDITOR.tools.htmlEncode( name ) + '">' )
-					: editor.document.createElement( 'input' );
+					 editor.document.createElement( 'input' );
 
 			element.setAttribute( 'type', 'hidden' );
 			this.commitContent( element );
@@ -59,26 +59,26 @@ CKEDITOR.dialog.add( 'hiddenfield', function( editor )
 			}
 			return true;
 		},
-		contents : [
+		contents  [
 			{
-				id : 'info',
-				label : editor.lang.hidden.title,
-				title : editor.lang.hidden.title,
-				elements : [
+				id  'info',
+				label  editor.lang.hidden.title,
+				title  editor.lang.hidden.title,
+				elements  [
 					{
-						id : '_cke_saved_name',
-						type : 'text',
-						label : editor.lang.hidden.name,
-						'default' : '',
-						accessKey : 'N',
-						setup : function( element )
+						id  '_cke_saved_name',
+						type  'text',
+						label  editor.lang.hidden.name,
+						'default'  '',
+						accessKey  'N',
+						setup  function( element )
 						{
 							this.setValue(
 									element.data( 'cke-saved-name' ) ||
 									element.getAttribute( 'name' ) ||
 									'' );
 						},
-						commit : function( element )
+						commit  function( element )
 						{
 							if ( this.getValue() )
 								element.setAttribute( 'name', this.getValue() );
@@ -89,16 +89,16 @@ CKEDITOR.dialog.add( 'hiddenfield', function( editor )
 						}
 					},
 					{
-						id : 'value',
-						type : 'text',
-						label : editor.lang.hidden.value,
-						'default' : '',
-						accessKey : 'V',
-						setup : function( element )
+						id  'value',
+						type  'text',
+						label  editor.lang.hidden.value,
+						'default'  '',
+						accessKey  'V',
+						setup  function( element )
 						{
 							this.setValue( element.getAttribute( 'value' ) || '' );
 						},
-						commit : function( element )
+						commit  function( element )
 						{
 							if ( this.getValue() )
 								element.setAttribute( 'value', this.getValue() );

@@ -42,10 +42,10 @@ provides:
 	{
 		return {
 			textNode  this.textNode,
-			offset : this.offset,
-			character : this.textNode ?
-				this.textNode.getText().charAt( this.offset ) : null,
-			hitMatchBoundary : this._.matchBoundary
+			offset  this.offset,
+			character  this.textNode ?
+				this.textNode.getText().charAt( this.offset )  null,
+			hitMatchBoundary  this._.matchBoundary
 		};
 	};
 
@@ -65,7 +65,7 @@ provides:
 		var sourceIndex, targetIndex,
 			sourceField, targetField;
 
-		sourceIndex = currentPageId === 'find' ? 1 : 0;
+		sourceIndex = currentPageId === 'find' ? 1  0;
 		targetIndex = 1 - sourceIndex;
 		var i, l = fieldsMapping.length;
 		for ( i = 0 ; i < l ; i++ )
@@ -81,10 +81,10 @@ provides:
 
 	var findDialog = function( editor, startupPage )
 	{
-		// Style object for highlights: (#5018)
+		// Style object for highlights (#5018)
 		// 1. Defined as full match style to avoid compromising ordinary text color styles.
 		// 2. Must be apply onto inner-most text to avoid conflicting with ordinary text color styles visually.
-		var highlightStyle = new CKEDITOR.style( CKEDITOR.tools.extend( { fullMatch : true, childRule : function(){ return 0; } },
+		var highlightStyle = new CKEDITOR.style( CKEDITOR.tools.extend( { fullMatch  true, childRule  function(){ return 0; } },
 			editor.config.find_highlight ) );
 
 		/**
@@ -99,7 +99,7 @@ provides:
 			var self = this;
 			var walker =
 				new CKEDITOR.dom.walker( range );
-			walker.guard = matchWord ? nonCharactersBoundary : function( node )
+			walker.guard = matchWord ? nonCharactersBoundary  function( node )
 			{
 				!nonCharactersBoundary( node ) && ( self._.matchBoundary = true );
 			};
@@ -113,24 +113,24 @@ provides:
 			}
 
 			this._ = {
-				matchWord : matchWord,
-				walker : walker,
-				matchBoundary : false
+				matchWord  matchWord,
+				walker  walker,
+				matchBoundary  false
 			};
 		};
 
 		characterWalker.prototype = {
-			next : function()
+			next  function()
 			{
 				return this.move();
 			},
 
-			back : function()
+			back  function()
 			{
 				return this.move( true );
 			},
 
-			move : function( rtl )
+			move  function( rtl )
 			{
 				var currentTextNode = this.textNode;
 				// Already at the end of document, no more character available.
@@ -160,7 +160,7 @@ provides:
 					while ( !currentTextNode )
 					{
 						currentTextNode =
-							this._.walker[ rtl ? 'previous' : 'next' ].call( this._.walker );
+							this._.walker[ rtl ? 'previous'  'next' ].call( this._.walker );
 
 						// Stop searching if we're need full word match OR
 						// already reach document end.
@@ -171,7 +171,7 @@ provides:
 					// Found a fresh text node.
 					this.textNode = currentTextNode;
 					if ( currentTextNode )
-						this.offset = rtl ? currentTextNode.getLength() - 1 : 0;
+						this.offset = rtl ? currentTextNode.getLength() - 1  0;
 					else
 						this.offset = 0;
 				}
@@ -188,11 +188,11 @@ provides:
 		var characterRange = function( characterWalker, rangeLength )
 		{
 			this._ = {
-				walker : characterWalker,
-				cursors : [],
-				rangeLength : rangeLength,
-				highlightRange : null,
-				isMatched : 0
+				walker  characterWalker,
+				cursors  [],
+				rangeLength  rangeLength,
+				highlightRange  null,
+				isMatched  0
 			};
 		};
 
@@ -200,7 +200,7 @@ provides:
 			/**
 			 * Translate this range to {@link CKEDITOR.dom.range}
 			 */
-			toDomRange : function()
+			toDomRange  function()
 			{
 				var range = new CKEDITOR.dom.range( editor.document );
 				var cursors = this._.cursors;
@@ -226,7 +226,7 @@ provides:
 			/**
 			 * Reflect the latest changes from dom range.
 			 */
-			updateFromDomRange : function( domRange )
+			updateFromDomRange  function( domRange )
 			{
 				var cursor,
 						walker = new characterWalker( domRange );
@@ -241,17 +241,17 @@ provides:
 				this._.rangeLength = this._.cursors.length;
 			},
 
-			setMatched : function()
+			setMatched  function()
 			{
 				this._.isMatched = true;
 			},
 
-			clearMatched : function()
+			clearMatched  function()
 			{
 				this._.isMatched = false;
 			},
 
-			isMatched : function()
+			isMatched  function()
 			{
 				return this._.isMatched;
 			},
@@ -259,7 +259,7 @@ provides:
 			/**
 			 * Hightlight the current matched chunk of text.
 			 */
-			highlight : function()
+			highlight  function()
 			{
 				// Do not apply if nothing is found.
 				if ( this._.cursors.length < 1 )
@@ -289,7 +289,7 @@ provides:
 			/**
 			 * Remove highlighted find result.
 			 */
-			removeHighlight : function()
+			removeHighlight  function()
 			{
 				if ( !this._.highlightRange )
 					return;
@@ -301,7 +301,7 @@ provides:
 				this._.highlightRange = null;
 			},
 
-			isReadOnly : function()
+			isReadOnly  function()
 			{
 				if ( !this._.highlightRange )
 					return 0;
@@ -309,7 +309,7 @@ provides:
 				return this._.highlightRange.startContainer.isReadOnly();
 			},
 
-			moveBack : function()
+			moveBack  function()
 			{
 				var retval = this._.walker.back(),
 					cursors = this._.cursors;
@@ -324,7 +324,7 @@ provides:
 				return retval;
 			},
 
-			moveNext : function()
+			moveNext  function()
 			{
 				var retval = this._.walker.next(),
 					cursors = this._.cursors;
@@ -340,7 +340,7 @@ provides:
 				return retval;
 			},
 
-			getEndCharacter : function()
+			getEndCharacter  function()
 			{
 				var cursors = this._.cursors;
 				if ( cursors.length < 1 )
@@ -349,7 +349,7 @@ provides:
 				return cursors[ cursors.length - 1 ].character;
 			},
 
-			getNextCharacterRange : function( maxLength )
+			getNextCharacterRange  function( maxLength )
 			{
 				var lastCursor,
 						nextRangeWalker,
@@ -364,7 +364,7 @@ provides:
 				return new characterRange( nextRangeWalker, maxLength );
 			},
 
-			getCursors : function()
+			getCursors  function()
 			{
 				return this._.cursors;
 			}
@@ -376,7 +376,7 @@ provides:
 		{
 			var range = new CKEDITOR.dom.range();
 			range.setStart( cursor.textNode,
-						   ( inclusive ? cursor.offset : cursor.offset + 1 ) );
+						   ( inclusive ? cursor.offset  cursor.offset + 1 ) );
 			range.setEndAt( editor.document.getBody(),
 							CKEDITOR.POSITION_BEFORE_END );
 			return range;
@@ -413,16 +413,16 @@ provides:
 			}
 
 			this._ = {
-				overlap : overlap,
-				state : 0,
-				ignoreCase : !!ignoreCase,
-				pattern : pattern
+				overlap  overlap,
+				state  0,
+				ignoreCase  !!ignoreCase,
+				pattern  pattern
 			};
 		};
 
 		kmpMatcher.prototype =
 		{
-			feedCharacter : function( c )
+			feedCharacter  function( c )
 			{
 				if ( this._.ignoreCase )
 					c = c.toLowerCase();
@@ -448,14 +448,14 @@ provides:
 				return null;
 			},
 
-			reset : function()
+			reset  function()
 			{
 				this._.state = 0;
 			}
 		};
 
 		var wordSeparatorRegex =
-		/[.,"'?!;: \u0085\u00a0\u1680\u280e\u2028\u2029\u202f\u205f\u3000]/;
+		/[.,"'?!; \u0085\u00a0\u1680\u280e\u2028\u2029\u202f\u205f\u3000]/;
 
 		var isWordSeparator = function( c )
 		{
@@ -468,9 +468,9 @@ provides:
 		};
 
 		var finder = {
-			searchRange : null,
-			matchRange : null,
-			find : function( pattern, matchCase, matchWord, matchCyclic, highlightMatched, cyclicRerun )
+			searchRange  null,
+			matchRange  null,
+			find  function( pattern, matchCase, matchWord, matchCyclic, highlightMatched, cyclicRerun )
 			{
 				if ( !this.matchRange )
 					this.matchRange =
@@ -540,9 +540,9 @@ provides:
 			/**
 			 * Record how much replacement occurred toward one replacing.
 			 */
-			replaceCounter : 0,
+			replaceCounter  0,
 
-			replace : function( dialog, pattern, newString, matchCase, matchWord,
+			replace  function( dialog, pattern, newString, matchCase, matchWord,
 				matchCyclic , isReplaceAll )
 			{
 				isReplace = 1;
@@ -614,37 +614,37 @@ provides:
 
 		var lang = editor.lang.findAndReplace;
 		return {
-			title : lang.title,
-			resizable : CKEDITOR.DIALOG_RESIZE_NONE,
-			minWidth : 350,
-			minHeight : 170,
-			buttons : [ CKEDITOR.dialog.cancelButton ],		// Cancel button only.
-			contents : [
+			title  lang.title,
+			resizable  CKEDITOR.DIALOG_RESIZE_NONE,
+			minWidth  350,
+			minHeight  170,
+			buttons  [ CKEDITOR.dialog.cancelButton ],		// Cancel button only.
+			contents  [
 				{
-					id : 'find',
-					label : lang.find,
-					title : lang.find,
-					accessKey : '',
-					elements : [
+					id  'find',
+					label  lang.find,
+					title  lang.find,
+					accessKey  '',
+					elements  [
 						{
-							type : 'hbox',
-							widths : [ '230px', '90px' ],
-							children :
+							type  'hbox',
+							widths  [ '230px', '90px' ],
+							children 
 							[
 								{
-									type : 'text',
-									id : 'txtFindFind',
-									label : lang.findWhat,
-									isChanged : false,
-									labelLayout : 'horizontal',
-									accessKey : 'F'
+									type  'text',
+									id  'txtFindFind',
+									label  lang.findWhat,
+									isChanged  false,
+									labelLayout  'horizontal',
+									accessKey  'F'
 								},
 								{
-									type : 'button',
-									align : 'left',
-									style : 'width:100%',
-									label : lang.find,
-									onClick : function()
+									type  'button',
+									align  'left',
+									style  'width100%',
+									label  lang.find,
+									onClick  function()
 									{
 										var dialog = this.getDialog();
 										if ( !finder.find( dialog.getValueOf( 'find', 'txtFindFind' ),
@@ -658,58 +658,58 @@ provides:
 							]
 						},
 						{
-							type : 'vbox',
-							padding : 0,
-							children :
+							type  'vbox',
+							padding  0,
+							children 
 							[
 								{
-									type : 'checkbox',
-									id : 'txtFindCaseChk',
-									isChanged : false,
-									style : 'margin-top:28px',
-									label : lang.matchCase
+									type  'checkbox',
+									id  'txtFindCaseChk',
+									isChanged  false,
+									style  'margin-top28px',
+									label  lang.matchCase
 								},
 								{
-									type : 'checkbox',
-									id : 'txtFindWordChk',
-									isChanged : false,
-									label : lang.matchWord
+									type  'checkbox',
+									id  'txtFindWordChk',
+									isChanged  false,
+									label  lang.matchWord
 								},
 								{
-									type : 'checkbox',
-									id : 'txtFindCyclic',
-									isChanged : false,
-									'default' : true,
-									label : lang.matchCyclic
+									type  'checkbox',
+									id  'txtFindCyclic',
+									isChanged  false,
+									'default'  true,
+									label  lang.matchCyclic
 								}
 							]
 						}
 					]
 				},
 				{
-					id : 'replace',
-					label : lang.replace,
-					accessKey : 'M',
-					elements : [
+					id  'replace',
+					label  lang.replace,
+					accessKey  'M',
+					elements  [
 						{
-							type : 'hbox',
-							widths : [ '230px', '90px' ],
-							children :
+							type  'hbox',
+							widths  [ '230px', '90px' ],
+							children 
 							[
 								{
-									type : 'text',
-									id : 'txtFindReplace',
-									label : lang.findWhat,
-									isChanged : false,
-									labelLayout : 'horizontal',
-									accessKey : 'F'
+									type  'text',
+									id  'txtFindReplace',
+									label  lang.findWhat,
+									isChanged  false,
+									labelLayout  'horizontal',
+									accessKey  'F'
 								},
 								{
-									type : 'button',
-									align : 'left',
-									style : 'width:100%',
-									label : lang.replace,
-									onClick : function()
+									type  'button',
+									align  'left',
+									style  'width100%',
+									label  lang.replace,
+									onClick  function()
 									{
 										var dialog = this.getDialog();
 										if ( !finder.replace( dialog,
@@ -725,25 +725,25 @@ provides:
 							]
 						},
 						{
-							type : 'hbox',
-							widths : [ '230px', '90px' ],
-							children :
+							type  'hbox',
+							widths  [ '230px', '90px' ],
+							children 
 							[
 								{
-									type : 'text',
-									id : 'txtReplace',
-									label : lang.replaceWith,
-									isChanged : false,
-									labelLayout : 'horizontal',
-									accessKey : 'R'
+									type  'text',
+									id  'txtReplace',
+									label  lang.replaceWith,
+									isChanged  false,
+									labelLayout  'horizontal',
+									accessKey  'R'
 								},
 								{
-									type : 'button',
-									align : 'left',
-									style : 'width:100%',
-									label : lang.replaceAll,
-									isChanged : false,
-									onClick : function()
+									type  'button',
+									align  'left',
+									style  'width100%',
+									label  lang.replaceAll,
+									isChanged  false,
+									onClick  function()
 									{
 										var dialog = this.getDialog();
 										var replaceNums;
@@ -764,7 +764,7 @@ provides:
 											dialog.getValueOf( 'replace', 'txtReplaceCaseChk' ),
 											dialog.getValueOf( 'replace', 'txtReplaceWordChk' ),
 											false, true ) )
-										{ /*jsl:pass*/ }
+										{ /*jslpass*/ }
 
 										if ( finder.replaceCounter )
 										{
@@ -778,30 +778,30 @@ provides:
 							]
 						},
 						{
-							type : 'vbox',
-							padding : 0,
-							children :
+							type  'vbox',
+							padding  0,
+							children 
 							[
 								{
-									type : 'checkbox',
-									id : 'txtReplaceCaseChk',
-									isChanged : false,
-									label : lang
+									type  'checkbox',
+									id  'txtReplaceCaseChk',
+									isChanged  false,
+									label  lang
 										.matchCase
 								},
 								{
-									type : 'checkbox',
-									id : 'txtReplaceWordChk',
-									isChanged : false,
-									label : lang
+									type  'checkbox',
+									id  'txtReplaceWordChk',
+									isChanged  false,
+									label  lang
 										.matchWord
 								},
 								{
-									type : 'checkbox',
-									id : 'txtReplaceCyclic',
-									isChanged : false,
-									'default' : true,
-									label : lang
+									type  'checkbox',
+									id  'txtReplaceCyclic',
+									isChanged  false,
+									'default'  true,
+									label  lang
 										.matchCyclic
 								}
 							]
@@ -809,7 +809,7 @@ provides:
 					]
 				}
 			],
-			onLoad : function()
+			onLoad  function()
 			{
 				var dialog = this;
 
@@ -835,8 +835,8 @@ provides:
 
 							var currPage = dialog._.tabs[ pageId ];
 							var patternFieldInput, patternFieldId, wholeWordChkFieldId;
-							patternFieldId = pageId === 'find' ? 'txtFindFind' : 'txtFindReplace';
-							wholeWordChkFieldId = pageId === 'find' ? 'txtFindWordChk' : 'txtReplaceWordChk';
+							patternFieldId = pageId === 'find' ? 'txtFindFind'  'txtFindReplace';
+							wholeWordChkFieldId = pageId === 'find' ? 'txtFindWordChk'  'txtReplaceWordChk';
 
 							patternField = dialog.getContentElement( pageId,
 								patternFieldId );
@@ -858,14 +858,14 @@ provides:
 					} );
 
 			},
-			onShow : function()
+			onShow  function()
 			{
 				// Establish initial searching start position.
 				finder.searchRange = getSearchRange();
 
 				this.selectPage( startupPage );
 			},
-			onHide : function()
+			onHide  function()
 			{
 				var range;
 				if ( finder.matchRange && finder.matchRange.isMatched() )
@@ -881,7 +881,7 @@ provides:
 				// Clear current session before dialog close
 				delete finder.matchRange;
 			},
-			onFocus : function()
+			onFocus  function()
 			{
 				if ( startupPage == 'replace' )
 					return this.getContentElement( 'replace', 'txtFindReplace' );

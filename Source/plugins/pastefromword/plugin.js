@@ -34,14 +34,14 @@ provides:
 					forceFromWord && setTimeout( function() { forceFromWord = 0; }, 0 );
 				};
 
-			// Features bring by this command beside the normal process:
+			// Features bring by this command beside the normal process
 			// 1. No more bothering of user about the clean-up.
 			// 2. Perform the clean-up even if content is not from MS-Word.
 			// (e.g. from a MS-Word similar application.)
 			editor.addCommand( 'pastefromword',
 			{
-				canUndo : false,
-				exec : function()
+				canUndo  false,
+				exec  function()
 				{
 					// Ensure the received data format is HTML and apply content filtering. (#6718)
 					forceFromWord = 1;
@@ -68,8 +68,8 @@ provides:
 			// Register the toolbar button.
 			editor.ui.addButton( 'PasteFromWord',
 				{
-					label : editor.lang.pastefromword.toolbar,
-					command : 'pastefromword'
+					label  editor.lang.pastefromword.toolbar,
+					command  'pastefromword'
 				});
 
 			editor.on( 'pasteState', function( evt )
@@ -84,7 +84,7 @@ provides:
 
 				// MS-WORD format sniffing.
 				if ( ( mswordHtml = data[ 'html' ] )
-					 && ( forceFromWord || ( /(class=\"?Mso|style=\"[^\"]*\bmso\-|w:WordDocument)/ ).test( mswordHtml ) ) )
+					 && ( forceFromWord || ( /(class=\"?Mso|style=\"[^\"]*\bmso\-|wWordDocument)/ ).test( mswordHtml ) ) )
 				{
 					var isLazyLoad = this.loadFilterRules( function()
 						{
@@ -105,7 +105,7 @@ provides:
 			}, this );
 		},
 
-		loadFilterRules : function( callback )
+		loadFilterRules  function( callback )
 		{
 
 			var isLoaded = CKEDITOR.cleanWord;
@@ -125,7 +125,7 @@ provides:
 			return !isLoaded;
 		},
 
-		requires : [ 'clipboard' ]
+		requires  [ 'clipboard' ]
 	});
 })();
 
@@ -142,7 +142,7 @@ provides:
 
 /**
  * The file that provides the MS Word cleanup function for pasting operations.
- * Note: This is a global configuration shared by all editor instances present
+ * Note This is a global configuration shared by all editor instances present
  * in the page.
  * @name CKEDITOR.config.pasteFromWordCleanupFile
  * @since 3.1

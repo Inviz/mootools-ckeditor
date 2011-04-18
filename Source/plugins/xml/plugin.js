@@ -118,7 +118,7 @@ provides:
 		 * for ( var i = 0 ; i < itemNodes.length ; i++ )
 		 *     alert( itemNodes[i].nodeName );
 		 */
-		selectNodes : function( xpath, contextNode )
+		selectNodes  function( xpath, contextNode )
 		{
 			var baseXml = this.baseXml,
 				nodes = [];
@@ -157,7 +157,7 @@ provides:
 		 * // Alert "<item id="test1" /><item id="test2" />".
 		 * alert( xml.getInnerXml( 'list' ) );
 		 */
-		getInnerXml : function( xpath, contextNode )
+		getInnerXml  function( xpath, contextNode )
 		{
 			var node = this.selectSingleNode( xpath, contextNode ),
 				xml = [];
@@ -175,7 +175,7 @@ provides:
 				}
 			}
 
-			return xml.length ? xml.join( '' ) : null;
+			return xml.length ? xml.join( '' )  null;
 		}
 	};
 })();

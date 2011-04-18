@@ -19,9 +19,9 @@ CKEDITOR.dialog.add( 'checkbox', function( editor )
 {
 	return {
 		title  editor.lang.checkboxAndRadio.checkboxTitle,
-		minWidth : 350,
-		minHeight : 140,
-		onShow : function()
+		minWidth  350,
+		minHeight  140,
+		onShow  function()
 		{
 			delete this.checkbox;
 
@@ -33,7 +33,7 @@ CKEDITOR.dialog.add( 'checkbox', function( editor )
 				this.setupContent( element );
 			}
 		},
-		onOk : function()
+		onOk  function()
 		{
 			var editor,
 				element = this.checkbox,
@@ -46,29 +46,29 @@ CKEDITOR.dialog.add( 'checkbox', function( editor )
 				element.setAttribute( 'type', 'checkbox' );
 				editor.insertElement( element );
 			}
-			this.commitContent( { element : element } );
+			this.commitContent( { element  element } );
 		},
-		contents : [
+		contents  [
 			{
-				id : 'info',
-				label : editor.lang.checkboxAndRadio.checkboxTitle,
-				title : editor.lang.checkboxAndRadio.checkboxTitle,
-				startupFocus : 'txtName',
-				elements : [
+				id  'info',
+				label  editor.lang.checkboxAndRadio.checkboxTitle,
+				title  editor.lang.checkboxAndRadio.checkboxTitle,
+				startupFocus  'txtName',
+				elements  [
 					{
-						id : 'txtName',
-						type : 'text',
-						label : editor.lang.common.name,
-						'default' : '',
-						accessKey : 'N',
-						setup : function( element )
+						id  'txtName',
+						type  'text',
+						label  editor.lang.common.name,
+						'default'  '',
+						accessKey  'N',
+						setup  function( element )
 						{
 							this.setValue(
 									element.data( 'cke-saved-name' ) ||
 									element.getAttribute( 'name' ) ||
 									'' );
 						},
-						commit : function( data )
+						commit  function( data )
 						{
 							var element = data.element;
 
@@ -83,18 +83,18 @@ CKEDITOR.dialog.add( 'checkbox', function( editor )
 						}
 					},
 					{
-						id : 'txtValue',
-						type : 'text',
-						label : editor.lang.checkboxAndRadio.value,
-						'default' : '',
-						accessKey : 'V',
-						setup : function( element )
+						id  'txtValue',
+						type  'text',
+						label  editor.lang.checkboxAndRadio.value,
+						'default'  '',
+						accessKey  'V',
+						setup  function( element )
 						{
 							var value = element.getAttribute( 'value' );
 							// IE Return 'on' as default attr value.
-							this.setValue(  CKEDITOR.env.ie && value == 'on' ? '' : value  );
+							this.setValue(  CKEDITOR.env.ie && value == 'on' ? ''  value  );
 						},
-						commit : function( data )
+						commit  function( data )
 						{
 							var element = data.element,
 								value = this.getValue();
@@ -107,7 +107,7 @@ CKEDITOR.dialog.add( 'checkbox', function( editor )
 								{
 									// Remove attribute 'value' of checkbox (#4721).
 									var checkbox = new CKEDITOR.dom.element( 'input', element.getDocument() );
-									element.copyAttributes( checkbox, { value: 1 } );
+									element.copyAttributes( checkbox, { value 1 } );
 									checkbox.replace( element );
 									editor.getSelection().selectElement( checkbox );
 									data.element = checkbox;
@@ -118,17 +118,17 @@ CKEDITOR.dialog.add( 'checkbox', function( editor )
 						}
 					},
 					{
-						id : 'cmbSelected',
-						type : 'checkbox',
-						label : editor.lang.checkboxAndRadio.selected,
-						'default' : '',
-						accessKey : 'S',
-						value : "checked",
-						setup : function( element )
+						id  'cmbSelected',
+						type  'checkbox',
+						label  editor.lang.checkboxAndRadio.selected,
+						'default'  '',
+						accessKey  'S',
+						value  "checked",
+						setup  function( element )
 						{
 							this.setValue( element.getAttribute( 'checked' ) );
 						},
-						commit : function( data )
+						commit  function( data )
 						{
 							var element = data.element;
 
@@ -140,10 +140,10 @@ CKEDITOR.dialog.add( 'checkbox', function( editor )
 								if ( isElementChecked != isChecked )
 								{
 									var replace = CKEDITOR.dom.element.createFromHtml( '<input type="checkbox"'
-										   + ( isChecked ? ' checked="checked"' : '' )
+										   + ( isChecked ? ' checked="checked"'  '' )
 										   + '/>', editor.document );
 
-									element.copyAttributes( replace, { type : 1, checked : 1 } );
+									element.copyAttributes( replace, { type  1, checked  1 } );
 									replace.replace( element );
 									editor.getSelection().selectElement( replace );
 									data.element = replace;

@@ -46,15 +46,15 @@ provides:
 
 		if ( newHeight != currentHeight )
 		{
-			newHeight = editor.fire( 'autoGrow', { currentHeight : currentHeight, newHeight : newHeight } ).newHeight;
+			newHeight = editor.fire( 'autoGrow', { currentHeight  currentHeight, newHeight  newHeight } ).newHeight;
 			editor.resize( editor.container.getStyle( 'width' ), newHeight, true );
 		}
 	};
 	CKEDITOR.plugins.add( 'autogrow',
 	{
-		init : function( editor )
+		init  function( editor )
 		{
-			for ( var eventName in { contentDom:1, key:1, selectionChange:1, insertElement:1 } )
+			for ( var eventName in { contentDom1, key1, selectionChange1, insertElement1 } )
 			{
 				editor.on( eventName, function( evt )
 				{

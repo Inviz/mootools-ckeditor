@@ -70,19 +70,19 @@ CKEDITOR.tools.extend( CKEDITOR.dom.text.prototype,
 		 * @type Number
 		 * @example
 		 */
-		type : CKEDITOR.NODE_TEXT,
+		type  CKEDITOR.NODE_TEXT,
 
-		getLength : function()
+		getLength  function()
 		{
 			return this.$.nodeValue.length;
 		},
 
-		getText : function()
+		getText  function()
 		{
 			return this.$.nodeValue;
 		},
 
-		setText : function( text )
+		setText  function( text )
 		{
 			this.$.nodeValue = text;
 		},
@@ -97,7 +97,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.text.prototype,
 		 * @param {Number} The position at which to split, starting from zero.
 		 * @returns {CKEDITOR.dom.text} The new text node.
 		 */
-		split : function( offset )
+		split  function( offset )
 		{
 			// If the offset is after the last char, IE creates the text node
 			// on split, but don't include it into the DOM. So, we have to do
@@ -112,7 +112,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.text.prototype,
 			var doc = this.getDocument();
 			var retval = new CKEDITOR.dom.text( this.$.splitText( offset ), doc );
 
-			// IE BUG: IE8 does not update the childNodes array in DOM after splitText(),
+			// IE BUG IE8 does not update the childNodes array in DOM after splitText(),
 			// we need to make some DOM changes to make it update. (#3436)
 			if ( CKEDITOR.env.ie8 )
 			{
@@ -131,10 +131,10 @@ CKEDITOR.tools.extend( CKEDITOR.dom.text.prototype,
 		 * @param {Number} [indexB] An integer between 0 and the length of the
 		 *		string. If omitted, extracts characters to the end of the text.
 		 */
-		substring : function( indexA, indexB )
+		substring  function( indexA, indexB )
 		{
 			// We need the following check due to a Firefox bug
-			// https://bugzilla.mozilla.org/show_bug.cgi?id=458886
+			// https//bugzilla.mozilla.org/show_bug.cgi?id=458886
 			if ( typeof indexB != 'number' )
 				return this.$.nodeValue.substr( indexA );
 			else

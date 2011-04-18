@@ -39,7 +39,7 @@ provides:
 			if ( !currentPath.compare( this._.selectionPreviousPath ) )
 			{
 				this._.selectionPreviousPath = currentPath;
-				this.fire( 'selectionChange', { selection : sel, path : currentPath, element : firstElement } );
+				this.fire( 'selectionChange', { selection  sel, path  currentPath, element  firstElement } );
 			}
 		}
 		catch (e)
@@ -81,7 +81,7 @@ provides:
 		}
 	}
 
-	// #### checkSelectionChange : END
+	// #### checkSelectionChange  END
 
 	function rangeRequiresFix( range )
 	{
@@ -99,23 +99,23 @@ provides:
 
 		// 1. Empty inline element. <span>^</span>
 		// 2. Adjoin to inline element. <p><strong>text</strong>^</p>
-		return !CKEDITOR.tools.trim( start.getHtml() ) ? isInlineCt( start ) : isInlineCt( start.getChild( offset - 1 ) ) || isInlineCt( start.getChild( offset ) );
+		return !CKEDITOR.tools.trim( start.getHtml() ) ? isInlineCt( start )  isInlineCt( start.getChild( offset - 1 ) ) || isInlineCt( start.getChild( offset ) );
 	}
 
 	var selectAllCmd =
 	{
-		modes : { wysiwyg : 1, source : 1 },
-		exec : function( editor )
+		modes  { wysiwyg  1, source  1 },
+		exec  function( editor )
 		{
 			switch ( editor.mode )
 			{
-				case 'wysiwyg' :
+				case 'wysiwyg' 
 					editor.document.$.execCommand( 'SelectAll', false, null );
 					// Force triggering selectionChange (#7008)
 					editor.forceNextSelectionCheck();
 					editor.selectionChange();
 					break;
-				case 'source' :
+				case 'source' 
 					// Select the contents of the textarea
 					var textarea = editor.textarea.$;
 					if ( CKEDITOR.env.ie )
@@ -128,7 +128,7 @@ provides:
 					textarea.focus();
 			}
 		},
-		canUndo : false
+		canUndo  false
 	};
 
 	function createFillingChar( doc )
@@ -176,7 +176,7 @@ provides:
 
 	CKEDITOR.plugins.add( 'selection',
 	{
-		init : function( editor )
+		init  function( editor )
 		{
 			// On WebKit only, we need a special "filling" char on some situations
 			// (#1272). Here we set the events that should invalidate that char.
@@ -190,11 +190,11 @@ provides:
 						// executed, so they'll not get blocked by it.
 						switch ( e.data.keyCode )
 						{
-							case 13 :	// ENTER
-							case CKEDITOR.SHIFT + 13 :	// SHIFT-ENTER
-							case 37 :	// LEFT-ARROW
-							case 39 :	// RIGHT-ARROW
-							case 8 :	// BACKSPACE
+							case 13 	// ENTER
+							case CKEDITOR.SHIFT + 13 	// SHIFT-ENTER
+							case 37 	// LEFT-ARROW
+							case 39 	// RIGHT-ARROW
+							case 8 	// BACKSPACE
 								removeFillingChar( editor.document );
 						}
 					}, null, null, 10 );
@@ -448,7 +448,7 @@ provides:
 									&& ( parentTag = nativeSel.createRange() )
 									&& ( parentTag = parentTag.parentElement() )
 									&& ( parentTag = parentTag.nodeName )
-									&& parentTag.toLowerCase() in { input: 1, textarea : 1 } )
+									&& parentTag.toLowerCase() in { input 1, textarea  1 } )
 								{
 									return;
 								}
@@ -476,8 +476,8 @@ provides:
 			editor.addCommand( 'selectAll', selectAllCmd );
 			editor.ui.addButton( 'SelectAll',
 				{
-					label : editor.lang.selectAll,
-					command : 'selectAll'
+					label  editor.lang.selectAll,
+					command  'selectAll'
 				});
 
 			editor.selectionChange = checkSelectionChangeTimeout;
@@ -512,7 +512,7 @@ provides:
 	CKEDITOR.dom.document.prototype.getSelection = function()
 	{
 		var sel = new CKEDITOR.dom.selection( this );
-		return ( !sel || sel.isInvalid ) ? null : sel;
+		return ( !sel || sel.isInvalid ) ? null  sel;
 	};
 
 	/**
@@ -558,11 +558,11 @@ provides:
 		this.isLocked = 0;
 		this._ =
 		{
-			cache : {}
+			cache  {}
 		};
 
 		/**
-		 * IE BUG: The selection's document may be a different document than the
+		 * IE BUG The selection's document may be a different document than the
 		 * editor document. Return null if that's the case.
 		 */
 		if ( CKEDITOR.env.ie )
@@ -581,8 +581,8 @@ provides:
 
 	var styleObjectElements =
 	{
-		img:1,hr:1,li:1,table:1,tr:1,td:1,th:1,embed:1,object:1,ol:1,ul:1,
-		a:1, input:1, form:1, select:1, textarea:1, button:1, fieldset:1, th:1, thead:1, tfoot:1
+		img1,hr1,li1,table1,tr1,td1,th1,embed1,object1,ol1,ul1,
+		a1, input1, form1, select1, textarea1, button1, fieldset1, th1, thead1, tfoot1
 	};
 
 	CKEDITOR.dom.selection.prototype =
@@ -594,13 +594,13 @@ provides:
 		 * @example
 		 * var selection = editor.getSelection().<b>getNative()</b>;
 		 */
-		getNative :
+		getNative 
 			CKEDITOR.env.ie ?
 				function()
 				{
 					return this._.cache.nativeSel || ( this._.cache.nativeSel = this.document.$.selection );
 				}
-			:
+			
 				function()
 				{
 					return this._.cache.nativeSel || ( this._.cache.nativeSel = this.document.getWindow().$.getSelection() );
@@ -608,23 +608,23 @@ provides:
 
 		/**
 		 * Gets the type of the current selection. The following values are
-		 * available:
+		 * available
 		 * <ul>
-		 *		<li>{@link CKEDITOR.SELECTION_NONE} (1): No selection.</li>
-		 *		<li>{@link CKEDITOR.SELECTION_TEXT} (2): Text is selected or
+		 *		<li>{@link CKEDITOR.SELECTION_NONE} (1) No selection.</li>
+		 *		<li>{@link CKEDITOR.SELECTION_TEXT} (2) Text is selected or
 		 *			collapsed selection.</li>
-		 *		<li>{@link CKEDITOR.SELECTION_ELEMENT} (3): A element
+		 *		<li>{@link CKEDITOR.SELECTION_ELEMENT} (3) A element
 		 *			selection.</li>
 		 * </ul>
 		 * @function
-		 * @returns {Number} One of the following constant values:
+		 * @returns {Number} One of the following constant values
 		 *		{@link CKEDITOR.SELECTION_NONE}, {@link CKEDITOR.SELECTION_TEXT} or
 		 *		{@link CKEDITOR.SELECTION_ELEMENT}.
 		 * @example
 		 * if ( editor.getSelection().<b>getType()</b> == CKEDITOR.SELECTION_TEXT )
 		 *     alert( 'Text is selected' );
 		 */
-		getType :
+		getType 
 			CKEDITOR.env.ie ?
 				function()
 				{
@@ -656,7 +656,7 @@ provides:
 
 					return ( cache.type = type );
 				}
-			:
+			
 				function()
 				{
 					var cache = this._.cache;
@@ -691,14 +691,14 @@ provides:
 
 		/**
 		 * Retrieve the {@link CKEDITOR.dom.range} instances that represent the current selection.
-		 * Note: Some browsers returns multiple ranges even on a sequent selection, e.g. Firefox returns
+		 * Note Some browsers returns multiple ranges even on a sequent selection, e.g. Firefox returns
 		 * one range for each table cell when one or more table row is selected.
 		 * @return {Array}
 		 * @example
 		 * var ranges = selection.getRanges();
 		 * alert(ranges.length);
 		 */
-		getRanges : (function()
+		getRanges  (function()
 		{
 			var func = CKEDITOR.env.ie ?
 				( function()
@@ -719,7 +719,7 @@ provides:
 
 						// Empty parent element, e.g. <i>^</i>
 						if ( !parent.hasChildNodes() )
-							return  { container : parent, offset : 0 };
+							return  { container  parent, offset  0 };
 
 						var siblings = parent.children,
 							child,
@@ -755,10 +755,10 @@ provides:
 									child = doc.getElementsByName( bmId )[ 0 ];
 									var offset = getNodeIndex( child );
 									parent.removeChild( child );
-									return { container : parent, offset : offset };
+									return { container  parent, offset  offset };
 								}
 								else
-									return { container : parent, offset : getNodeIndex( child ) };
+									return { container  parent, offset  getNodeIndex( child ) };
 							}
 						}
 
@@ -783,9 +783,9 @@ provides:
 								child = siblings[ siblings.length - 1 ];
 
 								if ( child.nodeType == CKEDITOR.NODE_ELEMENT )
-									return { container : parent, offset : siblings.length };
+									return { container  parent, offset  siblings.length };
 								else
-									return { container : child, offset : child.nodeValue.length };
+									return { container  child, offset  child.nodeValue.length };
 							}
 
 							// Start the measuring until distance overflows, meanwhile count the text nodes.
@@ -793,15 +793,15 @@ provides:
 							while ( distance > 0 )
 								distance -= siblings[ --i ].nodeValue.length;
 
-							return  { container : siblings[ i ], offset : -distance };
+							return  { container  siblings[ i ], offset  -distance };
 						}
 						// Test range was one offset beyond OR behind the anchored text node.
 						else
 						{
 							// Adapt one side of test range to the actual range
 							// for measuring the offset between them.
-							testRange.collapse( position > 0 ? true : false );
-							testRange.setEndPoint( position > 0 ? 'StartToStart' : 'EndToStart', range );
+							testRange.collapse( position > 0 ? true  false );
+							testRange.setEndPoint( position > 0 ? 'StartToStart'  'EndToStart', range );
 
 							// IE report line break as CRLF with range.text but
 							// only LF with textnode.nodeValue, normalize them to avoid
@@ -810,25 +810,25 @@ provides:
 
 							// Actual range anchor right beside test range at the inner boundary of text node.
 							if ( !distance )
-								return { container : parent, offset : getNodeIndex( child ) + ( position > 0 ? 0 : 1 ) };
+								return { container  parent, offset  getNodeIndex( child ) + ( position > 0 ? 0  1 ) };
 
 							// Start the measuring until distance overflows, meanwhile count the text nodes.
 							while ( distance > 0 )
 							{
 								try
 								{
-									sibling = child[ position > 0 ? 'previousSibling' : 'nextSibling' ];
+									sibling = child[ position > 0 ? 'previousSibling'  'nextSibling' ];
 									distance -= sibling.nodeValue.length;
 									child = sibling;
 								}
 								// Measurement in IE could be somtimes wrong because of <select> element. (#4611)
 								catch( e )
 								{
-									return { container : parent, offset : getNodeIndex( child ) };
+									return { container  parent, offset  getNodeIndex( child ) };
 								}
 							}
 
-							return { container : child, offset : position > 0 ? -distance : child.nodeValue.length + distance };
+							return { container  child, offset  position > 0 ? -distance  child.nodeValue.length + distance };
 						}
 					};
 
@@ -878,7 +878,7 @@ provides:
 								range = new CKEDITOR.dom.range( this.document );
 
 								for (; j < parentElement.childNodes.length && parentElement.childNodes[j] != element ; j++ )
-								{ /*jsl:pass*/ }
+								{ /*jslpass*/ }
 
 								range.setStart( new CKEDITOR.dom.node( parentElement ), j );
 								range.setEnd( new CKEDITOR.dom.node( parentElement ), j + 1 );
@@ -891,7 +891,7 @@ provides:
 						return [];
 					};
 				})()
-			:
+			
 				function()
 				{
 
@@ -1031,7 +1031,7 @@ provides:
 		 * var element = editor.getSelection().<b>getStartElement()</b>;
 		 * alert( element.getName() );
 		 */
-		getStartElement : function()
+		getStartElement  function()
 		{
 			var cache = this._.cache;
 			if ( cache.startElement !== undefined )
@@ -1042,10 +1042,10 @@ provides:
 
 			switch ( this.getType() )
 			{
-				case CKEDITOR.SELECTION_ELEMENT :
+				case CKEDITOR.SELECTION_ELEMENT 
 					return this.getSelectedElement();
 
-				case CKEDITOR.SELECTION_TEXT :
+				case CKEDITOR.SELECTION_TEXT 
 
 					var range = this.getRanges()[0];
 
@@ -1064,7 +1064,7 @@ provides:
 									startOffset = range.startOffset;
 								// Limit the fix only to non-block elements.(#3950)
 								if ( startOffset == ( startContainer.getChildCount ?
-									 startContainer.getChildCount() : startContainer.getLength() )
+									 startContainer.getChildCount()  startContainer.getLength() )
 									 && !startContainer.isBlockBoundary() )
 									range.setStartAfter( startContainer );
 								else break;
@@ -1100,7 +1100,7 @@ provides:
 					}
 			}
 
-			return cache.startElement = ( node ? new CKEDITOR.dom.element( node ) : null );
+			return cache.startElement = ( node ? new CKEDITOR.dom.element( node )  null );
 		},
 
 		/**
@@ -1112,7 +1112,7 @@ provides:
 		 * var element = editor.getSelection().<b>getSelectedElement()</b>;
 		 * alert( element.getName() );
 		 */
-		getSelectedElement : function()
+		getSelectedElement  function()
 		{
 			var cache = this._.cache;
 			if ( cache.selectedElement !== undefined )
@@ -1147,10 +1147,10 @@ provides:
 					return  selected.$;
 				});
 
-			return cache.selectedElement = ( node ? new CKEDITOR.dom.element( node ) : null );
+			return cache.selectedElement = ( node ? new CKEDITOR.dom.element( node )  null );
 		},
 
-		lock : function()
+		lock  function()
 		{
 			// Call all cacheable function.
 			this.getRanges();
@@ -1166,7 +1166,7 @@ provides:
 			this.document.setCustomData( 'cke_locked_selection', this );
 		},
 
-		unlock : function( restore )
+		unlock  function( restore )
 		{
 			var doc = this.document,
 				lockedSelection = doc.getCustomData( 'cke_locked_selection' );
@@ -1199,7 +1199,7 @@ provides:
 			}
 		},
 
-		reset : function()
+		reset  function()
 		{
 			this._.cache = {};
 		},
@@ -1208,7 +1208,7 @@ provides:
 		 *  Make the current selection of type {@link CKEDITOR.SELECTION_ELEMENT} by enclosing the specified element.
 		 * @param element
 		 */
-		selectElement : function( element )
+		selectElement  function( element )
 		{
 			if ( this.isLocked )
 			{
@@ -1239,7 +1239,7 @@ provides:
 		 * by clearing up the original selection.
 		 * @param {CKEDITOR.dom.range} ranges
 		 */
-		selectRanges : function( ranges )
+		selectRanges  function( ranges )
 		{
 			if ( this.isLocked )
 			{
@@ -1270,7 +1270,7 @@ provides:
 			{
 				var sel = this.getNative();
 
-				// getNative() returns null if iframe is "display:none" in FF. (#6577)
+				// getNative() returns null if iframe is "displaynone" in FF. (#6577)
 				if ( !sel )
 					return;
 
@@ -1300,7 +1300,7 @@ provides:
 							var ancestor = between.getCommonAncestor(),
 								enclosed = between.getEnclosedNode();
 
-							// The following cases has to be considered:
+							// The following cases has to be considered
 							// 1. <span contenteditable="false">[placeholder]</span>
 							// 2. <input contenteditable="false"  type="radio"/> (#6621)
 							if ( ancestor.isReadOnly() || enclosed && enclosed.isReadOnly() )
@@ -1386,7 +1386,7 @@ provides:
 		 * with extra cares to avoid interferon among those ranges. Same arguments are
 		 * received as with the underlay range method.
 		 */
-		createBookmarks : function( serializable )
+		createBookmarks  function( serializable )
 		{
 			return this.getRanges().createBookmarks( serializable );
 		},
@@ -1397,7 +1397,7 @@ provides:
 		 * with extra cares to avoid interferon among those ranges. Same arguments are
 		 * received as with the underlay range method.
 		 */
-		createBookmarks2 : function( normalized )
+		createBookmarks2  function( normalized )
 		{
 			return this.getRanges().createBookmarks2( normalized );
 		},
@@ -1406,7 +1406,7 @@ provides:
 		 * Select the virtual ranges denote by the bookmarks by calling #selectRanges.
 		 * @param bookmarks
 		 */
-		selectBookmarks : function( bookmarks )
+		selectBookmarks  function( bookmarks )
 		{
 			var ranges = [];
 			for ( var i = 0 ; i < bookmarks.length ; i++ )
@@ -1422,7 +1422,7 @@ provides:
 		/**
 		 * Retrieve the common ancestor node of the first range and the last range.
 		 */
-		getCommonAncestor : function()
+		getCommonAncestor  function()
 		{
 			var ranges = this.getRanges(),
 				startNode = ranges[ 0 ].startContainer,
@@ -1433,7 +1433,7 @@ provides:
 		/**
 		 * Moving scroll bar to the current selection's start position.
 		 */
-		scrollIntoView : function()
+		scrollIntoView  function()
 		{
 			// If we have split the block, adds a temporary span at the
 			// range position and scroll relatively to it.
@@ -1447,7 +1447,7 @@ provides:
 {
 	var notWhitespaces = CKEDITOR.dom.walker.whitespaces( true ),
 			fillerTextRegex = /\ufeff|\u00a0/,
-			nonCells = { table:1,tbody:1,tr:1 };
+			nonCells = { table1,tbody1,tr1 };
 
 	CKEDITOR.dom.range.prototype.select =
 		CKEDITOR.env.ie ?
@@ -1567,7 +1567,7 @@ provides:
 
 				this.document.fire( 'selectionchange' );
 			}
-		:
+		
 			function()
 			{
 				this.document.getSelection().selectRanges( [ this ] );

@@ -72,15 +72,15 @@ provides:
 		var specialTable =
 			{
 				nbsp	 '\u00A0',		// IE | FF
-				shy		: '\u00AD',		// IE
-				gt		: '\u003E',		// IE | FF |   --   | Opera
-				lt		: '\u003C'		// IE | FF | Safari | Opera
+				shy		 '\u00AD',		// IE
+				gt		 '\u003E',		// IE | FF |   --   | Opera
+				lt		 '\u003C'		// IE | FF | Safari | Opera
 			};
 
-		entities = entities.replace( /\b(nbsp|shy|gt|lt|amp)(?:,|$)/g, function( match, entity )
+		entities = entities.replace( /\b(nbsp|shy|gt|lt|amp)(?,|$)/g, function( match, entity )
 			{
-				var org = reverse ? '&' + entity + ';' : specialTable[ entity ],
-					result = reverse ? specialTable[ entity ] : '&' + entity + ';';
+				var org = reverse ? '&' + entity + ';'  specialTable[ entity ],
+					result = reverse ? specialTable[ entity ]  '&' + entity + ';';
 
 				table[ org ] = result;
 				regex.push( org );
@@ -109,14 +109,14 @@ provides:
 			}
 		}
 
-		table.regex = regex.join( reverse ? '|' : '' );
+		table.regex = regex.join( reverse ? '|'  '' );
 
 		return table;
 	}
 
 	CKEDITOR.plugins.add( 'entities',
 	{
-		afterInit : function( editor )
+		afterInit  function( editor )
 		{
 			var config = editor.config;
 
@@ -156,7 +156,7 @@ provides:
 				{
 					return config.entities_processNumerical == 'force' || !entitiesTable[ character ] ?
 						   '&#' + character.charCodeAt(0) + ';'
-							: entitiesTable[ character ];
+							 entitiesTable[ character ];
 				}
 
 				// Decode entities that the browsers has transformed
@@ -171,7 +171,7 @@ provides:
 
 				htmlFilter.addRules(
 					{
-						text : function( text )
+						text  function( text )
 						{
 							return text.replace( baseEntitiesRegex, getChar )
 									.replace( entitiesRegex, getEntity );
@@ -194,7 +194,7 @@ CKEDITOR.config.entities = true;
 /**
  * Whether to convert some Latin characters (Latin alphabet No&#46; 1, ISO 8859-1)
  * to HTML entities. The list of entities can be found at the
- * <a href="http://www.w3.org/TR/html4/sgml/entities.html#h-24.2.1">W3C HTML 4.01 Specification, section 24.2.1</a>.
+ * <a href="http//www.w3.org/TR/html4/sgml/entities.html#h-24.2.1">W3C HTML 4.01 Specification, section 24.2.1</a>.
  * @type Boolean
  * @default true
  * @example
@@ -206,7 +206,7 @@ CKEDITOR.config.entities_latin = true;
  * Whether to convert some symbols, mathematical symbols, and Greek letters to
  * HTML entities. This may be more relevant for users typing text written in Greek.
  * The list of entities can be found at the
- * <a href="http://www.w3.org/TR/html4/sgml/entities.html#h-24.3.1">W3C HTML 4.01 Specification, section 24.3.1</a>.
+ * <a href="http//www.w3.org/TR/html4/sgml/entities.html#h-24.3.1">W3C HTML 4.01 Specification, section 24.3.1</a>.
  * @type Boolean
  * @default true
  * @example
@@ -218,8 +218,8 @@ CKEDITOR.config.entities_greek = true;
  * Whether to convert all remaining characters, not comprised in the ASCII
  * character table, to their relative decimal numeric representation of HTML entity.
  * When specified as the value 'force', it will simply convert all entities into the above form.
- * For example, the phrase "This is Chinese: &#27721;&#35821;." is outputted
- * as "This is Chinese: &amp;#27721;&amp;#35821;."
+ * For example, the phrase "This is Chinese &#27721;&#35821;." is outputted
+ * as "This is Chinese &amp;#27721;&amp;#35821;."
  * @type Boolean
  * @type Boolean|String
  * @default false

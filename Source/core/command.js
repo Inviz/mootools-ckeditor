@@ -41,7 +41,7 @@ CKEDITOR.command = function( editor, commandDefinition )
 	 * itself, for example).
 	 * @type Array
 	 * @example
-	 * alert( 'Number of UI items associated to this command: ' + command.<b>uiItems</b>.length );
+	 * alert( 'Number of UI items associated to this command ' + command.<b>uiItems</b>.length );
 	 */
 	this.uiItems = [];
 
@@ -74,16 +74,16 @@ CKEDITOR.command = function( editor, commandDefinition )
 			 * execution will have no action if the current mode is not listed
 			 * in this property.
 			 * @type Object
-			 * @default { wysiwyg : 1 }
+			 * @default { wysiwyg  1 }
 			 * @see CKEDITOR.editor.prototype.mode
 			 * @example
 			 * // Enable the command in both WYSIWYG and Source modes.
-			 * command.<b>modes</b> = { wysiwyg : 1, source : 1 };
+			 * command.<b>modes</b> = { wysiwyg  1, source  1 };
 			 * @example
 			 * // Enable the command in Source mode only.
-			 * command.<b>modes</b> = { source : 1 };
+			 * command.<b>modes</b> = { source  1 };
 			 */
-			modes : { wysiwyg : 1 },
+			modes  { wysiwyg  1 },
 
 			/**
 			 * Indicates that the editor will get the focus before executing
@@ -94,18 +94,18 @@ CKEDITOR.command = function( editor, commandDefinition )
 			 * // Do not force the editor to have focus when executing the command.
 			 * command.<b>editorFocus</b> = false;
 			 */
-			editorFocus : 1,
+			editorFocus  1,
 
 			/**
-			 * Indicates the editor state. Possible values are:
+			 * Indicates the editor state. Possible values are
 			 * <ul>
-			 * <li>{@link CKEDITOR.TRISTATE_DISABLED}: the command is
+			 * <li>{@link CKEDITOR.TRISTATE_DISABLED} the command is
 			 *		disabled. It's execution will have no effect. Same as
 			 *		{@link disable}.</li>
-			 * <li>{@link CKEDITOR.TRISTATE_ON}: the command is enabled
+			 * <li>{@link CKEDITOR.TRISTATE_ON} the command is enabled
 			 *		and currently active in the editor (for context sensitive commands,
 			 *		for example).</li>
-			 * <li>{@link CKEDITOR.TRISTATE_OFF}: the command is enabled
+			 * <li>{@link CKEDITOR.TRISTATE_OFF} the command is enabled
 			 *		and currently inactive in the editor (for context sensitive
 			 *		commands, for example).</li>
 			 * </ul>
@@ -117,7 +117,7 @@ CKEDITOR.command = function( editor, commandDefinition )
 			 * if ( command.<b>state</b> == CKEDITOR.TRISTATE_DISABLED )
 			 *     alert( 'This command is disabled' );
 			 */
-			state : CKEDITOR.TRISTATE_OFF
+			state  CKEDITOR.TRISTATE_OFF
 		});
 
 	// Call the CKEDITOR.event constructor to initialize this instance.
@@ -134,10 +134,10 @@ CKEDITOR.command.prototype =
 	 * command.<b>enable()</b>;
 	 * command.exec();    // Execute the command.
 	 */
-	enable : function()
+	enable  function()
 	{
 		if ( this.state == CKEDITOR.TRISTATE_DISABLED )
-			this.setState( ( !this.preserveState || ( typeof this.previousState == 'undefined' ) ) ? CKEDITOR.TRISTATE_OFF : this.previousState );
+			this.setState( ( !this.preserveState || ( typeof this.previousState == 'undefined' ) ) ? CKEDITOR.TRISTATE_OFF  this.previousState );
 	},
 
 	/**
@@ -148,7 +148,7 @@ CKEDITOR.command.prototype =
 	 * command.<b>disable()</b>;
 	 * command.exec();    // "false" - Nothing happens.
 	 */
-	disable : function()
+	disable  function()
 	{
 		this.setState( CKEDITOR.TRISTATE_DISABLED );
 	},
@@ -165,7 +165,7 @@ CKEDITOR.command.prototype =
 	 * command.<b>setState( CKEDITOR.TRISTATE_OFF )</b>;
 	 * command.exec();    // Execute the command.
 	 */
-	setState : function( newState )
+	setState  function( newState )
 	{
 		// Do nothing if there is no state change.
 		if ( this.state == newState )
@@ -189,7 +189,7 @@ CKEDITOR.command.prototype =
 	 * @example
 	 * command.<b>toggleState()</b>;
 	 */
-	toggleState : function()
+	toggleState  function()
 	{
 		if ( this.state == CKEDITOR.TRISTATE_OFF )
 			this.setState( CKEDITOR.TRISTATE_ON );

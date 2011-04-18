@@ -22,7 +22,7 @@ provides:
 	{
 		requires  [ 'richcombo', 'styles' ],
 
-		init : function( editor )
+		init  function( editor )
 		{
 			var config = editor.config,
 				lang = editor.lang.stylesCombo,
@@ -62,18 +62,18 @@ provides:
 
 			editor.ui.addRichCombo( 'Styles',
 				{
-					label : lang.label,
-					title : lang.panelTitle,
-					className : 'cke_styles',
+					label  lang.label,
+					title  lang.panelTitle,
+					className  'cke_styles',
 
-					panel :
+					panel 
 					{
-						css : editor.skin.editor.css.concat( config.contentsCss ),
-						multiSelect : true,
-						attributes : { 'aria-label' : lang.panelTitle }
+						css  editor.skin.editor.css.concat( config.contentsCss ),
+						multiSelect  true,
+						attributes  { 'aria-label'  lang.panelTitle }
 					},
 
-					init : function()
+					init  function()
 					{
 						var combo = this;
 
@@ -102,7 +102,7 @@ provides:
 
 									combo.add(
 										styleName,
-										style.type == CKEDITOR.STYLE_OBJECT ? styleName : style.buildPreview(),
+										style.type == CKEDITOR.STYLE_OBJECT ? styleName  style.buildPreview(),
 										styleName );
 								}
 
@@ -112,7 +112,7 @@ provides:
 							});
 					},
 
-					onClick : function( value )
+					onClick  function( value )
 					{
 						editor.focus();
 						editor.fire( 'saveSnapshot' );
@@ -121,12 +121,12 @@ provides:
 							selection = editor.getSelection(),
 							elementPath = new CKEDITOR.dom.elementPath( selection.getStartElement() );
 
-						style[ style.checkActive( elementPath ) ? 'remove' : 'apply' ]( editor.document );
+						style[ style.checkActive( elementPath ) ? 'remove'  'apply' ]( editor.document );
 
 						editor.fire( 'saveSnapshot' );
 					},
 
-					onRender : function()
+					onRender  function()
 					{
 						editor.on( 'selectionChange', function( ev )
 							{
@@ -158,7 +158,7 @@ provides:
 							this);
 					},
 
-					onOpen : function()
+					onOpen  function()
 					{
 						if ( CKEDITOR.env.ie || CKEDITOR.env.webkit )
 							editor.focus();
@@ -206,10 +206,10 @@ provides:
 		var typeA = styleA.type,
 			typeB = styleB.type;
 
-		return typeA == typeB ? 0 :
-			typeA == CKEDITOR.STYLE_OBJECT ? -1 :
-			typeB == CKEDITOR.STYLE_OBJECT ? 1 :
-			typeB == CKEDITOR.STYLE_BLOCK ? 1 :
+		return typeA == typeB ? 0 
+			typeA == CKEDITOR.STYLE_OBJECT ? -1 
+			typeB == CKEDITOR.STYLE_OBJECT ? 1 
+			typeB == CKEDITOR.STYLE_BLOCK ? 1 
 			-1;
 	}
 })();

@@ -27,17 +27,17 @@ provides:
 	CKEDITOR.plugins.add( pluginName,
 	{
 		// List of available localizations.
-		availableLangs  { en:1, he:1 },
+		availableLangs  { en1, he1 },
 
-		init : function( editor )
+		init  function( editor )
 		{
 			var plugin = this;
 			editor.addCommand( commandName,
 				{
-					exec : function()
+					exec  function()
 					{
 						var langCode = editor.langCode;
-						langCode = plugin.availableLangs[ langCode ] ? langCode : 'en';
+						langCode = plugin.availableLangs[ langCode ] ? langCode  'en';
 
 						CKEDITOR.scriptLoader.load(
 								CKEDITOR.getUrl( plugin.path + 'lang/' + langCode + '.js' ),
@@ -47,8 +47,8 @@ provides:
 									editor.openDialog( commandName );
 								});
 					},
-					modes : { wysiwyg:1, source:1 },
-					canUndo : false
+					modes  { wysiwyg1, source1 },
+					canUndo  false
 				});
 
 			CKEDITOR.dialog.add( commandName, this.path + 'dialogs/a11yhelp.js' );

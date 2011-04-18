@@ -25,7 +25,7 @@ provides:
 	var horizontalruleCmd =
 	{
 		canUndo  false,    // The undo snapshot will be handled by 'insertElement'.
-		exec : function( editor )
+		exec  function( editor )
 		{
 			editor.insertElement( editor.document.createElement( 'hr' ) );
 		}
@@ -36,13 +36,13 @@ provides:
 	// Register a plugin named "horizontalrule".
 	CKEDITOR.plugins.add( pluginName,
 	{
-		init : function( editor )
+		init  function( editor )
 		{
 			editor.addCommand( pluginName, horizontalruleCmd );
 			editor.ui.addButton( 'HorizontalRule',
 				{
-					label : editor.lang.horizontalrule,
-					command : pluginName
+					label  editor.lang.horizontalrule,
+					command  pluginName
 				});
 		}
 	});

@@ -42,7 +42,7 @@ provides:
 		body.on( command, onExec );
 
 		// IE6/7 document.execCommand has problem to paste into positioned element.
-		( CKEDITOR.env.version > 7 ? doc.$ : doc.$.selection.createRange() ) [ 'execCommand' ]( command );
+		( CKEDITOR.env.version > 7 ? doc.$  doc.$.selection.createRange() ) [ 'execCommand' ]( command );
 
 		body.removeListener( command, onExec );
 
@@ -56,7 +56,7 @@ provides:
 			{
 				return execIECommand( editor, type );
 			}
-		:		// !IE.
+				// !IE.
 			function( editor, type )
 			{
 				try
@@ -80,7 +80,7 @@ provides:
 
 	cutCopyCmd.prototype =
 	{
-		exec : function( editor, data )
+		exec  function( editor, data )
 		{
 			this.type == 'cut' && fixCut( editor );
 
@@ -96,9 +96,9 @@ provides:
 	// Paste command.
 	var pasteCmd =
 	{
-		canUndo : false,
+		canUndo  false,
 
-		exec :
+		exec 
 			CKEDITOR.env.ie ?
 				function( editor )
 				{
@@ -112,7 +112,7 @@ provides:
 						return false;
 					}
 				}
-			:
+			
 				function( editor )
 				{
 					try
@@ -143,8 +143,8 @@ provides:
 		switch ( event.data.keyCode )
 		{
 			// Paste
-			case CKEDITOR.CTRL + 86 :		// CTRL+V
-			case CKEDITOR.SHIFT + 45 :		// SHIFT+INS
+			case CKEDITOR.CTRL + 86 		// CTRL+V
+			case CKEDITOR.SHIFT + 45 		// SHIFT+INS
 
 				var body = this.document.getBody();
 
@@ -158,8 +158,8 @@ provides:
 				return;
 
 			// Cut
-			case CKEDITOR.CTRL + 88 :		// CTRL+X
-			case CKEDITOR.SHIFT + 46 :		// SHIFT+DEL
+			case CKEDITOR.CTRL + 88 		// CTRL+X
+			case CKEDITOR.SHIFT + 46 		// SHIFT+DEL
 
 				// Save Undo snapshot.
 				var editor = this;
@@ -200,7 +200,7 @@ provides:
 			range = new CKEDITOR.dom.range( doc );
 
 		// Create container to paste into
-		var pastebin = new CKEDITOR.dom.element( mode == 'text' ? 'textarea' : CKEDITOR.env.webkit ? 'body' : 'div', doc );
+		var pastebin = new CKEDITOR.dom.element( mode == 'text' ? 'textarea'  CKEDITOR.env.webkit ? 'body'  'div', doc );
 		pastebin.setAttribute( 'id', 'cke_pastebin' );
 		// Safari requires a filler node inside the div to have the content pasted into it. (#4882)
 		CKEDITOR.env.webkit && pastebin.append( doc.createText( '\xa0' ) );
@@ -208,18 +208,18 @@ provides:
 
 		pastebin.setStyles(
 			{
-				position : 'absolute',
+				position  'absolute',
 				// Position the bin exactly at the position of the selected element
 				// to avoid any subsequent document scroll.
-				top : sel.getStartElement().getDocumentPosition().y + 'px',
-				width : '1px',
-				height : '1px',
-				overflow : 'hidden'
+				top  sel.getStartElement().getDocumentPosition().y + 'px',
+				width  '1px',
+				height  '1px',
+				overflow  'hidden'
 			});
 
 		// It's definitely a better user experience if we make the paste-bin pretty unnoticed
 		// by pulling it off the screen.
-		pastebin.setStyle( this.config.contentsLangDirection == 'ltr' ? 'left' : 'right', '-1000px' );
+		pastebin.setStyle( this.config.contentsLangDirection == 'ltr' ? 'left'  'right', '-1000px' );
 
 		var bms = sel.createBookmarks();
 
@@ -251,10 +251,10 @@ provides:
 			pastebin = ( CKEDITOR.env.webkit
 						 && ( bogusSpan = pastebin.getFirst() )
 						 && ( bogusSpan.is && bogusSpan.hasClass( 'Apple-style-span' ) ) ?
-							bogusSpan : pastebin );
+							bogusSpan  pastebin );
 
 			sel.selectBookmarks( bms );
-			callback( pastebin[ 'get' + ( mode == 'text' ? 'Value' : 'Html' ) ]() );
+			callback( pastebin[ 'get' + ( mode == 'text' ? 'Value'  'Html' ) ]() );
 		}, 0 );
 	}
 
@@ -291,12 +291,12 @@ provides:
 	var depressBeforeEvent;
 	function stateFromNamedCommand( command, editor )
 	{
-		// IE Bug: queryCommandEnabled('paste') fires also 'beforepaste(copy/cut)',
+		// IE Bug queryCommandEnabled('paste') fires also 'beforepaste(copy/cut)',
 		// guard to distinguish from the ordinary sources( either
 		// keyboard paste or execCommand ) (#4874).
 		CKEDITOR.env.ie && ( depressBeforeEvent = 1 );
 
-		var retval = editor.document.$.queryCommandEnabled( command ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED;
+		var retval = editor.document.$.queryCommandEnabled( command ) ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED;
 		depressBeforeEvent = 0;
 		return retval;
 	}
@@ -307,18 +307,18 @@ provides:
 		if ( this.mode != 'wysiwyg' )
 			return;
 
-		this.getCommand( 'cut' ).setState( inReadOnly ? CKEDITOR.TRISTATE_DISABLED : stateFromNamedCommand( 'Cut', this ) );
+		this.getCommand( 'cut' ).setState( inReadOnly ? CKEDITOR.TRISTATE_DISABLED  stateFromNamedCommand( 'Cut', this ) );
 		this.getCommand( 'copy' ).setState( stateFromNamedCommand( 'Copy', this ) );
-		var pasteState = inReadOnly ? CKEDITOR.TRISTATE_DISABLED :
-						CKEDITOR.env.webkit ? CKEDITOR.TRISTATE_OFF : stateFromNamedCommand( 'Paste', this );
+		var pasteState = inReadOnly ? CKEDITOR.TRISTATE_DISABLED 
+						CKEDITOR.env.webkit ? CKEDITOR.TRISTATE_OFF  stateFromNamedCommand( 'Paste', this );
 		this.fire( 'pasteState', pasteState );
 	}
 
 	// Register the plugin.
 	CKEDITOR.plugins.add( 'clipboard',
 		{
-			requires : [ 'dialog', 'htmldataprocessor' ],
-			init : function( editor )
+			requires  [ 'dialog', 'htmldataprocessor' ],
+			init  function( editor )
 			{
 				// Inserts processed data into the editor at the end of the
 				// events chain.
@@ -355,8 +355,8 @@ provides:
 					editor.addCommand( commandName, command );
 					editor.ui.addButton( buttonName,
 						{
-							label : lang,
-							command : commandName
+							label  lang,
+							command  commandName
 						});
 
 					// If the "menu" plugin is loaded, register the menu item.
@@ -364,10 +364,10 @@ provides:
 					{
 						editor.addMenuItem( commandName,
 							{
-								label : lang,
-								command : commandName,
-								group : 'clipboard',
-								order : ctxMenuOrder
+								label  lang,
+								command  commandName,
+								group  'clipboard',
+								order  ctxMenuOrder
 							});
 					}
 				}
@@ -393,7 +393,7 @@ provides:
 
 							// Fire 'beforePaste' event so clipboard flavor get customized
 							// by other plugins.
-							var eventData =  { mode : 'html' };
+							var eventData =  { mode  'html' };
 							editor.fire( 'beforePaste', eventData );
 
 							getClipboardData.call( editor, evt, eventData.mode, function ( data )
@@ -429,9 +429,9 @@ provides:
 						{
 							var readOnly = selection.getRanges()[ 0 ].checkReadOnly();
 							return {
-								cut : !readOnly && stateFromNamedCommand( 'Cut', editor ),
-								copy : stateFromNamedCommand( 'Copy', editor ),
-								paste : !readOnly && ( CKEDITOR.env.webkit ? CKEDITOR.TRISTATE_OFF : stateFromNamedCommand( 'Paste', editor ) )
+								cut  !readOnly && stateFromNamedCommand( 'Cut', editor ),
+								copy  stateFromNamedCommand( 'Copy', editor ),
+								paste  !readOnly && ( CKEDITOR.env.webkit ? CKEDITOR.TRISTATE_OFF  stateFromNamedCommand( 'Paste', editor ) )
 							};
 						});
 				}

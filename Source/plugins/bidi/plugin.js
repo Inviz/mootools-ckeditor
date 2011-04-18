@@ -18,12 +18,12 @@ provides:
 
 (function()
 {
-	var guardElements = { table1, ul:1, ol:1, blockquote:1, div:1 },
+	var guardElements = { table1, ul1, ol1, blockquote1, div1 },
 		directSelectionGuardElements = {},
 		// All guard elements which can have a direction applied on them.
 		allGuardElements = {};
-	CKEDITOR.tools.extend( directSelectionGuardElements, guardElements, { tr:1, p:1, div:1, li:1 } );
-	CKEDITOR.tools.extend( allGuardElements, directSelectionGuardElements, { td:1 } );
+	CKEDITOR.tools.extend( directSelectionGuardElements, guardElements, { tr1, p1, div1, li1 } );
+	CKEDITOR.tools.extend( allGuardElements, directSelectionGuardElements, { td1 } );
 
 	function onSelectionChange( e )
 	{
@@ -54,11 +54,11 @@ provides:
 			return;
 
 		var selectionDir = useComputedState ?
-			selectedElement.getComputedStyle( 'direction' ) :
+			selectedElement.getComputedStyle( 'direction' ) 
 			selectedElement.getStyle( 'direction' ) || selectedElement.getAttribute( 'dir' );
 
-		editor.getCommand( 'bidirtl' ).setState( selectionDir == 'rtl' ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF );
-		editor.getCommand( 'bidiltr' ).setState( selectionDir == 'ltr' ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF );
+		editor.getCommand( 'bidirtl' ).setState( selectionDir == 'rtl' ? CKEDITOR.TRISTATE_ON  CKEDITOR.TRISTATE_OFF );
+		editor.getCommand( 'bidiltr' ).setState( selectionDir == 'ltr' ? CKEDITOR.TRISTATE_ON  CKEDITOR.TRISTATE_OFF );
 	}
 
 	function handleMixedDirContent( evt )
@@ -66,7 +66,7 @@ provides:
 		var editor = evt.editor,
 			directionNode = evt.data.path.block || evt.data.path.blockLimit;
 
-		editor.fire( 'contentDirChanged', directionNode ? directionNode.getComputedStyle( 'direction' ) : editor.lang.dir );
+		editor.fire( 'contentDirChanged', directionNode ? directionNode.getComputedStyle( 'direction' )  editor.lang.dir );
 	}
 
 	/**
@@ -108,10 +108,10 @@ provides:
 			}
 		}
 
-		var useComputedState = ( 'useComputedState' in editor.config ) ? editor.config.useComputedState : 1;
+		var useComputedState = ( 'useComputedState' in editor.config ) ? editor.config.useComputedState  1;
 
 		var elementDir = useComputedState ? element.getComputedStyle( 'direction' )
-			: element.getStyle( 'direction' ) || element.hasAttribute( 'dir' );
+			 element.getStyle( 'direction' ) || element.hasAttribute( 'dir' );
 
 		// Stop if direction is same as present.
 		if ( elementDir == dir )
@@ -144,7 +144,7 @@ provides:
 		range = range.clone();
 		range.enlarge( enterMode == CKEDITOR.ENTER_BR ?
 				CKEDITOR.ENLARGE_LIST_ITEM_CONTENTS
-				: CKEDITOR.ENLARGE_BLOCK_CONTENTS );
+				 CKEDITOR.ENLARGE_BLOCK_CONTENTS );
 
 		if ( range.checkBoundaryOfElement( ancestor, CKEDITOR.START )
 				&& range.checkBoundaryOfElement( ancestor, CKEDITOR.END ) )
@@ -207,7 +207,7 @@ provides:
 					{
 						return !! ( node.type == CKEDITOR.NODE_ELEMENT
 								&& node.getName() in guardElements
-								&& !( node.getName() == ( enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' )
+								&& !( node.getName() == ( enterMode == CKEDITOR.ENTER_P ? 'p'  'div' )
 									&& node.getParent().type == CKEDITOR.NODE_ELEMENT
 									&& node.getParent().getName() == 'blockquote' )
 								// Element must be fully included in the range as well. (#6485).
@@ -221,7 +221,7 @@ provides:
 					iterator = range.createIterator();
 					iterator.enlargeBr = enterMode != CKEDITOR.ENTER_BR;
 
-					while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' ) ) )
+					while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p'  'div' ) ) )
 						switchDir( block, dir, editor, database );
 					}
 
@@ -238,20 +238,20 @@ provides:
 
 	CKEDITOR.plugins.add( 'bidi',
 	{
-		requires : [ 'styles', 'button' ],
+		requires  [ 'styles', 'button' ],
 
-		init : function( editor )
+		init  function( editor )
 		{
 			// All buttons use the same code to register. So, to avoid
 			// duplications, let's use this tool function.
 			var addButtonCommand = function( buttonName, buttonLabel, commandName, commandExec )
 			{
-				editor.addCommand( commandName, new CKEDITOR.command( editor, { exec : commandExec }) );
+				editor.addCommand( commandName, new CKEDITOR.command( editor, { exec  commandExec }) );
 
 				editor.ui.addButton( buttonName,
 					{
-						label : buttonLabel,
-						command : commandName
+						label  buttonLabel,
+						command  commandName
 					});
 			};
 
@@ -267,8 +267,8 @@ provides:
 				{
 					editor.fire( 'dirChanged',
 						{
-							node : evt.data,
-							dir : evt.data.getDirection( 1 )
+							node  evt.data,
+							dir  evt.data.getDirection( 1 )
 						} );
 				});
 			});
@@ -293,14 +293,14 @@ provides:
 	{
 		var isAttribute = org == elementProto.setAttribute,
 			isRemoveAttribute = org == elementProto.removeAttribute,
-			dirStyleRegexp = /\bdirection\s*:\s*(.*?)\s*(:?$|;)/;
+			dirStyleRegexp = /\bdirection\s*\s*(.*?)\s*(?$|;)/;
 
 		return function( name, val )
 		{
 			if ( !this.getDocument().equals( CKEDITOR.document ) )
 			{
 				var orgDir;
-				if ( ( name == ( isAttribute || isRemoveAttribute ? 'dir' : 'direction' ) ||
+				if ( ( name == ( isAttribute || isRemoveAttribute ? 'dir'  'direction' ) ||
 					 name == 'style' && ( isRemoveAttribute || dirStyleRegexp.test( val ) ) ) && !isOffline( this ) )
 				{
 					orgDir = this.getDirection( 1 );

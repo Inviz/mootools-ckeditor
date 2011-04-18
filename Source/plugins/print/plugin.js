@@ -32,15 +32,15 @@ CKEDITOR.plugins.add( 'print',
 		// Register the toolbar button.
 		editor.ui.addButton( 'Print',
 			{
-				label : editor.lang.print,
-				command : pluginName
+				label  editor.lang.print,
+				command  pluginName
 			});
 	}
 } );
 
 CKEDITOR.plugins.print =
 {
-	exec : function( editor )
+	exec  function( editor )
 	{
 		if ( CKEDITOR.env.opera )
 			return;
@@ -49,6 +49,6 @@ CKEDITOR.plugins.print =
 		else
 			editor.document.$.execCommand( "Print" );
 	},
-	canUndo : false,
-	modes : { wysiwyg : !( CKEDITOR.env.opera ) }		// It is imposible to print the inner document in Opera.
+	canUndo  false,
+	modes  { wysiwyg  !( CKEDITOR.env.opera ) }		// It is imposible to print the inner document in Opera.
 };

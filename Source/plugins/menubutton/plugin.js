@@ -19,7 +19,7 @@ provides:
 CKEDITOR.plugins.add( 'menubutton',
 {
 	requires  [ 'button', 'menu' ],
-	beforeInit : function( editor )
+	beforeInit  function( editor )
 	{
 		editor.ui.addHandler( CKEDITOR.UI_MENUBUTTON, CKEDITOR.ui.menuButton.handler );
 	}
@@ -50,16 +50,16 @@ CKEDITOR.UI_MENUBUTTON = 5;
 		{
 			menu = _.menu = new CKEDITOR.menu( editor,
 			{
-				panel:
+				panel
 				{
-					className : editor.skinClass + ' cke_contextmenu',
-					attributes : { 'aria-label' : editor.lang.common.options }
+					className  editor.skinClass + ' cke_contextmenu',
+					attributes  { 'aria-label'  editor.lang.common.options }
 				}
 			});
 
 			menu.onHide = CKEDITOR.tools.bind( function()
 				{
-					this.setState( this.modes && this.modes[ editor.mode ] ? _.previousState : CKEDITOR.TRISTATE_DISABLED );
+					this.setState( this.modes && this.modes[ editor.mode ] ? _.previousState  CKEDITOR.TRISTATE_DISABLED );
 				},
 				this );
 
@@ -82,9 +82,9 @@ CKEDITOR.UI_MENUBUTTON = 5;
 
 	CKEDITOR.ui.menuButton = CKEDITOR.tools.createClass(
 	{
-		base : CKEDITOR.ui.button,
+		base  CKEDITOR.ui.button,
 
-		$ : function( definition )
+		$  function( definition )
 		{
 			// We don't want the panel definition in this object.
 			var panelDefinition = definition.panel;
@@ -97,11 +97,11 @@ CKEDITOR.UI_MENUBUTTON = 5;
 			this.click = clickFn;
 		},
 
-		statics :
+		statics 
 		{
-			handler :
+			handler 
 			{
-				create : function( definition )
+				create  function( definition )
 				{
 					return new CKEDITOR.ui.menuButton( definition );
 				}

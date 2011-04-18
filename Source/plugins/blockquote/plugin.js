@@ -67,7 +67,7 @@ provides:
 
 			var bookmarks = selection.createBookmarks();
 
-			// Kludge for #1592: if the bookmark nodes are in the beginning of
+			// Kludge for #1592 if the bookmark nodes are in the beginning of
 			// blockquote, then move them to the nearest block element in the
 			// blockquote.
 			if ( CKEDITOR.env.ie )
@@ -119,7 +119,7 @@ provides:
 				// If no paragraphs, create one from the current selection position.
 				if ( paragraphs.length < 1 )
 				{
-					var para = editor.document.createElement( editor.config.enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' ),
+					var para = editor.document.createElement( editor.config.enterMode == CKEDITOR.ENTER_P ? 'p'  'div' ),
 						firstBookmark = bookmarks.shift();
 					range.insertNode( para );
 					para.append( new CKEDITOR.dom.text( '\ufeff', editor.document ) );
@@ -140,8 +140,8 @@ provides:
 					commonParent = commonParent.getCommonAncestor( block.getParent() );
 				}
 
-				// The common parent must not be the following tags: table, tbody, tr, ol, ul.
-				var denyTags = { table : 1, tbody : 1, tr : 1, ol : 1, ul : 1 };
+				// The common parent must not be the following tags table, tbody, tr, ol, ul.
+				var denyTags = { table  1, tbody  1, tr  1, ol  1, ul  1 };
 				while ( denyTags[ commonParent.getName() ] )
 					commonParent = commonParent.getParent();
 
@@ -297,19 +297,19 @@ provides:
 
 	CKEDITOR.plugins.add( 'blockquote',
 	{
-		init : function( editor )
+		init  function( editor )
 		{
 			editor.addCommand( 'blockquote', commandObject );
 
 			editor.ui.addButton( 'Blockquote',
 				{
-					label : editor.lang.blockquote,
-					command : 'blockquote'
+					label  editor.lang.blockquote,
+					command  'blockquote'
 				} );
 
 			editor.on( 'selectionChange', onSelectionChange );
 		},
 
-		requires : [ 'domiterator' ]
+		requires  [ 'domiterator' ]
 	} );
 })();

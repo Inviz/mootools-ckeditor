@@ -46,24 +46,24 @@ CKEDITOR.dialog.add( 'uicolor', function( editor )
 	pickerContents =
 	{
 		id  'yuiColorPicker',
-		type : 'html',
-		html : "<div id='" + pickerId + "' class='cke_uicolor_picker' style='width: 360px; height: 200px; position: relative;'></div>",
-		onLoad : function( event )
+		type  'html',
+		html  "<div id='" + pickerId + "' class='cke_uicolor_picker' style='width 360px; height 200px; position relative;'></div>",
+		onLoad  function( event )
 		{
 			var url = CKEDITOR.getUrl(
-					'_source/' + // @Packager.RemoveLine
+
 					'plugins/uicolor/yui/'
 				);
 
 			// Create new color picker widget.
 			picker = new window.YAHOO.widget.ColorPicker( pickerId,
 				{
-					showhsvcontrols : true,
-					showhexcontrols : true,
-					images :
+					showhsvcontrols  true,
+					showhexcontrols  true,
+					images 
 					{
-						PICKER_THUMB : url + "assets/picker_thumb.png",
-						HUE_THUMB : url + "assets/hue_thumb.png"
+						PICKER_THUMB  url + "assets/picker_thumb.png",
+						HUE_THUMB  url + "assets/hue_thumb.png"
 					}
 				});
 
@@ -89,10 +89,10 @@ CKEDITOR.dialog.add( 'uicolor', function( editor )
 	var skipPreviewChange = true;
 
 	return {
-		title : editor.lang.uicolor.title,
-		minWidth : 360,
-		minHeight : 320,
-		onLoad : function()
+		title  editor.lang.uicolor.title,
+		minWidth  360,
+		minHeight  320,
+		onLoad  function()
 		{
 			dialog = this;
 			this.setupContent();
@@ -101,48 +101,48 @@ CKEDITOR.dialog.add( 'uicolor', function( editor )
 			if ( CKEDITOR.env.ie7Compat )
 				dialog.parts.contents.setStyle( 'overflow', 'hidden' );
 		},
-		contents : [
+		contents  [
 			{
-				id : 'tab1',
-				label : '',
-				title : '',
-				expand : true,
-				padding : 0,
-				elements : [
+				id  'tab1',
+				label  '',
+				title  '',
+				expand  true,
+				padding  0,
+				elements  [
 						pickerContents,
 						{
-							id : 'tab1',
-							type : 'vbox',
-							children :
+							id  'tab1',
+							type  'vbox',
+							children 
 							[
 								{
-									id : 'livePeview',
-									type : 'checkbox',
-									label : editor.lang.uicolor.preview,
-									'default' : 1,
-									onLoad : function()
+									id  'livePeview',
+									type  'checkbox',
+									label  editor.lang.uicolor.preview,
+									'default'  1,
+									onLoad  function()
 									{
 										skipPreviewChange = true;
 									},
-									onChange : function()
+									onChange  function()
 									{
 										if ( skipPreviewChange )
 											return;
 										var on = this.getValue(),
-											color = on ? '#' + picker.get( 'hex' ) : uiColor;
+											color = on ? '#' + picker.get( 'hex' )  uiColor;
 										setNewUiColor( color, true );
 									}
 								},
 								{
-									type : 'hbox',
-									children :
+									type  'hbox',
+									children 
 									[
 										{
-											id : 'predefined',
-											type : 'select',
-											'default' : '',
-											label : editor.lang.uicolor.predefined,
-											items :
+											id  'predefined',
+											type  'select',
+											'default'  '',
+											label  editor.lang.uicolor.predefined,
+											items 
 											[
 												[ '' ],
 												[ 'Light blue', '#9AB8F3' ],
@@ -166,7 +166,7 @@ CKEDITOR.dialog.add( 'uicolor', function( editor )
 												[ 'Specks of dust', '#D1B596' ],
 												[ 'Lollipop', '#F6CE23' ]
 											],
-											onChange : function()
+											onChange  function()
 											{
 												var color = this.getValue();
 												if ( color )
@@ -179,7 +179,7 @@ CKEDITOR.dialog.add( 'uicolor', function( editor )
 												else
 													CKEDITOR.document.getById( 'predefinedPreview' ).setStyle( 'background', '' );
 											},
-											onShow : function()
+											onShow  function()
 											{
 												var color = editor.getUiColor();
 												if ( color )
@@ -187,19 +187,19 @@ CKEDITOR.dialog.add( 'uicolor', function( editor )
 											}
 										},
 										{
-											id : 'predefinedPreview',
-											type : 'html',
-											html : '<div id="cke_uicolor_preview" style="border: 1px solid black; padding: 3px; width: 30px;">' +
-													'<div id="predefinedPreview" style="width: 30px; height: 30px;">&nbsp;</div>' +
+											id  'predefinedPreview',
+											type  'html',
+											html  '<div id="cke_uicolor_preview" style="border 1px solid black; padding 3px; width 30px;">' +
+													'<div id="predefinedPreview" style="width 30px; height 30px;">&nbsp;</div>' +
 												'</div>'
 										}
 									]
 								},
 								{
-									id : 'configBox',
-									type : 'text',
-									label : editor.lang.uicolor.config,
-									onShow : function()
+									id  'configBox',
+									type  'text',
+									label  editor.lang.uicolor.config,
+									onShow  function()
 									{
 										var color = editor.getUiColor();
 										if ( color )
@@ -213,6 +213,6 @@ CKEDITOR.dialog.add( 'uicolor', function( editor )
 					]
 			}
 		],
-		buttons : [ CKEDITOR.dialog.okButton ]
+		buttons  [ CKEDITOR.dialog.okButton ]
 	};
 } );

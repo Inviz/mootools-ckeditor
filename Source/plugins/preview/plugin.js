@@ -24,13 +24,13 @@ provides:
 {
 	var previewCmd =
 	{
-		modes  { wysiwyg:1, source:1 },
-		canUndo : false,
-		exec : function( editor )
+		modes  { wysiwyg1, source1 },
+		canUndo  false,
+		exec  function( editor )
 		{
 			var sHTML,
 				config = editor.config,
-				baseTag = config.baseHref ? '<base href="' + config.baseHref + '"/>' : '',
+				baseTag = config.baseHref ? '<base href="' + config.baseHref + '"/>'  '',
 				isCustomDomain = CKEDITOR.env.isCustomDomain();
 
 			if ( config.fullPage )
@@ -82,7 +82,7 @@ provides:
 			if ( isCustomDomain )
 			{
 				window._cke_htmlToLoad = sHTML;
-				sOpenUrl = 'javascript:void( (function(){' +
+				sOpenUrl = 'javascriptvoid( (function(){' +
 					'document.open();' +
 					'document.domain="' + document.domain + '";' +
 					'document.write( window.opener._cke_htmlToLoad );' +
@@ -108,13 +108,13 @@ provides:
 	// Register a plugin named "preview".
 	CKEDITOR.plugins.add( pluginName,
 	{
-		init : function( editor )
+		init  function( editor )
 		{
 			editor.addCommand( pluginName, previewCmd );
 			editor.ui.addButton( 'Preview',
 				{
-					label : editor.lang.preview,
-					command : pluginName
+					label  editor.lang.preview,
+					command  pluginName
 				});
 		}
 	});

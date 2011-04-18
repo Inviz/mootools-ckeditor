@@ -31,30 +31,30 @@ CKEDITOR.plugins.add( 'pagebreak',
 		// Register the toolbar button.
 		editor.ui.addButton( 'PageBreak',
 			{
-				label : editor.lang.pagebreak,
-				command : 'pagebreak'
+				label  editor.lang.pagebreak,
+				command  'pagebreak'
 			});
 
 		// Add the style that renders our placeholder.
 		editor.addCss(
 			'img.cke_pagebreak' +
 			'{' +
-				'background-image: url(' + CKEDITOR.getUrl( this.path + 'images/pagebreak.gif' ) + ');' +
-				'background-position: center center;' +
-				'background-repeat: no-repeat;' +
-				'clear: both;' +
-				'display: block;' +
-				'float: none;' +
-				'width:100% !important; _width:99.9% !important;' +
-				'border-top: #999999 1px dotted;' +
-				'border-bottom: #999999 1px dotted;' +
-				'height: 5px !important;' +
-				'page-break-after: always;' +
+				'background-image url(' + CKEDITOR.getUrl( this.path + 'images/pagebreak.gif' ) + ');' +
+				'background-position center center;' +
+				'background-repeat no-repeat;' +
+				'clear both;' +
+				'display block;' +
+				'float none;' +
+				'width100% !important; _width99.9% !important;' +
+				'border-top #999999 1px dotted;' +
+				'border-bottom #999999 1px dotted;' +
+				'height 5px !important;' +
+				'page-break-after always;' +
 
 			'}' );
 	},
 
-	afterInit : function( editor )
+	afterInit  function( editor )
 	{
 		// Register a filter to displaying placeholders after mode change.
 
@@ -65,16 +65,16 @@ CKEDITOR.plugins.add( 'pagebreak',
 		{
 			dataFilter.addRules(
 				{
-					elements :
+					elements 
 					{
-						div : function( element )
+						div  function( element )
 						{
 							var attributes = element.attributes,
 								style = attributes && attributes.style,
 								child = style && element.children.length == 1 && element.children[ 0 ],
 								childStyle = child && ( child.name == 'span' ) && child.attributes.style;
 
-							if ( childStyle && ( /page-break-after\s*:\s*always/i ).test( style ) && ( /display\s*:\s*none/i ).test( childStyle ) )
+							if ( childStyle && ( /page-break-after\s*\s*always/i ).test( style ) && ( /display\s*\s*none/i ).test( childStyle ) )
 							{
 								var fakeImg = editor.createFakeParserElement( element, 'cke_pagebreak', 'div' );
 								var label = editor.lang.pagebreakAlt;
@@ -88,20 +88,20 @@ CKEDITOR.plugins.add( 'pagebreak',
 		}
 	},
 
-	requires : [ 'fakeobjects' ]
+	requires  [ 'fakeobjects' ]
 });
 
 CKEDITOR.plugins.pagebreakCmd =
 {
-	exec : function( editor )
+	exec  function( editor )
 	{
 		// Create the element that represents a print break.
 		var label = editor.lang.pagebreakAlt;
-		var breakObject = CKEDITOR.dom.element.createFromHtml( '<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>' );
+		var breakObject = CKEDITOR.dom.element.createFromHtml( '<div style="page-break-after always;"><span style="display none;">&nbsp;</span></div>' );
 
 		// Creates the fake image used for this element.
 		breakObject = editor.createFakeElement( breakObject, 'cke_pagebreak', 'div' );
-		breakObject.setAttributes( { alt : label, 'aria-label' : label, title : label } );
+		breakObject.setAttributes( { alt  label, 'aria-label'  label, title  label } );
 
 		var ranges = editor.getSelection().getRanges( true );
 

@@ -164,7 +164,7 @@ provides:
 	 */
 	CKEDITOR.editor.prototype.setMode = function( mode )
 	{
-		this.fire( 'beforeSetMode', { newMode : mode } );
+		this.fire( 'beforeSetMode', { newMode  mode } );
 
 		var data,
 			holderElement = this.getThemeSpace( 'contents' ),
@@ -200,7 +200,7 @@ provides:
 				});
 		}
 
-		modeEditor.load( holderElement, ( typeof data ) != 'string'  ? this.getData() : data);
+		modeEditor.load( holderElement, ( typeof data ) != 'string'  ? this.getData()  data);
 	};
 
 	/**

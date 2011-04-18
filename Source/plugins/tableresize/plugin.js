@@ -31,9 +31,9 @@ provides:
 		var computed = element.getComputedStyle( 'border-' + side + '-width' ),
 			borderMap =
 			{
-				thin: '0px',
-				medium: '1px',
-				thick: '2px'
+				thin '0px',
+				medium '1px',
+				thick '2px'
 			};
 
 		if ( computed.indexOf( 'px' ) < 0 )
@@ -101,7 +101,7 @@ provides:
 
 			// Calculate positions based on the current cell.
 			rtl ?
-				pillarRight = x + getBorderWidth( td, 'left' ) :
+				pillarRight = x + getBorderWidth( td, 'left' ) 
 				pillarLeft  = x + td.$.offsetWidth - getBorderWidth( td, 'right' );
 
 			// Calculate positions based on the next cell, if available.
@@ -110,7 +110,7 @@ provides:
 				x =  nextTd.getDocumentPosition().x;
 
 				rtl ?
-					pillarLeft	= x + nextTd.$.offsetWidth - getBorderWidth( nextTd, 'right' ) :
+					pillarLeft	= x + nextTd.$.offsetWidth - getBorderWidth( nextTd, 'right' ) 
 					pillarRight	= x + getBorderWidth( nextTd, 'left' );
 			}
 			// Otherwise calculate positions based on the table (for last cell).
@@ -119,7 +119,7 @@ provides:
 				x =  table.getDocumentPosition().x;
 
 				rtl ?
-					pillarLeft	= x :
+					pillarLeft	= x 
 					pillarRight	= x + table.$.offsetWidth;
 			}
 
@@ -131,14 +131,14 @@ provides:
 			// The pillar should reflects exactly the shape of the hovered
 			// column border line.
 			pillars.push( {
-				table : table,
-				index : pillarIndex,
-				x : pillarLeft,
-				y : tbodyPosition.y,
-				width : pillarWidth,
-				height: tbody.$.offsetHeight,
-				padding : pillarPadding,
-				rtl : rtl } );
+				table  table,
+				index  pillarIndex,
+				x  pillarLeft,
+				y  tbodyPosition.y,
+				width  pillarWidth,
+				height tbody.$.offsetHeight,
+				padding  pillarPadding,
+				rtl  rtl } );
 		}
 
 		return pillars;
@@ -187,7 +187,7 @@ provides:
 			document.getBody().setStyle( 'cursor', 'auto' );
 
 			// Hide the resizer (remove it on IE7 - #5890).
-			needsIEHacks ? resizer.remove() : resizer.hide();
+			needsIEHacks ? resizer.remove()  resizer.hide();
 		}
 
 		function resizeStart()
@@ -206,8 +206,8 @@ provides:
 			for ( var i = 0, len = map.length ; i < len ; i++ )
 			{
 				var row			= map[ i ],
-					leftCell	= row[ columnIndex + ( rtl ? 1 : 0 ) ],
-					rightCell	= row[ columnIndex + ( rtl ? 0 : 1 ) ];
+					leftCell	= row[ columnIndex + ( rtl ? 1  0 ) ],
+					rightCell	= row[ columnIndex + ( rtl ? 0  1 ) ];
 
 				leftCell	= leftCell && new CKEDITOR.dom.element( leftCell );
 				rightCell	= rightCell && new CKEDITOR.dom.element( rightCell );
@@ -258,7 +258,7 @@ provides:
 		function resizeColumn()
 		{
 			var rtl = pillar.rtl,
-				cellsCount = rtl ? rightSideCells.length : leftSideCells.length;
+				cellsCount = rtl ? rightSideCells.length  leftSideCells.length;
 
 			// Perform the actual resize to table cells, only for those by side of the pillar.
 			for ( var i = 0 ; i < cellsCount ; i++ )
@@ -276,7 +276,7 @@ provides:
 
 						// If we're in the last cell, we need to resize the table as well
 						if ( tableWidth )
-							table.setStyle( 'width', pxUnit( tableWidth + sizeShift * ( rtl ? -1 : 1 ) ) );
+							table.setStyle( 'width', pxUnit( tableWidth + sizeShift * ( rtl ? -1  1 ) ) );
 					}
 					, 0,
 					this, [
@@ -312,8 +312,8 @@ provides:
 
 		resizer = CKEDITOR.dom.element.createFromHtml(
 			'<div data-cke-temp=1 contenteditable=false unselectable=on '+
-			'style="position:absolute;cursor:col-resize;filter:alpha(opacity=0);opacity:0;' +
-				'padding:0;background-color:#004;background-image:none;border:0px none;z-index:10"></div>', document );
+			'style="positionabsolute;cursorcol-resize;filteralpha(opacity=0);opacity0;' +
+				'padding0;background-color#004;background-imagenone;border0px none;z-index10"></div>', document );
 
 		// Except on IE6/7 (#5890), place the resizer after body to prevent it
 		// from being editable.
@@ -337,10 +337,10 @@ provides:
 
 			resizer.setStyles(
 				{
-					width: pxUnit( targetPillar.width ),
-					height : pxUnit( targetPillar.height ),
-					left : pxUnit( targetPillar.x ),
-					top : pxUnit( targetPillar.y )
+					width pxUnit( targetPillar.width ),
+					height  pxUnit( targetPillar.height ),
+					left  pxUnit( targetPillar.x ),
+					top  pxUnit( targetPillar.y )
 				});
 
 			// In IE6/7, it's not possible to have custom cursors for floating
@@ -412,8 +412,8 @@ provides:
 
 	CKEDITOR.plugins.add( 'tableresize',
 	{
-		requires : [ 'tabletools' ],
-		init : function( editor )
+		requires  [ 'tabletools' ],
+		init  function( editor )
 		{
 			editor.on( 'contentDom', function()
 			{

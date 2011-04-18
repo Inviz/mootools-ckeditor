@@ -42,7 +42,7 @@ provides:
 		return ( CKEDITOR.instances && CKEDITOR.instances[ name ] ) ? getNewName()  name;
 	};
 
-	// ##### START: Config Privates
+	// ##### START Config Privates
 
 	// These function loads custom configuration files and cache the
 	// CKEDITOR.editorConfig functions defined on them, so there is no need to
@@ -129,7 +129,7 @@ provides:
 			editor.fireOnce( 'customConfigLoaded' );
 	};
 
-	// ##### END: Config Privates
+	// ##### END Config Privates
 
 	var onConfigLoaded = function( editor )
 	{
@@ -138,7 +138,7 @@ provides:
 		var skin = editor.config.skin.split( ',' ),
 			skinName = skin[ 0 ],
 			skinPath = CKEDITOR.getUrl( skin[ 1 ] || (
-				'_source/' +	// @Packager.RemoveLine
+
 				'skins/' + skinName + '/' ) );
 
 		/**
@@ -156,7 +156,7 @@ provides:
 		 * @name CKEDITOR.editor.prototype.skinPath
 		 * @type String
 		 * @example
-		 * alert( editor.skinPath );  // "http://example.com/ckeditor/skins/kama/" (e.g.)
+		 * alert( editor.skinPath );  // "http//example.com/ckeditor/skins/kama/" (e.g.)
 		 */
 		editor.skinPath = skinPath;
 
@@ -170,7 +170,7 @@ provides:
 		editor.skinClass = 'cke_skin_' + skinName;
 
 		/**
-		 * The <a href="http://en.wikipedia.org/wiki/Tabbing_navigation">tabbing
+		 * The <a href="http//en.wikipedia.org/wiki/Tabbing_navigation">tabbing
 		 * navigation</a> order that has been calculated for this editor
 		 * instance. This can be set by the {@link CKEDITOR.config.tabIndex}
 		 * setting or taken from the "tabindex" attribute of the
@@ -238,7 +238,7 @@ provides:
 		if ( extraPlugins )
 		{
 			// Remove them first to avoid duplications.
-			var removeRegex = new RegExp( '(?:^|,)(?:' + extraPlugins.replace( /\s*,\s*/g, '|' ) + ')(?=,|$)' , 'g' );
+			var removeRegex = new RegExp( '(?^|,)(?' + extraPlugins.replace( /\s*,\s*/g, '|' ) + ')(?=,|$)' , 'g' );
 			plugins = plugins.replace( removeRegex, '' );
 
 			plugins += ',' + extraPlugins;
@@ -246,7 +246,7 @@ provides:
 
 		if ( removePlugins )
 		{
-			removeRegex = new RegExp( '(?:^|,)(?:' + removePlugins.replace( /\s*,\s*/g, '|' ) + ')(?=,|$)' , 'g' );
+			removeRegex = new RegExp( '(?^|,)(?' + removePlugins.replace( /\s*,\s*/g, '|' ) + ')(?=,|$)' , 'g' );
 			plugins = plugins.replace( removeRegex, '' );
 		}
 
@@ -272,7 +272,7 @@ provides:
 				 * @name CKEDITOR.editor.prototype.plugins
 				 * @type Object
 				 * @example
-				 * alert( editor.plugins.dialog.path );  // "http://example.com/ckeditor/plugins/dialog/" (e.g.)
+				 * alert( editor.plugins.dialog.path );  // "http//example.com/ckeditor/plugins/dialog/" (e.g.)
 				 */
 				editor.plugins = plugins;
 
@@ -293,7 +293,7 @@ provides:
 					{
 						// Resolve the plugin language. If the current language
 						// is not available, get the first one (default one).
-						lang = ( CKEDITOR.tools.indexOf( pluginLangs, editor.langCode ) >= 0 ? editor.langCode : pluginLangs[ 0 ] );
+						lang = ( CKEDITOR.tools.indexOf( pluginLangs, editor.langCode ) >= 0 ? editor.langCode  pluginLangs[ 0 ] );
 
 						if ( !plugin.langEntries || !plugin.langEntries[ lang ] )
 						{
@@ -361,7 +361,7 @@ provides:
 				 * @name CKEDITOR.editor.prototype.theme
 				 * @type CKEDITOR.theme
 				 * @example
-				 * alert( editor.theme );  "http://example.com/ckeditor/themes/default/" (e.g.)
+				 * alert( editor.theme );  "http//example.com/ckeditor/themes/default/" (e.g.)
 				 */
 				var editorTheme = editor.theme = CKEDITOR.themes.get( theme );
 				editorTheme.path = CKEDITOR.themes.getPath( theme );
@@ -426,7 +426,7 @@ provides:
 		for ( var name in commands )
 		{
 			command = commands[ name ];
-			command[ command.startDisabled ? 'disable' : command.modes[ mode ] ? 'enable' : 'disable' ]();
+			command[ command.startDisabled ? 'disable'  command.modes[ mode ] ? 'enable'  'disable' ]();
 		}
 	}
 
@@ -531,25 +531,25 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * @example
 		 * editorInstance.addCommand( 'sample',
 		 * {
-		 *     exec : function( editor )
+		 *     exec  function( editor )
 		 *     {
 		 *         alert( 'Executing a command for the editor name "' + editor.name + '"!' );
 		 *     }
 		 * });
 		 */
-		addCommand : function( commandName, commandDefinition )
+		addCommand  function( commandName, commandDefinition )
 		{
 			return this._.commands[ commandName ] = new CKEDITOR.command( this, commandDefinition );
 		},
 
 		/**
 		 * Add a trunk of css text to the editor which will be applied to the wysiwyg editing document.
-		 * Note: This function should be called before editor is loaded to take effect.
+		 * Note This function should be called before editor is loaded to take effect.
 		 * @param css {String} CSS text.
 		 * @example
-		 * editorInstance.addCss( 'body { background-color: grey; }' );
+		 * editorInstance.addCss( 'body { background-color grey; }' );
 		 */
-		addCss : function( css )
+		addCss  function( css )
 		{
 			this._.styles.push( css );
 		},
@@ -565,7 +565,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * <b>CKEDITOR.instances.editor1.destroy()</b>;
 		 * alert( CKEDITOR.instances.editor1 );  "undefined"
 		 */
-		destroy : function( noUpdate )
+		destroy  function( noUpdate )
 		{
 			if ( !noUpdate )
 				this.updateElement();
@@ -586,15 +586,15 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * @example
 		 * editorInstance.execCommand( 'Bold' );
 		 */
-		execCommand : function( commandName, data )
+		execCommand  function( commandName, data )
 		{
 			var command = this.getCommand( commandName );
 
 			var eventData =
 			{
-				name: commandName,
-				commandData: data,
-				command: command
+				name commandName,
+				commandData data,
+				command command
 			};
 
 			if ( command && command.state != CKEDITOR.TRISTATE_DISABLED )
@@ -623,7 +623,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * @returns {CKEDITOR.command} The command object identified by the
 		 * provided name.
 		 */
-		getCommand : function( commandName )
+		getCommand  function( commandName )
 		{
 			return this._.commands[ commandName ];
 		},
@@ -637,7 +637,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * if ( CKEDITOR.instances.editor1.<b>getData()</b> == '' )
 		 *     alert( 'There is no data available' );
 		 */
-		getData : function()
+		getData  function()
 		{
 			this.fire( 'beforeGetData' );
 
@@ -647,12 +647,12 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 			{
 				var element = this.element;
 				if ( element && this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE )
-					eventData = element.is( 'textarea' ) ? element.getValue() : element.getHtml();
+					eventData = element.is( 'textarea' ) ? element.getValue()  element.getHtml();
 				else
 					eventData = '';
 			}
 
-			eventData = { dataValue : eventData };
+			eventData = { dataValue  eventData };
 
 			// Fire "getData" so data manipulation may happen.
 			this.fire( 'getData', eventData );
@@ -670,7 +670,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * @example
 		 * alert( editor.getSnapshot() );
 		 */
-		getSnapshot : function()
+		getSnapshot  function()
 		{
 			var data = this.fire( 'getSnapshot' );
 
@@ -678,7 +678,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 			{
 				var element = this.element;
 				if ( element && this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE )
-					data = element.is( 'textarea' ) ? element.getValue() : element.getHtml();
+					data = element.is( 'textarea' ) ? element.getValue()  element.getHtml();
 			}
 
 			return data;
@@ -693,7 +693,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * var data = editor.getSnapshot();
 		 * editor.<b>loadSnapshot( data )</b>;
 		 */
-		loadSnapshot : function( snapshot )
+		loadSnapshot  function( snapshot )
 		{
 			this.fire( 'loadSnapshot', snapshot );
 		},
@@ -716,7 +716,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 *         this.checkDirty();    // true
 		 *     });
 		 */
-		setData : function( data , callback, internal )
+		setData  function( data , callback, internal )
 		{
 			if( callback )
 			{
@@ -728,7 +728,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 			}
 
 			// Fire "setData" so data manipulation may happen.
-			var eventData = { dataValue : data };
+			var eventData = { dataValue  data };
 			!internal && this.fire( 'setData', eventData );
 
 			this._.data = eventData.dataValue;
@@ -742,7 +742,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * @example
 		 * CKEDITOR.instances.editor1.<b>insertHtml( '&lt;p&gt;This is a new paragraph.&lt;/p&gt;' )</b>;
 		 */
-		insertHtml : function( data )
+		insertHtml  function( data )
 		{
 			this.fire( 'insertHtml', data );
 		},
@@ -751,14 +751,14 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * Insert text content into the currently selected position in the
 		 * editor, in WYSIWYG mode, styles of the selected element will be applied to the inserted text,
 		 * spaces around the text will be leaving untouched.
-		 * <strong>Note:</strong> two subsequent line-breaks will introduce one paragraph, which element depends on {@link CKEDITOR.config.enterMode};
+		 * <strong>Note</strong> two subsequent line-breaks will introduce one paragraph, which element depends on {@link CKEDITOR.config.enterMode};
 		 * A single line-break will be instead translated into one &lt;br /&gt;.
 		 * @since 3.5
 		 * @param {String} text Text to be inserted into the editor.
 		 * @example
 		 * CKEDITOR.instances.editor1.<b>insertText( ' line1 \n\n line2' )</b>;
 		 */
-		insertText : function( text )
+		insertText  function( text )
 		{
 			this.fire( 'insertText', text );
 		},
@@ -772,7 +772,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * var element = CKEDITOR.dom.element.createFromHtml( '&lt;img src="hello.png" border="0" title="Hello" /&gt;' );
 		 * CKEDITOR.instances.editor1.<b>insertElement( element )</b>;
 		 */
-		insertElement : function( element )
+		insertElement  function( element )
 		{
 			this.fire( 'insertElement', element );
 		},
@@ -795,7 +795,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * else
 		 *     window.attachEvent( 'onbeforeunload', beforeUnload );
 		 */
-		checkDirty : function()
+		checkDirty  function()
 		{
 			return ( this.mayBeDirty && this._.previousValue !== this.getSnapshot() );
 		},
@@ -809,7 +809,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * editor.<b>resetDirty()</b>;
 		 * alert( editor.checkDirty() );  // "false"
 		 */
-		resetDirty : function()
+		resetDirty  function()
 		{
 			if ( this.mayBeDirty )
 				this._.previousValue = this.getSnapshot();
@@ -822,7 +822,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 		 * CKEDITOR.instances.editor1.updateElement();
 		 * alert( document.getElementById( 'editor1' ).value );  // The current editor data.
 		 */
-		updateElement : function()
+		updateElement  function()
 		{
 			var element = this.element;
 			if ( element && this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE )

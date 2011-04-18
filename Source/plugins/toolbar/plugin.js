@@ -46,9 +46,9 @@ provides:
 	{
 		toolbarFocus 
 		{
-			modes : { wysiwyg : 1, source : 1 },
+			modes  { wysiwyg  1, source  1 },
 
-			exec : function( editor )
+			exec  function( editor )
 			{
 				if ( editor.toolbox )
 				{
@@ -67,7 +67,7 @@ provides:
 
 	CKEDITOR.plugins.add( 'toolbar',
 	{
-		init : function( editor )
+		init  function( editor )
 		{
 			var itemKeystroke = function( item, keystroke )
 			{
@@ -76,8 +76,8 @@ provides:
 
 				switch ( keystroke )
 				{
-					case rtl ? 37 : 39 :					// RIGHT-ARROW
-					case 9 :					// TAB
+					case rtl ? 37  39 					// RIGHT-ARROW
+					case 9 					// TAB
 						do
 						{
 							// Look for the next item in the toolbar.
@@ -112,8 +112,8 @@ provides:
 
 						return false;
 
-					case rtl ? 39 : 37 :					// LEFT-ARROW
-					case CKEDITOR.SHIFT + 9 :	// SHIFT + TAB
+					case rtl ? 39  37 					// LEFT-ARROW
+					case CKEDITOR.SHIFT + 9 	// SHIFT + TAB
 						do
 						{
 							// Look for the previous item in the toolbar.
@@ -151,12 +151,12 @@ provides:
 
 						return false;
 
-					case 27 :					// ESC
+					case 27 					// ESC
 						editor.focus();
 						return false;
 
-					case 13 :					// ENTER
-					case 32 :					// SPACE
+					case 13 					// ENTER
+					case 32 					// SPACE
 						item.execute();
 						return false;
 				}
@@ -175,7 +175,7 @@ provides:
 							expanded =  editor.config.toolbarStartupExpanded !== false,
 							groupStarted;
 
-						output.push( expanded ? '>' : ' style="display:none">' );
+						output.push( expanded ? '>'  ' style="displaynone">' );
 
 						// Sends the ARIA label.
 						output.push( '<span id="', labelId, '" class="cke_voice_label">', editor.lang.toolbar, '</span>' );
@@ -184,7 +184,7 @@ provides:
 							toolbar =
 									( editor.config.toolbar instanceof Array ) ?
 										editor.config.toolbar
-									:
+									
 										editor.config[ 'toolbar_' + editor.config.toolbar ];
 
 						for ( var r = 0 ; r < toolbar.length ; r++ )
@@ -200,7 +200,7 @@ provides:
 								continue;
 
 							var toolbarId = CKEDITOR.tools.getNextId(),
-								toolbarObj = { id : toolbarId, items : [] };
+								toolbarObj = { id  toolbarId, items  [] };
 
 							if ( groupStarted )
 							{
@@ -267,7 +267,7 @@ provides:
 									itemObj.onkey = itemKeystroke;
 
 									/*
-									 * Fix for #3052:
+									 * Fix for #3052
 									 * Prevent JAWS from focusing the toolbar after document load.
 									 */
 									itemObj.onfocus = function()
@@ -305,7 +305,7 @@ provides:
 
 							editor.addCommand( 'toolbarCollapse',
 								{
-									exec : function( editor )
+									exec  function( editor )
 									{
 										var collapser = CKEDITOR.document.getById( collapserId ),
 											toolbox = collapser.getPrevious(),
@@ -330,7 +330,7 @@ provides:
 
 										// Update collapser symbol.
 										collapser.getFirst().setText( collapsed ?
-											'\u25B2' :		// BLACK UP-POINTING TRIANGLE
+											'\u25B2' 		// BLACK UP-POINTING TRIANGLE
 											'\u25C0' );		// BLACK LEFT-POINTING TRIANGLE
 
 										var dy = toolboxContainer.$.offsetHeight - previousHeight;
@@ -339,10 +339,10 @@ provides:
 										editor.fire( 'resize' );
 									},
 
-									modes : { wysiwyg : 1, source : 1 }
+									modes  { wysiwyg  1, source  1 }
 								} );
 
-							output.push( '<a title="' + ( expanded ? editor.lang.toolbarCollapse : editor.lang.toolbarExpand )
+							output.push( '<a title="' + ( expanded ? editor.lang.toolbarCollapse  editor.lang.toolbarExpand )
 													  + '" id="' + collapserId + '" tabIndex="-1" class="cke_toolbox_collapser' );
 
 							if ( !expanded )
@@ -388,7 +388,7 @@ provides:
  */
 CKEDITOR.ui.separator =
 {
-	render : function( editor, output )
+	render  function( editor, output )
 	{
 		output.push( '<span class="cke_separator" role="separator"></span>' );
 		return {};

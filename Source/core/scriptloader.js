@@ -63,10 +63,10 @@ CKEDITOR.scriptLoader = (function()
 		 * CKEDITOR.scriptLoader.load( [ '/myscript1.js', '/myscript2.js' ], function( completed, failed )
 		 *     {
 		 *         alert( 'Number of scripts loaded ' + completed.length );
-		 *         alert( 'Number of failures: ' + failed.length );
+		 *         alert( 'Number of failures ' + failed.length );
 		 *     });
 		 */
-		load : function( scriptUrl, callback, scope, showBusy )
+		load  function( scriptUrl, callback, scope, showBusy )
 		{
 			var isString = ( typeof scriptUrl == 'string' );
 
@@ -99,7 +99,7 @@ CKEDITOR.scriptLoader = (function()
 
 			var checkLoaded = function( url, success )
 			{
-				( success ? completed : failed ).push( url );
+				( success ? completed  failed ).push( url );
 
 				if ( --scriptCount <= 0 )
 				{
@@ -140,14 +140,14 @@ CKEDITOR.scriptLoader = (function()
 				// Create the <script> element.
 				var script = new CKEDITOR.dom.element( 'script' );
 				script.setAttributes( {
-					type : 'text/javascript',
-					src : url } );
+					type  'text/javascript',
+					src  url } );
 
 				if ( callback )
 				{
 					if ( CKEDITOR.env.ie )
 					{
-						// FIXME: For IE, we are not able to return false on error (like 404).
+						// FIXME For IE, we are not able to return false on error (like 404).
 
 						/** @ignore */
 						script.$.onreadystatechange = function ()
@@ -169,7 +169,7 @@ CKEDITOR.scriptLoader = (function()
 							setTimeout( function() { onLoad( url, true ); }, 0 );
 						};
 
-						// FIXME: Opera and Safari will not fire onerror.
+						// FIXME Opera and Safari will not fire onerror.
 
 						/** @ignore */
 						script.$.onerror = function()
@@ -182,7 +182,7 @@ CKEDITOR.scriptLoader = (function()
 				// Append it to <head>.
 				script.appendTo( CKEDITOR.document.getHead() );
 
-				CKEDITOR.fire( 'download', url );		// @Packager.RemoveLine
+
 			};
 
 			showBusy && CKEDITOR.document.getDocumentElement().setStyle( 'cursor', 'wait' );

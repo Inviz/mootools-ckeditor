@@ -44,7 +44,7 @@ provides:
 				return false;
 			}
 			else
-				editor.fire( 'paste', { 'text' : clipboardText } );
+				editor.fire( 'paste', { 'text'  clipboardText } );
 
 			return true;
 		}
@@ -53,15 +53,15 @@ provides:
 	// Register the plugin.
 	CKEDITOR.plugins.add( 'pastetext',
 	{
-		init : function( editor )
+		init  function( editor )
 		{
 			var commandName = 'pastetext',
 				command = editor.addCommand( commandName, pasteTextCmd );
 
 			editor.ui.addButton( 'PasteText',
 				{
-					label : editor.lang.pasteText.button,
-					command : commandName
+					label  editor.lang.pasteText.button,
+					command  commandName
 				});
 
 			CKEDITOR.dialog.add( commandName, CKEDITOR.getUrl( this.path + 'dialogs/pastetext.js' ) );
@@ -92,7 +92,7 @@ provides:
 				});
 		},
 
-		requires : [ 'clipboard' ]
+		requires  [ 'clipboard' ]
 	});
 
 })();
@@ -102,7 +102,7 @@ provides:
  * Whether to force all pasting operations to insert on plain text into the
  * editor, loosing any formatting information possibly available in the source
  * text.
- * <strong>Note:</strong> paste from word is not affected by this configuration.
+ * <strong>Note</strong> paste from word is not affected by this configuration.
  * @name CKEDITOR.config.forcePasteAsPlainText
  * @type Boolean
  * @default false

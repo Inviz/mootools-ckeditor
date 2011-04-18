@@ -156,14 +156,14 @@ CKEDITOR.skins = (function()
 		 * @param {Object} skinDefinition The skin definition.
 		 * @example
 		 */
-		add : function( skinName, skinDefinition )
+		add  function( skinName, skinDefinition )
 		{
 			loaded[ skinName ] = skinDefinition;
 
 			skinDefinition.skinPath = paths[ skinName ]
 				|| ( paths[ skinName ] =
 						CKEDITOR.getUrl(
-							'_source/' +	// @Packager.RemoveLine
+
 							'skins/' + skinName + '/' ) );
 		},
 
@@ -178,7 +178,7 @@ CKEDITOR.skins = (function()
 		 *		part files are loaded.
 		 * @example
 		 */
-		load : function( editor, skinPart, callback )
+		load  function( editor, skinPart, callback )
 		{
 			var skinName = editor.skinName,
 				skinPath = editor.skinPath;

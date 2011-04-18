@@ -19,7 +19,7 @@ provides:
 CKEDITOR.plugins.add( 'panelbutton',
 {
 	requires  [ 'button' ],
-	beforeInit : function( editor )
+	beforeInit  function( editor )
 	{
 		editor.ui.addHandler( CKEDITOR.UI_PANELBUTTON, CKEDITOR.ui.panelButton.handler );
 	}
@@ -55,9 +55,9 @@ CKEDITOR.UI_PANELBUTTON = 4;
 
 	CKEDITOR.ui.panelButton = CKEDITOR.tools.createClass(
 	{
-		base : CKEDITOR.ui.button,
+		base  CKEDITOR.ui.button,
 
-		$ : function( definition )
+		$  function( definition )
 		{
 			// We don't want the panel definition in this object.
 			var panelDefinition = definition.panel;
@@ -72,7 +72,7 @@ CKEDITOR.UI_PANELBUTTON = 4;
 
 			panelDefinition.block =
 			{
-				attributes : panelDefinition.attributes
+				attributes  panelDefinition.attributes
 			};
 
 			this.hasArrow = true;
@@ -81,24 +81,24 @@ CKEDITOR.UI_PANELBUTTON = 4;
 
 			this._ =
 			{
-				panelDefinition : panelDefinition
+				panelDefinition  panelDefinition
 			};
 		},
 
-		statics :
+		statics 
 		{
-			handler :
+			handler 
 			{
-				create : function( definition )
+				create  function( definition )
 				{
 					return new CKEDITOR.ui.panelButton( definition );
 				}
 			}
 		},
 
-		proto :
+		proto 
 		{
-			createPanel : function( editor )
+			createPanel  function( editor )
 			{
 				var _ = this._;
 
@@ -130,7 +130,7 @@ CKEDITOR.UI_PANELBUTTON = 4;
 						if ( me.className )
 							this.element.getFirst().removeClass( me.className + '_panel' );
 
-						me.setState( me.modes && me.modes[ editor.mode ] ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED );
+						me.setState( me.modes && me.modes[ editor.mode ] ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED );
 
 						_.on = 0;
 

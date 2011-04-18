@@ -37,7 +37,7 @@ provides:
 		{
 			// In IE, using the native XMLHttpRequest for local files may throw
 			// "Access is Denied" errors.
-			if ( !CKEDITOR.env.ie || location.protocol != 'file:' )
+			if ( !CKEDITOR.env.ie || location.protocol != 'file' )
 				try { return new XMLHttpRequest(); } catch(e) {}
 
 			try { return new ActiveXObject( 'Msxml2.XMLHTTP' ); } catch (e) {}
@@ -48,11 +48,11 @@ provides:
 
 		var checkStatus = function( xhr )
 		{
-			// HTTP Status Codes:
-			//	 2xx : Success
-			//	 304 : Not Modified
-			//	   0 : Returned when running locally (file://)
-			//	1223 : IE may change 204 to 1223 (see http://dev.jquery.com/ticket/1450)
+			// HTTP Status Codes
+			//	 2xx  Success
+			//	 304  Not Modified
+			//	   0  Returned when running locally (file//)
+			//	1223  IE may change 204 to 1223 (see http//dev.jquery.com/ticket/1450)
 
 			return ( xhr.readyState == 4 &&
 					(	( xhr.status >= 200 && xhr.status < 300 ) ||
@@ -73,7 +73,7 @@ provides:
 			if ( checkStatus( xhr ) )
 			{
 				var xml = xhr.responseXML;
-				return new CKEDITOR.xml( xml && xml.firstChild ? xml : xhr.responseText );
+				return new CKEDITOR.xml( xml && xml.firstChild ? xml  xhr.responseText );
 			}
 			return null;
 		};
@@ -91,7 +91,7 @@ provides:
 
 			if ( async )
 			{
-				// TODO: perform leak checks on this closure.
+				// TODO perform leak checks on this closure.
 				/** @ignore */
 				xhr.onreadystatechange = function()
 				{
@@ -105,7 +105,7 @@ provides:
 
 			xhr.send(null);
 
-			return async ? '' : getResponseFn( xhr );
+			return async ? ''  getResponseFn( xhr );
 		};
 
 		return 	/** @lends CKEDITOR.ajax */ {
@@ -129,7 +129,7 @@ provides:
 			 *         alert( data );
 			 *     } );
 			 */
-			load : function( url, callback )
+			load  function( url, callback )
 			{
 				return load( url, callback, getResponseText );
 			},
@@ -153,7 +153,7 @@ provides:
 			 *         alert( xml.getInnerXml( '//' ) );
 			 *     } );
 			 */
-			loadXml : function( url, callback )
+			loadXml  function( url, callback )
 			{
 				return load( url, callback, getResponseXml );
 			}

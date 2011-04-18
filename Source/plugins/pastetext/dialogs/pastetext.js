@@ -23,16 +23,16 @@ provides:
 			return {
 				title  editor.lang.pasteText.title,
 
-				minWidth : CKEDITOR.env.ie && CKEDITOR.env.quirks ? 368 : 350,
-				minHeight : 240,
+				minWidth  CKEDITOR.env.ie && CKEDITOR.env.quirks ? 368  350,
+				minHeight  240,
 
-				onShow : function()
+				onShow  function()
 				{
 					// Reset the textarea value.
 					this.getContentElement( 'general', 'content' ).getInputElement().setValue( '' );
 				},
 
-				onOk : function()
+				onOk  function()
 				{
 					// Get the textarea value.
 					var text = this.getContentElement( 'general', 'content' ).getInputElement().getValue(),
@@ -40,28 +40,28 @@ provides:
 
 					setTimeout( function()
 					{
-						editor.fire( 'paste', { 'text' : text } );
+						editor.fire( 'paste', { 'text'  text } );
 					}, 0 );
 				},
 
-				contents :
+				contents 
 				[
 					{
-						label : editor.lang.common.generalTab,
-						id : 'general',
-						elements :
+						label  editor.lang.common.generalTab,
+						id  'general',
+						elements 
 						[
 							{
-								type : 'html',
-								id : 'pasteMsg',
-								html : '<div style="white-space:normal;width:340px;">' + editor.lang.clipboard.pasteMsg + '</div>'
+								type  'html',
+								id  'pasteMsg',
+								html  '<div style="white-spacenormal;width340px;">' + editor.lang.clipboard.pasteMsg + '</div>'
 							},
 							{
-								type : 'textarea',
-								id : 'content',
-								className : 'cke_pastetext',
+								type  'textarea',
+								id  'content',
+								className  'cke_pastetext',
 
-								onLoad : function()
+								onLoad  function()
 								{
 									var label = this.getDialog().getContentElement( 'general', 'pasteMsg' ).getElement(),
 										input = this.getElement().getElementsByTag( 'textarea' ).getItem( 0 );
@@ -70,7 +70,7 @@ provides:
 									input.setStyle( 'direction', editor.config.contentsLangDirection );
 								},
 
-								focus : function()
+								focus  function()
 								{
 									this.getElement().focus();
 								}

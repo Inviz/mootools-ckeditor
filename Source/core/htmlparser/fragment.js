@@ -50,7 +50,7 @@ CKEDITOR.htmlParser.fragment = function()
 	this._ =
 	{
 		isBlockLike  true,
-		hasInlineStarted : false
+		hasInlineStarted  false
 	};
 };
 
@@ -58,12 +58,12 @@ CKEDITOR.htmlParser.fragment = function()
 {
 	// Block-level elements whose internal structure should be respected during
 	// parser fixing.
-	var nonBreakingBlocks = CKEDITOR.tools.extend( { table:1,ul:1,ol:1,dl:1 }, CKEDITOR.dtd.table, CKEDITOR.dtd.ul, CKEDITOR.dtd.ol, CKEDITOR.dtd.dl );
+	var nonBreakingBlocks = CKEDITOR.tools.extend( { table1,ul1,ol1,dl1 }, CKEDITOR.dtd.table, CKEDITOR.dtd.ul, CKEDITOR.dtd.ol, CKEDITOR.dtd.dl );
 
-	var listBlocks = { ol:1, ul:1 };
+	var listBlocks = { ol1, ul1 };
 
 	// Dtd of the fragment element, basically it accept anything except for intermediate structure, e.g. orphan <li>.
-	var rootDtd = CKEDITOR.tools.extend( {}, { html: 1 }, CKEDITOR.dtd.html, CKEDITOR.dtd.body, CKEDITOR.dtd.head, { style:1,script:1 } );
+	var rootDtd = CKEDITOR.tools.extend( {}, { html 1 }, CKEDITOR.dtd.html, CKEDITOR.dtd.body, CKEDITOR.dtd.head, { style1,script1 } );
 
 	/**
 	 * Creates a {@link CKEDITOR.htmlParser.fragment} from an HTML string.
@@ -200,7 +200,7 @@ CKEDITOR.htmlParser.fragment = function()
 				delete element.returnPoint;
 			}
 			else
-				currentNode = moveCurrent ? target : savedCurrent;
+				currentNode = moveCurrent ? target  savedCurrent;
 		}
 
 		parser.onTagOpen = function( tagName, attributes, selfClosing, optionalClose )
@@ -239,8 +239,8 @@ CKEDITOR.htmlParser.fragment = function()
 				var currentName = currentNode.name;
 
 				var currentDtd = currentName ? ( CKEDITOR.dtd[ currentName ]
-						|| ( currentNode._.isBlockLike ? CKEDITOR.dtd.div : CKEDITOR.dtd.span ) )
-						: rootDtd;
+						|| ( currentNode._.isBlockLike ? CKEDITOR.dtd.div  CKEDITOR.dtd.span ) )
+						 rootDtd;
 
 				// If the element cannot be child of the current element.
 				if ( !element.isUnknown && !currentNode.isUnknown && !currentDtd[ tagName ] )
@@ -265,7 +265,7 @@ CKEDITOR.htmlParser.fragment = function()
 					}
 					// Establish new list root for orphan list items.
 					else if ( tagName in CKEDITOR.dtd.$listItem && currentName != tagName )
-						parser.onTagOpen( tagName == 'li' ? 'ul' : 'dl', {}, 0, 1 );
+						parser.onTagOpen( tagName == 'li' ? 'ul'  'dl', {}, 0, 1 );
 					// We're inside a structural block like table and list, AND the incoming element
 					// is not of the same type (e.g. <td>td1<td>td2</td>), we simply add this new one before it,
 					// and most importantly, return back to here once this element is added,
@@ -436,12 +436,12 @@ CKEDITOR.htmlParser.fragment = function()
 		/**
 		 * Adds a node to this fragment.
 		 * @param {Object} node The node to be added. It can be any of of the
-		 *		following types: {@link CKEDITOR.htmlParser.element},
+		 *		following types {@link CKEDITOR.htmlParser.element},
 		 *		{@link CKEDITOR.htmlParser.text} and
 		 *		{@link CKEDITOR.htmlParser.comment}.
 		 * @example
 		 */
-		add : function( node )
+		add  function( node )
 		{
 			var len = this.children.length,
 				previous = len > 0 && this.children[ len - 1 ] || null;
@@ -484,7 +484,7 @@ CKEDITOR.htmlParser.fragment = function()
 		 * fragment.writeHtml( writer )
 		 * alert( writer.getHtml() );  "&lt;p&gt;&lt;b&gt;Example&lt;/b&gt;&lt;/p&gt;"
 		 */
-		writeHtml : function( writer, filter )
+		writeHtml  function( writer, filter )
 		{
 			var isChildrenFiltered;
 			this.filterChildren = function()
@@ -499,10 +499,10 @@ CKEDITOR.htmlParser.fragment = function()
 			// Filtering the root fragment before anything else.
 			!this.name && filter && filter.onFragment( this );
 
-			this.writeChildrenHtml( writer, isChildrenFiltered ? null : filter );
+			this.writeChildrenHtml( writer, isChildrenFiltered ? null  filter );
 		},
 
-		writeChildrenHtml : function( writer, filter )
+		writeChildrenHtml  function( writer, filter )
 		{
 			for ( var i = 0 ; i < this.children.length ; i++ )
 				this.children[i].writeHtml( writer, filter );

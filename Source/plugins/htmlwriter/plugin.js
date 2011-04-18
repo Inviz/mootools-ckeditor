@@ -34,7 +34,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 {
 	base  CKEDITOR.htmlParser.basicWriter,
 
-	$ : function()
+	$  function()
 	{
 		// Call the base contructor.
 		this.base();
@@ -86,39 +86,39 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		{
 			this.setRules( e,
 				{
-					indent : 1,
-					breakBeforeOpen : 1,
-					breakAfterOpen : 1,
-					breakBeforeClose : !dtd[ e ][ '#' ],
-					breakAfterClose : 1
+					indent  1,
+					breakBeforeOpen  1,
+					breakAfterOpen  1,
+					breakBeforeClose  !dtd[ e ][ '#' ],
+					breakAfterClose  1
 				});
 		}
 
 		this.setRules( 'br',
 			{
-				breakAfterOpen : 1
+				breakAfterOpen  1
 			});
 
 		this.setRules( 'title',
 			{
-				indent : 0,
-				breakAfterOpen : 0
+				indent  0,
+				breakAfterOpen  0
 			});
 
 		this.setRules( 'style',
 			{
-				indent : 0,
-				breakBeforeClose : 1
+				indent  0,
+				breakBeforeClose  1
 			});
 
 		// Disable indentation on <pre>.
 		this.setRules( 'pre',
 			{
-			  indent : 0
+			  indent  0
 			});
 	},
 
-	proto :
+	proto 
 	{
 		/**
 		 * Writes the tag opening part for a opener tag.
@@ -127,9 +127,9 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 *		attributes could be used to inspect the tag.
 		 * @example
 		 * // Writes "&lt;p".
-		 * writer.openTag( 'p', { class : 'MyClass', id : 'MyId' } );
+		 * writer.openTag( 'p', { class  'MyClass', id  'MyId' } );
 		 */
-		openTag : function( tagName, attributes )
+		openTag  function( tagName, attributes )
 		{
 			var rules = this._.rules[ tagName ];
 
@@ -157,7 +157,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Writes " /&gt;".
 		 * writer.openTagClose( 'br', true );
 		 */
-		openTagClose : function( tagName, isSelfClose )
+		openTagClose  function( tagName, isSelfClose )
 		{
 			var rules = this._.rules[ tagName ];
 
@@ -185,7 +185,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Writes ' class="MyClass"'.
 		 * writer.attribute( 'class', 'MyClass' );
 		 */
-		attribute : function( attName, attValue )
+		attribute  function( attName, attValue )
 		{
 
 			if ( typeof attValue == 'string' )
@@ -205,7 +205,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Writes "&lt;/p&gt;".
 		 * writer.closeTag( 'p' );
 		 */
-		closeTag : function( tagName )
+		closeTag  function( tagName )
 		{
 			var rules = this._.rules[ tagName ];
 
@@ -235,7 +235,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Writes "Hello Word".
 		 * writer.text( 'Hello Word' );
 		 */
-		text : function( text )
+		text  function( text )
 		{
 			if ( this._.indent )
 			{
@@ -253,7 +253,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Writes "&lt;!-- My comment --&gt;".
 		 * writer.comment( ' My comment ' );
 		 */
-		comment : function( comment )
+		comment  function( comment )
 		{
 			if ( this._.indent )
 				this.indentation();
@@ -267,7 +267,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Writes "\n" (e.g.).
 		 * writer.lineBreak();
 		 */
-		lineBreak : function()
+		lineBreak  function()
 		{
 			if ( !this._.inPre && this._.output.length > 0 )
 				this._.output.push( this.lineBreakChars );
@@ -282,7 +282,7 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Writes "\t" (e.g.).
 		 * writer.indentation();
 		 */
-		indentation : function()
+		indentation  function()
 		{
 			if( !this._.inPre )
 				this._.output.push( this._.indentation );
@@ -290,13 +290,13 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		},
 
 		/**
-		 * Sets formatting rules for a give element. The possible rules are:
+		 * Sets formatting rules for a give element. The possible rules are
 		 * <ul>
-		 *	<li><b>indent</b>: indent the element contents.</li>
-		 *	<li><b>breakBeforeOpen</b>: break line before the opener tag for this element.</li>
-		 *	<li><b>breakAfterOpen</b>: break line after the opener tag for this element.</li>
-		 *	<li><b>breakBeforeClose</b>: break line before the closer tag for this element.</li>
-		 *	<li><b>breakAfterClose</b>: break line after the closer tag for this element.</li>
+		 *	<li><b>indent</b> indent the element contents.</li>
+		 *	<li><b>breakBeforeOpen</b> break line before the opener tag for this element.</li>
+		 *	<li><b>breakAfterOpen</b> break line after the opener tag for this element.</li>
+		 *	<li><b>breakBeforeClose</b> break line before the closer tag for this element.</li>
+		 *	<li><b>breakAfterClose</b> break line after the closer tag for this element.</li>
 		 * </ul>
 		 *
 		 * All rules default to "false". Each call to the function overrides
@@ -312,14 +312,14 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass(
 		 * // Break line before and after "img" tags.
 		 * writer.setRules( 'img',
 		 *     {
-		 *         breakBeforeOpen : true
-		 *         breakAfterOpen : true
+		 *         breakBeforeOpen  true
+		 *         breakAfterOpen  true
 		 *     });
 		 * @example
 		 * // Reset the rules for the "h1" tag.
 		 * writer.setRules( 'h1', {} );
 		 */
-		setRules : function( tagName, rules )
+		setRules  function( tagName, rules )
 		{
 			var currentRules = this._.rules[ tagName ];
 

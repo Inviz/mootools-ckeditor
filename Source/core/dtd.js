@@ -47,85 +47,85 @@ CKEDITOR.dtd = (function()
 {
 	var X = CKEDITOR.tools.extend,
 
-		A = {isindex:1,fieldset:1},
-		B = {input:1,button:1,select:1,textarea:1,label:1},
-		C = X({a:1},B),
-		D = X({iframe:1},C),
-		E = {hr:1,ul:1,menu:1,div:1,blockquote:1,noscript:1,table:1,center:1,address:1,dir:1,pre:1,h5:1,dl:1,h4:1,noframes:1,h6:1,ol:1,h1:1,h3:1,h2:1},
-		F = {ins:1,del:1,script:1,style:1},
-		G = X({b:1,acronym:1,bdo:1,'var':1,'#':1,abbr:1,code:1,br:1,i:1,cite:1,kbd:1,u:1,strike:1,s:1,tt:1,strong:1,q:1,samp:1,em:1,dfn:1,span:1},F),
-		H = X({sub:1,img:1,object:1,sup:1,basefont:1,map:1,applet:1,font:1,big:1,small:1},G),
-		I = X({p:1},H),
-		J = X({iframe:1},H,B),
-		K = {img:1,noscript:1,br:1,kbd:1,center:1,button:1,basefont:1,h5:1,h4:1,samp:1,h6:1,ol:1,h1:1,h3:1,h2:1,form:1,font:1,'#':1,select:1,menu:1,ins:1,abbr:1,label:1,code:1,table:1,script:1,cite:1,input:1,iframe:1,strong:1,textarea:1,noframes:1,big:1,small:1,span:1,hr:1,sub:1,bdo:1,'var':1,div:1,object:1,sup:1,strike:1,dir:1,map:1,dl:1,applet:1,del:1,isindex:1,fieldset:1,ul:1,b:1,acronym:1,a:1,blockquote:1,i:1,u:1,s:1,tt:1,address:1,q:1,pre:1,p:1,em:1,dfn:1},
+		A = {isindex1,fieldset1},
+		B = {input1,button1,select1,textarea1,label1},
+		C = X({a1},B),
+		D = X({iframe1},C),
+		E = {hr1,ul1,menu1,div1,blockquote1,noscript1,table1,center1,address1,dir1,pre1,h51,dl1,h41,noframes1,h61,ol1,h11,h31,h21},
+		F = {ins1,del1,script1,style1},
+		G = X({b1,acronym1,bdo1,'var'1,'#'1,abbr1,code1,br1,i1,cite1,kbd1,u1,strike1,s1,tt1,strong1,q1,samp1,em1,dfn1,span1},F),
+		H = X({sub1,img1,object1,sup1,basefont1,map1,applet1,font1,big1,small1},G),
+		I = X({p1},H),
+		J = X({iframe1},H,B),
+		K = {img1,noscript1,br1,kbd1,center1,button1,basefont1,h51,h41,samp1,h61,ol1,h11,h31,h21,form1,font1,'#'1,select1,menu1,ins1,abbr1,label1,code1,table1,script1,cite1,input1,iframe1,strong1,textarea1,noframes1,big1,small1,span1,hr1,sub1,bdo1,'var'1,div1,object1,sup1,strike1,dir1,map1,dl1,applet1,del1,isindex1,fieldset1,ul1,b1,acronym1,a1,blockquote1,i1,u1,s1,tt1,address1,q1,pre1,p1,em1,dfn1},
 
-		L = X({a:1},J),
-		M = {tr:1},
-		N = {'#':1},
-		O = X({param:1},K),
-		P = X({form:1},A,D,E,I),
-		Q = {li:1},
-		R = {style:1,script:1},
-		S = {base:1,link:1,meta:1,title:1},
+		L = X({a1},J),
+		M = {tr1},
+		N = {'#'1},
+		O = X({param1},K),
+		P = X({form1},A,D,E,I),
+		Q = {li1},
+		R = {style1,script1},
+		S = {base1,link1,meta1,title1},
 		T = X(S,R),
-		U = {head:1,body:1},
-		V = {html:1};
+		U = {head1,body1},
+		V = {html1};
 
-	var block = {address:1,blockquote:1,center:1,dir:1,div:1,dl:1,fieldset:1,form:1,h1:1,h2:1,h3:1,h4:1,h5:1,h6:1,hr:1,isindex:1,menu:1,noframes:1,ol:1,p:1,pre:1,table:1,ul:1};
+	var block = {address1,blockquote1,center1,dir1,div1,dl1,fieldset1,form1,h11,h21,h31,h41,h51,h61,hr1,isindex1,menu1,noframes1,ol1,p1,pre1,table1,ul1};
 
 	return /** @lends CKEDITOR.dtd */ {
 
 		// The "$" items have been added manually.
 
 		// List of elements living outside body.
-		$nonBodyContent: X(V,U,S),
+		$nonBodyContent X(V,U,S),
 
 		/**
 		 * List of block elements, like "p" or "div".
 		 * @type Object
 		 * @example
 		 */
-		$block : block,
+		$block  block,
 
 		/**
 		 * List of block limit elements.
 		 * @type Object
 		 * @example
 		 */
-		$blockLimit : { body:1,div:1,td:1,th:1,caption:1,form:1 },
+		$blockLimit  { body1,div1,td1,th1,caption1,form1 },
 
 		/**
 		 * List of inline (&lt;span&gt; like) elements.
 		 */
-		$inline : L,	// Just like span.
+		$inline  L,	// Just like span.
 
 		/**
 		 * list of elements that can be children at &lt;body&gt;.
 		 */
-		$body : X({script:1,style:1}, block),
+		$body  X({script1,style1}, block),
 
-		$cdata : {script:1,style:1},
+		$cdata  {script1,style1},
 
 		/**
 		 * List of empty (self-closing) elements, like "br" or "img".
 		 * @type Object
 		 * @example
 		 */
-		$empty : {area:1,base:1,br:1,col:1,hr:1,img:1,input:1,link:1,meta:1,param:1},
+		$empty  {area1,base1,br1,col1,hr1,img1,input1,link1,meta1,param1},
 
 		/**
 		 * List of list item elements, like "li" or "dd".
 		 * @type Object
 		 * @example
 		 */
-		$listItem : {dd:1,dt:1,li:1},
+		$listItem  {dd1,dt1,li1},
 
 		/**
 	     * List of list root elements.
 	     * @type Object
 	     * @example
 	     */
-	    $list: { ul:1,ol:1,dl:1},
+	    $list { ul1,ol1,dl1},
 
 		/**
 		 * Elements that accept text nodes, but are not possible to edit into
@@ -133,119 +133,119 @@ CKEDITOR.dtd = (function()
 		 * @type Object
 		 * @example
 		 */
-		$nonEditable : {applet:1,button:1,embed:1,iframe:1,map:1,object:1,option:1,script:1,textarea:1,param:1},
+		$nonEditable  {applet1,button1,embed1,iframe1,map1,object1,option1,script1,textarea1,param1},
 
 		/**
 		 * List of elements that can be ignored if empty, like "b" or "span".
 		 * @type Object
 		 * @example
 		 */
-		$removeEmpty : {abbr:1,acronym:1,address:1,b:1,bdo:1,big:1,cite:1,code:1,del:1,dfn:1,em:1,font:1,i:1,ins:1,label:1,kbd:1,q:1,s:1,samp:1,small:1,span:1,strike:1,strong:1,sub:1,sup:1,tt:1,u:1,'var':1},
+		$removeEmpty  {abbr1,acronym1,address1,b1,bdo1,big1,cite1,code1,del1,dfn1,em1,font1,i1,ins1,label1,kbd1,q1,s1,samp1,small1,span1,strike1,strong1,sub1,sup1,tt1,u1,'var'1},
 
 		/**
 		 * List of elements that have tabindex set to zero by default.
 		 * @type Object
 		 * @example
 		 */
-		$tabIndex : {a:1,area:1,button:1,input:1,object:1,select:1,textarea:1},
+		$tabIndex  {a1,area1,button1,input1,object1,select1,textarea1},
 
 		/**
 		 * List of elements used inside the "table" element, like "tbody" or "td".
 		 * @type Object
 		 * @example
 		 */
-		$tableContent : {caption:1,col:1,colgroup:1,tbody:1,td:1,tfoot:1,th:1,thead:1,tr:1},
+		$tableContent  {caption1,col1,colgroup1,tbody1,td1,tfoot1,th1,thead1,tr1},
 
-        html: U,
-        head: T,
-        style: N,
-        script: N,
-        body: P,
-        base: {},
-        link: {},
-        meta: {},
-        title: N,
-        col : {},
-        tr : {td:1,th:1},
-        img : {},
-        colgroup : {col:1},
-        noscript : P,
-        td : P,
-        br : {},
-        th : P,
-        center : P,
-        kbd : L,
-        button : X(I,E),
-        basefont : {},
-        h5 : L,
-        h4 : L,
-        samp : L,
-        h6 : L,
-        ol : Q,
-        h1 : L,
-        h3 : L,
-        option : N,
-        h2 : L,
-        form : X(A,D,E,I),
-        select : {optgroup:1,option:1},
-        font : L,
-        ins : L,
-        menu : Q,
-        abbr : L,
-        label : L,
-        table : {thead:1,col:1,tbody:1,tr:1,colgroup:1,caption:1,tfoot:1},
-        code : L,
-        script : N,
-        tfoot : M,
-        cite : L,
-        li : P,
-        input : {},
-        iframe : P,
-        strong : L,
-        textarea : N,
-        noframes : P,
-        big : L,
-        small : L,
-        span : L,
-        hr : {},
-        dt : L,
-        sub : L,
-        optgroup : {option:1},
-        param : {},
-        bdo : L,
-        'var' : L,
-        div : P,
-        object : O,
-        sup : L,
-        dd : P,
-        strike : L,
-        area : {},
-        dir : Q,
-        map : X({area:1,form:1,p:1},A,F,E),
-        applet : O,
-        dl : {dt:1,dd:1},
-        del : L,
-        isindex : {},
-        fieldset : X({legend:1},K),
-        thead : M,
-        ul : Q,
-        acronym : L,
-        b : L,
-        a : J,
-        blockquote : P,
-        caption : L,
-        i : L,
-        u : L,
-        tbody : M,
-        s : L,
-        address : X(D,I),
-        tt : L,
-        legend : L,
-        q : L,
-        pre : X(G,C),
-        p : L,
-        em : L,
-        dfn : L
+        html U,
+        head T,
+        style N,
+        script N,
+        body P,
+        base {},
+        link {},
+        meta {},
+        title N,
+        col  {},
+        tr  {td1,th1},
+        img  {},
+        colgroup  {col1},
+        noscript  P,
+        td  P,
+        br  {},
+        th  P,
+        center  P,
+        kbd  L,
+        button  X(I,E),
+        basefont  {},
+        h5  L,
+        h4  L,
+        samp  L,
+        h6  L,
+        ol  Q,
+        h1  L,
+        h3  L,
+        option  N,
+        h2  L,
+        form  X(A,D,E,I),
+        select  {optgroup1,option1},
+        font  L,
+        ins  L,
+        menu  Q,
+        abbr  L,
+        label  L,
+        table  {thead1,col1,tbody1,tr1,colgroup1,caption1,tfoot1},
+        code  L,
+        script  N,
+        tfoot  M,
+        cite  L,
+        li  P,
+        input  {},
+        iframe  P,
+        strong  L,
+        textarea  N,
+        noframes  P,
+        big  L,
+        small  L,
+        span  L,
+        hr  {},
+        dt  L,
+        sub  L,
+        optgroup  {option1},
+        param  {},
+        bdo  L,
+        'var'  L,
+        div  P,
+        object  O,
+        sup  L,
+        dd  P,
+        strike  L,
+        area  {},
+        dir  Q,
+        map  X({area1,form1,p1},A,F,E),
+        applet  O,
+        dl  {dt1,dd1},
+        del  L,
+        isindex  {},
+        fieldset  X({legend1},K),
+        thead  M,
+        ul  Q,
+        acronym  L,
+        b  L,
+        a  J,
+        blockquote  P,
+        caption  L,
+        i  L,
+        u  L,
+        tbody  M,
+        s  L,
+        address  X(D,I),
+        tt  L,
+        legend  L,
+        q  L,
+        pre  X(G,C),
+        p  L,
+        em  L,
+        dfn  L
     };
 })();
 

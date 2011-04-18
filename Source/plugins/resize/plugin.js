@@ -48,7 +48,7 @@ CKEDITOR.plugins.add( 'resize',
 					dy = evt.data.$.screenY - origin.y,
 					width = startSize.width,
 					height = startSize.height,
-					internalWidth = width + dx * ( resizeDir == 'rtl' ? -1 : 1 ),
+					internalWidth = width + dx * ( resizeDir == 'rtl' ? -1  1 ),
 					internalHeight = height + dy;
 
 				if ( resizeHorizontal )
@@ -77,8 +77,8 @@ CKEDITOR.plugins.add( 'resize',
 					if ( !container )
 						container = editor.getResizable();
 
-					startSize = { width : container.$.offsetWidth || 0, height : container.$.offsetHeight || 0 };
-					origin = { x : $event.screenX, y : $event.screenY };
+					startSize = { width  container.$.offsetWidth || 0, height  container.$.offsetHeight || 0 };
+					origin = { x  $event.screenX, y  $event.screenY };
 
 					config.resize_minWidth > startSize.width && ( config.resize_minWidth = startSize.width );
 					config.resize_minHeight > startSize.height && ( config.resize_minHeight = startSize.height );
@@ -114,7 +114,7 @@ CKEDITOR.plugins.add( 'resize',
 
 						// Always sticks the corner of botttom space.
 						resizeDir == 'ltr' && direction == 'ltr' ?
-							event.data.html += resizerHtml :
+							event.data.html += resizerHtml 
 							event.data.html = resizerHtml + event.data.html;
 					}
 				}, editor, null, 100 );
@@ -124,7 +124,7 @@ CKEDITOR.plugins.add( 'resize',
 
 /**
  * The minimum editor width, in pixels, when resizing it with the resize handle.
- * Note: It fallbacks to editor's actual width if that's smaller than the default value.
+ * Note It fallbacks to editor's actual width if that's smaller than the default value.
  * @name CKEDITOR.config.resize_minWidth
  * @type Number
  * @default 750
@@ -134,7 +134,7 @@ CKEDITOR.plugins.add( 'resize',
 
 /**
  * The minimum editor height, in pixels, when resizing it with the resize handle.
- * Note: It fallbacks to editor's actual height if that's smaller than the default value.
+ * Note It fallbacks to editor's actual height if that's smaller than the default value.
  * @name CKEDITOR.config.resize_minHeight
  * @type Number
  * @default 250

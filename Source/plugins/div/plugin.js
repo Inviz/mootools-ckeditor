@@ -25,7 +25,7 @@ provides:
 	{
 		requires  [ 'editingblock', 'domiterator', 'styles' ],
 
-		init : function( editor )
+		init  function( editor )
 		{
 			var lang = editor.lang.div;
 
@@ -33,7 +33,7 @@ provides:
 			editor.addCommand( 'editdiv', new CKEDITOR.dialogCommand( 'editdiv' ) );
 			editor.addCommand( 'removediv',
 				{
-					exec : function( editor )
+					exec  function( editor )
 					{
 						var selection = editor.getSelection(),
 							ranges = selection && selection.getRanges(),
@@ -77,28 +77,28 @@ provides:
 
 			editor.ui.addButton( 'CreateDiv',
 			{
-				label : lang.toolbar,
-				command :'creatediv'
+				label  lang.toolbar,
+				command 'creatediv'
 			} );
 
 			if ( editor.addMenuItems )
 			{
 				editor.addMenuItems(
 					{
-						editdiv :
+						editdiv 
 						{
-							label : lang.edit,
-							command : 'editdiv',
-							group : 'div',
-							order : 1
+							label  lang.edit,
+							command  'editdiv',
+							group  'div',
+							order  1
 						},
 
-						removediv:
+						removediv
 						{
-							label : lang.remove,
-							command : 'removediv',
-							group : 'div',
-							order : 5
+							label  lang.remove,
+							command  'removediv',
+							group  'div',
+							order  5
 						}
 					} );
 
@@ -115,8 +115,8 @@ provides:
 							if ( blockLimit && blockLimit.getAscendant( 'div', true ) )
 							{
 								return {
-									editdiv : CKEDITOR.TRISTATE_OFF,
-									removediv : CKEDITOR.TRISTATE_OFF
+									editdiv  CKEDITOR.TRISTATE_OFF,
+									removediv  CKEDITOR.TRISTATE_OFF
 								};
 							}
 

@@ -52,14 +52,14 @@ CKEDITOR.plugins.add( 'menu',
 			};
 	},
 
-	requires : [ 'floatpanel' ]
+	requires  [ 'floatpanel' ]
 });
 
 (function()
 {
 	CKEDITOR.menu = CKEDITOR.tools.createClass(
 	{
-		$ : function( editor, definition )
+		$  function( editor, definition )
 		{
 			definition = this._.definition = definition || {};
 			this.id = CKEDITOR.tools.getNextId();
@@ -72,9 +72,9 @@ CKEDITOR.plugins.add( 'menu',
 
 			var panelDefinition = CKEDITOR.tools.extend( {}, definition.panel,
 			{
-				css : editor.skin.editor.css,
-				level : this._.level - 1,
-				block : {}
+				css  editor.skin.editor.css,
+				level  this._.level - 1,
+				block  {}
 			} );
 
 			var attrs = panelDefinition.block.attributes = ( panelDefinition.attributes || {} );
@@ -83,9 +83,9 @@ CKEDITOR.plugins.add( 'menu',
 			this._.panelDefinition = panelDefinition;
 		},
 
-		_ :
+		_ 
 		{
-			onShow : function()
+			onShow  function()
 			{
 				var selection = this.editor.getSelection();
 
@@ -120,7 +120,7 @@ CKEDITOR.plugins.add( 'menu',
 				}
 			},
 
-			onClick : function( item )
+			onClick  function( item )
 			{
 				this.hide();
 
@@ -130,7 +130,7 @@ CKEDITOR.plugins.add( 'menu',
 					this.editor.execCommand( item.command );
 			},
 
-			onEscape : function( keystroke )
+			onEscape  function( keystroke )
 			{
 				var parent = this.parent;
 				// 1. If it's sub-menu, restore the last focused item
@@ -152,7 +152,7 @@ CKEDITOR.plugins.add( 'menu',
 				return false;
 			},
 
-			onHide : function()
+			onHide  function()
 			{
 				if ( CKEDITOR.env.ie )
 				{
@@ -163,7 +163,7 @@ CKEDITOR.plugins.add( 'menu',
 				this.onHide && this.onHide();
 			},
 
-			showSubMenu : function( index )
+			showSubMenu  function( index )
 			{
 				var menu = this._.subMenu,
 					item = this.items[ index ],
@@ -188,7 +188,7 @@ CKEDITOR.plugins.add( 'menu',
 				else
 				{
 					menu = this._.subMenu = new CKEDITOR.menu( this.editor,
-								   CKEDITOR.tools.extend( {}, this._.definition, { level : this._.level + 1 }, true ) );
+								   CKEDITOR.tools.extend( {}, this._.definition, { level  this._.level + 1 }, true ) );
 					menu.parent = this;
 					menu._.onClick = CKEDITOR.tools.bind( this._.onClick, this );
 				}
@@ -212,9 +212,9 @@ CKEDITOR.plugins.add( 'menu',
 			}
 		},
 
-		proto :
+		proto 
 		{
-			add : function( item )
+			add  function( item )
 			{
 				// Later we may sort the items, but Array#sort is not stable in
 				// some browsers, here we're forcing the original sequence with
@@ -225,12 +225,12 @@ CKEDITOR.plugins.add( 'menu',
 				this.items.push( item );
 			},
 
-			removeAll : function()
+			removeAll  function()
 			{
 				this.items = [];
 			},
 
-			show : function( offsetParent, corner, offsetX, offsetY )
+			show  function( offsetParent, corner, offsetX, offsetY )
 			{
 				// Not for sub menu.
 				if ( !this.parent )
@@ -241,7 +241,7 @@ CKEDITOR.plugins.add( 'menu',
 						return;
 				}
 
-				corner = corner || ( this.editor.lang.dir == 'rtl' ? 2 : 1 );
+				corner = corner || ( this.editor.lang.dir == 'rtl' ? 2  1 );
 
 				var items = this.items,
 					editor = this.editor,
@@ -279,7 +279,7 @@ CKEDITOR.plugins.add( 'menu',
 					keys[ 38 ]	= 'prev';					// ARROW-UP
 					keys[ CKEDITOR.SHIFT + 9 ]	= 'prev';	// SHIFT + TAB
 					keys[ 32 ]	= 'click';					// SPACE
-					keys[ ( editor.lang.dir == 'rtl' ? 37 : 39 ) ]	= 'click';  // ARROW-RIGHT/ARROW-LEFT(rtl)
+					keys[ ( editor.lang.dir == 'rtl' ? 37  39 ) ]	= 'click';  // ARROW-RIGHT/ARROW-LEFT(rtl)
 
 					element = this._.element = block.element;
 					element.addClass( editor.skinClass );
@@ -323,7 +323,7 @@ CKEDITOR.plugins.add( 'menu',
 				sortItems( items );
 
 				var chromeRoot = editor.container.getChild( 1 ),
-					mixedContentClass = chromeRoot.hasClass( 'cke_mixed_dir_content' ) ? ' cke_mixed_dir_content' : '';
+					mixedContentClass = chromeRoot.hasClass( 'cke_mixed_dir_content' ) ? ' cke_mixed_dir_content'  '';
 
 				// Build the HTML that composes the menu and its items.
 				var output = [ '<div class="cke_menu' + mixedContentClass + '" role="presentation">' ];
@@ -359,12 +359,12 @@ CKEDITOR.plugins.add( 'menu',
 				editor.fire( 'menuShow', [ panel ] );
 			},
 
-			addListener : function( listenerFn )
+			addListener  function( listenerFn )
 			{
 				this._.listeners.push( listenerFn );
 			},
 
-			hide : function()
+			hide  function()
 			{
 				this._.onHide && this._.onHide();
 				this._.panel && this._.panel.hide();
@@ -381,20 +381,20 @@ CKEDITOR.plugins.add( 'menu',
 				else if ( itemA.group > itemB.group )
 					return 1;
 
-				return itemA.order < itemB.order ? -1 :
-					itemA.order > itemB.order ? 1 :
+				return itemA.order < itemB.order ? -1 
+					itemA.order > itemB.order ? 1 
 					0;
 			});
 	}
 	CKEDITOR.menuItem = CKEDITOR.tools.createClass(
 	{
-		$ : function( editor, name, definition )
+		$  function( editor, name, definition )
 		{
 			CKEDITOR.tools.extend( this, definition,
 				// Defaults
 				{
-					order : 0,
-					className : 'cke_button_' + name
+					order  0,
+					className  'cke_button_' + name
 				});
 
 			// Transform the group name into its order number.
@@ -404,16 +404,16 @@ CKEDITOR.plugins.add( 'menu',
 			this.name = name;
 		},
 
-		proto :
+		proto 
 		{
-			render : function( menu, index, output )
+			render  function( menu, index, output )
 			{
 				var id = menu.id + String( index ),
-					state = ( typeof this.state == 'undefined' ) ? CKEDITOR.TRISTATE_OFF : this.state;
+					state = ( typeof this.state == 'undefined' ) ? CKEDITOR.TRISTATE_OFF  this.state;
 
 				var classes = ' cke_' + (
-					state == CKEDITOR.TRISTATE_ON ? 'on' :
-					state == CKEDITOR.TRISTATE_DISABLED ? 'disabled' :
+					state == CKEDITOR.TRISTATE_ON ? 'on' 
+					state == CKEDITOR.TRISTATE_DISABLED ? 'disabled' 
 					'off' );
 
 				var htmlLabel = this.label;
@@ -424,21 +424,21 @@ CKEDITOR.plugins.add( 'menu',
 			var hasSubMenu = this.getItems;
 
 			output.push(
-				'<span class="cke_menuitem' + ( this.icon && this.icon.indexOf( '.png' ) == -1 ? ' cke_noalphafix' : '' ) + '">' +
+				'<span class="cke_menuitem' + ( this.icon && this.icon.indexOf( '.png' ) == -1 ? ' cke_noalphafix'  '' ) + '">' +
 				'<a id="', id, '"' +
-					' class="', classes, '" href="javascript:void(\'', ( this.label || '' ).replace( "'", '' ), '\')"' +
+					' class="', classes, '" href="javascriptvoid(\'', ( this.label || '' ).replace( "'", '' ), '\')"' +
 					' title="', this.label, '"' +
 					' tabindex="-1"' +
 					'_cke_focus=1' +
 					' hidefocus="true"' +
 					' role="menuitem"' +
-					( hasSubMenu ? 'aria-haspopup="true"' : '' ) +
-					( state == CKEDITOR.TRISTATE_DISABLED ? 'aria-disabled="true"' : '' ) +
-					( state == CKEDITOR.TRISTATE_ON ? 'aria-pressed="true"' : '' ) );
+					( hasSubMenu ? 'aria-haspopup="true"'  '' ) +
+					( state == CKEDITOR.TRISTATE_DISABLED ? 'aria-disabled="true"'  '' ) +
+					( state == CKEDITOR.TRISTATE_ON ? 'aria-pressed="true"'  '' ) );
 
 				// Some browsers don't cancel key events in the keydown but in the
 				// keypress.
-				// TODO: Check if really needed for Gecko+Mac.
+				// TODO Check if really needed for Gecko+Mac.
 				if ( CKEDITOR.env.opera || ( CKEDITOR.env.gecko && CKEDITOR.env.mac ) )
 				{
 					output.push(
@@ -461,8 +461,8 @@ CKEDITOR.plugins.add( 'menu',
 					' onclick="CKEDITOR.tools.callFunction(', menu._.itemClickFn, ',', index, '); return false;"' +
 					'>' +
 						'<span class="cke_icon_wrapper"><span class="cke_icon"' +
-							( this.icon ? ' style="background-image:url(' + CKEDITOR.getUrl( this.icon ) + ');background-position:0 ' + offset + 'px;"'
-							: '' ) +
+							( this.icon ? ' style="background-imageurl(' + CKEDITOR.getUrl( this.icon ) + ');background-position0 ' + offset + 'px;"'
+							 '' ) +
 							'></span></span>' +
 						'<span class="cke_label">' );
 
@@ -472,7 +472,7 @@ CKEDITOR.plugins.add( 'menu',
 							'<span class="cke_menuarrow">',
 								'<span>&#',
 									( this.editor.lang.dir == 'rtl' ?
-										'9668' :	// BLACK LEFT-POINTING POINTER
+										'9668' 	// BLACK LEFT-POINTING POINTER
 										'9658' ),	// BLACK RIGHT-POINTING POINTER
 								';</span>',
 							'</span>' );

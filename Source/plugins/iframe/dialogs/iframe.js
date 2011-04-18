@@ -22,8 +22,8 @@ provides:
 	// http//www.w3.org/TR/REC-html40/present/frames.html#h-16.5
 	var checkboxValues =
 	{
-		scrolling : { 'true' : 'yes', 'false' : 'no' },
-		frameborder : { 'true' : '1', 'false' : '0' }
+		scrolling  { 'true'  'yes', 'false'  'no' },
+		frameborder  { 'true'  '1', 'false'  '0' }
 	};
 
 	function loadValue( iframeNode )
@@ -58,10 +58,10 @@ provides:
 			commonLang = editor.lang.common,
 			dialogadvtab = editor.plugins.dialogadvtab;
 		return {
-			title : iframeLang.title,
-			minWidth : 350,
-			minHeight : 260,
-			onShow : function()
+			title  iframeLang.title,
+			minWidth  350,
+			minHeight  260,
+			onShow  function()
 			{
 				// Clear previously saved elements.
 				this.fakeImage = this.iframeNode = null;
@@ -77,7 +77,7 @@ provides:
 					this.setupContent( iframeNode, fakeImage );
 				}
 			},
-			onOk : function()
+			onOk  function()
 			{
 				var iframeNode;
 				if ( !this.fakeImage )
@@ -103,41 +103,41 @@ provides:
 				else
 					editor.insertElement( newFakeImage );
 			},
-			contents : [
+			contents  [
 				{
-					id : 'info',
-					label : commonLang.generalTab,
-					accessKey : 'I',
-					elements :
+					id  'info',
+					label  commonLang.generalTab,
+					accessKey  'I',
+					elements 
 					[
 						{
-							type : 'vbox',
-							padding : 0,
-							children :
+							type  'vbox',
+							padding  0,
+							children 
 							[
 								{
-									id : 'src',
-									type : 'text',
-									label : commonLang.url,
-									required : true,
-									validate : CKEDITOR.dialog.validate.notEmpty( iframeLang.noUrl ),
-									setup : loadValue,
-									commit : commitValue
+									id  'src',
+									type  'text',
+									label  commonLang.url,
+									required  true,
+									validate  CKEDITOR.dialog.validate.notEmpty( iframeLang.noUrl ),
+									setup  loadValue,
+									commit  commitValue
 								}
 							]
 						},
 						{
-							type : 'hbox',
-							children :
+							type  'hbox',
+							children 
 							[
 								{
-									id : 'width',
-									type : 'text',
-									style : 'width:100%',
-									labelLayout : 'vertical',
-									label : commonLang.width,
-									validate : CKEDITOR.dialog.validate.integer( commonLang.invalidWidth ),
-									setup : function( iframeNode, fakeImage )
+									id  'width',
+									type  'text',
+									style  'width100%',
+									labelLayout  'vertical',
+									label  commonLang.width,
+									validate  CKEDITOR.dialog.validate.integer( commonLang.invalidWidth ),
+									setup  function( iframeNode, fakeImage )
 									{
 										loadValue.apply( this, arguments );
 										if ( fakeImage )
@@ -147,7 +147,7 @@ provides:
 												this.setValue( fakeImageWidth );
 										}
 									},
-									commit : function( iframeNode, extraStyles )
+									commit  function( iframeNode, extraStyles )
 									{
 										commitValue.apply( this, arguments );
 										if ( this.getValue() )
@@ -155,13 +155,13 @@ provides:
 									}
 								},
 								{
-									id : 'height',
-									type : 'text',
-									style : 'width:100%',
-									labelLayout : 'vertical',
-									label : commonLang.height,
-									validate : CKEDITOR.dialog.validate.integer( commonLang.invalidHeight ),
-									setup : function( iframeNode, fakeImage )
+									id  'height',
+									type  'text',
+									style  'width100%',
+									labelLayout  'vertical',
+									label  commonLang.height,
+									validate  CKEDITOR.dialog.validate.integer( commonLang.invalidHeight ),
+									setup  function( iframeNode, fakeImage )
 									{
 										loadValue.apply( this, arguments );
 										if ( fakeImage )
@@ -171,7 +171,7 @@ provides:
 												this.setValue( fakeImageHeight );
 										}
 									},
-									commit : function( iframeNode, extraStyles )
+									commit  function( iframeNode, extraStyles )
 									{
 										commitValue.apply( this, arguments );
 										if ( this.getValue() )
@@ -179,10 +179,10 @@ provides:
 									}
 								},
 								{
-									id : 'align',
-									type : 'select',
-									'default' : '',
-									items :
+									id  'align',
+									type  'select',
+									'default'  '',
+									items 
 									[
 										[ commonLang.notSet , '' ],
 										[ commonLang.alignLeft , 'left' ],
@@ -191,10 +191,10 @@ provides:
 										[ commonLang.alignMiddle , 'middle' ],
 										[ commonLang.alignBottom , 'bottom' ]
 									],
-									style : 'width:100%',
-									labelLayout : 'vertical',
-									label : commonLang.align,
-									setup : function( iframeNode, fakeImage )
+									style  'width100%',
+									labelLayout  'vertical',
+									label  commonLang.align,
+									setup  function( iframeNode, fakeImage )
 									{
 										loadValue.apply( this, arguments );
 										if ( fakeImage )
@@ -203,7 +203,7 @@ provides:
 											this.setValue( fakeImageAlign && fakeImageAlign.toLowerCase() || '' );
 										}
 									},
-									commit : function( iframeNode, extraStyles, extraAttributes )
+									commit  function( iframeNode, extraStyles, extraAttributes )
 									{
 										commitValue.apply( this, arguments );
 										if ( this.getValue() )
@@ -213,57 +213,57 @@ provides:
 							]
 						},
 						{
-							type : 'hbox',
-							widths : [ '50%', '50%' ],
-							children :
+							type  'hbox',
+							widths  [ '50%', '50%' ],
+							children 
 							[
 								{
-									id : 'scrolling',
-									type : 'checkbox',
-									label : iframeLang.scrolling,
-									setup : loadValue,
-									commit : commitValue
+									id  'scrolling',
+									type  'checkbox',
+									label  iframeLang.scrolling,
+									setup  loadValue,
+									commit  commitValue
 								},
 								{
-									id : 'frameborder',
-									type : 'checkbox',
-									label : iframeLang.border,
-									setup : loadValue,
-									commit : commitValue
+									id  'frameborder',
+									type  'checkbox',
+									label  iframeLang.border,
+									setup  loadValue,
+									commit  commitValue
 								}
 							]
 						},
 						{
-							type : 'hbox',
-							widths : [ '50%', '50%' ],
-							children :
+							type  'hbox',
+							widths  [ '50%', '50%' ],
+							children 
 							[
 								{
-									id : 'name',
-									type : 'text',
-									label : commonLang.name,
-									setup : loadValue,
-									commit : commitValue
+									id  'name',
+									type  'text',
+									label  commonLang.name,
+									setup  loadValue,
+									commit  commitValue
 								},
 								{
-									id : 'title',
-									type : 'text',
-									label : commonLang.advisoryTitle,
-									setup : loadValue,
-									commit : commitValue
+									id  'title',
+									type  'text',
+									label  commonLang.advisoryTitle,
+									setup  loadValue,
+									commit  commitValue
 								}
 							]
 						},
 						{
-							id : 'longdesc',
-							type : 'text',
-							label : commonLang.longDescr,
-							setup : loadValue,
-							commit : commitValue
+							id  'longdesc',
+							type  'text',
+							label  commonLang.longDescr,
+							setup  loadValue,
+							commit  commitValue
 						}
 					]
 				},
-				dialogadvtab && dialogadvtab.createAdvancedTab( editor, { id:1, classes:1, styles:1 })
+				dialogadvtab && dialogadvtab.createAdvancedTab( editor, { id1, classes1, styles1 })
 			]
 		};
 	});

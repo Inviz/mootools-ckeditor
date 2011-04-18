@@ -33,20 +33,20 @@ CKEDITOR.dialog.add( 'anchor', function( editor )
 
 	return {
 		title  editor.lang.anchor.title,
-		minWidth : 300,
-		minHeight : 60,
-		onOk : function()
+		minWidth  300,
+		minHeight  60,
+		onOk  function()
 		{
 			// Always create a new anchor, because of IE BUG.
 			var name = this.getValueOf( 'info', 'txtName' ),
 				element = CKEDITOR.env.ie && !( CKEDITOR.document.$.documentMode >= 8 ) ?
-				editor.document.createElement( '<a name="' + CKEDITOR.tools.htmlEncode( name ) + '">' ) :
+				editor.document.createElement( '<a name="' + CKEDITOR.tools.htmlEncode( name ) + '">' ) 
 				editor.document.createElement( 'a' );
 
 			// Move contents and attributes of old anchor to new anchor.
 			if ( this.editMode )
 			{
-				this.editObj.copyAttributes( element, { name : 1 } );
+				this.editObj.copyAttributes( element, { name  1 } );
 				this.editObj.moveChildren( element );
 			}
 
@@ -66,7 +66,7 @@ CKEDITOR.dialog.add( 'anchor', function( editor )
 
 			return true;
 		},
-		onShow : function()
+		onShow  function()
 		{
 			this.editObj = false;
 			this.fakeObj = false;
@@ -83,19 +83,19 @@ CKEDITOR.dialog.add( 'anchor', function( editor )
 			}
 			this.getContentElement( 'info', 'txtName' ).focus();
 		},
-		contents : [
+		contents  [
 			{
-				id : 'info',
-				label : editor.lang.anchor.title,
-				accessKey : 'I',
-				elements :
+				id  'info',
+				label  editor.lang.anchor.title,
+				accessKey  'I',
+				elements 
 				[
 					{
-						type : 'text',
-						id : 'txtName',
-						label : editor.lang.anchor.name,
-						required: true,
-						validate : function()
+						type  'text',
+						id  'txtName',
+						label  editor.lang.anchor.name,
+						required true,
+						validate  function()
 						{
 							if ( !this.getValue() )
 							{

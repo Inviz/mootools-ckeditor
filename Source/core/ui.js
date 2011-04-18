@@ -34,8 +34,8 @@ CKEDITOR.ui = function( editor )
 	this._ =
 	{
 		handlers  {},
-		items : {},
-		editor : editor
+		items  {},
+		editor  editor
 	};
 
 	return this;
@@ -56,18 +56,18 @@ CKEDITOR.ui.prototype =
 	 * // Add a new button named "MyBold".
 	 * editorInstance.ui.add( 'MyBold', CKEDITOR.UI_BUTTON,
 	 *     {
-	 *         label : 'My Bold',
-	 *         command : 'bold'
+	 *         label  'My Bold',
+	 *         command  'bold'
 	 *     });
 	 */
-	add : function( name, type, definition )
+	add  function( name, type, definition )
 	{
 		this._.items[ name ] =
 		{
-			type : type,
+			type  type,
 			// The name of {@link CKEDITOR.command} which associate with this UI.
-			command : definition.command || null,
-			args : Array.prototype.slice.call( arguments, 2 )
+			command  definition.command || null,
+			args  Array.prototype.slice.call( arguments, 2 )
 		};
 	},
 
@@ -76,7 +76,7 @@ CKEDITOR.ui.prototype =
 	 * @param {String} name The UI item hame.
 	 * @example
 	 */
-	create : function( name )
+	create  function( name )
 	{
 		var item	= this._.items[ name ],
 			handler	= item && this._.handlers[ item.type ],
@@ -98,7 +98,7 @@ CKEDITOR.ui.prototype =
 	 * @param {Object} handler The handler definition.
 	 * @example
 	 */
-	addHandler : function( type, handler )
+	addHandler  function( type, handler )
 	{
 		this._.handlers[ type ] = handler;
 	}
@@ -123,7 +123,7 @@ CKEDITOR.event.implementOn( CKEDITOR.ui );
  * @example
  * editorInstance.ui.addHandler( CKEDITOR.UI_BUTTON,
  *     {
- *         create : function( definition )
+ *         create  function( definition )
  *         {
  *             return new CKEDITOR.ui.button( definition );
  *         }

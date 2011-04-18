@@ -73,17 +73,17 @@ provides:
 
 		/**
 		 * Creates a deep copy of an object.
-		 * Attention: there is no support for recursive references.
+		 * Attention there is no support for recursive references.
 		 * @param {Object} object The object to be cloned.
 		 * @returns {Object} The object clone.
 		 * @example
 		 * var obj =
 		 *     {
-		 *         name : 'John',
-		 *         cars :
+		 *         name  'John',
+		 *         cars 
 		 *             {
-		 *                 Mercedes : { color : 'blue' },
-		 *                 Porsche : { color : 'red' }
+		 *                 Mercedes  { color  'blue' },
+		 *                 Porsche  { color  'red' }
 		 *             }
 		 *     };
 		 * var clone = CKEDITOR.tools.clone( obj );
@@ -94,7 +94,7 @@ provides:
 		 * alert( obj.cars.Porsche.color );	// red
 		 * alert( clone.cars.Porsche.color );	// silver
 		 */
-		clone : function( obj )
+		clone  function( obj )
 		{
 			var clone;
 
@@ -137,7 +137,7 @@ provides:
 		 * Turn the first letter of string to upper-case.
 		 * @param {String} str
 		 */
-		capitalize: function( str )
+		capitalize function( str )
 		{
 			return str.charAt( 0 ).toUpperCase() + str.substring( 1 ).toLowerCase();
 		},
@@ -158,21 +158,21 @@ provides:
 		 * // Create the sample object.
 		 * var myObject =
 		 * {
-		 *     prop1 : true
+		 *     prop1  true
 		 * };
 		 *
 		 * // Extend the above object with two properties.
 		 * CKEDITOR.tools.extend( myObject,
 		 *     {
-		 *         prop2 : true,
-		 *         prop3 : true
+		 *         prop2  true,
+		 *         prop3  true
 		 *     } );
 		 *
 		 * // Alert "prop1", "prop2" and "prop3".
 		 * for ( var p in myObject )
 		 *     alert( p );
 		 */
-		extend : function( target )
+		extend  function( target )
 		{
 			var argsLength = arguments.length,
 				overwrite, propertiesList;
@@ -212,7 +212,7 @@ provides:
 		 *		the final object.
 		 * @returns {Object} The resulting copy.
 		 */
-		prototypedCopy : function( source )
+		prototypedCopy  function( source )
 		{
 			var copy = function()
 			{};
@@ -229,7 +229,7 @@ provides:
 		 * alert( CKEDITOR.tools.isArray( [] ) );      // "true"
 		 * alert( CKEDITOR.tools.isArray( 'Test' ) );  // "false"
 		 */
-		isArray : function( object )
+		isArray  function( object )
 		{
 			return ( !!object && object instanceof Array );
 		},
@@ -238,7 +238,7 @@ provides:
 		 * Whether the object contains no properties of it's own.
  		 * @param object
 		 */
-		isEmpty : function ( object )
+		isEmpty  function ( object )
 		{
 			for ( var i in object )
 			{
@@ -256,13 +256,13 @@ provides:
 		 * alert( CKEDITOR.tools.cssStyleToDomStyle( 'background-color' ) );  // "backgroundColor"
 		 * alert( CKEDITOR.tools.cssStyleToDomStyle( 'float' ) );             // "cssFloat"
 		 */
-		cssStyleToDomStyle : ( function()
+		cssStyleToDomStyle  ( function()
 		{
 			var test = document.createElement( 'div' ).style;
 
 			var cssFloat = ( typeof test.cssFloat != 'undefined' ) ? 'cssFloat'
-				: ( typeof test.styleFloat != 'undefined' ) ? 'styleFloat'
-				: 'float';
+				 ( typeof test.styleFloat != 'undefined' ) ? 'styleFloat'
+				 'float';
 
 			return function( cssName )
 			{
@@ -283,7 +283,7 @@ provides:
 		 * @param css {String|Array} Each of which are url (absolute) of a CSS file or
 		 * a trunk of style text.
 		 */
-		buildStyleHtml : function ( css )
+		buildStyleHtml  function ( css )
 		{
 			css = [].concat( css );
 			var item, retval = [];
@@ -307,7 +307,7 @@ provides:
 		 * @example
 		 * alert( CKEDITOR.tools.htmlEncode( 'A > B & C < D' ) );  // "A &amp;gt; B &amp;amp; C &amp;lt; D"
 		 */
-		htmlEncode : function( text )
+		htmlEncode  function( text )
 		{
 			var standard = function( text )
 			{
@@ -321,7 +321,7 @@ provides:
 				{
 					// #3874 IE and Safari encode line-break into <br>
 					return standard( text ).replace( /<br>/gi, '\n' );
-				} :
+				} 
 				standard;
 
 			var fix2 = ( standard( '>' ) == '>' ) ?
@@ -330,7 +330,7 @@ provides:
 					// WebKit does't encode the ">" character, which makes sense, but
 					// it's different than other browsers.
 					return fix1( text ).replace( />/g, '&gt;' );
-				} :
+				} 
 				fix1;
 
 			var fix3 = ( standard( '  ' ) == '&nbsp; ' ) ?
@@ -338,7 +338,7 @@ provides:
 				{
 					// #3785 IE8 changes spaces (>= 2) to &nbsp;
 					return fix2( text ).replace( /&nbsp;/g, ' ' );
-				} :
+				} 
 				fix2;
 
 			this.htmlEncode = fix3;
@@ -354,7 +354,7 @@ provides:
 		 * element.setAttribute( 'title', '<a " b >' );
 		 * alert( CKEDITOR.tools.htmlEncodeAttr( element.getAttribute( 'title' ) );  // "&gt;a &quot; b &lt;"
 		 */
-		htmlEncodeAttr : function( text )
+		htmlEncodeAttr  function( text )
 		{
 			return text.replace( /"/g, '&quot;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
 		},
@@ -368,7 +368,7 @@ provides:
 		 * alert( CKEDITOR.tools.<b>getNextNumber()</b> );  // "1" (e.g.)
 		 * alert( CKEDITOR.tools.<b>getNextNumber()</b> );  // "2"
 		 */
-		getNextNumber : (function()
+		getNextNumber  (function()
 		{
 			var last = 0;
 			return function()
@@ -386,7 +386,7 @@ provides:
 		 * alert( CKEDITOR.tools.<b>getNextId()</b> );  // "cke_1" (e.g.)
 		 * alert( CKEDITOR.tools.<b>getNextId()</b> );  // "cke_2"
 		 */
-		getNextId : function()
+		getNextId  function()
 		{
 			return 'cke_' + this.getNextNumber();
 		},
@@ -401,9 +401,9 @@ provides:
 		 * @example
 		 * var example =
 		 * {
-		 *     myFunction : function( name )
+		 *     myFunction  function( name )
 		 *     {
-		 *         alert( 'Name: ' + name );
+		 *         alert( 'Name ' + name );
 		 *     }
 		 * };
 		 *
@@ -411,12 +411,12 @@ provides:
 		 *     {
 		 *         return function( name )
 		 *             {
-		 *                 alert( 'Override Name: ' + name );
+		 *                 alert( 'Override Name ' + name );
 		 *                 myFunctionOriginal.call( this, name );
 		 *             };
 		 *     });
 		 */
-		override : function( originalFunction, functionBuilder )
+		override  function( originalFunction, functionBuilder )
 		{
 			return functionBuilder( originalFunction );
 		},
@@ -441,7 +441,7 @@ provides:
 		 *     },
 		 *     2000 )</b>;
 		 */
-		setTimeout : function( func, milliseconds, scope, args, ownerWindow )
+		setTimeout  function( func, milliseconds, scope, args, ownerWindow )
 		{
 			if ( !ownerWindow )
 				ownerWindow = window;
@@ -462,17 +462,17 @@ provides:
 
 		/**
 		 * Remove spaces from the start and the end of a string. The following
-		 * characters are removed: space, tab, line break, line feed.
+		 * characters are removed space, tab, line break, line feed.
 		 * @function
 		 * @param {String} str The text from which remove the spaces.
 		 * @returns {String} The modified string without the boundary spaces.
 		 * @example
 		 * alert( CKEDITOR.tools.trim( '  example ' );  // "example"
 		 */
-		trim : (function()
+		trim  (function()
 		{
 			// We are not using \s because we don't want "non-breaking spaces" to be caught.
-			var trimRegex = /(?:^[ \t\n\r]+)|(?:[ \t\n\r]+$)/g;
+			var trimRegex = /(?^[ \t\n\r]+)|(?[ \t\n\r]+$)/g;
 			return function( str )
 			{
 				return str.replace( trimRegex, '' ) ;
@@ -481,14 +481,14 @@ provides:
 
 		/**
 		 * Remove spaces from the start (left) of a string. The following
-		 * characters are removed: space, tab, line break, line feed.
+		 * characters are removed space, tab, line break, line feed.
 		 * @function
 		 * @param {String} str The text from which remove the spaces.
 		 * @returns {String} The modified string excluding the removed spaces.
 		 * @example
 		 * alert( CKEDITOR.tools.ltrim( '  example ' );  // "example "
 		 */
-		ltrim : (function()
+		ltrim  (function()
 		{
 			// We are not using \s because we don't want "non-breaking spaces" to be caught.
 			var trimRegex = /^[ \t\n\r]+/g;
@@ -500,14 +500,14 @@ provides:
 
 		/**
 		 * Remove spaces from the end (right) of a string. The following
-		 * characters are removed: space, tab, line break, line feed.
+		 * characters are removed space, tab, line break, line feed.
 		 * @function
 		 * @param {String} str The text from which remove the spaces.
 		 * @returns {String} The modified string excluding the removed spaces.
 		 * @example
 		 * alert( CKEDITOR.tools.ltrim( '  example ' );  // "  example"
 		 */
-		rtrim : (function()
+		rtrim  (function()
 		{
 			// We are not using \s because we don't want "non-breaking spaces" to be caught.
 			var trimRegex = /[ \t\n\r]+$/g;
@@ -528,14 +528,14 @@ provides:
 		 * alert( CKEDITOR.tools.indexOf( letters, '0' ) );  "-1" because 0 !== '0'
 		 * alert( CKEDITOR.tools.indexOf( letters, false ) );  "4" because 0 !== false
 		 */
-		indexOf :
-			// #2514: We should try to use Array.indexOf if it does exist.
+		indexOf 
+			// #2514 We should try to use Array.indexOf if it does exist.
 			( Array.prototype.indexOf ) ?
 				function( array, entry )
 					{
 						return array.indexOf( entry );
 					}
-			:
+			
 				function( array, entry )
 				{
 					for ( var i = 0, len = array.length ; i < len ; i++ )
@@ -554,7 +554,7 @@ provides:
 		 * @returns {Function} The function that can be used to execute the
 		 *		"func" function in the context of "obj".
 		 * @example
-		 * var obj = { text : 'My Object' };
+		 * var obj = { text  'My Object' };
 		 *
 		 * function alertText()
 		 * {
@@ -564,14 +564,14 @@ provides:
 		 * var newFunc = <b>CKEDITOR.tools.bind( alertText, obj )</b>;
 		 * newFunc();  // Alerts "My Object".
 		 */
-		bind : function( func, obj )
+		bind  function( func, obj )
 		{
 			return function() { return func.apply( obj, arguments ); };
 		},
 
 		/**
 		 * Class creation based on prototype inheritance, with supports of the
-		 * following features:
+		 * following features
 		 * <ul>
 		 * <li> Static fields </li>
 		 * <li> Private fields </li>
@@ -581,7 +581,7 @@ provides:
 		 * @param {Object} definition The class definition object.
 		 * @returns {Function} A class-like JavaScript function.
 		 */
-		createClass : function( definition )
+		createClass  function( definition )
 		{
 			var $ = definition.$,
 				baseClass = definition.base,
@@ -604,7 +604,7 @@ provides:
 						var priv = privates[ privateName ];
 
 						_[ privateName ] =
-							( typeof priv == 'function' ) ? CKEDITOR.tools.bind( priv, this ) : priv;
+							( typeof priv == 'function' ) ? CKEDITOR.tools.bind( priv, this )  priv;
 					}
 
 					originalConstructor.apply( this, arguments );
@@ -648,7 +648,7 @@ provides:
 		 *     });
 		 * CKEDITOR.tools.callFunction( ref );  // Hello!
 		 */
-		addFunction : function( fn, scope )
+		addFunction  function( fn, scope )
 		{
 			return functions.push( function()
 				{
@@ -661,7 +661,7 @@ provides:
 		 * @param {Number} ref The function reference created with
 		 *		CKEDITOR.tools.addFunction.
 		 */
-		removeFunction : function( ref )
+		removeFunction  function( ref )
 		{
 			functions[ ref ] = null;
 		},
@@ -682,7 +682,7 @@ provides:
 		 *     });
 		 * <b>CKEDITOR.tools.callFunction( ref )</b>;  // Hello!
 		 */
-		callFunction : function( ref )
+		callFunction  function( ref )
 		{
 			var fn = functions[ ref ];
 			return fn && fn.apply( window, Array.prototype.slice.call( arguments, 1 ) );
@@ -692,12 +692,12 @@ provides:
 		 * Append the 'px' length unit to the size if it's missing.
 		 * @param length
 		 */
-		cssLength : (function()
+		cssLength  (function()
 		{
-			var decimalRegex = /^\d+(?:\.\d+)?$/;
+			var decimalRegex = /^\d+(?\.\d+)?$/;
 			return function( length )
 			{
-				return length + ( decimalRegex.test( length ) ? 'px' : '' );
+				return length + ( decimalRegex.test( length ) ? 'px'  '' );
 			};
 		})(),
 
@@ -706,7 +706,7 @@ provides:
 		 * @param str
 		 * @param times
 		 */
-		repeat : function( str, times )
+		repeat  function( str, times )
 		{
 			return new Array( times + 1 ).join( str );
 		},
@@ -715,7 +715,7 @@ provides:
 		 * Return the first successfully executed function's return value that
 		 * doesn't throw any exception.
 		 */
-		tryThese : function()
+		tryThese  function()
 		{
 			var returnValue;
 			for ( var i = 0, length = arguments.length; i < length; i++ )
@@ -738,7 +738,7 @@ provides:
 		 * var key = CKEDITOR.tools.genKey( 'key1', 'key2', 'key3' );
 		 * alert( key );		// "key1-key2-key3".
 		 */
-		genKey : function()
+		genKey  function()
 		{
 			return Array.prototype.slice.call( arguments ).join( '-' );
 		}

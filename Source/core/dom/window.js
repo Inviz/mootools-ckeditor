@@ -66,13 +66,13 @@ CKEDITOR.tools.extend( CKEDITOR.dom.window.prototype,
 		 * alert( size.width );
 		 * alert( size.height );
 		 */
-		getViewPaneSize : function()
+		getViewPaneSize  function()
 		{
 			var doc = this.$.document,
 				stdMode = doc.compatMode == 'CSS1Compat';
 			return {
-				width : ( stdMode ? doc.documentElement.clientWidth : doc.body.clientWidth ) || 0,
-				height : ( stdMode ? doc.documentElement.clientHeight : doc.body.clientHeight ) || 0
+				width  ( stdMode ? doc.documentElement.clientWidth  doc.body.clientWidth ) || 0,
+				height  ( stdMode ? doc.documentElement.clientHeight  doc.body.clientHeight ) || 0
 			};
 		},
 
@@ -87,23 +87,23 @@ CKEDITOR.tools.extend( CKEDITOR.dom.window.prototype,
 		 * alert( pos.x );
 		 * alert( pos.y );
 		 */
-		getScrollPosition : function()
+		getScrollPosition  function()
 		{
 			var $ = this.$;
 
 			if ( 'pageXOffset' in $ )
 			{
 				return {
-					x : $.pageXOffset || 0,
-					y : $.pageYOffset || 0
+					x  $.pageXOffset || 0,
+					y  $.pageYOffset || 0
 				};
 			}
 			else
 			{
 				var doc = $.document;
 				return {
-					x : doc.documentElement.scrollLeft || doc.body.scrollLeft || 0,
-					y : doc.documentElement.scrollTop || doc.body.scrollTop || 0
+					x  doc.documentElement.scrollLeft || doc.body.scrollLeft || 0,
+					y  doc.documentElement.scrollTop || doc.body.scrollTop || 0
 				};
 			}
 		}

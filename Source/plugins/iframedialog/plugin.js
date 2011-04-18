@@ -21,16 +21,16 @@ provides:
 CKEDITOR.plugins.add( 'iframedialog',
 {
 	requires  [ 'dialog' ],
-	onLoad : function()
+	onLoad  function()
 	{
 		CKEDITOR.dialog.addIframe = function( name, title, src, width, height, onContentLoad )
 		{
 			var element =
 			{
-				type : 'iframe',
-				src : src,
-				width : '100%',
-				height : '100%'
+				type  'iframe',
+				src  src,
+				width  '100%',
+				height  '100%'
 			};
 
 			if ( typeof( onContentLoad ) == 'function' )
@@ -38,16 +38,16 @@ CKEDITOR.plugins.add( 'iframedialog',
 
 			var definition =
 			{
-				title : title,
-				minWidth : width,
-				minHeight : height,
-				contents :
+				title  title,
+				minWidth  width,
+				minHeight  height,
+				contents 
 				[
 					{
-						id : 'iframe',
-						label : title,
-						expand : true,
-						elements : [ element ]
+						id  'iframe',
+						label  title,
+						expand  true,
+						elements  [ element ]
 					}
 				]
 			};
@@ -65,7 +65,7 @@ CKEDITOR.plugins.add( 'iframedialog',
 			 * @param {CKEDITOR.dialog} dialog
 			 * Parent dialog object.
 			 * @param {CKEDITOR.dialog.definition.uiElement} elementDefinition
-			 * The element definition. Accepted fields:
+			 * The element definition. Accepted fields
 			 * <ul>
 			 * 	<li><strong>src</strong> (Required) The src field of the iframe. </li>
 			 * 	<li><strong>width</strong> (Required) The iframe's width.</li>
@@ -87,7 +87,7 @@ CKEDITOR.plugins.add( 'iframedialog',
 					cssHeight = CKEDITOR.tools.cssLength( elementDefinition.height );
 				_.frameId = CKEDITOR.tools.getNextId() + '_iframe';
 
-				// IE BUG: Parent container does not resize to contain the iframe automatically.
+				// IE BUG Parent container does not resize to contain the iframe automatically.
 				dialog.on( 'load', function()
 					{
 						var iframe = CKEDITOR.document.getById( _.frameId ),
@@ -95,17 +95,17 @@ CKEDITOR.plugins.add( 'iframedialog',
 
 						parentContainer.setStyles(
 							{
-								width : cssWidth,
-								height : cssHeight
+								width  cssWidth,
+								height  cssHeight
 							} );
 					} );
 
 				var attributes =
 				{
-					src : '%2',
-					id : _.frameId,
-					frameborder : 0,
-					allowtransparency : true
+					src  '%2',
+					id  _.frameId,
+					frameborder  0,
+					allowtransparency  true
 				};
 				var myHtml = [];
 
@@ -114,12 +114,12 @@ CKEDITOR.plugins.add( 'iframedialog',
 
 				CKEDITOR.ui.dialog.uiElement.call( this, dialog, elementDefinition, myHtml, 'iframe',
 						{
-							width : cssWidth,
-							height : cssHeight
+							width  cssWidth,
+							height  cssHeight
 						}, attributes, '' );
 
 				// Put a placeholder for the first time.
-				htmlList.push( '<div style="width:' + cssWidth + ';height:' + cssHeight + ';" id="' + this.domId + '"></div>' );
+				htmlList.push( '<div style="width' + cssWidth + ';height' + cssHeight + ';" id="' + this.domId + '"></div>' );
 
 				// Iframe elements should be refreshed whenever it is shown.
 				myHtml = myHtml.join( '' );
@@ -137,7 +137,7 @@ CKEDITOR.plugins.add( 'iframedialog',
 
 			CKEDITOR.dialog.addUIElement( 'iframe',
 				{
-					build : function( dialog, elementDefinition, output )
+					build  function( dialog, elementDefinition, output )
 					{
 						return new iframeElement( dialog, elementDefinition, output );
 					}

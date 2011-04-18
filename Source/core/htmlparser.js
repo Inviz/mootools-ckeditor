@@ -31,14 +31,14 @@ CKEDITOR.htmlParser = function()
 {
 	this._ =
 	{
-		htmlPartsRegex  new RegExp( '<(?:(?:\\/([^>]+)>)|(?:!--([\\S|\\s]*?)-->)|(?:([^\\s>]+)\\s*((?:(?:[^"\'>]+)|(?:"[^"]*")|(?:\'[^\']*\'))*)\\/?>))', 'g' )
+		htmlPartsRegex  new RegExp( '<(?(?\\/([^>]+)>)|(?!--([\\S|\\s]*?)-->)|(?([^\\s>]+)\\s*((?(?[^"\'>]+)|(?"[^"]*")|(?\'[^\']*\'))*)\\/?>))', 'g' )
 	};
 };
 
 (function()
 {
-	var attribsRegex	= /([\w\-:.]+)(?:(?:\s*=\s*(?:(?:"([^"]*)")|(?:'([^']*)')|([^\s>]+)))|(?=\s|$))/g,
-		emptyAttribs	= {checked:1,compact:1,declare:1,defer:1,disabled:1,ismap:1,multiple:1,nohref:1,noresize:1,noshade:1,nowrap:1,readonly:1,selected:1};
+	var attribsRegex	= /([\w\-.]+)(?(?\s*=\s*(?(?"([^"]*)")|(?'([^']*)')|([^\s>]+)))|(?=\s|$))/g,
+		emptyAttribs	= {checked1,compact1,declare1,defer1,disabled1,ismap1,multiple1,nohref1,noresize1,noshade1,nowrap1,readonly1,selected1};
 
 	CKEDITOR.htmlParser.prototype =
 	{
@@ -60,7 +60,7 @@ CKEDITOR.htmlParser = function()
 		 *     });
 		 * parser.parse( "&lt;!-- Example --&gt;&lt;b&gt;Hello&lt;/b&gt;" );
 		 */
-		onTagOpen	: function() {},
+		onTagOpen	 function() {},
 
 		/**
 		 * Function to be fired when a tag closer is found. This function
@@ -75,7 +75,7 @@ CKEDITOR.htmlParser = function()
 		 *     });
 		 * parser.parse( "&lt;!-- Example --&gt;&lt;b&gt;Hello&lt;/b&gt;" );
 		 */
-		onTagClose	: function() {},
+		onTagClose	 function() {},
 
 		/**
 		 * Function to be fired when text is found. This function
@@ -89,7 +89,7 @@ CKEDITOR.htmlParser = function()
 		 *     });
 		 * parser.parse( "&lt;!-- Example --&gt;&lt;b&gt;Hello&lt;/b&gt;" );
 		 */
-		onText		: function() {},
+		onText		 function() {},
 
 		/**
 		 * Function to be fired when CDATA section is found. This function
@@ -103,7 +103,7 @@ CKEDITOR.htmlParser = function()
 		 *     });
 		 * parser.parse( "&lt;script&gt;var hello;&lt;/script&gt;" );
 		 */
-		onCDATA		: function() {},
+		onCDATA		 function() {},
 
 		/**
 		 * Function to be fired when a commend is found. This function
@@ -117,7 +117,7 @@ CKEDITOR.htmlParser = function()
 		 *     });
 		 * parser.parse( "&lt;!-- Example --&gt;&lt;b&gt;Hello&lt;/b&gt;" );
 		 */
-		onComment	: function() {},
+		onComment	 function() {},
 
 		/**
 		 * Parses text, looking for HTML tokens, like tag openers or closers,
@@ -130,7 +130,7 @@ CKEDITOR.htmlParser = function()
 		 * // at this point.
 		 * parser.parse( "&lt;!-- Example --&gt;&lt;b&gt;Hello&lt;/b&gt;" );
 		 */
-		parse : function( html )
+		parse  function( html )
 		{
 			var parts,
 				tagName,
@@ -153,12 +153,12 @@ CKEDITOR.htmlParser = function()
 				nextIndex = this._.htmlPartsRegex.lastIndex;
 
 				/*
-				 "parts" is an array with the following items:
-					0 : The entire match for opening/closing tags and comments.
-					1 : Group filled with the tag name for closing tags.
-					2 : Group filled with the comment text.
-					3 : Group filled with the tag name for opening tags.
-					4 : Group filled with the attributes part of opening tags.
+				 "parts" is an array with the following items
+					0  The entire match for opening/closing tags and comments.
+					1  Group filled with the tag name for closing tags.
+					2  Group filled with the comment text.
+					3  Group filled with the tag name for opening tags.
+					4  Group filled with the attributes part of opening tags.
 				 */
 
 				// Closing tag

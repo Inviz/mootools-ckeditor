@@ -21,11 +21,11 @@ CKEDITOR.skins.add( 'kama', (function()
 	var uiColorStylesheetId = 'cke_ui_color';
 
 	return {
-		editor		 { css : [ 'editor.css' ] },
-		dialog		: { css : [ 'dialog.css' ] },
-		templates	: { css : [ 'templates.css' ] },
-		margins		: [ 0, 0, 0, 0 ],
-		init : function( editor )
+		editor		 { css  [ 'editor.css' ] },
+		dialog		 { css  [ 'dialog.css' ] },
+		templates	 { css  [ 'templates.css' ] },
+		margins		 [ 0, 0, 0, 0 ],
+		init  function( editor )
 		{
 			if ( editor.config.width && !isNaN( editor.config.width ) )
 				editor.config.width -= 12;
@@ -35,56 +35,56 @@ CKEDITOR.skins.add( 'kama', (function()
 			var uiColorMenuCss = "/* UI Color Support */\
 .cke_skin_kama .cke_menuitem .cke_icon_wrapper\
 {\
-	background-color: $color !important;\
-	border-color: $color !important;\
+	background-color $color !important;\
+	border-color $color !important;\
 }\
 \
-.cke_skin_kama .cke_menuitem a:hover .cke_icon_wrapper,\
-.cke_skin_kama .cke_menuitem a:focus .cke_icon_wrapper,\
-.cke_skin_kama .cke_menuitem a:active .cke_icon_wrapper\
+.cke_skin_kama .cke_menuitem ahover .cke_icon_wrapper,\
+.cke_skin_kama .cke_menuitem afocus .cke_icon_wrapper,\
+.cke_skin_kama .cke_menuitem aactive .cke_icon_wrapper\
 {\
-	background-color: $color !important;\
-	border-color: $color !important;\
+	background-color $color !important;\
+	border-color $color !important;\
 }\
 \
-.cke_skin_kama .cke_menuitem a:hover .cke_label,\
-.cke_skin_kama .cke_menuitem a:focus .cke_label,\
-.cke_skin_kama .cke_menuitem a:active .cke_label\
+.cke_skin_kama .cke_menuitem ahover .cke_label,\
+.cke_skin_kama .cke_menuitem afocus .cke_label,\
+.cke_skin_kama .cke_menuitem aactive .cke_label\
 {\
-	background-color: $color !important;\
+	background-color $color !important;\
 }\
 \
-.cke_skin_kama .cke_menuitem a.cke_disabled:hover .cke_label,\
-.cke_skin_kama .cke_menuitem a.cke_disabled:focus .cke_label,\
-.cke_skin_kama .cke_menuitem a.cke_disabled:active .cke_label\
+.cke_skin_kama .cke_menuitem a.cke_disabledhover .cke_label,\
+.cke_skin_kama .cke_menuitem a.cke_disabledfocus .cke_label,\
+.cke_skin_kama .cke_menuitem a.cke_disabledactive .cke_label\
 {\
-	background-color: transparent !important;\
+	background-color transparent !important;\
 }\
 \
-.cke_skin_kama .cke_menuitem a.cke_disabled:hover .cke_icon_wrapper,\
-.cke_skin_kama .cke_menuitem a.cke_disabled:focus .cke_icon_wrapper,\
-.cke_skin_kama .cke_menuitem a.cke_disabled:active .cke_icon_wrapper\
+.cke_skin_kama .cke_menuitem a.cke_disabledhover .cke_icon_wrapper,\
+.cke_skin_kama .cke_menuitem a.cke_disabledfocus .cke_icon_wrapper,\
+.cke_skin_kama .cke_menuitem a.cke_disabledactive .cke_icon_wrapper\
 {\
-	background-color: $color !important;\
-	border-color: $color !important;\
+	background-color $color !important;\
+	border-color $color !important;\
 }\
 \
 .cke_skin_kama .cke_menuitem a.cke_disabled .cke_icon_wrapper\
 {\
-	background-color: $color !important;\
-	border-color: $color !important;\
+	background-color $color !important;\
+	border-color $color !important;\
 }\
 \
 .cke_skin_kama .cke_menuseparator\
 {\
-	background-color: $color !important;\
+	background-color $color !important;\
 }\
 \
-.cke_skin_kama .cke_menuitem a:hover,\
-.cke_skin_kama .cke_menuitem a:focus,\
-.cke_skin_kama .cke_menuitem a:active\
+.cke_skin_kama .cke_menuitem ahover,\
+.cke_skin_kama .cke_menuitem afocus,\
+.cke_skin_kama .cke_menuitem aactive\
 {\
-	background-color: $color !important;\
+	background-color $color !important;\
 }";
 			// We have to split CSS declarations for webkit.
 			if ( CKEDITOR.env.webkit )
@@ -140,14 +140,14 @@ CKEDITOR.skins.add( 'kama', (function()
 
 			CKEDITOR.tools.extend( editor,
 			{
-				uiColor: null,
+				uiColor null,
 
-				getUiColor : function()
+				getUiColor  function()
 				{
 					return this.uiColor;
 				},
 
-				setUiColor : function( color )
+				setUiColor  function( color )
 				{
 					var cssContent,
 						uiStyle = getStylesheet( CKEDITOR.document ),
@@ -160,7 +160,7 @@ CKEDITOR.skins.add( 'kama', (function()
 							cssId + "_dialog a.cke_dialog_tab",
 							cssId + "_dialog .cke_dialog_footer"
 						].join( ',' );
-					var cssProperties = "background-color: $color !important;";
+					var cssProperties = "background-color $color !important;";
 
 					if ( CKEDITOR.env.webkit )
 						cssContent = [ [ cssSelectors, cssProperties ] ];
@@ -209,7 +209,7 @@ CKEDITOR.skins.add( 'kama', (function()
 
 (function()
 {
-	CKEDITOR.dialog ? dialogSetup() : CKEDITOR.on( 'dialogPluginReady', dialogSetup );
+	CKEDITOR.dialog ? dialogSetup()  CKEDITOR.on( 'dialogPluginReady', dialogSetup );
 
 	function dialogSetup()
 	{
@@ -226,8 +226,8 @@ CKEDITOR.skins.add( 'kama', (function()
 
 				contents.setStyles(
 					{
-						width : width + 'px',
-						height : height + 'px'
+						width  width + 'px',
+						height  height + 'px'
 					});
 			});
 	}

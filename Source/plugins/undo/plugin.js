@@ -25,13 +25,13 @@ provides:
 	{
 		requires  [ 'selection', 'wysiwygarea' ],
 
-		init : function( editor )
+		init  function( editor )
 		{
 			var undoManager = new UndoManager( editor );
 
 			var undoCommand = editor.addCommand( 'undo',
 				{
-					exec : function()
+					exec  function()
 					{
 						if ( undoManager.undo() )
 						{
@@ -39,13 +39,13 @@ provides:
 							this.fire( 'afterUndo' );
 						}
 					},
-					state : CKEDITOR.TRISTATE_DISABLED,
-					canUndo : false
+					state  CKEDITOR.TRISTATE_DISABLED,
+					canUndo  false
 				});
 
 			var redoCommand = editor.addCommand( 'redo',
 				{
-					exec : function()
+					exec  function()
 					{
 						if ( undoManager.redo() )
 						{
@@ -53,14 +53,14 @@ provides:
 							this.fire( 'afterRedo' );
 						}
 					},
-					state : CKEDITOR.TRISTATE_DISABLED,
-					canUndo : false
+					state  CKEDITOR.TRISTATE_DISABLED,
+					canUndo  false
 				});
 
 			undoManager.onChange = function()
 			{
-				undoCommand.setState( undoManager.undoable() ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED );
-				redoCommand.setState( undoManager.redoable() ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED );
+				undoCommand.setState( undoManager.undoable() ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED );
+				redoCommand.setState( undoManager.redoable() ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED );
 			};
 
 			function recordCommand( event )
@@ -107,14 +107,14 @@ provides:
 
 			editor.ui.addButton( 'Undo',
 				{
-					label : editor.lang.undo,
-					command : 'undo'
+					label  editor.lang.undo,
+					command  'undo'
 				});
 
 			editor.ui.addButton( 'Redo',
 				{
-					label : editor.lang.redo,
-					command : 'redo'
+					label  editor.lang.redo,
+					command  'redo'
 				});
 
 			editor.resetUndo = function()
@@ -175,17 +175,17 @@ provides:
 	};
 
 	// Attributes that browser may changing them when setting via innerHTML.
-	var protectedAttrs = /\b(?:href|src|name)="[^"]*?"/gi;
+	var protectedAttrs = /\b(?href|src|name)="[^"]*?"/gi;
 
 	Image.prototype =
 	{
-		equals : function( otherImage, contentOnly )
+		equals  function( otherImage, contentOnly )
 		{
 
 			var thisContents = this.contents,
 				otherContents = otherImage.contents;
 
-			// For IE6/7 : Comparing only the protected attribute values but not the original ones.(#4522)
+			// For IE6/7  Comparing only the protected attribute values but not the original ones.(#4522)
 			if ( CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.ie6Compat ) )
 			{
 				thisContents = thisContents.replace( protectedAttrs, '' );
@@ -238,9 +238,9 @@ provides:
 	}
 
 
-	var editingKeyCodes = { /*Backspace*/ 8:1, /*Delete*/ 46:1 },
-		modifierKeyCodes = { /*Shift*/ 16:1, /*Ctrl*/ 17:1, /*Alt*/ 18:1 },
-		navigationKeyCodes = { 37:1, 38:1, 39:1, 40:1 };  // Arrows: L, T, R, B
+	var editingKeyCodes = { /*Backspace*/ 81, /*Delete*/ 461 },
+		modifierKeyCodes = { /*Shift*/ 161, /*Ctrl*/ 171, /*Alt*/ 181 },
+		navigationKeyCodes = { 371, 381, 391, 401 };  // Arrows L, T, R, B
 
 	UndoManager.prototype =
 	{
@@ -248,7 +248,7 @@ provides:
 		 * Process undo system regard keystrikes.
 		 * @param {CKEDITOR.dom.event} event
 		 */
-		type : function( event )
+		type  function( event )
 		{
 			var keystroke = event && event.data.getKey(),
 				isModifierKey = keystroke in modifierKeyCodes,
@@ -264,7 +264,7 @@ provides:
 
 				// Create undo snap for every different modifier key.
 				modifierSnapshot = ( isEditingKey && !sameAsLastEditingKey ),
-				// Create undo snap on the following cases:
+				// Create undo snap on the following cases
 				// 1. Just start to type .
 				// 2. Typing some content after a modifier.
 				// 3. Typing some content after make a visible selection.
@@ -337,7 +337,7 @@ provides:
 
 		},
 
-		reset : function()	// Reset the undo stack.
+		reset  function()	// Reset the undo stack.
 		{
 			/**
 			 * Remember last pressed key.
@@ -369,14 +369,14 @@ provides:
 		 * Reset all states about typing.
 		 * @see  UndoManager.type
 		 */
-		resetType : function()
+		resetType  function()
 		{
 			this.typing = false;
 			delete this.lastKeystroke;
 			this.typesCount = 0;
 			this.modifiersCount = 0;
 		},
-		fireChange : function()
+		fireChange  function()
 		{
 			this.hasUndo = !!this.getNextImage( true );
 			this.hasRedo = !!this.getNextImage( false );
@@ -388,7 +388,7 @@ provides:
 		/**
 		 * Save a snapshot of document image for later retrieve.
 		 */
-		save : function( onContentOnly, image, autoFireChange )
+		save  function( onContentOnly, image, autoFireChange )
 		{
 			var snapshots = this.snapshots;
 
@@ -421,7 +421,7 @@ provides:
 			return true;
 		},
 
-		restoreImage : function( image )
+		restoreImage  function( image )
 		{
 			this.editor.loadSnapshot( image.contents );
 
@@ -429,7 +429,7 @@ provides:
 				this.editor.getSelection().selectBookmarks( image.bookmarks );
 			else if ( CKEDITOR.env.ie )
 			{
-				// IE BUG: If I don't set the selection to *somewhere* after setting
+				// IE BUG If I don't set the selection to *somewhere* after setting
 				// document contents, then IE would create an empty paragraph at the bottom
 				// the next time the document is modified.
 				var $range = this.editor.document.getBody().$.createTextRange();
@@ -447,7 +447,7 @@ provides:
 		},
 
 		// Get the closest available image.
-		getNextImage : function( isUndo )
+		getNextImage  function( isUndo )
 		{
 			var snapshots = this.snapshots,
 				currentImage = this.currentImage,
@@ -489,7 +489,7 @@ provides:
 		 * @return {Boolean} Whether the document has previous state to
 		 *		retrieve.
 		 */
-		redoable : function()
+		redoable  function()
 		{
 			return this.enabled && this.hasRedo;
 		},
@@ -498,7 +498,7 @@ provides:
 		 * Check the current undo state.
 		 * @return {Boolean} Whether the document has future state to restore.
 		 */
-		undoable : function()
+		undoable  function()
 		{
 			return this.enabled && this.hasUndo;
 		},
@@ -506,7 +506,7 @@ provides:
 		/**
 		 * Perform undo on current index.
 		 */
-		undo : function()
+		undo  function()
 		{
 			if ( this.undoable() )
 			{
@@ -523,7 +523,7 @@ provides:
 		/**
 		 * Perform redo on current index.
 		 */
-		redo : function()
+		redo  function()
 		{
 			if ( this.redoable() )
 			{
@@ -546,7 +546,7 @@ provides:
 		/**
 		 * Update the last snapshot of the undo stack with the current editor content.
 		 */
-		update : function()
+		update  function()
 		{
 			this.snapshots.splice( this.index, 1, ( this.currentImage = new Image( this.editor ) ) );
 		}

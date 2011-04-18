@@ -51,14 +51,14 @@ provides:
 		 * @type Number
 		 * @example
 		 */
-		type : CKEDITOR.NODE_TEXT,
+		type  CKEDITOR.NODE_TEXT,
 
 		/**
 		 * Writes the HTML representation of this text to a CKEDITOR.htmlWriter.
 		 * @param {CKEDITOR.htmlWriter} writer The writer to which write the HTML.
 		 * @example
 		 */
-		writeHtml : function( writer, filter )
+		writeHtml  function( writer, filter )
 		{
 			var text = this.value;
 

@@ -103,9 +103,9 @@ CKEDITOR.themes.add( 'default', (function()
 				element.hide();
 
 			// Get the HTML for the predefined spaces.
-			var topHtml			= editor.fire( 'themeSpace', { space : 'top', html : '' } ).html;
-			var contentsHtml	= editor.fire( 'themeSpace', { space : 'contents', html : '' } ).html;
-			var bottomHtml		= editor.fireOnce( 'themeSpace', { space : 'bottom', html : '' } ).html;
+			var topHtml			= editor.fire( 'themeSpace', { space  'top', html  '' } ).html;
+			var contentsHtml	= editor.fire( 'themeSpace', { space  'contents', html  '' } ).html;
+			var bottomHtml		= editor.fireOnce( 'themeSpace', { space  'bottom', html  '' } ).html;
 
 			var height	= contentsHtml && editor.config.height;
 
@@ -125,7 +125,7 @@ CKEDITOR.themes.add( 'default', (function()
 				if ( !isNaN( width ) )
 					width += 'px';
 
-				style += "width: " + width + ";";
+				style += "width " + width + ";";
 			}
 
 			var sharedTop		= topHtml && checkSharedSpace( editor, 'top' ),
@@ -139,23 +139,23 @@ CKEDITOR.themes.add( 'default', (function()
 					' id="cke_', name, '"' +
 					' class="', editor.skinClass, ' ', editor.id, ' cke_editor_', name, '"' +
 					' dir="', editor.lang.dir, '"' +
-					' title="', ( CKEDITOR.env.gecko ? ' ' : '' ), '"' +
+					' title="', ( CKEDITOR.env.gecko ? ' '  '' ), '"' +
 					' lang="', editor.langCode, '"' +
-						( CKEDITOR.env.webkit? ' tabindex="' + tabIndex + '"' : '' ) +
+						( CKEDITOR.env.webkit? ' tabindex="' + tabIndex + '"'  '' ) +
 					' role="application"' +
 					' aria-labelledby="cke_', name, '_arialbl"' +
-					( style ? ' style="' + style + '"' : '' ) +
+					( style ? ' style="' + style + '"'  '' ) +
 					'>' +
 					'<span id="cke_', name, '_arialbl" class="cke_voice_label">' + editor.lang.editor + '</span>' +
 					'<span class="' , CKEDITOR.env.cssClass, '" role="presentation">' +
 						'<span class="cke_wrapper cke_', editor.lang.dir, '" role="presentation">' +
 							'<table class="cke_editor" border="0" cellspacing="0" cellpadding="0" role="presentation"><tbody>' +
-								'<tr', topHtml		? '' : ' style="display:none"', ' role="presentation"><td id="cke_top_'		, name, '" class="cke_top" role="presentation">'	, topHtml		, '</td></tr>' +
-								'<tr', contentsHtml	? '' : ' style="display:none"', ' role="presentation"><td id="cke_contents_', name, '" class="cke_contents" style="height:', height, '" role="presentation">', contentsHtml, '</td></tr>' +
-								'<tr', bottomHtml	? '' : ' style="display:none"', ' role="presentation"><td id="cke_bottom_'	, name, '" class="cke_bottom" role="presentation">'	, bottomHtml	, '</td></tr>' +
+								'<tr', topHtml		? ''  ' style="displaynone"', ' role="presentation"><td id="cke_top_'		, name, '" class="cke_top" role="presentation">'	, topHtml		, '</td></tr>' +
+								'<tr', contentsHtml	? ''  ' style="displaynone"', ' role="presentation"><td id="cke_contents_', name, '" class="cke_contents" style="height', height, '" role="presentation">', contentsHtml, '</td></tr>' +
+								'<tr', bottomHtml	? ''  ' style="displaynone"', ' role="presentation"><td id="cke_bottom_'	, name, '" class="cke_bottom" role="presentation">'	, bottomHtml	, '</td></tr>' +
 							'</tbody></table>' +
 							//Hide the container when loading skins, later restored by skin css.
-							'<style>.', editor.skinClass, '{visibility:hidden;}</style>' +
+							'<style>.', editor.skinClass, '{visibilityhidden;}</style>' +
 						'</span>' +
 					'</span>' +
 				'</span>' ].join( '' ) );
@@ -184,7 +184,7 @@ CKEDITOR.themes.add( 'default', (function()
 			// Use a class to indicate that the current selection is in different direction than the UI.
 			editor.on( 'contentDirChanged', function( evt )
 			{
-				var func = ( editor.lang.dir != evt.data ? 'add' : 'remove' ) + 'Class';
+				var func = ( editor.lang.dir != evt.data ? 'add'  'remove' ) + 'Class';
 
 				container.getChild( 1 )[ func ]( 'cke_mixed_dir_content' );
 
@@ -197,7 +197,7 @@ CKEDITOR.themes.add( 'default', (function()
 			editor.fireOnce( 'uiReady' );
 		},
 
-		buildDialog : function( editor )
+		buildDialog  function( editor )
 		{
 			var baseIdNumber = CKEDITOR.tools.getNextNumber();
 
@@ -209,11 +209,11 @@ CKEDITOR.themes.add( 'default', (function()
 						' aria-labelledby="%title#"' +
 						'>' +
 						'<table class="cke_dialog', ' ' + CKEDITOR.env.cssClass,
-							' cke_', editor.lang.dir, '" style="position:absolute" role="presentation">' +
+							' cke_', editor.lang.dir, '" style="positionabsolute" role="presentation">' +
 							'<tr><td role="presentation">' +
 							'<div class="%body" role="presentation">' +
 								'<div id="%title#" class="%title" role="presentation"></div>' +
-								'<a id="%close_button#" class="%close_button" href="javascript:void(0)" title="' +  editor.lang.common.close+'" role="button"><span class="cke_label">X</span></a>' +
+								'<a id="%close_button#" class="%close_button" href="javascriptvoid(0)" title="' +  editor.lang.common.close+'" role="button"><span class="cke_label">X</span></a>' +
 								'<div id="%tabs#" class="%tabs" role="tablist"></div>' +
 								'<table class="%contents" role="presentation">' +
 								'<tr>' +
@@ -236,7 +236,7 @@ CKEDITOR.themes.add( 'default', (function()
 						'</table>',
 
 						//Hide the container when loading skins, later restored by skin css.
-						( CKEDITOR.env.ie ? '' : '<style>.cke_dialog{visibility:hidden;}</style>' ),
+						( CKEDITOR.env.ie ? ''  '<style>.cke_dialog{visibilityhidden;}</style>' ),
 
 					'</div>'
 				].join( '' )
@@ -253,20 +253,20 @@ CKEDITOR.themes.add( 'default', (function()
 
 
 			return {
-				element : element,
-				parts :
+				element  element,
+				parts 
 				{
-					dialog		: element.getChild( 0 ),
-					title		: title,
-					close		: close,
-					tabs		: body.getChild( 2 ),
-					contents	: body.getChild( [ 3, 0, 0, 0 ] ),
-					footer		: body.getChild( [ 3, 0, 1, 0 ] )
+					dialog		 element.getChild( 0 ),
+					title		 title,
+					close		 close,
+					tabs		 body.getChild( 2 ),
+					contents	 body.getChild( [ 3, 0, 0, 0 ] ),
+					footer		 body.getChild( [ 3, 0, 1, 0 ] )
 				}
 			};
 		},
 
-		destroy : function( editor )
+		destroy  function( editor )
 		{
 			var container = editor.container,
 				element = editor.element;
@@ -330,10 +330,10 @@ CKEDITOR.editor.prototype.resize = function( width, height, isContentHeight, res
 {
 	var container = this.container,
 		contents = CKEDITOR.document.getById( 'cke_contents_' + this.name ),
-		outer = resizeInner ? container.getChild( 1 ) : container;
+		outer = resizeInner ? container.getChild( 1 )  container;
 
 	// Resize the width first.
-	// WEBKIT BUG: Webkit requires that we put the editor off from display when we
+	// WEBKIT BUG Webkit requires that we put the editor off from display when we
 	// resize it. If we don't, the browser crashes!
 	CKEDITOR.env.webkit && outer.setStyle( 'display', 'none' );
 	// Set as border box width. (#5353)
@@ -346,7 +346,7 @@ CKEDITOR.editor.prototype.resize = function( width, height, isContentHeight, res
 
 	// Get the height delta between the outer table and the content area.
 	// If we're setting the content area's height, then we don't need the delta.
-	var delta = isContentHeight ? 0 : ( outer.$.offsetHeight || 0 ) - ( contents.$.clientHeight || 0 );
+	var delta = isContentHeight ? 0  ( outer.$.offsetHeight || 0 ) - ( contents.$.clientHeight || 0 );
 	contents.setStyle( 'height', Math.max( height - delta, 0 ) + 'px' );
 
 	// Emit a resize event.
@@ -379,15 +379,15 @@ CKEDITOR.editor.prototype.getResizable = function()
  * // elements path into the element with ID "anotherId".
  * config.sharedSpaces =
  * {
- *     top : 'someElementId',
- *     bottom : 'anotherId'
+ *     top  'someElementId',
+ *     bottom  'anotherId'
  * };
  * @example
  * // Place the toolbar inside the element with ID "someElementId". The
  * // elements path will remain attached to the editor UI.
  * config.sharedSpaces =
  * {
- *     top : 'someElementId'
+ *     top  'someElementId'
  * };
  */
 

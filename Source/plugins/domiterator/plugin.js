@@ -87,14 +87,14 @@ CKEDITOR.plugins.add( 'domiterator' );
 					|| range.startContainer.hasAscendant( 'pre', true );
 
 				range.enlarge( this.forceBrBreak && !touchPre || !this.enlargeBr ?
-							   CKEDITOR.ENLARGE_LIST_ITEM_CONTENTS : CKEDITOR.ENLARGE_BLOCK_CONTENTS );
+							   CKEDITOR.ENLARGE_LIST_ITEM_CONTENTS  CKEDITOR.ENLARGE_BLOCK_CONTENTS );
 
 				var walker = new CKEDITOR.dom.walker( range ),
 					ignoreBookmarkTextEvaluator = CKEDITOR.dom.walker.bookmark( true, true );
 				// Avoid anchor inside bookmark inner text.
 				walker.evaluator = ignoreBookmarkTextEvaluator;
 				this._.nextNode = walker.next();
-				// TODO: It's better to have walker.reset() used here.
+				// TODO It's better to have walker.reset() used here.
 				walker = new CKEDITOR.dom.walker( range );
 				walker.evaluator = ignoreBookmarkTextEvaluator;
 				var lastNode = walker.previous();
@@ -152,7 +152,7 @@ CKEDITOR.plugins.add( 'domiterator' );
 					var nodeName = currentNode.getName();
 
 					if ( currentNode.isBlockBoundary( this.forceBrBreak &&
-							!parentPre && { br : 1 } ) )
+							!parentPre && { br  1 } ) )
 					{
 						// <br> boundaries must be part of the range. It will
 						// happen only if ForceBrBreak.
@@ -227,7 +227,7 @@ CKEDITOR.plugins.add( 'domiterator' );
 						var parentNode = currentNode.getParent();
 
 						if ( parentNode.isBlockBoundary( this.forceBrBreak
-								&& !parentPre && { br : 1 } ) )
+								&& !parentPre && { br  1 } ) )
 						{
 							closeRange = 1;
 							includeNode = 0;
@@ -270,7 +270,7 @@ CKEDITOR.plugins.add( 'domiterator' );
 
 				var startPath = new CKEDITOR.dom.elementPath( range.startContainer );
 				var startBlockLimit = startPath.blockLimit,
-					checkLimits = { div : 1, th : 1, td : 1 };
+					checkLimits = { div  1, th  1, td  1 };
 				block = startPath.block;
 
 				if ( !block
@@ -325,7 +325,7 @@ CKEDITOR.plugins.add( 'domiterator' );
 					// the current range, which could be an <li> child (nested
 					// lists) or the next sibling <li>.
 
-					this._.nextNode = ( block.equals( lastNode ) ? null : getNextSourceNode( range.getBoundaryNodes().endNode, 1, lastNode ) );
+					this._.nextNode = ( block.equals( lastNode ) ? null  getNextSourceNode( range.getBoundaryNodes().endNode, 1, lastNode ) );
 				}
 			}
 
@@ -359,7 +359,7 @@ CKEDITOR.plugins.add( 'domiterator' );
 			// next interation.
 			if ( !this._.nextNode )
 			{
-				this._.nextNode = ( isLast || block.equals( lastNode ) ) ? null :
+				this._.nextNode = ( isLast || block.equals( lastNode ) ) ? null 
 					getNextSourceNode( block, 1, lastNode );
 			}
 

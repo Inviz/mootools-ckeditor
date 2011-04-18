@@ -55,7 +55,7 @@ provides:
 
 		align && ( align = align.replace( /-moz-|-webkit-|start|auto/i, '' ) );
 
-		!align && useComputedState && ( align = element.getComputedStyle( 'direction' ) == 'rtl' ? 'right' : 'left' );
+		!align && useComputedState && ( align = element.getComputedStyle( 'direction' ) == 'rtl' ? 'right'  'left' );
 
 		return align;
 	}
@@ -77,21 +77,21 @@ provides:
 		{
 			switch ( value )
 			{
-				case 'left' :
+				case 'left' 
 					this.cssClassName = classes[0];
 					break;
-				case 'center' :
+				case 'center' 
 					this.cssClassName = classes[1];
 					break;
-				case 'right' :
+				case 'right' 
 					this.cssClassName = classes[2];
 					break;
-				case 'justify' :
+				case 'justify' 
 					this.cssClassName = classes[3];
 					break;
 			}
 
-			this.cssClassRegex = new RegExp( '(?:^|\\s+)(?:' + classes.join( '|' ) + ')(?=$|\\s)' );
+			this.cssClassRegex = new RegExp( '(?^|\\s+)(?' + classes.join( '|' ) + ')(?=$|\\s)' );
 		}
 	}
 
@@ -149,7 +149,7 @@ provides:
 	}
 
 	justifyCommand.prototype = {
-		exec : function( editor )
+		exec  function( editor )
 		{
 			var selection = editor.getSelection(),
 				enterMode = editor.config.enterMode;
@@ -172,7 +172,7 @@ provides:
 				iterator = ranges[ i ].createIterator();
 				iterator.enlargeBr = enterMode != CKEDITOR.ENTER_BR;
 
-				while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' ) ) )
+				while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p'  'div' ) ) )
 				{
 					block.removeAttribute( 'align' );
 					block.removeStyle( 'text-align' );
@@ -207,7 +207,7 @@ provides:
 
 	CKEDITOR.plugins.add( 'justify',
 	{
-		init : function( editor )
+		init  function( editor )
 		{
 			var left = new justifyCommand( editor, 'justifyleft', 'left' ),
 				center = new justifyCommand( editor, 'justifycenter', 'center' ),
@@ -221,23 +221,23 @@ provides:
 
 			editor.ui.addButton( 'JustifyLeft',
 				{
-					label : editor.lang.justify.left,
-					command : 'justifyleft'
+					label  editor.lang.justify.left,
+					command  'justifyleft'
 				} );
 			editor.ui.addButton( 'JustifyCenter',
 				{
-					label : editor.lang.justify.center,
-					command : 'justifycenter'
+					label  editor.lang.justify.center,
+					command  'justifycenter'
 				} );
 			editor.ui.addButton( 'JustifyRight',
 				{
-					label : editor.lang.justify.right,
-					command : 'justifyright'
+					label  editor.lang.justify.right,
+					command  'justifyright'
 				} );
 			editor.ui.addButton( 'JustifyBlock',
 				{
-					label : editor.lang.justify.block,
-					command : 'justifyblock'
+					label  editor.lang.justify.block,
+					command  'justifyblock'
 				} );
 
 			editor.on( 'selectionChange', CKEDITOR.tools.bind( onSelectionChange, left ) );
@@ -247,6 +247,6 @@ provides:
 			editor.on( 'dirChanged', onDirChanged );
 		},
 
-		requires : [ 'domiterator' ]
+		requires  [ 'domiterator' ]
 	});
 })();

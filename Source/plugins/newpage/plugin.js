@@ -27,9 +27,9 @@ CKEDITOR.plugins.add( 'newpage',
 	{
 		editor.addCommand( 'newpage',
 			{
-				modes : { wysiwyg:1, source:1 },
+				modes  { wysiwyg1, source1 },
 
-				exec : function( editor )
+				exec  function( editor )
 				{
 					var command = this;
 					editor.setData( editor.config.newpage_html || '', function()
@@ -39,8 +39,8 @@ CKEDITOR.plugins.add( 'newpage',
 						{
 							editor.fire( 'afterCommandExec',
 							{
-								name: command.name,
-								command: command
+								name command.name,
+								command command
 							} );
 							editor.selectionChange();
 
@@ -48,13 +48,13 @@ CKEDITOR.plugins.add( 'newpage',
 					} );
 					editor.focus();
 				},
-				async : true
+				async  true
 			});
 
 		editor.ui.addButton( 'NewPage',
 			{
-				label : editor.lang.newPage,
-				command : 'newpage'
+				label  editor.lang.newPage,
+				command  'newpage'
 			});
 	}
 });

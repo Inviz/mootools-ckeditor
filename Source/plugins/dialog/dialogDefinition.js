@@ -35,21 +35,21 @@ provides:
  *       {
  *           return {
  *               title  'Test Dialog',
- *               resizable : CKEDITOR.DIALOG_RESIZE_BOTH,
- *               minWidth : 500,
- *               minHeight : 400,
- *               contents : [
+ *               resizable  CKEDITOR.DIALOG_RESIZE_BOTH,
+ *               minWidth  500,
+ *               minHeight  400,
+ *               contents  [
  *                   {
- *                       id : 'tab1',
- *                       label : 'First Tab',
- *                       title : 'First Tab Title',
- *                       accessKey : 'Q',
- *                       elements : [
+ *                       id  'tab1',
+ *                       label  'First Tab',
+ *                       title  'First Tab Title',
+ *                       accessKey  'Q',
+ *                       elements  [
  *                           {
- *                               type : 'text',
- *                               label : 'Test Text 1',
- *                               id : 'testText1',
- *                               'default' : 'hello world!'
+ *                               type  'text',
+ *                               label  'Test Text 1',
+ *                               id  'testText1',
+ *                               'default'  'hello world!'
  *                           }
  *                       ]
  *                    }
@@ -314,25 +314,25 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'hbox',</b>
- * 	widths : [ '25%', '25%', '50%' ],
- * 	children :
+ * 	<b>type  'hbox',</b>
+ * 	widths  [ '25%', '25%', '50%' ],
+ * 	children 
  * 	[
  * 		{
- * 			type : 'text',
- * 			id : 'id1',
- * 			width : '40px',
+ * 			type  'text',
+ * 			id  'id1',
+ * 			width  '40px',
  * 		},
  * 		{
- * 			type : 'text',
- * 			id : 'id2',
- * 			width : '40px',
+ * 			type  'text',
+ * 			id  'id2',
+ * 			width  '40px',
  * 		},
  * 		{
- * 			type : 'text',
- * 			id : 'id3'
+ * 			type  'text',
+ * 			id  'id3'
  * 		}
  * 	]
  * }
@@ -371,7 +371,7 @@ provides:
  */
 
 /**
- * (Optional) The padding width inside child cells. Example: 0, 1.
+ * (Optional) The padding width inside child cells. Example 0, 1.
  * @name CKEDITOR.dialog.definition.hbox.prototype.padding
  * @field
  * @type Number
@@ -379,7 +379,7 @@ provides:
  */
 
 /**
- * (Optional) The alignment of the whole layout. Example: center, top.
+ * (Optional) The alignment of the whole layout. Example center, top.
  * @name CKEDITOR.dialog.definition.hbox.prototype.align
  * @field
  * @type String
@@ -395,7 +395,7 @@ provides:
  * that developers can use to define and create vertical layouts.
  * <br /><br />Once the dialog is opened, the created element becomes a {@link CKEDITOR.ui.dialog.vbox} object and can be accessed with {@link CKEDITOR.dialog#getContentElement}.
  * </div>
- * <style type="text/css">.details .detailList {display:none;} </style>
+ * <style type="text/css">.details .detailList {displaynone;} </style>
  * @name CKEDITOR.dialog.definition.vbox
  * @extends CKEDITOR.dialog.definition.uiElement
  * @constructor
@@ -403,27 +403,27 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'vbox',</b>
- * 	align : 'right',
- * 	width : '200px',
- * 	children :
+ * 	<b>type  'vbox',</b>
+ * 	align  'right',
+ * 	width  '200px',
+ * 	children 
  * 	[
  * 		{
- * 			type : 'text',
- * 			id : 'age',
- * 			label : 'Age'
+ * 			type  'text',
+ * 			id  'age',
+ * 			label  'Age'
  * 		},
  * 		{
- * 			type : 'text',
- * 			id : 'sex',
- * 			label : 'Sex'
+ * 			type  'text',
+ * 			id  'sex',
+ * 			label  'Sex'
  * 		},
  * 		{
- * 			type : 'text',
- * 			id : 'nationality',
- * 			label : 'Nationality'
+ * 			type  'text',
+ * 			id  'nationality',
+ * 			label  'Nationality'
  * 		}
  * 	]
  * }
@@ -462,7 +462,7 @@ provides:
  */
 
 /**
- * (Optional) The padding width inside child cells. Example: 0, 1.
+ * (Optional) The padding width inside child cells. Example 0, 1.
  * @name CKEDITOR.dialog.definition.vbox.prototype.padding
  * @field
  * @type Number
@@ -470,7 +470,7 @@ provides:
  */
 
 /**
- * (Optional) The alignment of the whole layout. Example: center, top.
+ * (Optional) The alignment of the whole layout. Example center, top.
  * @name CKEDITOR.dialog.definition.vbox.prototype.align
  * @field
  * @type String
@@ -502,15 +502,15 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'button',</b>
- * 	id : 'buttonId',
- * 	label : 'Click me',
- * 	title : 'My title',
- * 	onClick : function() {
+ * 	<b>type  'button',</b>
+ * 	id  'buttonId',
+ * 	label  'Click me',
+ * 	title  'My title',
+ * 	onClick  function() {
  * 		// this = CKEDITOR.ui.dialog.button
- * 		alert( 'Clicked: ' + this.id );
+ * 		alert( 'Clicked ' + this.id );
  * 	}
  * }
  */
@@ -548,15 +548,15 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'checkbox',</b>
- * 	id : 'agree',
- * 	label : 'I agree',
- * 	'default' : 'checked',
- * 	onClick : function() {
+ * 	<b>type  'checkbox',</b>
+ * 	id  'agree',
+ * 	label  'I agree',
+ * 	'default'  'checked',
+ * 	onClick  function() {
  * 		// this = CKEDITOR.ui.dialog.checkbox
- * 		alert( 'Checked: ' + this.getValue() );
+ * 		alert( 'Checked ' + this.getValue() );
  * 	}
  * }
  */
@@ -604,21 +604,21 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'file'</b>,
- * 	id : 'upload',
- * 	label : 'Select file from your computer',
- * 	size : 38
+ * 	<b>type  'file'</b>,
+ * 	id  'upload',
+ * 	label  'Select file from your computer',
+ * 	size  38
  * },
  * {
- * 	type : 'fileButton',
- * 	id : 'fileId',
- * 	label : 'Upload file',
- * 	'for' : [ 'tab1', 'upload' ]
- * 	filebrowser : {
- * 		onSelect : function( fileUrl, data ) {
- * 			alert( 'Successfully uploaded: ' + fileUrl );
+ * 	type  'fileButton',
+ * 	id  'fileId',
+ * 	label  'Upload file',
+ * 	'for'  [ 'tab1', 'upload' ]
+ * 	filebrowser  {
+ * 		onSelect  function( fileUrl, data ) {
+ * 			alert( 'Successfully uploaded ' + fileUrl );
  * 		}
  * 	}
  * }
@@ -674,21 +674,21 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	type : 'file',
- * 	id : 'upload',
- * 	label : 'Select file from your computer',
- * 	size : 38
+ * 	type  'file',
+ * 	id  'upload',
+ * 	label  'Select file from your computer',
+ * 	size  38
  * },
  * {
- * 	<b>type : 'fileButton'</b>,
- * 	id : 'fileId',
- * 	label : 'Upload file',
- * 	'for' : [ 'tab1', 'upload' ]
- * 	filebrowser : {
- * 		onSelect : function( fileUrl, data ) {
- * 			alert( 'Successfully uploaded: ' + fileUrl );
+ * 	<b>type  'fileButton'</b>,
+ * 	id  'fileId',
+ * 	label  'Upload file',
+ * 	'for'  [ 'tab1', 'upload' ]
+ * 	filebrowser  {
+ * 		onSelect  function( fileUrl, data ) {
+ * 			alert( 'Successfully uploaded ' + fileUrl );
  * 		}
  * 	}
  * }
@@ -718,12 +718,12 @@ provides:
  * @field
  * @example
  * // Update field with id 'txtUrl' in the 'tab1' tab when file is uploaded.
- * filebrowser : 'tab1:txtUrl'
+ * filebrowser  'tab1txtUrl'
  *
  * // Call custom onSelect function when file is successfully uploaded.
- * filebrowser : {
- * 	onSelect : function( fileUrl, data ) {
- * 		alert( 'Successfully uploaded: ' + fileUrl );
+ * filebrowser  {
+ * 	onSelect  function( fileUrl, data ) {
+ * 		alert( 'Successfully uploaded ' + fileUrl );
  * 	}
  * }
  */
@@ -755,20 +755,20 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example 1:
+ * // Example 1
  * {
- * 	<b>type : 'html',</b>
- * 	html : '&lt;h3>This is some sample HTML content.&lt;/h3>'
+ * 	<b>type  'html',</b>
+ * 	html  '&lt;h3>This is some sample HTML content.&lt;/h3>'
  * }
  * @example
- * // Example 2:
+ * // Example 2
  * // Complete sample with document.getById() call when the "Ok" button is clicked.
  * var dialogDefinition =
  * {
- * 	title : 'Sample dialog',
- * 	minWidth : 300,
- * 	minHeight : 200,
- * 	onOk : function() {
+ * 	title  'Sample dialog',
+ * 	minWidth  300,
+ * 	minHeight  200,
+ * 	onOk  function() {
  * 		// "this" is now a CKEDITOR.dialog object.
  * 		var document = this.getElement().getDocument();
  * 		// document = CKEDITOR.dom.document
@@ -776,21 +776,21 @@ provides:
  * 		if ( element )
  * 			alert( element.getHtml() );
  * 	},
- * 	contents : [
+ * 	contents  [
  * 		{
- * 			id : 'tab1',
- * 			label : '',
- * 			title : '',
- * 			elements :
+ * 			id  'tab1',
+ * 			label  '',
+ * 			title  '',
+ * 			elements 
  * 			[
  * 				{
- * 					<b>type : 'html',</b>
- * 					html : '<b>&lt;div id="myDiv">Sample &lt;b>text&lt;/b>.&lt;/div></b>&lt;div id="otherId">Another div.&lt;/div>'
+ * 					<b>type  'html',</b>
+ * 					html  '<b>&lt;div id="myDiv">Sample &lt;b>text&lt;/b>.&lt;/div></b>&lt;div id="otherId">Another div.&lt;/div>'
  * 				},
  * 			]
  * 		}
  * 	],
- * 	buttons : [ CKEDITOR.dialog.cancelButton, CKEDITOR.dialog.okButton ]
+ * 	buttons  [ CKEDITOR.dialog.cancelButton, CKEDITOR.dialog.okButton ]
  * };
  */
 
@@ -819,17 +819,17 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'radio',</b>
- * 	id : 'country',
- * 	label : 'Which country is bigger',
- * 	items : [ [ 'France', 'FR' ], [ 'Germany', 'DE' ] ] ,
- * 	style : 'color:green',
- * 	'default' : 'DE',
- * 	onClick : function() {
+ * 	<b>type  'radio',</b>
+ * 	id  'country',
+ * 	label  'Which country is bigger',
+ * 	items  [ [ 'France', 'FR' ], [ 'Germany', 'DE' ] ] ,
+ * 	style  'colorgreen',
+ * 	'default'  'DE',
+ * 	onClick  function() {
  * 		// this = CKEDITOR.ui.dialog.radio
- * 		alert( 'Current value: ' + this.getValue() );
+ * 		alert( 'Current value ' + this.getValue() );
  * 	}
  * }
  */
@@ -883,16 +883,16 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'select',</b>
- * 	id : 'sport',
- * 	label : 'Select your favourite sport',
- * 	items : [ [ 'Basketball' ], [ 'Baseball' ], [ 'Hockey' ], [ 'Football' ] ],
- * 	'default' : 'Football',
- * 	onChange : function( api ) {
+ * 	<b>type  'select',</b>
+ * 	id  'sport',
+ * 	label  'Select your favourite sport',
+ * 	items  [ [ 'Basketball' ], [ 'Baseball' ], [ 'Hockey' ], [ 'Football' ] ],
+ * 	'default'  'Football',
+ * 	onChange  function( api ) {
  * 		// this = CKEDITOR.ui.dialog.select
- * 		alert( 'Current value: ' + this.getValue() );
+ * 		alert( 'Current value ' + this.getValue() );
  * 	}
  * }
  */
@@ -964,11 +964,11 @@ provides:
  * // object with the appropriate properties.
  *
  * {
- * 	<b>type : 'text',</b>
- * 	id : 'name',
- * 	label : 'Your name',
- * 	'default' : '',
- * 	validate : function() {
+ * 	<b>type  'text',</b>
+ * 	id  'name',
+ * 	label  'Your name',
+ * 	'default'  '',
+ * 	validate  function() {
  * 		if ( !this.getValue() )
  * 		{
  * 			api.openMsgDialog( '', 'Name cannot be empty.' );
@@ -1035,13 +1035,13 @@ provides:
  * // There is no constructor for this class, the user just has to define an
  * // object with the appropriate properties.
  *
- * // Example:
+ * // Example
  * {
- * 	<b>type : 'textarea',</b>
- * 	id : 'message',
- * 	label : 'Your comment',
- * 	'default' : '',
- * 	validate : function() {
+ * 	<b>type  'textarea',</b>
+ * 	id  'message',
+ * 	label  'Your comment',
+ * 	'default'  '',
+ * 	validate  function() {
  * 		if ( this.getValue().length < 5 )
  * 		{
  * 			api.openMsgDialog( 'The comment is too short.' );

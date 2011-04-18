@@ -28,7 +28,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 
 	function getPanel( editor, doc, parentElement, definition, level )
 	{
-		// Generates the panel key: docId-eleId-skinName-langDir[-uiColor][-CSSs][-level]
+		// Generates the panel key docId-eleId-skinName-langDir[-uiColor][-CSSs][-level]
 		var key = CKEDITOR.tools.genKey( doc.getUniqueId(), parentElement.getUniqueId(), editor.skinName, editor.lang.dir,
 			editor.uiColor || '', definition.css || '', level || '' );
 
@@ -41,8 +41,8 @@ CKEDITOR.plugins.add( 'floatpanel',
 
 			panel.element.setStyles(
 				{
-					display : 'none',
-					position : 'absolute'
+					display  'none',
+					position  'absolute'
 				});
 		}
 
@@ -51,7 +51,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 
 	CKEDITOR.ui.floatPanel = CKEDITOR.tools.createClass(
 	{
-		$ : function( editor, parentElement, definition, level )
+		$  function( editor, parentElement, definition, level )
 		{
 			definition.forceIFrame = 1;
 
@@ -65,49 +65,49 @@ CKEDITOR.plugins.add( 'floatpanel',
 			this._ =
 			{
 				// The panel that will be floating.
-				panel : panel,
-				parentElement : parentElement,
-				definition : definition,
-				document : doc,
-				iframe : iframe,
-				children : [],
-				dir : editor.lang.dir
+				panel  panel,
+				parentElement  parentElement,
+				definition  definition,
+				document  doc,
+				iframe  iframe,
+				children  [],
+				dir  editor.lang.dir
 			};
 
 			editor.on( 'mode', function(){ this.hide(); }, this );
 		},
 
-		proto :
+		proto 
 		{
-			addBlock : function( name, block )
+			addBlock  function( name, block )
 			{
 				return this._.panel.addBlock( name, block );
 			},
 
-			addListBlock : function( name, multiSelect )
+			addListBlock  function( name, multiSelect )
 			{
 				return this._.panel.addListBlock( name, multiSelect );
 			},
 
-			getBlock : function( name )
+			getBlock  function( name )
 			{
 				return this._.panel.getBlock( name );
 			},
 
 			/*
-				corner (LTR):
+				corner (LTR)
 					1 = top-left
 					2 = top-right
 					3 = bottom-right
 					4 = bottom-left
 
-				corner (RTL):
+				corner (RTL)
 					1 = top-right
 					2 = top-left
 					3 = bottom-left
 					4 = bottom-right
 			 */
-			showBlock : function( name, offsetParent, corner, offsetX, offsetY )
+			showBlock  function( name, offsetParent, corner, offsetX, offsetY )
 			{
 				var panel = this._.panel,
 					block = panel.showBlock( name );
@@ -138,9 +138,9 @@ CKEDITOR.plugins.add( 'floatpanel',
 
 				element.setStyles(
 					{
-						top : top + 'px',
-						left: 0,
-						display	: ''
+						top  top + 'px',
+						left 0,
+						display	 ''
 					});
 
 				// Don't use display or visibility style because we need to
@@ -154,7 +154,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 				if ( !this._.blurSet )
 				{
 					// Non IE prefer the event into a window object.
-					var focused = CKEDITOR.env.ie ? iframe : new CKEDITOR.dom.window( iframe.$.contentWindow );
+					var focused = CKEDITOR.env.ie ? iframe  new CKEDITOR.dom.window( iframe.$.contentWindow );
 
 					// With addEventListener compatible browsers, we must
 					// useCapture when registering the focus/blur events to
@@ -222,8 +222,8 @@ CKEDITOR.plugins.add( 'floatpanel',
 									widthNode = widthNode.document.body;
 
 								var width = widthNode.scrollWidth;
-								// Account for extra height needed due to IE quirks box model bug:
-								// http://en.wikipedia.org/wiki/Internet_Explorer_box_model_bug
+								// Account for extra height needed due to IE quirks box model bug
+								// http//en.wikipedia.org/wiki/Internet_Explorer_box_model_bug
 								// (#3426)
 								if ( CKEDITOR.env.ie && CKEDITOR.env.quirks && width > 0 )
 									width += ( target.$.offsetWidth || 0 ) - ( target.$.clientWidth || 0 );
@@ -238,8 +238,8 @@ CKEDITOR.plugins.add( 'floatpanel',
 
 								var height = block.element.$.scrollHeight;
 
-								// Account for extra height needed due to IE quirks box model bug:
-								// http://en.wikipedia.org/wiki/Internet_Explorer_box_model_bug
+								// Account for extra height needed due to IE quirks box model bug
+								// http//en.wikipedia.org/wiki/Internet_Explorer_box_model_bug
 								// (#3426)
 								if ( CKEDITOR.env.ie && CKEDITOR.env.quirks && height > 0 )
 									height += ( target.$.offsetHeight || 0 ) - ( target.$.clientHeight || 0 );
@@ -258,14 +258,14 @@ CKEDITOR.plugins.add( 'floatpanel',
 								viewportSize = panelWindow.getViewPaneSize(),
 								panelSize =
 								{
-									'height' : panelElement.$.offsetHeight,
-									'width' : panelElement.$.offsetWidth
+									'height'  panelElement.$.offsetHeight,
+									'width'  panelElement.$.offsetWidth
 								};
 
 							// If the menu is horizontal off, shift it toward
 							// the opposite language direction.
-							if ( rtl ? left < 0 : left + panelSize.width > viewportSize.width + windowScroll.x )
-								left += ( panelSize.width * ( rtl ? 1 : -1 ) );
+							if ( rtl ? left < 0  left + panelSize.width > viewportSize.width + windowScroll.x )
+								left += ( panelSize.width * ( rtl ? 1  -1 ) );
 
 							// Vertical off screen is simpler.
 							if ( top + panelSize.height > viewportSize.height + windowScroll.y )
@@ -303,13 +303,13 @@ CKEDITOR.plugins.add( 'floatpanel',
 
 							element.setStyles(
 								{
-									top : top + 'px',
-									left : left + 'px'
+									top  top + 'px',
+									left  left + 'px'
 								} );
 							element.setOpacity( 1 );
 						} , this );
 
-						panel.isLoaded ? panelLoad() : panel.onLoad = panelLoad;
+						panel.isLoaded ? panelLoad()  panel.onLoad = panelLoad;
 
 						// Set the panel frame focus, so the blur event gets fired.
 						CKEDITOR.tools.setTimeout( function()
@@ -318,7 +318,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 							// We need this get fired manually because of unfired focus() function.
 							this.allowBlur( true );
 						}, 0, this);
-					},  CKEDITOR.env.air ? 200 : 0, this);
+					},  CKEDITOR.env.air ? 200  0, this);
 				this.visible = 1;
 
 				if ( this.onShow )
@@ -327,7 +327,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 				isShowing = 0;
 			},
 
-			hide : function()
+			hide  function()
 			{
 				if ( this.visible && ( !this.onHide || this.onHide.call( this ) !== true ) )
 				{
@@ -338,7 +338,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 				}
 			},
 
-			allowBlur : function( allow )	// Prevent editor from hiding the panel. #3222.
+			allowBlur  function( allow )	// Prevent editor from hiding the panel. #3222.
 			{
 				var panel = this._.panel;
 				if ( allow != undefined )
@@ -347,7 +347,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 				return panel.allowBlur;
 			},
 
-			showAsChild : function( panel, blockName, offsetParent, corner, offsetX, offsetY )
+			showAsChild  function( panel, blockName, offsetParent, corner, offsetX, offsetY )
 			{
 				// Skip reshowing of child which is already visible.
 				if ( this._.activeChild == panel && panel._.panel._.offsetParentId == offsetParent.getId() )
@@ -373,7 +373,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 
 				panel.showBlock( blockName, offsetParent, corner, offsetX, offsetY );
 
-				/* #3767 IE: Second level menu may not have borders */
+				/* #3767 IE Second level menu may not have borders */
 				if ( CKEDITOR.env.ie7Compat || ( CKEDITOR.env.ie8 && CKEDITOR.env.ie6Compat ) )
 				{
 					setTimeout(function()
@@ -383,7 +383,7 @@ CKEDITOR.plugins.add( 'floatpanel',
 				}
 			},
 
-			hideChild : function()
+			hideChild  function()
 			{
 				var activeChild = this._.activeChild;
 

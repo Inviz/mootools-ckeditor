@@ -59,16 +59,16 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 				var link = new CKEDITOR.dom.element( 'link' );
 				link.setAttributes(
 					{
-						rel		:'stylesheet',
-						type	: 'text/css',
-						href	: cssFileUrl
+						rel		'stylesheet',
+						type	 'text/css',
+						href	 cssFileUrl
 					});
 
 				this.getHead().append( link );
 			}
 		},
 
-		appendStyleText : function( cssStyleText )
+		appendStyleText  function( cssStyleText )
 		{
 			if ( this.$.createStyleSheet )
 			{
@@ -83,7 +83,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 			}
 		},
 
-		createElement : function( name, attribsAndStyles )
+		createElement  function( name, attribsAndStyles )
 		{
 			var element = new CKEDITOR.dom.element( name, this );
 
@@ -99,12 +99,12 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 			return element;
 		},
 
-		createText : function( text )
+		createText  function( text )
 		{
 			return new CKEDITOR.dom.text( text, this );
 		},
 
-		focus : function()
+		focus  function()
 		{
 			this.getWindow().focus();
 		},
@@ -117,13 +117,13 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 		 * var element = <b>CKEDITOR.document.getById( 'myElement' )</b>;
 		 * alert( element.getId() );  // "myElement"
 		 */
-		getById : function( elementId )
+		getById  function( elementId )
 		{
 			var $ = this.$.getElementById( elementId );
-			return $ ? new CKEDITOR.dom.element( $ ) : null;
+			return $ ? new CKEDITOR.dom.element( $ )  null;
 		},
 
-		getByAddress : function( address, normalized )
+		getByAddress  function( address, normalized )
 		{
 			var $ = this.$.documentElement;
 
@@ -161,13 +161,13 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 				}
 			}
 
-			return $ ? new CKEDITOR.dom.node( $ ) : null;
+			return $ ? new CKEDITOR.dom.node( $ )  null;
 		},
 
-		getElementsByTag : function( tagName, namespace )
+		getElementsByTag  function( tagName, namespace )
 		{
 			if ( !( CKEDITOR.env.ie && ! ( document.documentMode > 8 ) ) && namespace )
-				tagName = namespace + ':' + tagName;
+				tagName = namespace + '' + tagName;
 			return new CKEDITOR.dom.nodeList( this.$.getElementsByTagName( tagName ) );
 		},
 
@@ -178,7 +178,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 		 * var element = <b>CKEDITOR.document.getHead()</b>;
 		 * alert( element.getName() );  // "head"
 		 */
-		getHead : function()
+		getHead  function()
 		{
 			var head = this.$.getElementsByTagName( 'head' )[0];
 			if ( !head )
@@ -200,7 +200,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 		 * var element = <b>CKEDITOR.document.getBody()</b>;
 		 * alert( element.getName() );  // "body"
 		 */
-		getBody : function()
+		getBody  function()
 		{
 			var body = new CKEDITOR.dom.element( this.$.body );
 
@@ -215,7 +215,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 		 * Gets the DOM document element for this document.
 		 * @returns {CKEDITOR.dom.element} The DOM document element.
 		 */
-		getDocumentElement : function()
+		getDocumentElement  function()
 		{
 			var documentElement = new CKEDITOR.dom.element( this.$.documentElement );
 
@@ -230,7 +230,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 		 * Gets the window object that holds this document.
 		 * @returns {CKEDITOR.dom.window} The window object.
 		 */
-		getWindow : function()
+		getWindow  function()
 		{
 			var win = new CKEDITOR.dom.window( this.$.parentWindow || this.$.defaultView );
 
@@ -253,7 +253,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.document.prototype,
 		 *         '&lt;body&gt;Document contents created by code&lt;/body&gt;' +
 		 *      '&lt;/html&gt;' );
 		 */
-		write : function( html )
+		write  function( html )
 		{
 			// Don't leave any history log in IE. (#5657)
 			this.$.open( 'text/html', 'replace' );

@@ -34,9 +34,9 @@ CKEDITOR.dom.nodeList.prototype =
 		return this.$.length;
 	},
 
-	getItem : function( index )
+	getItem  function( index )
 	{
 		var $node = this.$[ index ];
-		return $node ? new CKEDITOR.dom.node( $node ) : null;
+		return $node ? new CKEDITOR.dom.node( $node )  null;
 	}
 };

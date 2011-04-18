@@ -31,9 +31,9 @@ provides:
 			'.%1 table.%2,',
 			 '.%1 table.%2 td, .%1 table.%2 th,',
 			 '{',
-				'border : #d3d3d3 1px dotted',
+				'border  #d3d3d3 1px dotted',
 			 '}'
-		  ] :
+		  ] 
 		  [
 			 '.%1 table.%2,',
 			 '.%1 table.%2 > tr > td, .%1 table.%2 > tr > th,',
@@ -41,7 +41,7 @@ provides:
 			 '.%1 table.%2 > thead > tr > td, .%1 table.%2 > thead > tr > th,',
 			 '.%1 table.%2 > tfoot > tr > td, .%1 table.%2 > tfoot > tr > th',
 			 '{',
-				'border : #d3d3d3 1px dotted',
+				'border  #d3d3d3 1px dotted',
 			 '}'
 		  ] ).join( '' );
 
@@ -49,28 +49,28 @@ provides:
 
 	var commandDefinition =
 	{
-		preserveState : true,
-		editorFocus : false,
+		preserveState  true,
+		editorFocus  false,
 
-		exec : function ( editor )
+		exec  function ( editor )
 		{
 			this.toggleState();
 			this.refresh( editor );
 		},
 
-		refresh : function( editor )
+		refresh  function( editor )
 		{
-			var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
+			var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass'  'removeClass';
 			editor.document.getBody()[ funcName ]( 'cke_show_borders' );
 		}
 	};
 
 	CKEDITOR.plugins.add( 'showborders',
 	{
-		requires : [ 'wysiwygarea' ],
-		modes : { 'wysiwyg' : 1 },
+		requires  [ 'wysiwygarea' ],
+		modes  { 'wysiwyg'  1 },
 
-		init : function( editor )
+		init  function( editor )
 		{
 
 			var command = editor.addCommand( 'showborders', commandDefinition );
@@ -104,7 +104,7 @@ provides:
 				});
 		},
 
-		afterInit : function( editor )
+		afterInit  function( editor )
 		{
 			var dataProcessor = editor.dataProcessor,
 				dataFilter = dataProcessor && dataProcessor.dataFilter,
@@ -114,9 +114,9 @@ provides:
 			{
 				dataFilter.addRules(
 					{
-						elements :
+						elements 
 						{
-							'table' : function( element )
+							'table'  function( element )
 							{
 								var attributes = element.attributes,
 									cssClass = attributes[ 'class' ],
@@ -133,9 +133,9 @@ provides:
 			{
 				htmlFilter.addRules(
 				{
-					elements :
+					elements 
 					{
-						'table' : function( table )
+						'table'  function( table )
 						{
 							var attributes = table.attributes,
 								cssClass = attributes[ 'class' ];
@@ -169,7 +169,7 @@ provides:
 					{
 						org.apply( this, arguments );
 						var value = parseInt( this.getValue(), 10 );
-						selectedTable[ ( !value || value <= 0 ) ? 'addClass' : 'removeClass' ]( showBorderClassName );
+						selectedTable[ ( !value || value <= 0 ) ? 'addClass'  'removeClass' ]( showBorderClassName );
 					};
 			} );
 

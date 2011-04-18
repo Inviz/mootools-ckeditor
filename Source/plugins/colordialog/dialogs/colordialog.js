@@ -30,7 +30,7 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 		var spacer =
 		{
 			type  'html',
-			html : '&nbsp;'
+			html  '&nbsp;'
 		};
 
 		function clearSelected()
@@ -89,7 +89,7 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 			switch ( keystroke )
 			{
 				// UP-ARROW
-				case 38 :
+				case 38 
 					// relative is TR
 					if ( ( relative = element.getParent().getParent().getPrevious() ) )
 					{
@@ -101,7 +101,7 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 					ev.preventDefault();
 					break;
 				// DOWN-ARROW
-				case 40 :
+				case 40 
 					// relative is TR
 					if ( ( relative = element.getParent().getParent().getNext() ) )
 					{
@@ -117,13 +117,13 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 					break;
 				// SPACE
 				// ENTER is already handled as onClick
-				case 32 :
+				case 32 
 					onClick( ev );
 					ev.preventDefault();
 					break;
 
 				// RIGHT-ARROW
-				case rtl ? 37 : 39 :
+				case rtl ? 37  39 
 					// relative is TD
 					if ( ( relative = element.getParent().getNext() ) )
 					{
@@ -155,7 +155,7 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 					break;
 
 				// LEFT-ARROW
-				case rtl ? 39 : 37 :
+				case rtl ? 39  37 
 					// relative is TD
 					if ( ( relative = element.getParent().getPrevious() ) )
 					{
@@ -177,7 +177,7 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 					else
 						onBlur( null, element );
 					break;
-				default :
+				default 
 					// Do not stop not handled events.
 					return;
 			}
@@ -217,10 +217,10 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 
 				var index = cell.$.cellIndex + 1 + 18 * targetRow.rowIndex;
 				cell.append( CKEDITOR.dom.element.createFromHtml(
-						'<a href="javascript: void(0);" role="option"' +
+						'<a href="javascript void(0);" role="option"' +
 						' aria-posinset="' + index + '"' +
 						' aria-setsize="' + 13 * 18 + '"' +
-						' style="cursor: pointer;display:block;width:100%;height:100% " title="'+ CKEDITOR.tools.htmlEncode( color )+ '"' +
+						' style="cursor pointer;displayblock;width100%;height100% " title="'+ CKEDITOR.tools.htmlEncode( color )+ '"' +
 						' onkeydown="CKEDITOR.tools.callFunction( ' + onKeydownHandler + ', event, this )"' +
 						' onclick="CKEDITOR.tools.callFunction(' + onClickHandler + ', event, this ); return false;"' +
 						' tabindex="-1"><span class="cke_voice_label">' + color + '</span>&nbsp;</a>', CKEDITOR.document ) );
@@ -261,40 +261,40 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 			tableLabelId = numbering( 'color_table_label' );
 
 		return {
-			title : lang.title,
-			minWidth : 360,
-			minHeight : 220,
-			onLoad : function()
+			title  lang.title,
+			minWidth  360,
+			minHeight  220,
+			onLoad  function()
 			{
 				// Update reference.
 				dialog = this;
 			},
-			contents : [
+			contents  [
 				{
-					id : 'picker',
-					label : lang.title,
-					accessKey : 'I',
-					elements :
+					id  'picker',
+					label  lang.title,
+					accessKey  'I',
+					elements 
 					[
 						{
-							type : 'hbox',
-							padding : 0,
-							widths : [ '70%', '10%', '30%' ],
-							children :
+							type  'hbox',
+							padding  0,
+							widths  [ '70%', '10%', '30%' ],
+							children 
 							[
 								{
-									type : 'html',
-									html :	'<table role="listbox" aria-labelledby="' + tableLabelId + '" onmouseout="CKEDITOR.tools.callFunction( ' + onMouseout + ' );">' +
-											( !CKEDITOR.env.webkit ? html : '' ) +
+									type  'html',
+									html 	'<table role="listbox" aria-labelledby="' + tableLabelId + '" onmouseout="CKEDITOR.tools.callFunction( ' + onMouseout + ' );">' +
+											( !CKEDITOR.env.webkit ? html  '' ) +
 										'</table><span id="' + tableLabelId + '" class="cke_voice_label">' + lang.options +'</span>',
-									onLoad : function()
+									onLoad  function()
 									{
 										var table = CKEDITOR.document.getById( this.domId );
 										table.on( 'mouseover', updateHighlight );
 										// In WebKit, the table content must be inserted after this event call (#6150)
 										CKEDITOR.env.webkit && table.setHtml( html );
 									},
-									focus: function()
+									focus function()
 									{
 										var firstColor = this.getElement().getElementsByTag( 'a' ).getItem( 0 );
 										firstColor.focus();
@@ -302,25 +302,25 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 								},
 								spacer,
 								{
-									type : 'vbox',
-									padding : 0,
-									widths : [ '70%', '5%', '25%' ],
-									children :
+									type  'vbox',
+									padding  0,
+									widths  [ '70%', '5%', '25%' ],
+									children 
 									[
 										{
-											type : 'html',
-											html : '<span>' + lang.highlight +'</span>\
-												<div id="' + hicolorId + '" style="border: 1px solid; height: 74px; width: 74px;"></div>\
+											type  'html',
+											html  '<span>' + lang.highlight +'</span>\
+												<div id="' + hicolorId + '" style="border 1px solid; height 74px; width 74px;"></div>\
 												<div id="' + hicolorTextId + '">&nbsp;</div><span>' + lang.selected + '</span>\
-												<div id="' + selHiColorId + '" style="border: 1px solid; height: 20px; width: 74px;"></div>'
+												<div id="' + selHiColorId + '" style="border 1px solid; height 20px; width 74px;"></div>'
 										},
 										{
-											type : 'text',
-											label : lang.selected,
-											labelStyle: 'display:none',
-											id : 'selectedColor',
-											style : 'width: 74px',
-											onChange : function()
+											type  'text',
+											label  lang.selected,
+											labelStyle 'displaynone',
+											id  'selectedColor',
+											style  'width 74px',
+											onChange  function()
 											{
 												// Try to update color preview with new value. If fails, then set it no none.
 												try
@@ -335,11 +335,11 @@ CKEDITOR.dialog.add( 'colordialog', function( editor )
 										},
 										spacer,
 										{
-											type : 'button',
-											id : 'clear',
-											style : 'margin-top: 5px',
-											label : lang.clear,
-											onClick : clearSelected
+											type  'button',
+											id  'clear',
+											style  'margin-top 5px',
+											label  lang.clear,
+											onClick  clearSelected
 										}
 									]
 								}

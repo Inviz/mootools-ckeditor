@@ -20,17 +20,17 @@ CKEDITOR.dialog.add( 'form', function( editor )
 	var autoAttributes =
 	{
 		action  1,
-		id : 1,
-		method : 1,
-		enctype : 1,
-		target : 1
+		id  1,
+		method  1,
+		enctype  1,
+		target  1
 	};
 
 	return {
-		title : editor.lang.form.title,
-		minWidth : 350,
-		minHeight : 200,
-		onShow : function()
+		title  editor.lang.form.title,
+		minWidth  350,
+		minHeight  200,
+		onShow  function()
 		{
 			delete this.form;
 
@@ -42,7 +42,7 @@ CKEDITOR.dialog.add( 'form', function( editor )
 				this.setupContent( form );
 			}
 		},
-		onOk : function()
+		onOk  function()
 		{
 			var editor,
 				element = this.form,
@@ -59,7 +59,7 @@ CKEDITOR.dialog.add( 'form', function( editor )
 				editor.insertElement( element );
 			this.commitContent( element );
 		},
-		onLoad : function()
+		onLoad  function()
 		{
 			function autoSetup( element )
 			{
@@ -83,25 +83,25 @@ CKEDITOR.dialog.add( 'form', function( editor )
 					}
 				} );
 		},
-		contents : [
+		contents  [
 			{
-				id : 'info',
-				label : editor.lang.form.title,
-				title : editor.lang.form.title,
-				elements : [
+				id  'info',
+				label  editor.lang.form.title,
+				title  editor.lang.form.title,
+				elements  [
 					{
-						id : 'txtName',
-						type : 'text',
-						label : editor.lang.common.name,
-						'default' : '',
-						accessKey : 'N',
-						setup : function( element )
+						id  'txtName',
+						type  'text',
+						label  editor.lang.common.name,
+						'default'  '',
+						accessKey  'N',
+						setup  function( element )
 						{
 							this.setValue( element.data( 'cke-saved-name' ) ||
 									element.getAttribute( 'name' ) ||
 									'' );
 						},
-						commit : function( element )
+						commit  function( element )
 						{
 							if ( this.getValue() )
 								element.data( 'cke-saved-name', this.getValue() );
@@ -113,32 +113,32 @@ CKEDITOR.dialog.add( 'form', function( editor )
 						}
 					},
 					{
-						id : 'action',
-						type : 'text',
-						label : editor.lang.form.action,
-						'default' : '',
-						accessKey : 'T'
+						id  'action',
+						type  'text',
+						label  editor.lang.form.action,
+						'default'  '',
+						accessKey  'T'
 					},
 					{
-						type : 'hbox',
-						widths : [ '45%', '55%' ],
-						children :
+						type  'hbox',
+						widths  [ '45%', '55%' ],
+						children 
 						[
 							{
-								id : 'id',
-								type : 'text',
-								label : editor.lang.common.id,
-								'default' : '',
-								accessKey : 'I'
+								id  'id',
+								type  'text',
+								label  editor.lang.common.id,
+								'default'  '',
+								accessKey  'I'
 							},
 							{
-								id : 'enctype',
-								type : 'select',
-								label : editor.lang.form.encoding,
-								style : 'width:100%',
-								accessKey : 'E',
-								'default' : '',
-								items :
+								id  'enctype',
+								type  'select',
+								label  editor.lang.form.encoding,
+								style  'width100%',
+								accessKey  'E',
+								'default'  '',
+								items 
 								[
 									[ '' ],
 									[ 'text/plain' ],
@@ -149,18 +149,18 @@ CKEDITOR.dialog.add( 'form', function( editor )
 						]
 					},
 					{
-						type : 'hbox',
-						widths : [ '45%', '55%' ],
-						children :
+						type  'hbox',
+						widths  [ '45%', '55%' ],
+						children 
 						[
 							{
-								id : 'target',
-								type : 'select',
-								label : editor.lang.common.target,
-								style : 'width:100%',
-								accessKey : 'M',
-								'default' : '',
-								items :
+								id  'target',
+								type  'select',
+								label  editor.lang.common.target,
+								style  'width100%',
+								accessKey  'M',
+								'default'  '',
+								items 
 								[
 									[ editor.lang.common.notSet, '' ],
 									[ editor.lang.common.targetNew, '_blank' ],
@@ -170,12 +170,12 @@ CKEDITOR.dialog.add( 'form', function( editor )
 								]
 							},
 							{
-								id : 'method',
-								type : 'select',
-								label : editor.lang.form.method,
-								accessKey : 'M',
-								'default' : 'GET',
-								items :
+								id  'method',
+								type  'select',
+								label  editor.lang.form.method,
+								accessKey  'M',
+								'default'  'GET',
+								items 
 								[
 									[ 'GET', 'get' ],
 									[ 'POST', 'post' ]

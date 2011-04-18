@@ -26,41 +26,41 @@ CKEDITOR.plugins.add( 'link',
 		editor.addCommand( 'unlink', new CKEDITOR.unlinkCommand() );
 		editor.ui.addButton( 'Link',
 			{
-				label : editor.lang.link.toolbar,
-				command : 'link'
+				label  editor.lang.link.toolbar,
+				command  'link'
 			} );
 		editor.ui.addButton( 'Unlink',
 			{
-				label : editor.lang.unlink,
-				command : 'unlink'
+				label  editor.lang.unlink,
+				command  'unlink'
 			} );
 		editor.ui.addButton( 'Anchor',
 			{
-				label : editor.lang.anchor.toolbar,
-				command : 'anchor'
+				label  editor.lang.anchor.toolbar,
+				command  'anchor'
 			} );
 		CKEDITOR.dialog.add( 'link', this.path + 'dialogs/link.js' );
 		CKEDITOR.dialog.add( 'anchor', this.path + 'dialogs/anchor.js' );
 
 		// Add the CSS styles for anchor placeholders.
-		var side = editor.lang.dir == 'rtl' ? 'right' : 'left';
+		var side = editor.lang.dir == 'rtl' ? 'right'  'left';
 		editor.addCss(
 			'img.cke_anchor' +
 			'{' +
-				'background-image: url(' + CKEDITOR.getUrl( this.path + 'images/anchor.gif' ) + ');' +
-				'background-position: center center;' +
-				'background-repeat: no-repeat;' +
-				'border: 1px solid #a9a9a9;' +
-				'width: 18px !important;' +
-				'height: 18px !important;' +
+				'background-image url(' + CKEDITOR.getUrl( this.path + 'images/anchor.gif' ) + ');' +
+				'background-position center center;' +
+				'background-repeat no-repeat;' +
+				'border 1px solid #a9a9a9;' +
+				'width 18px !important;' +
+				'height 18px !important;' +
 			'}\n' +
 			'a.cke_anchor' +
 			'{' +
-				'background-image: url(' + CKEDITOR.getUrl( this.path + 'images/anchor.gif' ) + ');' +
-				'background-position: ' + side + ' center;' +
-				'background-repeat: no-repeat;' +
-				'border: 1px solid #a9a9a9;' +
-				'padding-' + side + ': 18px;' +
+				'background-image url(' + CKEDITOR.getUrl( this.path + 'images/anchor.gif' ) + ');' +
+				'background-position ' + side + ' center;' +
+				'background-repeat no-repeat;' +
+				'border 1px solid #a9a9a9;' +
+				'padding-' + side + ' 18px;' +
 			'}'
 		   	);
 
@@ -86,7 +86,7 @@ CKEDITOR.plugins.add( 'link',
 				if ( !element.isReadOnly() )
 				{
 					if ( element.is( 'a' ) )
-						evt.data.dialog =  ( element.getAttribute( 'name' ) && !element.getAttribute( 'href' ) ) ? 'anchor' : 'link';
+						evt.data.dialog =  ( element.getAttribute( 'name' ) && !element.getAttribute( 'href' ) ) ? 'anchor'  'link';
 					else if ( element.is( 'img' ) && element.data( 'cke-real-element-type' ) == 'anchor' )
 						evt.data.dialog = 'anchor';
 				}
@@ -97,27 +97,27 @@ CKEDITOR.plugins.add( 'link',
 		{
 			editor.addMenuItems(
 				{
-					anchor :
+					anchor 
 					{
-						label : editor.lang.anchor.menu,
-						command : 'anchor',
-						group : 'anchor'
+						label  editor.lang.anchor.menu,
+						command  'anchor',
+						group  'anchor'
 					},
 
-					link :
+					link 
 					{
-						label : editor.lang.link.menu,
-						command : 'link',
-						group : 'link',
-						order : 1
+						label  editor.lang.link.menu,
+						command  'link',
+						group  'link',
+						order  1
 					},
 
-					unlink :
+					unlink 
 					{
-						label : editor.lang.unlink,
-						command : 'unlink',
-						group : 'link',
-						order : 5
+						label  editor.lang.unlink,
+						command  'unlink',
+						group  'link',
+						order  5
 					}
 				});
 		}
@@ -141,13 +141,13 @@ CKEDITOR.plugins.add( 'link',
 					}
 
 					return isAnchor ?
-							{ anchor : CKEDITOR.TRISTATE_OFF } :
-							{ link : CKEDITOR.TRISTATE_OFF, unlink : CKEDITOR.TRISTATE_OFF };
+							{ anchor  CKEDITOR.TRISTATE_OFF } 
+							{ link  CKEDITOR.TRISTATE_OFF, unlink  CKEDITOR.TRISTATE_OFF };
 				});
 		}
 	},
 
-	afterInit : function( editor )
+	afterInit  function( editor )
 	{
 		// Register a filter to displaying placeholders after mode change.
 
@@ -158,9 +158,9 @@ CKEDITOR.plugins.add( 'link',
 		{
 			dataFilter.addRules(
 				{
-					elements :
+					elements 
 					{
-						a : function( element )
+						a  function( element )
 						{
 							var attributes = element.attributes;
 							if ( attributes.name && !attributes.href )
@@ -171,7 +171,7 @@ CKEDITOR.plugins.add( 'link',
 		}
 	},
 
-	requires : [ 'fakeobjects' ]
+	requires  [ 'fakeobjects' ]
 } );
 
 CKEDITOR.plugins.link =
@@ -191,7 +191,7 @@ CKEDITOR.plugins.link =
 	 *  [<a href="#"><b>li]nk</b></a>
 	 * </pre>
 	 */
-	getSelectedLink : function( editor )
+	getSelectedLink  function( editor )
 	{
 		try
 		{
@@ -216,13 +216,13 @@ CKEDITOR.unlinkCommand = function(){};
 CKEDITOR.unlinkCommand.prototype =
 {
 	/** @ignore */
-	exec : function( editor )
+	exec  function( editor )
 	{
 		/*
 		 * execCommand( 'unlink', ... ) in Firefox leaves behind <span> tags at where
 		 * the <a> was, so again we have to remove the link ourselves. (See #430)
 		 *
-		 * TODO: Use the style system when it's complete. Let's use execCommand()
+		 * TODO Use the style system when it's complete. Let's use execCommand()
 		 * as a stopgap solution for now.
 		 */
 		var selection = editor.getSelection(),
@@ -245,11 +245,11 @@ CKEDITOR.unlinkCommand.prototype =
 		selection.selectBookmarks( bookmarks );
 	},
 
-	startDisabled : true
+	startDisabled  true
 };
 
 CKEDITOR.tools.extend( CKEDITOR.config,
 {
-	linkShowAdvancedTab : true,
-	linkShowTargetTab : true
+	linkShowAdvancedTab  true,
+	linkShowTargetTab  true
 } );

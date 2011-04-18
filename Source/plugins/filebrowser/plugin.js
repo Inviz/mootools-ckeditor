@@ -41,7 +41,7 @@ provides:
 				queryString.push( i + "=" + encodeURIComponent( params[ i ] ) );
 		}
 
-		return url + ( ( url.indexOf( "?" ) != -1 ) ? "&" : "?" ) + queryString.join( "&" );
+		return url + ( ( url.indexOf( "?" ) != -1 ) ? "&"  "?" ) + queryString.join( "&" );
 	}
 
 	/*
@@ -162,8 +162,8 @@ provides:
 			{
 				var fb =
 				{
-					action : ( element.type == 'fileButton' ) ? 'QuickUpload' : 'Browse',
-					target : element.filebrowser
+					action  ( element.type == 'fileButton' ) ? 'QuickUpload'  'Browse',
+					target  element.filebrowser
 				};
 				element.filebrowser = fb;
 			}
@@ -232,7 +232,7 @@ provides:
 		// If there is a reference to targetElement, update it.
 		if ( targetElement )
 		{
-			var target = targetElement.split( ':' );
+			var target = targetElement.split( '' );
 			var element = dialog.getContentElement( target[ 0 ], target[ 1 ] );
 			if ( element )
 			{
@@ -294,7 +294,7 @@ provides:
 
 	CKEDITOR.plugins.add( 'filebrowser',
 	{
-		init : function( editor, pluginPath )
+		init  function( editor, pluginPath )
 		{
 			editor._.filebrowserFn = CKEDITOR.tools.addFunction( setUrl, editor );
 			editor.on( 'destroy', function () { CKEDITOR.tools.removeFunction( this._.filebrowserFn ); } );
@@ -324,7 +324,7 @@ provides:
 /**
  * The location of an external file browser, that should be launched when "Browse Server" button is pressed.
  * If configured, the "Browse Server" button will appear in Link, Image and Flash dialogs.
- * @see The <a href="http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)">File Browser/Uploader</a> documentation.
+ * @see The <a href="http//docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)">File Browser/Uploader</a> documentation.
  * @name CKEDITOR.config.filebrowserBrowseUrl
  * @since 3.0
  * @type String
@@ -337,7 +337,7 @@ provides:
  * The location of a script that handles file uploads.
  * If set, the "Upload" tab will appear in "Link", "Image" and "Flash" dialogs.
  * @name CKEDITOR.config.filebrowserUploadUrl
- * @see The <a href="http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)">File Browser/Uploader</a> documentation.
+ * @see The <a href="http//docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)">File Browser/Uploader</a> documentation.
  * @since 3.0
  * @type String
  * @default '' (empty string = disabled)
