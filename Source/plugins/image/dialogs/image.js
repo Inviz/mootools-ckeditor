@@ -117,7 +117,7 @@ provides:
 					field;
 				for ( var i = 0; i < length; i++ )
 				{
-					field = dialog.getContentElement.apply( dialog, targetFields[ i ].split( '' ) );
+					field = dialog.getContentElement.apply( dialog, targetFields[ i ].split( ':' ) );
 					// May cause recursion.
 					field && field.setup( IMAGE, element );
 				}
@@ -143,7 +143,7 @@ provides:
 						height = dialog.getValueOf( 'info', 'txtHeight' ),
 						originalRatio = oImageOriginal.$.width * 1000 / oImageOriginal.$.height,
 						thisRatio = width * 1000 / height;
-					dialog.lockRatio  = false;		// Default unlock ratio
+					dialog.lockRatio  = false;		// Default: unlock ratio
 
 					if ( !width && !height )
 						dialog.lockRatio = true;
@@ -169,7 +169,7 @@ provides:
 				ratioButton.addClass( 'cke_btn_unlocked' );
 
 			var lang = dialog._.editor.lang.image,
-				label =  lang[  dialog.lockRatio ? 'unlockRatio'  'lockRatio' ];
+				label =  lang[  dialog.lockRatio ? 'unlockRatio' : 'lockRatio' ];
 
 			ratioButton.setAttribute( 'title', label );
 			ratioButton.getFirst().setText( label );
@@ -210,7 +210,7 @@ provides:
 
 			var dialog = this.getDialog(),
 				value = '',
-				dimension = this.id == 'txtWidth' ? 'width'  'height',
+				dimension = this.id == 'txtWidth' ? 'width' : 'height',
 				size = element.getAttribute( dimension );
 
 			if ( size )
@@ -276,15 +276,15 @@ provides:
 			previewImageId = numbering( 'previewImage' );
 
 		return {
-			title  editor.lang.image[ dialogType == 'image' ? 'title'  'titleButton' ],
-			minWidth  420,
-			minHeight  360,
-			onShow  function()
+			title : editor.lang.image[ dialogType == 'image' ? 'title' : 'titleButton' ],
+			minWidth : 420,
+			minHeight : 360,
+			onShow : function()
 			{
 				this.imageElement = false;
 				this.linkElement = false;
 
-				// Default create a new element.
+				// Default: create a new element.
 				this.imageEditMode = false;
 				this.linkEditMode = false;
 
@@ -364,7 +364,7 @@ provides:
 					this.preview.setStyle( 'display', 'none' );
 				}
 			},
-			onOk  function()
+			onOk : function()
 			{
 				// Edit existing Image.
 				if ( this.imageEditMode )
@@ -388,8 +388,8 @@ provides:
 						this.imageElement = editor.document.createElement( 'input' );
 						this.imageElement.setAttributes(
 							{
-								type  'image',
-								alt  ''
+								type : 'image',
+								alt : ''
 							}
 						);
 						editor.insertElement( this.imageElement );
@@ -459,7 +459,7 @@ provides:
 					}
 				}
 			},
-			onLoad  function()
+			onLoad : function()
 			{
 				if ( dialogType != 'image' )
 					this.hidePage( 'Link' );		//Hide Link tab.
@@ -469,7 +469,7 @@ provides:
 
 				this.commitContent = commitContent;
 			},
-			onHide  function()
+			onHide : function()
 			{
 				if ( this.preview )
 					this.commitContent( CLEANUP, this.preview );
@@ -485,30 +485,30 @@ provides:
 
 				delete this.imageElement;
 			},
-			contents  [
+			contents : [
 				{
-					id  'info',
-					label  editor.lang.image.infoTab,
-					accessKey  'I',
-					elements 
+					id : 'info',
+					label : editor.lang.image.infoTab,
+					accessKey : 'I',
+					elements :
 					[
 						{
-							type  'vbox',
-							padding  0,
-							children 
+							type : 'vbox',
+							padding : 0,
+							children :
 							[
 								{
-									type  'hbox',
-									widths  [ '280px', '110px' ],
-									align  'right',
-									children 
+									type : 'hbox',
+									widths : [ '280px', '110px' ],
+									align : 'right',
+									children :
 									[
 										{
-											id  'txtUrl',
-											type  'text',
-											label  editor.lang.common.url,
-											required true,
-											onChange  function()
+											id : 'txtUrl',
+											type : 'text',
+											label : editor.lang.common.url,
+											required: true,
+											onChange : function()
 											{
 												var dialog = this.getDialog(),
 													newUrl = this.getValue();
@@ -544,7 +544,7 @@ provides:
 													dialog.preview.setStyle( 'display', 'none' );
 												}
 											},
-											setup  function( type, element )
+											setup : function( type, element )
 											{
 												if ( type == IMAGE )
 												{
@@ -558,7 +558,7 @@ provides:
 													field.setInitValue();
 												}
 											},
-											commit  function( type, element )
+											commit : function( type, element )
 											{
 												if ( type == IMAGE && ( this.getValue() || this.isChanged() ) )
 												{
@@ -571,39 +571,39 @@ provides:
 													element.removeAttribute( 'src' );
 												}
 											},
-											validate  CKEDITOR.dialog.validate.notEmpty( editor.lang.image.urlMissing )
+											validate : CKEDITOR.dialog.validate.notEmpty( editor.lang.image.urlMissing )
 										},
 										{
-											type  'button',
-											id  'browse',
+											type : 'button',
+											id : 'browse',
 											// v-align with the 'txtUrl' field.
-											// TODO We need something better than a fixed size here.
-											style  'displayinline-block;margin-top10px;',
-											align  'center',
-											label  editor.lang.common.browseServer,
-											hidden  true,
-											filebrowser  'infotxtUrl'
+											// TODO: We need something better than a fixed size here.
+											style : 'display:inline-block;margin-top:10px;',
+											align : 'center',
+											label : editor.lang.common.browseServer,
+											hidden : true,
+											filebrowser : 'info:txtUrl'
 										}
 									]
 								}
 							]
 						},
 						{
-							id  'txtAlt',
-							type  'text',
-							label  editor.lang.image.alt,
-							accessKey  'T',
-							'default'  '',
-							onChange  function()
+							id : 'txtAlt',
+							type : 'text',
+							label : editor.lang.image.alt,
+							accessKey : 'T',
+							'default' : '',
+							onChange : function()
 							{
 								updatePreview( this.getDialog() );
 							},
-							setup  function( type, element )
+							setup : function( type, element )
 							{
 								if ( type == IMAGE )
 									this.setValue( element.getAttribute( 'alt' ) );
 							},
-							commit  function( type, element )
+							commit : function( type, element )
 							{
 								if ( type == IMAGE )
 								{
@@ -621,34 +621,34 @@ provides:
 							}
 						},
 						{
-							type  'hbox',
-							children 
+							type : 'hbox',
+							children :
 							[
 								{
-									type  'vbox',
-									children 
+									type : 'vbox',
+									children :
 									[
 										{
-											type  'hbox',
-											widths  [ '50%', '50%' ],
-											children 
+											type : 'hbox',
+											widths : [ '50%', '50%' ],
+											children :
 											[
 												{
-													type  'vbox',
-													padding  1,
-													children 
+													type : 'vbox',
+													padding : 1,
+													children :
 													[
 														{
-															type  'text',
-															width '40px',
-															id  'txtWidth',
-															label  editor.lang.common.width,
-															onKeyUp  onSizeChange,
-															onChange  function()
+															type : 'text',
+															width: '40px',
+															id : 'txtWidth',
+															label : editor.lang.common.width,
+															onKeyUp : onSizeChange,
+															onChange : function()
 															{
-																commitInternally.call( this, 'advancedtxtdlgGenStyle' );
+																commitInternally.call( this, 'advanced:txtdlgGenStyle' );
 															},
-															validate  function()
+															validate : function()
 															{
 																var aMatch  =  this.getValue().match( regexGetSizeOrEmpty ),
 																	isValid = !!( aMatch && parseInt( aMatch[1], 10 ) !== 0 );
@@ -656,8 +656,8 @@ provides:
 																	alert( editor.lang.common.invalidWidth );
 																return isValid;
 															},
-															setup  setupDimension,
-															commit  function( type, element, internalCommit )
+															setup : setupDimension,
+															commit : function( type, element, internalCommit )
 															{
 																var value = this.getValue();
 																if ( type == IMAGE )
@@ -689,16 +689,16 @@ provides:
 															}
 														},
 														{
-															type  'text',
-															id  'txtHeight',
-															width '40px',
-															label  editor.lang.common.height,
-															onKeyUp  onSizeChange,
-															onChange  function()
+															type : 'text',
+															id : 'txtHeight',
+															width: '40px',
+															label : editor.lang.common.height,
+															onKeyUp : onSizeChange,
+															onChange : function()
 															{
-																commitInternally.call( this, 'advancedtxtdlgGenStyle' );
+																commitInternally.call( this, 'advanced:txtdlgGenStyle' );
 															},
-															validate  function()
+															validate : function()
 															{
 																var aMatch = this.getValue().match( regexGetSizeOrEmpty ),
 																	isValid = !!( aMatch && parseInt( aMatch[1], 10 ) !== 0 );
@@ -706,8 +706,8 @@ provides:
 																	alert( editor.lang.common.invalidHeight );
 																return isValid;
 															},
-															setup  setupDimension,
-															commit  function( type, element, internalCommit )
+															setup : setupDimension,
+															commit : function( type, element, internalCommit )
 															{
 																var value = this.getValue();
 																if ( type == IMAGE )
@@ -741,9 +741,9 @@ provides:
 													]
 												},
 												{
-													type  'html',
-													style  'margin-top30px;width40px;height40px;',
-													onLoad  function()
+													type : 'html',
+													style : 'margin-top:30px;width:40px;height:40px;',
+													onLoad : function()
 													{
 														// Activate Reset button
 														var	resetButton = CKEDITOR.document.getById( btnResetSizeId ),
@@ -794,48 +794,48 @@ provides:
 																}, ratioButton );
 														}
 													},
-													html  '<div>'+
-														'<a href="javascriptvoid(0)" tabindex="-1" title="' + editor.lang.image.unlockRatio +
+													html : '<div>'+
+														'<a href="javascript:void(0)" tabindex="-1" title="' + editor.lang.image.unlockRatio +
 														'" class="cke_btn_locked" id="' + btnLockSizesId + '" role="button"><span class="cke_label">' + editor.lang.image.unlockRatio + '</span></a>' +
-														'<a href="javascriptvoid(0)" tabindex="-1" title="' + editor.lang.image.resetSize +
+														'<a href="javascript:void(0)" tabindex="-1" title="' + editor.lang.image.resetSize +
 														'" class="cke_btn_reset" id="' + btnResetSizeId + '" role="button"><span class="cke_label">' + editor.lang.image.resetSize + '</span></a>'+
 														'</div>'
 												}
 											]
 										},
 										{
-											type  'vbox',
-											padding  1,
-											children 
+											type : 'vbox',
+											padding : 1,
+											children :
 											[
 												{
-													type  'text',
-													id  'txtBorder',
-													width '60px',
-													label  editor.lang.image.border,
-													'default'  '',
-													onKeyUp  function()
+													type : 'text',
+													id : 'txtBorder',
+													width: '60px',
+													label : editor.lang.image.border,
+													'default' : '',
+													onKeyUp : function()
 													{
 														updatePreview( this.getDialog() );
 													},
-													onChange  function()
+													onChange : function()
 													{
-														commitInternally.call( this, 'advancedtxtdlgGenStyle' );
+														commitInternally.call( this, 'advanced:txtdlgGenStyle' );
 													},
-													validate  CKEDITOR.dialog.validate.integer( editor.lang.image.validateBorder ),
-													setup  function( type, element )
+													validate : CKEDITOR.dialog.validate.integer( editor.lang.image.validateBorder ),
+													setup : function( type, element )
 													{
 														if ( type == IMAGE )
 														{
 															var value,
 																borderStyle = element.getStyle( 'border-width' );
-															borderStyle = borderStyle && borderStyle.match( /^(\d+px)(? \1 \1 \1)?$/ );
+															borderStyle = borderStyle && borderStyle.match( /^(\d+px)(?: \1 \1 \1)?$/ );
 															value = borderStyle && parseInt( borderStyle[ 1 ], 10 );
 															isNaN ( parseInt( value, 10 ) ) && ( value = element.getAttribute( 'border' ) );
 															this.setValue( value );
 														}
 													},
-													commit  function( type, element, internalCommit )
+													commit : function( type, element, internalCommit )
 													{
 														var value = parseInt( this.getValue(), 10 );
 														if ( type == IMAGE || type == PREVIEW )
@@ -865,21 +865,21 @@ provides:
 													}
 												},
 												{
-													type  'text',
-													id  'txtHSpace',
-													width '60px',
-													label  editor.lang.image.hSpace,
-													'default'  '',
-													onKeyUp  function()
+													type : 'text',
+													id : 'txtHSpace',
+													width: '60px',
+													label : editor.lang.image.hSpace,
+													'default' : '',
+													onKeyUp : function()
 													{
 														updatePreview( this.getDialog() );
 													},
-													onChange  function()
+													onChange : function()
 													{
-														commitInternally.call( this, 'advancedtxtdlgGenStyle' );
+														commitInternally.call( this, 'advanced:txtdlgGenStyle' );
 													},
-													validate  CKEDITOR.dialog.validate.integer( editor.lang.image.validateHSpace ),
-													setup  function( type, element )
+													validate : CKEDITOR.dialog.validate.integer( editor.lang.image.validateHSpace ),
+													setup : function( type, element )
 													{
 														if ( type == IMAGE )
 														{
@@ -900,7 +900,7 @@ provides:
 															this.setValue( value );
 														}
 													},
-													commit  function( type, element, internalCommit )
+													commit : function( type, element, internalCommit )
 													{
 														var value = parseInt( this.getValue(), 10 );
 														if ( type == IMAGE || type == PREVIEW )
@@ -928,21 +928,21 @@ provides:
 													}
 												},
 												{
-													type  'text',
-													id  'txtVSpace',
-													width  '60px',
-													label  editor.lang.image.vSpace,
-													'default'  '',
-													onKeyUp  function()
+													type : 'text',
+													id : 'txtVSpace',
+													width : '60px',
+													label : editor.lang.image.vSpace,
+													'default' : '',
+													onKeyUp : function()
 													{
 														updatePreview( this.getDialog() );
 													},
-													onChange  function()
+													onChange : function()
 													{
-														commitInternally.call( this, 'advancedtxtdlgGenStyle' );
+														commitInternally.call( this, 'advanced:txtdlgGenStyle' );
 													},
-													validate  CKEDITOR.dialog.validate.integer( editor.lang.image.validateVSpace ),
-													setup  function( type, element )
+													validate : CKEDITOR.dialog.validate.integer( editor.lang.image.validateVSpace ),
+													setup : function( type, element )
 													{
 														if ( type == IMAGE )
 														{
@@ -962,7 +962,7 @@ provides:
 															this.setValue( value );
 														}
 													},
-													commit  function( type, element, internalCommit )
+													commit : function( type, element, internalCommit )
 													{
 														var value = parseInt( this.getValue(), 10 );
 														if ( type == IMAGE || type == PREVIEW )
@@ -990,13 +990,13 @@ provides:
 													}
 												},
 												{
-													id  'cmbAlign',
-													type  'select',
-													widths  [ '35%','65%' ],
-													style  'width90px',
-													label  editor.lang.common.align,
-													'default'  '',
-													items 
+													id : 'cmbAlign',
+													type : 'select',
+													widths : [ '35%','65%' ],
+													style : 'width:90px',
+													label : editor.lang.common.align,
+													'default' : '',
+													items :
 													[
 														[ editor.lang.common.notSet , ''],
 														[ editor.lang.common.alignLeft , 'left'],
@@ -1011,12 +1011,12 @@ provides:
 														//  [ editor.lang.image.alignMiddle , 'middle'],
 														//  [ editor.lang.image.alignTop , 'top']
 													],
-													onChange  function()
+													onChange : function()
 													{
 														updatePreview( this.getDialog() );
-														commitInternally.call( this, 'advancedtxtdlgGenStyle' );
+														commitInternally.call( this, 'advanced:txtdlgGenStyle' );
 													},
-													setup  function( type, element )
+													setup : function( type, element )
 													{
 														if ( type == IMAGE )
 														{
@@ -1024,8 +1024,8 @@ provides:
 															switch( value )
 															{
 																// Ignore those unrelated values.
-																case 'inherit'
-																case 'none'
+																case 'inherit':
+																case 'none':
 																	value = '';
 															}
 
@@ -1033,7 +1033,7 @@ provides:
 															this.setValue( value );
 														}
 													},
-													commit  function( type, element, internalCommit )
+													commit : function( type, element, internalCommit )
 													{
 														var value = this.getValue();
 														if ( type == IMAGE || type == PREVIEW )
@@ -1050,8 +1050,8 @@ provides:
 																{
 																	// we should remove it only if it matches "left" or "right",
 																	// otherwise leave it intact.
-																	case 'left'
-																	case 'right'
+																	case 'left':
+																	case 'right':
 																		element.removeAttribute( 'align' );
 																}
 															}
@@ -1066,17 +1066,17 @@ provides:
 									]
 								},
 								{
-									type  'vbox',
-									height  '250px',
-									children 
+									type : 'vbox',
+									height : '250px',
+									children :
 									[
 										{
-											type  'html',
-											style  'width95%;',
-											html  '<div>' + CKEDITOR.tools.htmlEncode( editor.lang.common.preview ) +'<br>'+
-											'<div id="' + imagePreviewLoaderId + '" class="ImagePreviewLoader" style="displaynone"><div class="loading">&nbsp;</div></div>'+
+											type : 'html',
+											style : 'width:95%;',
+											html : '<div>' + CKEDITOR.tools.htmlEncode( editor.lang.common.preview ) +'<br>'+
+											'<div id="' + imagePreviewLoaderId + '" class="ImagePreviewLoader" style="display:none"><div class="loading">&nbsp;</div></div>'+
 											'<div id="' + imagePreviewBoxId + '" class="ImagePreviewBox"><table><tr><td>'+
-											'<a href="javascriptvoid(0)" target="_blank" onclick="return false;" id="' + previewLinkId + '">'+
+											'<a href="javascript:void(0)" target="_blank" onclick="return false;" id="' + previewLinkId + '">'+
 											'<img id="' + previewImageId + '" alt="" /></a>' +
 											( editor.config.image_previewText ||
 											'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. '+
@@ -1091,18 +1091,18 @@ provides:
 					]
 				},
 				{
-					id  'Link',
-					label  editor.lang.link.title,
-					padding  0,
-					elements 
+					id : 'Link',
+					label : editor.lang.link.title,
+					padding : 0,
+					elements :
 					[
 						{
-							id  'txtUrl',
-							type  'text',
-							label  editor.lang.common.url,
-							style  'width 100%',
-							'default'  '',
-							setup  function( type, element )
+							id : 'txtUrl',
+							type : 'text',
+							label : editor.lang.common.url,
+							style : 'width: 100%',
+							'default' : '',
+							setup : function( type, element )
 							{
 								if ( type == LINK )
 								{
@@ -1112,7 +1112,7 @@ provides:
 									this.setValue( href );
 								}
 							},
-							commit  function( type, element )
+							commit : function( type, element )
 							{
 								if ( type == LINK )
 								{
@@ -1129,24 +1129,24 @@ provides:
 							}
 						},
 						{
-							type  'button',
-							id  'browse',
-							filebrowser 
+							type : 'button',
+							id : 'browse',
+							filebrowser :
 							{
-								action  'Browse',
-								target 'LinktxtUrl',
-								url editor.config.filebrowserImageBrowseLinkUrl
+								action : 'Browse',
+								target: 'Link:txtUrl',
+								url: editor.config.filebrowserImageBrowseLinkUrl
 							},
-							style  'floatright',
-							hidden  true,
-							label  editor.lang.common.browseServer
+							style : 'float:right',
+							hidden : true,
+							label : editor.lang.common.browseServer
 						},
 						{
-							id  'cmbTarget',
-							type  'select',
-							label  editor.lang.common.target,
-							'default'  '',
-							items 
+							id : 'cmbTarget',
+							type : 'select',
+							label : editor.lang.common.target,
+							'default' : '',
+							items :
 							[
 								[ editor.lang.common.notSet , ''],
 								[ editor.lang.common.targetNew , '_blank'],
@@ -1154,12 +1154,12 @@ provides:
 								[ editor.lang.common.targetSelf , '_self'],
 								[ editor.lang.common.targetParent , '_parent']
 							],
-							setup  function( type, element )
+							setup : function( type, element )
 							{
 								if ( type == LINK )
 									this.setValue( element.getAttribute( 'target' ) || '' );
 							},
-							commit  function( type, element )
+							commit : function( type, element )
 							{
 								if ( type == LINK )
 								{
@@ -1171,48 +1171,48 @@ provides:
 					]
 				},
 				{
-					id  'Upload',
-					hidden  true,
-					filebrowser  'uploadButton',
-					label  editor.lang.image.upload,
-					elements 
+					id : 'Upload',
+					hidden : true,
+					filebrowser : 'uploadButton',
+					label : editor.lang.image.upload,
+					elements :
 					[
 						{
-							type  'file',
-							id  'upload',
-							label  editor.lang.image.btnUpload,
-							style 'height40px',
-							size  38
+							type : 'file',
+							id : 'upload',
+							label : editor.lang.image.btnUpload,
+							style: 'height:40px',
+							size : 38
 						},
 						{
-							type  'fileButton',
-							id  'uploadButton',
-							filebrowser  'infotxtUrl',
-							label  editor.lang.image.btnUpload,
-							'for'  [ 'Upload', 'upload' ]
+							type : 'fileButton',
+							id : 'uploadButton',
+							filebrowser : 'info:txtUrl',
+							label : editor.lang.image.btnUpload,
+							'for' : [ 'Upload', 'upload' ]
 						}
 					]
 				},
 				{
-					id  'advanced',
-					label  editor.lang.common.advancedTab,
-					elements 
+					id : 'advanced',
+					label : editor.lang.common.advancedTab,
+					elements :
 					[
 						{
-							type  'hbox',
-							widths  [ '50%', '25%', '25%' ],
-							children 
+							type : 'hbox',
+							widths : [ '50%', '25%', '25%' ],
+							children :
 							[
 								{
-									type  'text',
-									id  'linkId',
-									label  editor.lang.common.id,
-									setup  function( type, element )
+									type : 'text',
+									id : 'linkId',
+									label : editor.lang.common.id,
+									setup : function( type, element )
 									{
 										if ( type == IMAGE )
 											this.setValue( element.getAttribute( 'id' ) );
 									},
-									commit  function( type, element )
+									commit : function( type, element )
 									{
 										if ( type == IMAGE )
 										{
@@ -1222,23 +1222,23 @@ provides:
 									}
 								},
 								{
-									id  'cmbLangDir',
-									type  'select',
-									style  'width  100px;',
-									label  editor.lang.common.langDir,
-									'default'  '',
-									items 
+									id : 'cmbLangDir',
+									type : 'select',
+									style : 'width : 100px;',
+									label : editor.lang.common.langDir,
+									'default' : '',
+									items :
 									[
 										[ editor.lang.common.notSet, '' ],
 										[ editor.lang.common.langDirLtr, 'ltr' ],
 										[ editor.lang.common.langDirRtl, 'rtl' ]
 									],
-									setup  function( type, element )
+									setup : function( type, element )
 									{
 										if ( type == IMAGE )
 											this.setValue( element.getAttribute( 'dir' ) );
 									},
-									commit  function( type, element )
+									commit : function( type, element )
 									{
 										if ( type == IMAGE )
 										{
@@ -1248,16 +1248,16 @@ provides:
 									}
 								},
 								{
-									type  'text',
-									id  'txtLangCode',
-									label  editor.lang.common.langCode,
-									'default'  '',
-									setup  function( type, element )
+									type : 'text',
+									id : 'txtLangCode',
+									label : editor.lang.common.langCode,
+									'default' : '',
+									setup : function( type, element )
 									{
 										if ( type == IMAGE )
 											this.setValue( element.getAttribute( 'lang' ) );
 									},
-									commit  function( type, element )
+									commit : function( type, element )
 									{
 										if ( type == IMAGE )
 										{
@@ -1269,15 +1269,15 @@ provides:
 							]
 						},
 						{
-							type  'text',
-							id  'txtGenLongDescr',
-							label  editor.lang.common.longDescr,
-							setup  function( type, element )
+							type : 'text',
+							id : 'txtGenLongDescr',
+							label : editor.lang.common.longDescr,
+							setup : function( type, element )
 							{
 								if ( type == IMAGE )
 									this.setValue( element.getAttribute( 'longDesc' ) );
 							},
-							commit  function( type, element )
+							commit : function( type, element )
 							{
 								if ( type == IMAGE )
 								{
@@ -1287,21 +1287,21 @@ provides:
 							}
 						},
 						{
-							type  'hbox',
-							widths  [ '50%', '50%' ],
-							children 
+							type : 'hbox',
+							widths : [ '50%', '50%' ],
+							children :
 							[
 								{
-									type  'text',
-									id  'txtGenClass',
-									label  editor.lang.common.cssClass,
-									'default'  '',
-									setup  function( type, element )
+									type : 'text',
+									id : 'txtGenClass',
+									label : editor.lang.common.cssClass,
+									'default' : '',
+									setup : function( type, element )
 									{
 										if ( type == IMAGE )
 											this.setValue( element.getAttribute( 'class' ) );
 									},
-									commit  function( type, element )
+									commit : function( type, element )
 									{
 										if ( type == IMAGE )
 										{
@@ -1311,20 +1311,20 @@ provides:
 									}
 								},
 								{
-									type  'text',
-									id  'txtGenTitle',
-									label  editor.lang.common.advisoryTitle,
-									'default'  '',
-									onChange  function()
+									type : 'text',
+									id : 'txtGenTitle',
+									label : editor.lang.common.advisoryTitle,
+									'default' : '',
+									onChange : function()
 									{
 										updatePreview( this.getDialog() );
 									},
-									setup  function( type, element )
+									setup : function( type, element )
 									{
 										if ( type == IMAGE )
 											this.setValue( element.getAttribute( 'title' ) );
 									},
-									commit  function( type, element )
+									commit : function( type, element )
 									{
 										if ( type == IMAGE )
 										{
@@ -1344,11 +1344,11 @@ provides:
 							]
 						},
 						{
-							type  'text',
-							id  'txtdlgGenStyle',
-							label  editor.lang.common.cssStyle,
-							'default'  '',
-							setup  function( type, element )
+							type : 'text',
+							id : 'txtdlgGenStyle',
+							label : editor.lang.common.cssStyle,
+							'default' : '',
+							setup : function( type, element )
 							{
 								if ( type == IMAGE )
 								{
@@ -1359,26 +1359,26 @@ provides:
 
 									var height = element.$.style.height,
 										width = element.$.style.width,
-										aMatchH  = ( height ? height  '' ).match( regexGetSize ),
-										aMatchW  = ( width ? width  '').match( regexGetSize );
+										aMatchH  = ( height ? height : '' ).match( regexGetSize ),
+										aMatchW  = ( width ? width : '').match( regexGetSize );
 
 									this.attributesInStyle =
 									{
-										height  !!aMatchH,
-										width  !!aMatchW
+										height : !!aMatchH,
+										width : !!aMatchW
 									};
 								}
 							},
-							onChange  function ()
+							onChange : function ()
 							{
 								commitInternally.call( this,
-									[ 'infocmbFloat', 'infocmbAlign',
-									  'infotxtVSpace', 'infotxtHSpace',
-									  'infotxtBorder',
-									  'infotxtWidth', 'infotxtHeight' ] );
+									[ 'info:cmbFloat', 'info:cmbAlign',
+									  'info:txtVSpace', 'info:txtHSpace',
+									  'info:txtBorder',
+									  'info:txtWidth', 'info:txtHeight' ] );
 								updatePreview( this );
 							},
-							commit  function( type, element )
+							commit : function( type, element )
 							{
 								if ( type == IMAGE && ( this.getValue() || this.isChanged() ) )
 								{

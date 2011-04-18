@@ -40,7 +40,7 @@ provides:
  * @example
  * editorInstance.addCommand( 'sample',
  * {
- *     exec  function( editor )
+ *     exec : function( editor )
  *     {
  *         alert( 'Executing a command for the editor name "' + editor.name + '"!' );
  *     }
@@ -56,17 +56,17 @@ provides:
  * @example
  * editorInstance.addCommand( 'alertName',
  * {
- *     exec  function( editor )
+ *     exec : function( editor )
  *     {
  *         alert( editor.name );
  *     },
- *     canUndo  false    // No support for undo/redo
+ *     canUndo : false    // No support for undo/redo
  * });
  */
 
 /**
  * Whether the command is asynchronous, which means that the
- * {@link CKEDITOR.editor#eventafterCommandExec} event will be fired by the
+ * {@link CKEDITOR.editor#event:afterCommandExec} event will be fired by the
  * command itself manually, and that the return value of this command is not to
  * be returned by the {@link CKEDITOR.command#exec} function.
  * @name  CKEDITOR.commandDefinition.prototype.async
@@ -75,7 +75,7 @@ provides:
  * @example
  * editorInstance.addCommand( 'loadOptions',
  * {
- *     exec  function( editor )
+ *     exec : function( editor )
  *     {
  *         // Asynchronous operation below.
  *         CKEDITOR.ajax.loadXml( 'data.xml', function()
@@ -83,7 +83,7 @@ provides:
  *                 editor.fire( 'afterCommandExec' );
  *             ));
  *     },
- *     async  true    // The command need some time to complete after exec function returns.
+ *     async : true    // The command need some time to complete after exec function returns.
  * });
  */
 
@@ -96,11 +96,11 @@ provides:
  * @example
  * editorInstance.addCommand( 'maximize',
  * {
- *     exec  function( editor )
+ *     exec : function( editor )
  *     {
  *         // ...
  *     },
- *     editorFocus  false    // The command doesn't require focusing the editing document.
+ *     editorFocus : false    // The command doesn't require focusing the editing document.
  * });
  */
 
@@ -113,11 +113,11 @@ provides:
  * @example
  * editorInstance.addCommand( 'unlink',
  * {
- *     exec  function( editor )
+ *     exec : function( editor )
  *     {
  *         // ...
  *     },
- *     startDisabled  true    // Command is unavailable until selection is inside a link.
+ *     startDisabled : true    // Command is unavailable until selection is inside a link.
  * });
  */
 
@@ -126,15 +126,15 @@ provides:
  * will have no action if the current mode is not listed in this property.
  * @name  CKEDITOR.commandDefinition.prototype.modes
  * @type Object
- * @default { wysiwyg  1 }
+ * @default { wysiwyg : 1 }
  * @see CKEDITOR.command#modes
  * @example
  * editorInstance.addCommand( 'link',
  * {
- *     exec  function( editor )
+ *     exec : function( editor )
  *     {
  *         // ...
  *     },
- *     modes  { wysiwyg  1 }    // Command is available in wysiwyg mode only.
+ *     modes : { wysiwyg : 1 }    // Command is available in wysiwyg mode only.
  * });
  */

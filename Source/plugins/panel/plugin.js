@@ -18,7 +18,7 @@ provides:
 
 CKEDITOR.plugins.add( 'panel',
 {
-	beforeInit  function( editor )
+	beforeInit : function( editor )
 	{
 		editor.ui.addHandler( CKEDITOR.UI_PANEL, CKEDITOR.ui.panel.handler );
 	}
@@ -40,8 +40,8 @@ CKEDITOR.ui.panel = function( document, definition )
 	// Set defaults.
 	CKEDITOR.tools.extend( this,
 		{
-			className  '',
-			css  []
+			className : '',
+			css : []
 		});
 
 	this.id = CKEDITOR.tools.getNextId();
@@ -49,7 +49,7 @@ CKEDITOR.ui.panel = function( document, definition )
 
 	this._ =
 	{
-		blocks  {}
+		blocks : {}
 	};
 };
 
@@ -61,7 +61,7 @@ CKEDITOR.ui.panel = function( document, definition )
  */
 CKEDITOR.ui.panel.handler =
 {
-	create  function( definition )
+	create : function( definition )
 	{
 		return new CKEDITOR.ui.panel( definition );
 	}
@@ -69,7 +69,7 @@ CKEDITOR.ui.panel.handler =
 
 CKEDITOR.ui.panel.prototype =
 {
-	renderHtml  function( editor )
+	renderHtml : function( editor )
 	{
 		var output = [];
 		this.render( editor, output );
@@ -84,7 +84,7 @@ CKEDITOR.ui.panel.prototype =
 	 *		to this button.
 	 * @example
 	 */
-	render  function( editor, output )
+	render : function( editor, output )
 	{
 		var id = this.id;
 
@@ -93,7 +93,7 @@ CKEDITOR.ui.panel.prototype =
 				' lang="', editor.langCode, '"' +
 				' role="presentation"' +
 				// iframe loading need sometime, keep the panel hidden(#4186).
-				' style="displaynone;z-index' + ( editor.config.baseFloatZIndex + 1 ) + '">' +
+				' style="display:none;z-index:' + ( editor.config.baseFloatZIndex + 1 ) + '">' +
 				'<div' +
 					' id=', id,
 					' dir=', editor.lang.dir,
@@ -111,7 +111,7 @@ CKEDITOR.ui.panel.prototype =
 			output.push(
 						'<iframe id="', id, '_frame"' +
 							' frameborder="0"' +
-							' role="application" src="javascriptvoid(' );
+							' role="application" src="javascript:void(' );
 
 			output.push(
 							// Support for custom document.domain in IE.
@@ -121,7 +121,7 @@ CKEDITOR.ui.panel.prototype =
 									'document.domain=\'' + document.domain + '\';' +
 									'document.close();' +
 								'})()'
-							
+							:
 								'0' );
 
 			output.push(
@@ -135,7 +135,7 @@ CKEDITOR.ui.panel.prototype =
 		return id;
 	},
 
-	getHolderElement  function()
+	getHolderElement : function()
 	{
 		var holder = this._.holder;
 
@@ -161,9 +161,9 @@ CKEDITOR.ui.panel.prototype =
 					'<!DOCTYPE html>' +
 					'<html dir="' + dir + '" class="' + className + '_container" lang="' + langCode + '">' +
 						'<head>' +
-							'<style>.' + className + '_container{visibilityhidden}</style>' +
+							'<style>.' + className + '_container{visibility:hidden}</style>' +
 						'</head>' +
-						'<body class="cke_' + dir + ' cke_panel_frame ' + CKEDITOR.env.cssClass + '" style="margin0;padding0"' +
+						'<body class="cke_' + dir + ' cke_panel_frame ' + CKEDITOR.env.cssClass + '" style="margin:0;padding:0"' +
 						' onload="( window.CKEDITOR || window.parent.CKEDITOR ).tools.callFunction(' + onLoad + ');"></body>' +
 						// It looks strange, but for FF2, the styles must go
 						// after <body>, so it (body) becames immediatelly
@@ -179,7 +179,7 @@ CKEDITOR.ui.panel.prototype =
 				win.$.CKEDITOR = CKEDITOR;
 
 				// Arrow keys for scrolling is only preventable with 'keypress' event in Opera (#4534).
-				doc.on( 'key' + ( CKEDITOR.env.opera? 'press''down' ), function( evt )
+				doc.on( 'key' + ( CKEDITOR.env.opera? 'press':'down' ), function( evt )
 					{
 						var keystroke = evt.data.getKeystroke(),
 							dir = this.document.getById( this.id ).getAttribute( 'dir' );
@@ -192,7 +192,7 @@ CKEDITOR.ui.panel.prototype =
 						}
 
 						// ESC/ARROW-LEFT(ltr) OR ARROW-RIGHT(rtl)
-						if ( keystroke == 27 || keystroke == ( dir == 'rtl' ? 39  37 ) )
+						if ( keystroke == 27 || keystroke == ( dir == 'rtl' ? 39 : 37 ) )
 						{
 							if ( this.onEscape && this.onEscape( keystroke ) === false )
 								evt.data.preventDefault();
@@ -213,10 +213,10 @@ CKEDITOR.ui.panel.prototype =
 		return holder;
 	},
 
-	addBlock  function( name, block )
+	addBlock : function( name, block )
 	{
 		block = this._.blocks[ name ] = block instanceof CKEDITOR.ui.panel.block ?  block
-				 new CKEDITOR.ui.panel.block( this.getHolderElement(), block );
+				: new CKEDITOR.ui.panel.block( this.getHolderElement(), block );
 
 		if ( !this._.currentBlock )
 			this.showBlock( name );
@@ -224,19 +224,19 @@ CKEDITOR.ui.panel.prototype =
 		return block;
 	},
 
-	getBlock  function( name )
+	getBlock : function( name )
 	{
 		return this._.blocks[ name ];
 	},
 
-	showBlock  function( name )
+	showBlock : function( name )
 	{
 		var blocks = this._.blocks,
 			block = blocks[ name ],
 			current = this._.currentBlock,
 			holder = this.forceIFrame ?
 				this.document.getById( this.id + '_frame' )
-				 this._.holder;
+				: this._.holder;
 
 		// Disable context menu for block panel.
 		holder.getParent().getParent().disableContextMenu();
@@ -273,7 +273,7 @@ CKEDITOR.ui.panel.prototype =
 		return block;
 	},
 
-	destroy  function()
+	destroy : function()
 	{
 		this.element && this.element.remove();
 	}
@@ -281,20 +281,20 @@ CKEDITOR.ui.panel.prototype =
 
 CKEDITOR.ui.panel.block = CKEDITOR.tools.createClass(
 {
-	$  function( blockHolder, blockDefinition )
+	$ : function( blockHolder, blockDefinition )
 	{
 		this.element = blockHolder.append(
 			blockHolder.getDocument().createElement( 'div',
 				{
-					attributes 
+					attributes :
 					{
-						'tabIndex'  -1,
-						'class'  'cke_panel_block',
-						'role'  'presentation'
+						'tabIndex' : -1,
+						'class' : 'cke_panel_block',
+						'role' : 'presentation'
 					},
-					styles 
+					styles :
 					{
-						display  'none'
+						display : 'none'
 					}
 				}) );
 
@@ -313,12 +313,12 @@ CKEDITOR.ui.panel.block = CKEDITOR.tools.createClass(
 		this.element.disableContextMenu();
 	},
 
-	_  {
+	_ : {
 
 		/**
 		 * Mark the item specified by the index as current activated.
 		 */
-		markItem function( index )
+		markItem: function( index )
 		{
 			if ( index == -1 )
 				return;
@@ -335,26 +335,26 @@ CKEDITOR.ui.panel.block = CKEDITOR.tools.createClass(
 		}
 	},
 
-	proto 
+	proto :
 	{
-		show  function()
+		show : function()
 		{
 			this.element.setStyle( 'display', '' );
 		},
 
-		hide  function()
+		hide : function()
 		{
 			if ( !this.onHide || this.onHide.call( this )  !== true )
 				this.element.setStyle( 'display', 'none' );
 		},
 
-		onKeyDown  function( keystroke )
+		onKeyDown : function( keystroke )
 		{
 			var keyAction = this.keys[ keystroke ];
 			switch ( keyAction )
 			{
 				// Move forward.
-				case 'next' 
+				case 'next' :
 					var index = this._.focusIndex,
 						links = this.element.getElementsByTag( 'a' ),
 						link;
@@ -374,7 +374,7 @@ CKEDITOR.ui.panel.block = CKEDITOR.tools.createClass(
 					return false;
 
 				// Move backward.
-				case 'prev' 
+				case 'prev' :
 					index = this._.focusIndex;
 					links = this.element.getElementsByTag( 'a' );
 
@@ -392,12 +392,12 @@ CKEDITOR.ui.panel.block = CKEDITOR.tools.createClass(
 					}
 					return false;
 
-				case 'click' 
+				case 'click' :
 					index = this._.focusIndex;
 					link = index >= 0 && this.element.getElementsByTag( 'a' ).getItem( index );
 
 					if ( link )
-						link.$.click ? link.$.click()  link.$.onclick();
+						link.$.click ? link.$.click() : link.$.onclick();
 
 					return false;
 			}

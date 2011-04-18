@@ -25,7 +25,7 @@ provides:
 	// Use DOM2 event listeners to substitue inline handlers instead.
 	function convertInlineHandlers( container )
 	{
-		// TODO document.querySelectorAll is not supported in AIR.
+		// TODO: document.querySelectorAll is not supported in AIR.
 		var children = container.getElementsByTag( '*' ),
 			count = children.count(),
 			child;
@@ -79,13 +79,13 @@ provides:
 										// Speical variables.
 										switch( argName )
 										{
-											case 'this' 
+											case 'this' :
 												callFuncArgs[ i ] = node.$;
 												break;
-											case 'event' 
+											case 'event' :
 												callFuncArgs[ i ] = evt.data.$;
 												break;
-											case 'null' 
+											case 'null' :
 												callFuncArgs [ i ] = null;
 												break;
 										}
@@ -108,13 +108,13 @@ provides:
 
 	CKEDITOR.plugins.add( 'adobeair',
 	{
-		init  function( editor )
+		init : function( editor )
 		{
 			if ( !CKEDITOR.env.air )
 				return;
 
 			// Body doesn't get default margin on AIR.
-			editor.addCss( 'body { padding 8px }' );
+			editor.addCss( 'body { padding: 8px }' );
 
 			editor.on( 'uiReady', function()
 				{

@@ -50,17 +50,17 @@ provides:
 
 		editor.ui.addRichCombo( comboName,
 			{
-				label  lang.label,
-				title  lang.panelTitle,
-				className  'cke_' + ( styleType == 'size' ? 'fontSize'  'font' ),
-				panel 
+				label : lang.label,
+				title : lang.panelTitle,
+				className : 'cke_' + ( styleType == 'size' ? 'fontSize' : 'font' ),
+				panel :
 				{
-					css  editor.skin.editor.css.concat( config.contentsCss ),
-					multiSelect  false,
-					attributes  { 'aria-label'  lang.panelTitle }
+					css : editor.skin.editor.css.concat( config.contentsCss ),
+					multiSelect : false,
+					attributes : { 'aria-label' : lang.panelTitle }
 				},
 
-				init  function()
+				init : function()
 				{
 					this.startGroup( lang.panelTitle );
 
@@ -73,7 +73,7 @@ provides:
 					}
 				},
 
-				onClick  function( value )
+				onClick : function( value )
 				{
 					editor.focus();
 					editor.fire( 'saveSnapshot' );
@@ -88,7 +88,7 @@ provides:
 					editor.fire( 'saveSnapshot' );
 				},
 
-				onRender  function()
+				onRender : function()
 				{
 					editor.on( 'selectionChange', function( ev )
 						{
@@ -125,9 +125,9 @@ provides:
 
 	CKEDITOR.plugins.add( 'font',
 	{
-		requires  [ 'richcombo', 'styles' ],
+		requires : [ 'richcombo', 'styles' ],
 
-		init  function( editor )
+		init : function( editor )
 		{
 			var config = editor.config;
 
@@ -183,16 +183,16 @@ CKEDITOR.config.font_defaultLabel = '';
  * // This is actually the default value for it.
  * config.font_style =
  *     {
- *         element		 'span',
- *         styles		 { 'font-family'  '#(family)' },
- *         overrides	 [ { element  'font', attributes  { 'face'  null } } ]
+ *         element		: 'span',
+ *         styles		: { 'font-family' : '#(family)' },
+ *         overrides	: [ { element : 'font', attributes : { 'face' : null } } ]
  *     };
  */
 CKEDITOR.config.font_style =
 	{
-		element		 'span',
-		styles		 { 'font-family'  '#(family)' },
-		overrides	 [ { element  'font', attributes  { 'face'  null } } ]
+		element		: 'span',
+		styles		: { 'font-family' : '#(family)' },
+		overrides	: [ { element : 'font', attributes : { 'face' : null } } ]
 	};
 
 /**
@@ -234,14 +234,14 @@ CKEDITOR.config.fontSize_defaultLabel = '';
  * // This is actually the default value for it.
  * config.fontSize_style =
  *     {
- *         element		 'span',
- *         styles		 { 'font-size'  '#(size)' },
- *         overrides	 [ { element  'font', attributes  { 'size'  null } } ]
+ *         element		: 'span',
+ *         styles		: { 'font-size' : '#(size)' },
+ *         overrides	: [ { element : 'font', attributes : { 'size' : null } } ]
  *     };
  */
 CKEDITOR.config.fontSize_style =
 	{
-		element		 'span',
-		styles		 { 'font-size'  '#(size)' },
-		overrides	 [ { element  'font', attributes  { 'size'  null } } ]
+		element		: 'span',
+		styles		: { 'font-size' : '#(size)' },
+		overrides	: [ { element : 'font', attributes : { 'size' : null } } ]
 	};

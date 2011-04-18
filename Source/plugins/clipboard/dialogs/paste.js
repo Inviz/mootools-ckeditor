@@ -30,7 +30,7 @@ CKEDITOR.dialog.add( 'paste', function( editor )
 		script && script.remove();
 
 		CKEDITOR.env.ie ?
-			docElement.body.contentEditable = "true" 
+			docElement.body.contentEditable = "true" :
 			docElement.designMode = "on";
 
 		// IE before version 8 will leave cursor blinking inside the document after
@@ -51,13 +51,13 @@ CKEDITOR.dialog.add( 'paste', function( editor )
 
 			switch( key )
 			{
-				case 27 
+				case 27 :
 					this.hide();
 					processed = 1;
 					break;
 
-				case 9 
-				case CKEDITOR.SHIFT + 9 
+				case 9 :
+				case CKEDITOR.SHIFT + 9 :
 					this.changeFocus( true );
 					processed = 1;
 			}
@@ -69,20 +69,20 @@ CKEDITOR.dialog.add( 'paste', function( editor )
 	}
 
 	return {
-		title  lang.title,
+		title : lang.title,
 
-		minWidth  CKEDITOR.env.ie && CKEDITOR.env.quirks ? 370  350,
-		minHeight  CKEDITOR.env.quirks ? 250  245,
-		onShow  function()
+		minWidth : CKEDITOR.env.ie && CKEDITOR.env.quirks ? 370 : 350,
+		minHeight : CKEDITOR.env.quirks ? 250 : 245,
+		onShow : function()
 		{
-			// FIREFOX BUG Force the browser to render the dialog to make the to-be-
+			// FIREFOX BUG: Force the browser to render the dialog to make the to-be-
 			// inserted iframe editable. (#3366)
 			this.parts.dialog.$.offsetHeight;
 
 			var htmlToLoad =
 				'<html dir="' + editor.config.contentsLangDirection + '"' +
 				' lang="' + ( editor.config.contentsLanguage || editor.langCode ) + '">' +
-					'<head><style>body { margin 3px; height 95%; } </style></head><body>' +
+					'<head><style>body { margin: 3px; height: 95%; } </style></head><body>' +
 					'<script id="cke_actscrpt" type="text/javascript">' +
 					'window.parent.CKEDITOR.tools.callFunction( ' + CKEDITOR.tools.addFunction( onPasteFrameLoad, this ) + ', this );' +
 					'</script></body>' +
@@ -90,14 +90,14 @@ CKEDITOR.dialog.add( 'paste', function( editor )
 
 			var src =
 				CKEDITOR.env.air ?
-					'javascriptvoid(0)' 
+					'javascript:void(0)' :
 				isCustomDomain ?
-					'javascriptvoid((function(){' +
+					'javascript:void((function(){' +
 						'document.open();' +
 						'document.domain=\'' + document.domain + '\';' +
 						'document.close();' +
 						'})())"'
-				
+				:
 					'';
 
 			var iframe = CKEDITOR.dom.element.createFromHtml(
@@ -135,7 +135,7 @@ CKEDITOR.dialog.add( 'paste', function( editor )
 			// the cursor blinking inside iframe. (#5461)
 			if ( CKEDITOR.env.ie )
 			{
-				var focusGrabber = CKEDITOR.dom.element.createFromHtml( '<span tabindex="-1" style="positionabsolute;" role="presentation"></span>' );
+				var focusGrabber = CKEDITOR.dom.element.createFromHtml( '<span tabindex="-1" style="position:absolute;" role="presentation"></span>' );
 				focusGrabber.on( 'focus', function()
 				{
 					iframe.$.contentWindow.focus();
@@ -160,19 +160,19 @@ CKEDITOR.dialog.add( 'paste', function( editor )
 			}
 		},
 
-		onHide  function()
+		onHide : function()
 		{
 			if ( CKEDITOR.env.ie )
 				this.getParentEditor().document.getBody().$.contentEditable = 'true';
 		},
 
-		onLoad  function()
+		onLoad : function()
 		{
 			if ( ( CKEDITOR.env.ie7Compat || CKEDITOR.env.ie6Compat ) && editor.lang.dir == 'rtl' )
 				this.parts.contents.setStyle( 'overflow', 'hidden' );
 		},
 
-		onOk  function()
+		onOk : function()
 		{
 			var container = this.getContentElement( 'general', 'editing_area' ).getElement(),
 				iframe = container.getElementsByTag( 'iframe' ).getItem( 0 ),
@@ -185,36 +185,36 @@ CKEDITOR.dialog.add( 'paste', function( editor )
 			html = body.getHtml();
 
 			setTimeout( function(){
-				editor.fire( 'paste', { 'html'  html } );
+				editor.fire( 'paste', { 'html' : html } );
 			}, 0 );
 
 		},
 
-		contents  [
+		contents : [
 			{
-				id  'general',
-				label  editor.lang.common.generalTab,
-				elements  [
+				id : 'general',
+				label : editor.lang.common.generalTab,
+				elements : [
 					{
-						type  'html',
-						id  'securityMsg',
-						html  '<div style="white-spacenormal;width340px;">' + lang.securityMsg + '</div>'
+						type : 'html',
+						id : 'securityMsg',
+						html : '<div style="white-space:normal;width:340px;">' + lang.securityMsg + '</div>'
 					},
 					{
-						type  'html',
-						id  'pasteMsg',
-						html  '<div style="white-spacenormal;width340px;">'+lang.pasteMsg +'</div>'
+						type : 'html',
+						id : 'pasteMsg',
+						html : '<div style="white-space:normal;width:340px;">'+lang.pasteMsg +'</div>'
 					},
 					{
-						type  'html',
-						id  'editing_area',
-						style  'width 100%; height 100%;',
-						html  '',
-						focus  function()
+						type : 'html',
+						id : 'editing_area',
+						style : 'width: 100%; height: 100%;',
+						html : '',
+						focus : function()
 						{
 							var win = this.getInputElement().$.contentWindow;
 
-							// #3291  JAWS needs the 500ms delay to detect that the editor iframe
+							// #3291 : JAWS needs the 500ms delay to detect that the editor iframe
 							// iframe is no longer editable. So that it will put the focus into the
 							// Paste from Word dialog's editable area instead.
 							setTimeout( function()

@@ -24,9 +24,9 @@ provides:
 {
 	var saveCmd =
 	{
-		modes  { wysiwyg1, source1 },
+		modes : { wysiwyg:1, source:1 },
 
-		exec  function( editor )
+		exec : function( editor )
 		{
 			var $form = editor.element.$.form;
 
@@ -53,15 +53,15 @@ provides:
 	// Register a plugin named "save".
 	CKEDITOR.plugins.add( pluginName,
 	{
-		init  function( editor )
+		init : function( editor )
 		{
 			var command = editor.addCommand( pluginName, saveCmd );
-			command.modes = { wysiwyg  !!( editor.element.$.form ) };
+			command.modes = { wysiwyg : !!( editor.element.$.form ) };
 
 			editor.ui.addButton( 'Save',
 				{
-					label  editor.lang.save,
-					command  pluginName
+					label : editor.lang.save,
+					command : pluginName
 				});
 		}
 	});

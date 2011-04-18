@@ -45,13 +45,13 @@ provides:
 		 * @type Number
 		 * @example
 		 */
-		type  CKEDITOR.NODE_TEXT,
+		type : CKEDITOR.NODE_TEXT,
 
 		/**
 		 * Writes write the CDATA with no special manipulations.
 		 * @param {CKEDITOR.htmlWriter} writer The writer to which write the HTML.
 		 */
-		writeHtml  function( writer )
+		writeHtml : function( writer )
 		{
 			writer.write( this.value );
 		}

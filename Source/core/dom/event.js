@@ -43,7 +43,7 @@ CKEDITOR.dom.event.prototype =
 	 * @example
 	 * alert( event.getKey() );  "65" is "a" has been pressed
 	 */
-	getKey  function()
+	getKey : function()
 	{
 		return this.$.keyCode || this.$.which;
 	},
@@ -58,7 +58,7 @@ CKEDITOR.dom.event.prototype =
 	 * alert( event.getKeystroke() == CKEDITOR.CTRL + 65 );                   // CTRL + "a" key
 	 * alert( event.getKeystroke() == CKEDITOR.CTRL + CKEDITOR.SHIFT + 65 );  // CTRL + SHIFT + "a" key
 	 */
-	getKeystroke  function()
+	getKeystroke : function()
 	{
 		var keystroke = this.getKey();
 
@@ -89,7 +89,7 @@ CKEDITOR.dom.event.prototype =
 	 *         domEvent.preventDefault();
 	 *     });
 	 */
-	preventDefault  function( stopPropagation )
+	preventDefault : function( stopPropagation )
 	{
 		var $ = this.$;
 		if ( $.preventDefault )
@@ -101,7 +101,7 @@ CKEDITOR.dom.event.prototype =
 			this.stopPropagation();
 	},
 
-	stopPropagation  function()
+	stopPropagation : function()
 	{
 		var $ = this.$;
 		if ( $.stopPropagation )
@@ -124,10 +124,10 @@ CKEDITOR.dom.event.prototype =
 	 *     });
 	 */
 
-	getTarget  function()
+	getTarget : function()
 	{
 		var rawNode = this.$.target || this.$.srcElement;
-		return rawNode ? new CKEDITOR.dom.node( rawNode )  null;
+		return rawNode ? new CKEDITOR.dom.node( rawNode ) : null;
 	}
 };
 

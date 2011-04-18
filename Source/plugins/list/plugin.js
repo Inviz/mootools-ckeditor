@@ -22,7 +22,7 @@ provides:
 
 (function()
 {
-	var listNodeNames = { ol  1, ul  1 },
+	var listNodeNames = { ol : 1, ul : 1 },
 		emptyTextRegex = /^[\n\r\t ]*$/;
 
 	var whitespaces = CKEDITOR.dom.walker.whitespaces(),
@@ -36,7 +36,7 @@ provides:
 		 * does not change the DOM tree, with the exception that it may add some
 		 * markers to the list item nodes when database is specified.
 		 */
-		listToArray  function( listNode, database, baseArray, baseIndentLevel, grandparentNode )
+		listToArray : function( listNode, database, baseArray, baseIndentLevel, grandparentNode )
 		{
 			if ( !listNodeNames[ listNode.getName() ] )
 				return [];
@@ -59,7 +59,7 @@ provides:
 				if ( listItem.$.nodeName.toLowerCase() != 'li' )
 					continue;
 
-				var itemObj = { 'parent'  listNode, indent  baseIndentLevel, element  listItem, contents  [] };
+				var itemObj = { 'parent' : listNode, indent : baseIndentLevel, element : listItem, contents : [] };
 				if ( !grandparentNode )
 				{
 					itemObj.grandparent = listNode.getParent();
@@ -88,7 +88,7 @@ provides:
 		},
 
 		// Convert our internal representation of a list back to a DOM forest.
-		arrayToList  function( listArray, database, baseIndex, paragraphMode, dir )
+		arrayToList : function( listArray, database, baseIndex, paragraphMode, dir )
 		{
 			if ( !baseIndex )
 				baseIndex = 0;
@@ -101,7 +101,7 @@ provides:
 				indentLevel = Math.max( listArray[ baseIndex ].indent, 0 ),
 				currentListItem = null,
 				itemDir,
-				paragraphName = ( paragraphMode == CKEDITOR.ENTER_P ? 'p'  'div' );
+				paragraphName = ( paragraphMode == CKEDITOR.ENTER_P ? 'p' : 'div' );
 			while ( 1 )
 			{
 				var item = listArray[ currentIndex ];
@@ -124,7 +124,7 @@ provides:
 					var orgDir = item.element.getDirection( 1 ),
 						currDir = listArray[ currentIndex - 1 ].element.getDirection( 1 ),
 						listData = CKEDITOR.plugins.list.arrayToList( listArray, null, currentIndex, paragraphMode,
-						currDir != orgDir ? orgDir null );
+						currDir != orgDir ? orgDir: null );
 
 					// If the next block is an <li> with another list tree as the first
 					// child, we'll need to append a filler (<br>/NBSP) or the list item
@@ -149,7 +149,7 @@ provides:
 						if ( dir || item.element.hasAttributes() || paragraphMode != CKEDITOR.ENTER_BR )
 						{
 							currentListItem = doc.createElement( paragraphName );
-							item.element.copyAttributes( currentListItem, { type1, value1 } );
+							item.element.copyAttributes( currentListItem, { type:1, value:1 } );
 							itemDir = item.element.getDirection() || dir;
 							itemDir &&
 								currentListItem.setAttribute( 'dir', itemDir );
@@ -225,7 +225,7 @@ provides:
 				}
 			}
 
-			return { listNode  retval, nextIndex  currentIndex };
+			return { listNode : retval, nextIndex : currentIndex };
 		}
 	};
 
@@ -242,7 +242,7 @@ provides:
 			  && !element.equals( blockLimit ); i++ )
 		{
 			if ( listNodeNames[ elements[i].getName() ] )
-				return this.setState( this.type == elements[i].getName() ? CKEDITOR.TRISTATE_ON  CKEDITOR.TRISTATE_OFF );
+				return this.setState( this.type == elements[i].getName() ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF );
 		}
 
 		return this.setState( CKEDITOR.TRISTATE_OFF );
@@ -271,7 +271,7 @@ provides:
 		var root = groupObj.root,
 			fakeParent = root.getDocument().createElement( this.type );
 		// Copy all attributes, except from 'start' and 'type'.
-		root.copyAttributes( fakeParent, { start  1, type  1 } );
+		root.copyAttributes( fakeParent, { start : 1, type : 1 } );
 		// The list-style-type property should be ignored.
 		fakeParent.removeStyle( 'list-style-type' );
 
@@ -448,12 +448,12 @@ provides:
 		var docFragment = newList.listNode, boundaryNode, siblingNode;
 		function compensateBrs( isStart )
 		{
-			if ( ( boundaryNode = docFragment[ isStart ? 'getFirst'  'getLast' ]() )
+			if ( ( boundaryNode = docFragment[ isStart ? 'getFirst' : 'getLast' ]() )
 				 && !( boundaryNode.is && boundaryNode.isBlockBoundary() )
-				 && ( siblingNode = groupObj.root[ isStart ? 'getPrevious'  'getNext' ]
+				 && ( siblingNode = groupObj.root[ isStart ? 'getPrevious' : 'getNext' ]
 				      ( CKEDITOR.dom.walker.whitespaces( true ) ) )
-				 && !( siblingNode.is && siblingNode.isBlockBoundary( { br  1 } ) ) )
-				editor.document.createElement( 'br' )[ isStart ? 'insertBefore'  'insertAfter' ]( boundaryNode );
+				 && !( siblingNode.is && siblingNode.isBlockBoundary( { br : 1 } ) ) )
+				editor.document.createElement( 'br' )[ isStart ? 'insertBefore' : 'insertAfter' ]( boundaryNode );
 		}
 		compensateBrs( true );
 		compensateBrs();
@@ -468,7 +468,7 @@ provides:
 	}
 
 	listCommand.prototype = {
-		exec  function( editor )
+		exec : function( editor )
 		{
 			var doc = editor.document,
 				config = editor.config,
@@ -488,8 +488,8 @@ provides:
 				if ( !body.getFirst( nonEmpty ) )
 				{
 					config.enterMode == CKEDITOR.ENTER_BR ?
-						body.appendBogus() 
-						ranges[ 0 ].fixBlock( 1, config.enterMode == CKEDITOR.ENTER_P ? 'p'  'div' );
+						body.appendBogus() :
+						ranges[ 0 ].fixBlock( 1, config.enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' );
 
 					selection.selectRanges( ranges );
 				}
@@ -565,7 +565,7 @@ provides:
 								groupObj.contents.push( block );
 							else
 							{
-								groupObj = { root  element, contents  [ block ] };
+								groupObj = { root : element, contents : [ block ] };
 								listGroups.push( groupObj );
 								CKEDITOR.dom.element.setMarker( database, element, 'list_group_object', groupObj );
 							}
@@ -583,7 +583,7 @@ provides:
 						root.getCustomData( 'list_group_object_' + index ).contents.push( block );
 					else
 					{
-						groupObj = { root  root, contents  [ block ] };
+						groupObj = { root : root, contents : [ block ] };
 						CKEDITOR.dom.element.setMarker( database, root, 'list_group_object_' + index, groupObj );
 						listGroups.push( groupObj );
 					}
@@ -616,7 +616,7 @@ provides:
 				( mergeSibling = function( rtl ){
 
 					var sibling = listNode[ rtl ?
-						'getPrevious'  'getNext' ]( CKEDITOR.dom.walker.whitespaces( true ) );
+						'getPrevious' : 'getNext' ]( CKEDITOR.dom.walker.whitespaces( true ) );
 					if ( sibling && sibling.getName &&
 						 sibling.getName() == listCommand.type )
 					{
@@ -636,7 +636,7 @@ provides:
 	};
 
 	var dtd = CKEDITOR.dtd;
-	var tailNbspRegex = /[\t\r\n ]*(?&nbsp;|\xa0)$/;
+	var tailNbspRegex = /[\t\r\n ]*(?:&nbsp;|\xa0)$/;
 
 	function indexOfFirstChildElement( element, tagNameList )
 	{
@@ -676,7 +676,7 @@ provides:
 				// in front of a list item.
 				if ( !( tailNbspmatch && tailNbspmatch.index ) && fillerNode == children[ 0 ] )
 					children[ 0 ] = ( isHtmlFilter || CKEDITOR.env.ie ) ?
-					                 new CKEDITOR.htmlParser.text( '\xa0' ) 
+					                 new CKEDITOR.htmlParser.text( '\xa0' ) :
 									 new CKEDITOR.htmlParser.element( 'br', {} );
 
 				// Otherwise the filler is not needed anymore.
@@ -689,17 +689,17 @@ provides:
 		};
 	}
 
-	var defaultListDataFilterRules = { elements  {} };
+	var defaultListDataFilterRules = { elements : {} };
 	for ( var i in dtd.$listItem )
 		defaultListDataFilterRules.elements[ i ] = getExtendNestedListFilter();
 
-	var defaultListHtmlFilterRules = { elements  {} };
+	var defaultListHtmlFilterRules = { elements : {} };
 	for ( i in dtd.$listItem )
 		defaultListHtmlFilterRules.elements[ i ] = getExtendNestedListFilter( true );
 
 	CKEDITOR.plugins.add( 'list',
 	{
-		init  function( editor )
+		init : function( editor )
 		{
 			// Register commands.
 			var numberedListCommand = editor.addCommand( 'numberedlist', new listCommand( 'numberedlist', 'ol' ) ),
@@ -708,13 +708,13 @@ provides:
 			// Register the toolbar button.
 			editor.ui.addButton( 'NumberedList',
 				{
-					label  editor.lang.numberedlist,
-					command  'numberedlist'
+					label : editor.lang.numberedlist,
+					command : 'numberedlist'
 				} );
 			editor.ui.addButton( 'BulletedList',
 				{
-					label  editor.lang.bulletedlist,
-					command  'bulletedlist'
+					label : editor.lang.bulletedlist,
+					command : 'bulletedlist'
 				} );
 
 			// Register the state changing handlers.
@@ -722,7 +722,7 @@ provides:
 			editor.on( 'selectionChange', CKEDITOR.tools.bind( onSelectionChange, bulletedListCommand ) );
 		},
 
-		afterInit  function ( editor )
+		afterInit : function ( editor )
 		{
 			var dataProcessor = editor.dataProcessor;
 			if ( dataProcessor )
@@ -732,6 +732,6 @@ provides:
 			}
 		},
 
-		requires  [ 'domiterator' ]
+		requires : [ 'domiterator' ]
 	} );
 })();

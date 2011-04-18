@@ -18,7 +18,7 @@ provides:
 
 (function()
 {
-	var cellNodeRegex = /^(?td|th)$/;
+	var cellNodeRegex = /^(?:td|th)$/;
 
 	function getSelectedCells( selection )
 	{
@@ -66,7 +66,7 @@ provides:
 
 				while ( ( node = walker.next() ) )
 				{
-					// If may be possible for us to have a range like this
+					// If may be possible for us to have a range like this:
 					// <td>^1</td><td>^2</td>
 					// The 2nd td shouldn't be included.
 					//
@@ -139,12 +139,12 @@ provides:
 				lastCell = cells[ cells.length - 1 ],
 				endRowIndex = lastCell.getParent().$.rowIndex + lastCell.$.rowSpan - 1,
 				endRow = new CKEDITOR.dom.element( table.$.rows[ endRowIndex ] ),
-				rowIndex = insertBefore ? startRowIndex  endRowIndex,
-				row = insertBefore ? startRow  endRow;
+				rowIndex = insertBefore ? startRowIndex : endRowIndex,
+				row = insertBefore ? startRow : endRow;
 
 		var map = CKEDITOR.tools.buildTableMap( table ),
 				cloneRow = map[ rowIndex ],
-				nextRow = insertBefore ? map[ rowIndex - 1 ]  map[ rowIndex + 1 ],
+				nextRow = insertBefore ? map[ rowIndex - 1 ] : map[ rowIndex + 1 ],
 				width = map[0].length;
 
 		var newRow = doc.createElement( 'tr' );
@@ -170,7 +170,7 @@ provides:
 		}
 
 		insertBefore ?
-		newRow.insertBefore( row ) 
+		newRow.insertBefore( row ) :
 		newRow.insertAfter( row );
 	}
 
@@ -212,7 +212,7 @@ provides:
 							var nextMapRow = map[ i + 1 ];
 							nextMapRow[ j - 1 ] ?
 							cell.insertAfter( new CKEDITOR.dom.element( nextMapRow[ j - 1 ] ) )
-									 new CKEDITOR.dom.element( table.$.rows[ i + 1 ] ).append( cell, 1 );
+									: new CKEDITOR.dom.element( table.$.rows[ i + 1 ] ).append( cell, 1 );
 						}
 					}
 
@@ -257,7 +257,7 @@ provides:
 		for ( var i = 0; i < rowCells.length; i++ )
 		{
 			var mapCell = rowCells[ i ];
-			colIndex += isStart ? 1  mapCell.colSpan;
+			colIndex += isStart ? 1 : mapCell.colSpan;
 			if ( mapCell == cell.$ )
 				break;
 		}
@@ -267,11 +267,11 @@ provides:
 
 	function getColumnsIndices( cells, isStart )
 	{
-		var retval = isStart ? Infinity  0;
+		var retval = isStart ? Infinity : 0;
 		for ( var i = 0; i < cells.length; i++ )
 		{
 			var colIndex = getCellColIndex( cells[ i ], isStart );
-			if ( isStart ? colIndex < retval   colIndex > retval )
+			if ( isStart ? colIndex < retval  : colIndex > retval )
 				retval = colIndex;
 		}
 		return retval;
@@ -284,7 +284,7 @@ provides:
 			table = firstCell.getAscendant( 'table' ),
 			startCol =  getColumnsIndices( cells, 1 ),
 			lastCol =  getColumnsIndices( cells ),
-			colIndex = insertBefore? startCol  lastCol;
+			colIndex = insertBefore? startCol : lastCol;
 
 		var map = CKEDITOR.tools.buildTableMap( table ),
 			cloneCol = [],
@@ -294,7 +294,7 @@ provides:
 		for ( var i = 0; i < height; i++ )
 		{
 			cloneCol.push( map[ i ][ colIndex ] );
-			var nextCell = insertBefore ? map[ i ][ colIndex - 1 ]  map[ i ][ colIndex + 1 ];
+			var nextCell = insertBefore ? map[ i ][ colIndex - 1 ] : map[ i ][ colIndex + 1 ];
 			nextCell && nextCol.push( nextCell );
 		}
 
@@ -314,7 +314,7 @@ provides:
 				cell = new CKEDITOR.dom.element( cloneCol[ i ] ).clone();
 				cell.removeAttribute( 'colSpan' );
 				!CKEDITOR.env.ie && cell.appendBogus();
-				cell[ insertBefore? 'insertBefore'  'insertAfter' ].call( cell, new CKEDITOR.dom.element ( cloneCol[ i ] ) );
+				cell[ insertBefore? 'insertBefore' : 'insertAfter' ].call( cell, new CKEDITOR.dom.element ( cloneCol[ i ] ) );
 				cell = cell.$;
 			}
 
@@ -373,7 +373,7 @@ provides:
 		// 1. Into next cell of the first row if any;
 		// 2. Into previous cell of the first row if any;
 		// 3. Into table's parent element;
-		var cursorPosition =  new CKEDITOR.dom.element( firstRowCells[ startColIndex ] || ( startColIndex ? firstRowCells[ startColIndex - 1 ]  table.$.parentNode ) );
+		var cursorPosition =  new CKEDITOR.dom.element( firstRowCells[ startColIndex ] || ( startColIndex ? firstRowCells[ startColIndex - 1 ] : table.$.parentNode ) );
 
 		// Delete table rows only if all columns are gone (do not remove empty row).
 		if ( rowsToDelete.length == rows )
@@ -406,7 +406,7 @@ provides:
 
 		if ( !targetIndex )
 			targetIndex = cellIndexList[ 0 ] > 0 ? ( cellIndexList[ 0 ] - 1 )
-							 ( cellIndexList[ cellIndexList.length - 1 ] + 1 );
+							: ( cellIndexList[ cellIndexList.length - 1 ] + 1 );
 
 		// scan row by row to get the target cell
 		var rows = table.$.rows;
@@ -417,7 +417,7 @@ provides:
 				break;
 		}
 
-		return targetCell ?  new CKEDITOR.dom.element( targetCell )   table.getPrevious();
+		return targetCell ?  new CKEDITOR.dom.element( targetCell ) :  table.getPrevious();
 	}
 
 	function insertCell( selection, insertBefore )
@@ -476,10 +476,10 @@ provides:
 	function placeCursorInCell( cell, placeAtEnd )
 	{
 		var range = new CKEDITOR.dom.range( cell.getDocument() );
-		if ( !range[ 'moveToElementEdit' + ( placeAtEnd ? 'End'  'Start' ) ]( cell ) )
+		if ( !range[ 'moveToElementEdit' + ( placeAtEnd ? 'End' : 'Start' ) ]( cell ) )
 		{
 			range.selectNodeContents( cell );
-			range.collapse( placeAtEnd ? false  true );
+			range.collapse( placeAtEnd ? false : true );
 		}
 		range.select( true );
 	}
@@ -497,7 +497,7 @@ provides:
 			else if ( c == cell )
 				return new CKEDITOR.dom.element( oRow[ c ] );
 		}
-		return cell.is ? -1  null;
+		return cell.is ? -1 : null;
 	}
 
 	function cellInCol( tableMap, colIndex, cell )
@@ -514,19 +514,19 @@ provides:
 				return new CKEDITOR.dom.element( row[ colIndex ] );
 		}
 
-		return ( typeof cell == 'undefined' )? oCol  cell.is ? -1   null;
+		return ( typeof cell == 'undefined' )? oCol : cell.is ? -1 :  null;
 	}
 
 	function mergeCells( selection, mergeDirection, isDetect )
 	{
 		var cells = getSelectedCells( selection );
 
-		// Invalid merge request if
+		// Invalid merge request if:
 		// 1. In batch mode despite that less than two selected.
 		// 2. In solo mode while not exactly only one selected.
 		// 3. Cells distributed in different table groups (e.g. from both thead and tbody).
 		var commonAncestor;
-		if ( ( mergeDirection ? cells.length != 1  cells.length < 2 )
+		if ( ( mergeDirection ? cells.length != 1 : cells.length < 2 )
 				|| ( commonAncestor = selection.getCommonAncestor() )
 				&& commonAncestor.type == CKEDITOR.NODE_ELEMENT
 				&& commonAncestor.is( 'table' ) )
@@ -553,11 +553,11 @@ provides:
 
 				targetCell =
 					map[ mergeDirection == 'up' ?
-							( startRow - rowspan )
-							mergeDirection == 'down' ? ( startRow + rowspan )  startRow  ] [
+							( startRow - rowspan ):
+							mergeDirection == 'down' ? ( startRow + rowspan ) : startRow  ] [
 						mergeDirection == 'left' ?
-							( startColumn - colspan )
-						mergeDirection == 'right' ?  ( startColumn + colspan )  startColumn ];
+							( startColumn - colspan ):
+						mergeDirection == 'right' ?  ( startColumn + colspan ) : startColumn ];
 
 			}
 			catch( er )
@@ -572,7 +572,7 @@ provides:
 
 			// Sort in map order regardless of the DOM sequence.
 			cells[ ( mergeDirection == 'up' || mergeDirection == 'left' ) ?
-			         'unshift'  'push' ]( new CKEDITOR.dom.element( targetCell ) );
+			         'unshift' : 'push' ]( new CKEDITOR.dom.element( targetCell ) );
 		}
 
 		// Start from here are merging way ignorance (merge up/right, batch merge).
@@ -610,7 +610,7 @@ provides:
 					if ( rowIndex != lastRowIndex
 						&& cellFirstChild
 						&& !( cellFirstChild.isBlockBoundary
-							  && cellFirstChild.isBlockBoundary( { br  1 } ) ) )
+							  && cellFirstChild.isBlockBoundary( { br : 1 } ) ) )
 					{
 						var last = frag.getLast( CKEDITOR.dom.walker.whitespaces( true ) );
 						if ( last && !( last.is && last.is( 'br' ) ) )
@@ -619,7 +619,7 @@ provides:
 
 					cell.moveChildren( frag );
 				}
-				i ? cell.remove()  cell.setHtml( '' );
+				i ? cell.remove() : cell.setHtml( '' );
 			}
 			lastRowIndex = rowIndex;
 		}
@@ -786,11 +786,11 @@ provides:
 		return newCell;
 	}
 	// Context menu on table caption incorrect (#3834)
-	var contextMenuTags = { thead  1, tbody  1, tfoot  1, td  1, tr  1, th  1 };
+	var contextMenuTags = { thead : 1, tbody : 1, tfoot : 1, td : 1, tr : 1, th : 1 };
 
 	CKEDITOR.plugins.tabletools =
 	{
-		init  function( editor )
+		init : function( editor )
 		{
 			var lang = editor.lang.table;
 
@@ -799,7 +799,7 @@ provides:
 
 			editor.addCommand( 'tableDelete',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection(),
 							startElement = selection && selection.getStartElement(),
@@ -822,7 +822,7 @@ provides:
 
 			editor.addCommand( 'rowDelete',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						placeCursorInCell( deleteRows( selection ) );
@@ -831,7 +831,7 @@ provides:
 
 			editor.addCommand( 'rowInsertBefore',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						insertRow( selection, true );
@@ -840,7 +840,7 @@ provides:
 
 			editor.addCommand( 'rowInsertAfter',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						insertRow( selection );
@@ -849,7 +849,7 @@ provides:
 
 			editor.addCommand( 'columnDelete',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						var element = deleteColumns( selection );
@@ -859,7 +859,7 @@ provides:
 
 			editor.addCommand( 'columnInsertBefore',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						insertColumn( selection, true );
@@ -868,7 +868,7 @@ provides:
 
 			editor.addCommand( 'columnInsertAfter',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						insertColumn( selection );
@@ -877,7 +877,7 @@ provides:
 
 			editor.addCommand( 'cellDelete',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						deleteCells( selection );
@@ -886,7 +886,7 @@ provides:
 
 			editor.addCommand( 'cellMerge',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						placeCursorInCell( mergeCells( editor.getSelection() ), true );
 					}
@@ -894,7 +894,7 @@ provides:
 
 			editor.addCommand( 'cellMergeRight',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						placeCursorInCell( mergeCells( editor.getSelection(), 'right' ), true );
 					}
@@ -902,7 +902,7 @@ provides:
 
 			editor.addCommand( 'cellMergeDown',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						placeCursorInCell( mergeCells( editor.getSelection(), 'down' ), true );
 					}
@@ -910,7 +910,7 @@ provides:
 
 			editor.addCommand( 'cellVerticalSplit',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						placeCursorInCell( verticalSplitCell( editor.getSelection() ) );
 					}
@@ -918,7 +918,7 @@ provides:
 
 			editor.addCommand( 'cellHorizontalSplit',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						placeCursorInCell( horizontalSplitCell( editor.getSelection() ) );
 					}
@@ -926,7 +926,7 @@ provides:
 
 			editor.addCommand( 'cellInsertBefore',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						insertCell( selection, true );
@@ -935,7 +935,7 @@ provides:
 
 			editor.addCommand( 'cellInsertAfter',
 				{
-					exec  function( editor )
+					exec : function( editor )
 					{
 						var selection = editor.getSelection();
 						insertCell( selection );
@@ -947,177 +947,177 @@ provides:
 			{
 				editor.addMenuItems(
 					{
-						tablecell 
+						tablecell :
 						{
-							label  lang.cell.menu,
-							group  'tablecell',
-							order  1,
-							getItems  function()
+							label : lang.cell.menu,
+							group : 'tablecell',
+							order : 1,
+							getItems : function()
 							{
 								var selection = editor.getSelection(),
 									cells = getSelectedCells( selection );
 								return {
-									tablecell_insertBefore  CKEDITOR.TRISTATE_OFF,
-									tablecell_insertAfter  CKEDITOR.TRISTATE_OFF,
-									tablecell_delete  CKEDITOR.TRISTATE_OFF,
-									tablecell_merge  mergeCells( selection, null, true ) ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED,
-									tablecell_merge_right  mergeCells( selection, 'right', true ) ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED,
-									tablecell_merge_down  mergeCells( selection, 'down', true ) ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED,
-									tablecell_split_vertical  verticalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED,
-									tablecell_split_horizontal  horizontalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED,
-									tablecell_properties  cells.length > 0 ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED
+									tablecell_insertBefore : CKEDITOR.TRISTATE_OFF,
+									tablecell_insertAfter : CKEDITOR.TRISTATE_OFF,
+									tablecell_delete : CKEDITOR.TRISTATE_OFF,
+									tablecell_merge : mergeCells( selection, null, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+									tablecell_merge_right : mergeCells( selection, 'right', true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+									tablecell_merge_down : mergeCells( selection, 'down', true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+									tablecell_split_vertical : verticalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+									tablecell_split_horizontal : horizontalSplitCell( selection, true ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED,
+									tablecell_properties : cells.length > 0 ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED
 								};
 							}
 						},
 
-						tablecell_insertBefore 
+						tablecell_insertBefore :
 						{
-							label  lang.cell.insertBefore,
-							group  'tablecell',
-							command  'cellInsertBefore',
-							order  5
+							label : lang.cell.insertBefore,
+							group : 'tablecell',
+							command : 'cellInsertBefore',
+							order : 5
 						},
 
-						tablecell_insertAfter 
+						tablecell_insertAfter :
 						{
-							label  lang.cell.insertAfter,
-							group  'tablecell',
-							command  'cellInsertAfter',
-							order  10
+							label : lang.cell.insertAfter,
+							group : 'tablecell',
+							command : 'cellInsertAfter',
+							order : 10
 						},
 
-						tablecell_delete 
+						tablecell_delete :
 						{
-							label  lang.cell.deleteCell,
-							group  'tablecell',
-							command  'cellDelete',
-							order  15
+							label : lang.cell.deleteCell,
+							group : 'tablecell',
+							command : 'cellDelete',
+							order : 15
 						},
 
-						tablecell_merge 
+						tablecell_merge :
 						{
-							label  lang.cell.merge,
-							group  'tablecell',
-							command  'cellMerge',
-							order  16
+							label : lang.cell.merge,
+							group : 'tablecell',
+							command : 'cellMerge',
+							order : 16
 						},
 
-						tablecell_merge_right 
+						tablecell_merge_right :
 						{
-							label  lang.cell.mergeRight,
-							group  'tablecell',
-							command  'cellMergeRight',
-							order  17
+							label : lang.cell.mergeRight,
+							group : 'tablecell',
+							command : 'cellMergeRight',
+							order : 17
 						},
 
-						tablecell_merge_down 
+						tablecell_merge_down :
 						{
-							label  lang.cell.mergeDown,
-							group  'tablecell',
-							command  'cellMergeDown',
-							order  18
+							label : lang.cell.mergeDown,
+							group : 'tablecell',
+							command : 'cellMergeDown',
+							order : 18
 						},
 
-						tablecell_split_horizontal 
+						tablecell_split_horizontal :
 						{
-							label  lang.cell.splitHorizontal,
-							group  'tablecell',
-							command  'cellHorizontalSplit',
-							order  19
+							label : lang.cell.splitHorizontal,
+							group : 'tablecell',
+							command : 'cellHorizontalSplit',
+							order : 19
 						},
 
-						tablecell_split_vertical 
+						tablecell_split_vertical :
 						{
-							label  lang.cell.splitVertical,
-							group  'tablecell',
-							command  'cellVerticalSplit',
-							order  20
+							label : lang.cell.splitVertical,
+							group : 'tablecell',
+							command : 'cellVerticalSplit',
+							order : 20
 						},
 
-						tablecell_properties 
+						tablecell_properties :
 						{
-							label  lang.cell.title,
-							group  'tablecellproperties',
-							command  'cellProperties',
-							order  21
+							label : lang.cell.title,
+							group : 'tablecellproperties',
+							command : 'cellProperties',
+							order : 21
 						},
 
-						tablerow 
+						tablerow :
 						{
-							label  lang.row.menu,
-							group  'tablerow',
-							order  1,
-							getItems  function()
+							label : lang.row.menu,
+							group : 'tablerow',
+							order : 1,
+							getItems : function()
 							{
 								return {
-									tablerow_insertBefore  CKEDITOR.TRISTATE_OFF,
-									tablerow_insertAfter  CKEDITOR.TRISTATE_OFF,
-									tablerow_delete  CKEDITOR.TRISTATE_OFF
+									tablerow_insertBefore : CKEDITOR.TRISTATE_OFF,
+									tablerow_insertAfter : CKEDITOR.TRISTATE_OFF,
+									tablerow_delete : CKEDITOR.TRISTATE_OFF
 								};
 							}
 						},
 
-						tablerow_insertBefore 
+						tablerow_insertBefore :
 						{
-							label  lang.row.insertBefore,
-							group  'tablerow',
-							command  'rowInsertBefore',
-							order  5
+							label : lang.row.insertBefore,
+							group : 'tablerow',
+							command : 'rowInsertBefore',
+							order : 5
 						},
 
-						tablerow_insertAfter 
+						tablerow_insertAfter :
 						{
-							label  lang.row.insertAfter,
-							group  'tablerow',
-							command  'rowInsertAfter',
-							order  10
+							label : lang.row.insertAfter,
+							group : 'tablerow',
+							command : 'rowInsertAfter',
+							order : 10
 						},
 
-						tablerow_delete 
+						tablerow_delete :
 						{
-							label  lang.row.deleteRow,
-							group  'tablerow',
-							command  'rowDelete',
-							order  15
+							label : lang.row.deleteRow,
+							group : 'tablerow',
+							command : 'rowDelete',
+							order : 15
 						},
 
-						tablecolumn 
+						tablecolumn :
 						{
-							label  lang.column.menu,
-							group  'tablecolumn',
-							order  1,
-							getItems  function()
+							label : lang.column.menu,
+							group : 'tablecolumn',
+							order : 1,
+							getItems : function()
 							{
 								return {
-									tablecolumn_insertBefore  CKEDITOR.TRISTATE_OFF,
-									tablecolumn_insertAfter  CKEDITOR.TRISTATE_OFF,
-									tablecolumn_delete  CKEDITOR.TRISTATE_OFF
+									tablecolumn_insertBefore : CKEDITOR.TRISTATE_OFF,
+									tablecolumn_insertAfter : CKEDITOR.TRISTATE_OFF,
+									tablecolumn_delete : CKEDITOR.TRISTATE_OFF
 								};
 							}
 						},
 
-						tablecolumn_insertBefore 
+						tablecolumn_insertBefore :
 						{
-							label  lang.column.insertBefore,
-							group  'tablecolumn',
-							command  'columnInsertBefore',
-							order  5
+							label : lang.column.insertBefore,
+							group : 'tablecolumn',
+							command : 'columnInsertBefore',
+							order : 5
 						},
 
-						tablecolumn_insertAfter 
+						tablecolumn_insertAfter :
 						{
-							label  lang.column.insertAfter,
-							group  'tablecolumn',
-							command  'columnInsertAfter',
-							order  10
+							label : lang.column.insertAfter,
+							group : 'tablecolumn',
+							command : 'columnInsertAfter',
+							order : 10
 						},
 
-						tablecolumn_delete 
+						tablecolumn_delete :
 						{
-							label  lang.column.deleteColumn,
-							group  'tablecolumn',
-							command  'columnDelete',
-							order  15
+							label : lang.column.deleteColumn,
+							group : 'tablecolumn',
+							command : 'columnDelete',
+							order : 15
 						}
 					});
 			}
@@ -1135,9 +1135,9 @@ provides:
 							if ( element.getName() in contextMenuTags )
 							{
 								return {
-									tablecell  CKEDITOR.TRISTATE_OFF,
-									tablerow  CKEDITOR.TRISTATE_OFF,
-									tablecolumn  CKEDITOR.TRISTATE_OFF
+									tablecell : CKEDITOR.TRISTATE_OFF,
+									tablerow : CKEDITOR.TRISTATE_OFF,
+									tablecolumn : CKEDITOR.TRISTATE_OFF
 								};
 							}
 							element = element.getParent();
@@ -1148,7 +1148,7 @@ provides:
 			}
 		},
 
-		getSelectedCells  getSelectedCells
+		getSelectedCells : getSelectedCells
 
 	};
 	CKEDITOR.plugins.add( 'tabletools', CKEDITOR.plugins.tabletools );
@@ -1183,8 +1183,8 @@ CKEDITOR.tools.buildTableMap = function ( table )
 			while ( aMap[r][c] )
 				c++ ;
 
-			var iColSpan = isNaN( oCell.colSpan ) ? 1  oCell.colSpan ;
-			var iRowSpan = isNaN( oCell.rowSpan ) ? 1  oCell.rowSpan ;
+			var iColSpan = isNaN( oCell.colSpan ) ? 1 : oCell.colSpan ;
+			var iRowSpan = isNaN( oCell.rowSpan ) ? 1 : oCell.rowSpan ;
 
 			for ( var rs = 0 ; rs < iRowSpan ; rs++ )
 			{

@@ -32,7 +32,7 @@ provides:
 		// It is not good for IE Quirks, yet using offsetHeight would also not work as expected (#6408).
 		// We do the same for FF because of the html height workaround (#6341).
 		if ( CKEDITOR.env.ie || CKEDITOR.env.gecko )
-			newHeight = doc.getBody().$.scrollHeight + ( CKEDITOR.env.ie && CKEDITOR.env.quirks ? 0  24 );
+			newHeight = doc.getBody().$.scrollHeight + ( CKEDITOR.env.ie && CKEDITOR.env.quirks ? 0 : 24 );
 		else
 			newHeight = doc.getDocumentElement().$.offsetHeight;
 
@@ -46,15 +46,15 @@ provides:
 
 		if ( newHeight != currentHeight )
 		{
-			newHeight = editor.fire( 'autoGrow', { currentHeight  currentHeight, newHeight  newHeight } ).newHeight;
+			newHeight = editor.fire( 'autoGrow', { currentHeight : currentHeight, newHeight : newHeight } ).newHeight;
 			editor.resize( editor.container.getStyle( 'width' ), newHeight, true );
 		}
 	};
 	CKEDITOR.plugins.add( 'autogrow',
 	{
-		init  function( editor )
+		init : function( editor )
 		{
-			for ( var eventName in { contentDom1, key1, selectionChange1, insertElement1 } )
+			for ( var eventName in { contentDom:1, key:1, selectionChange:1, insertElement:1 } )
 			{
 				editor.on( eventName, function( evt )
 				{

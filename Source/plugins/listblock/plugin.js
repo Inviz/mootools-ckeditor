@@ -18,9 +18,9 @@ provides:
 
 CKEDITOR.plugins.add( 'listblock',
 {
-	requires  [ 'panel' ],
+	requires : [ 'panel' ],
 
-	onLoad  function()
+	onLoad : function()
 	{
 		CKEDITOR.ui.panel.prototype.addListBlock = function( name, definition )
 		{
@@ -29,9 +29,9 @@ CKEDITOR.plugins.add( 'listblock',
 
 		CKEDITOR.ui.listBlock = CKEDITOR.tools.createClass(
 			{
-				base  CKEDITOR.ui.panel.block,
+				base : CKEDITOR.ui.panel.block,
 
-				$  function( blockHolder, blockDefinition )
+				$ : function( blockHolder, blockDefinition )
 				{
 					blockDefinition = blockDefinition || {};
 
@@ -56,9 +56,9 @@ CKEDITOR.plugins.add( 'listblock',
 					this._.groups = {};
 				},
 
-				_ 
+				_ :
 				{
-					close  function()
+					close : function()
 					{
 						if ( this._.started )
 						{
@@ -67,7 +67,7 @@ CKEDITOR.plugins.add( 'listblock',
 						}
 					},
 
-					getClick  function()
+					getClick : function()
 					{
 						if ( !this._.click )
 						{
@@ -89,9 +89,9 @@ CKEDITOR.plugins.add( 'listblock',
 					}
 				},
 
-				proto 
+				proto :
 				{
-					add  function( value, html, title )
+					add : function( value, html, title )
 					{
 						var pendingHtml = this._.pendingHtml,
 							id = CKEDITOR.tools.getNextId();
@@ -109,7 +109,7 @@ CKEDITOR.plugins.add( 'listblock',
 							'<li id=', id, ' class=cke_panel_listItem role=presentation>' +
 								'<a id="', id, '_option" _cke_focus=1 hidefocus=true' +
 									' title="', title || value, '"' +
-									' href="javascriptvoid(\'', value, '\')"' +
+									' href="javascript:void(\'', value, '\')"' +
 									' onclick="CKEDITOR.tools.callFunction(', this._.getClick(), ',\'', value, '\'); return false;"',
 									' role="option"' +
 									' aria-posinset="' + ++this._.size + '">',
@@ -118,7 +118,7 @@ CKEDITOR.plugins.add( 'listblock',
 							'</li>' );
 					},
 
-					startGroup  function( title )
+					startGroup : function( title )
 					{
 						this._.close();
 
@@ -129,7 +129,7 @@ CKEDITOR.plugins.add( 'listblock',
 						this._.pendingHtml.push( '<h1 role="presentation" id=', id, ' class=cke_panel_grouptitle>', title, '</h1>' );
 					},
 
-					commit  function()
+					commit : function()
 					{
 						this._.close();
 						this.element.appendHtml( this._.pendingHtml.join( '' ) );
@@ -143,7 +143,7 @@ CKEDITOR.plugins.add( 'listblock',
 						this._.pendingHtml = [];
 					},
 
-					toggle  function( value )
+					toggle : function( value )
 					{
 						var isMarked = this.isMarked( value );
 
@@ -155,7 +155,7 @@ CKEDITOR.plugins.add( 'listblock',
 						return !isMarked;
 					},
 
-					hideGroup  function( groupTitle )
+					hideGroup : function( groupTitle )
 					{
 						var group = this.element.getDocument().getById( this._.groups[ groupTitle ] ),
 							list = group && group.getNext();
@@ -169,12 +169,12 @@ CKEDITOR.plugins.add( 'listblock',
 						}
 					},
 
-					hideItem  function( value )
+					hideItem : function( value )
 					{
 						this.element.getDocument().getById( this._.items[ value ] ).setStyle( 'display', 'none' );
 					},
 
-					showAll  function()
+					showAll : function()
 					{
 						var items = this._.items,
 							groups = this._.groups,
@@ -197,7 +197,7 @@ CKEDITOR.plugins.add( 'listblock',
 						}
 					},
 
-					mark  function( value )
+					mark : function( value )
 					{
 						if ( !this.multiSelect )
 							this.unmarkAll();
@@ -212,13 +212,13 @@ CKEDITOR.plugins.add( 'listblock',
 						this.onMark && this.onMark( item );
 					},
 
-					unmark  function( value )
+					unmark : function( value )
 					{
 						this.element.getDocument().getById( this._.items[ value ] ).removeClass( 'cke_selected' );
 						this.onUnmark && this.onUnmark( this._.items[ value ] );
 					},
 
-					unmarkAll  function()
+					unmarkAll : function()
 					{
 						var items = this._.items,
 							doc = this.element.getDocument();
@@ -231,12 +231,12 @@ CKEDITOR.plugins.add( 'listblock',
 						this.onUnmark && this.onUnmark();
 					},
 
-					isMarked  function( value )
+					isMarked : function( value )
 					{
 						return this.element.getDocument().getById( this._.items[ value ] ).hasClass( 'cke_selected' );
 					},
 
-					focus  function( value )
+					focus : function( value )
 					{
 						this._.focusIndex = -1;
 

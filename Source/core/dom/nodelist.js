@@ -29,14 +29,14 @@ CKEDITOR.dom.nodeList = function( nativeList )
 
 CKEDITOR.dom.nodeList.prototype =
 {
-	count  function()
+	count : function()
 	{
 		return this.$.length;
 	},
 
-	getItem  function( index )
+	getItem : function( index )
 	{
 		var $node = this.$[ index ];
-		return $node ? new CKEDITOR.dom.node( $node )  null;
+		return $node ? new CKEDITOR.dom.node( $node ) : null;
 	}
 };

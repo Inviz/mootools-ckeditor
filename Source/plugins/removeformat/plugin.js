@@ -18,31 +18,31 @@ provides:
 
 CKEDITOR.plugins.add( 'removeformat',
 {
-	requires  [ 'selection' ],
+	requires : [ 'selection' ],
 
-	init  function( editor )
+	init : function( editor )
 	{
 		editor.addCommand( 'removeFormat', CKEDITOR.plugins.removeformat.commands.removeformat );
 		editor.ui.addButton( 'RemoveFormat',
 			{
-				label  editor.lang.removeFormat,
-				command  'removeFormat'
+				label : editor.lang.removeFormat,
+				command : 'removeFormat'
 			});
 
-		editor._.removeFormat = { filters [] };
+		editor._.removeFormat = { filters: [] };
 	}
 });
 
 CKEDITOR.plugins.removeformat =
 {
-	commands 
+	commands :
 	{
-		removeformat 
+		removeformat :
 		{
-			exec  function( editor )
+			exec : function( editor )
 			{
 				var tagsRegex = editor._.removeFormatRegex ||
-					( editor._.removeFormatRegex = new RegExp( '^(?' + editor.config.removeFormatTags.replace( /,/g,'|' ) + ')$', 'i' ) );
+					( editor._.removeFormatRegex = new RegExp( '^(?:' + editor.config.removeFormatTags.replace( /,/g,'|' ) + ')$', 'i' ) );
 
 				var removeAttributes = editor._.removeAttributes ||
 					( editor._.removeAttributes = editor.config.removeFormatAttributes.split( ',' ) );
@@ -68,10 +68,10 @@ CKEDITOR.plugins.removeformat =
 					// the code in a way that we can properly remove partially selected nodes.
 					// For example, removing a <b> style from
 					//		<b>This is [some text</b> to show <b>the] problem</b>
-					// ... where [ and ] represent the selection, must result
+					// ... where [ and ] represent the selection, must result:
 					//		<b>This is </b>[some text to show the]<b> problem</b>
 					// The strategy is simple, we just break the partial nodes before the
-					// removal logic, having something that could be represented this way
+					// removal logic, having something that could be represented this way:
 					//		<b>This is </b>[<b>some text</b> to show <b>the</b>]<b> problem</b>
 
 					var breakParent = function( node )
@@ -141,7 +141,7 @@ CKEDITOR.plugins.removeformat =
 	 * @param {CKEDITOR.editor} editor
 	 * @param {CKEDITOR.dom.element} element
 	 */
-	filter  function ( editor, element )
+	filter : function ( editor, element )
 	{
 		var filters = editor._.removeFormat.filters;
 		for ( var i = 0; i < filters.length; i++ )
@@ -157,7 +157,7 @@ CKEDITOR.plugins.removeformat =
  * Add to a collection of functions to decide whether a specific
  * element should be considered as formatting element and thus
  * could be removed during <b>removeFormat</b> command,
- * Note Only available with the existence of 'removeformat' plugin.
+ * Note: Only available with the existence of 'removeformat' plugin.
  * @since 3.3
  * @param {Function} func The function to be called, which will be passed a {CKEDITOR.dom.element} element to test.
  * @example

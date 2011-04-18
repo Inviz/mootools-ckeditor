@@ -20,9 +20,9 @@ provides:
 {
 	CKEDITOR.plugins.add( 'enterkey',
 	{
-		requires  [ 'keystrokes', 'indent' ],
+		requires : [ 'keystrokes', 'indent' ],
 
-		init  function( editor )
+		init : function( editor )
 		{
 			var specialKeys = editor.specialKeys;
 			specialKeys[ 13 ] = enter;
@@ -32,7 +32,7 @@ provides:
 
 	CKEDITOR.plugins.enterkey =
 	{
-		enterBlock  function( editor, mode, range, forceMode )
+		enterBlock : function( editor, mode, range, forceMode )
 		{
 			// Get the range for the current selection.
 			range = range || getRange( editor );
@@ -58,7 +58,7 @@ provides:
 			}
 
 			// Determine the block element to be used.
-			var blockTag = ( mode == CKEDITOR.ENTER_DIV ? 'div'  'p' );
+			var blockTag = ( mode == CKEDITOR.ENTER_DIV ? 'div' : 'p' );
 
 			// Split the range.
 			var splitInfo = range.splitBlock( blockTag );
@@ -104,7 +104,7 @@ provides:
 				if ( nextBlock.is( 'li' )
 					 && ( node = nextBlock.getFirst( CKEDITOR.dom.walker.invisible( true ) ) )
 					 && node.is && node.is( 'ul', 'ol' ) )
-					( CKEDITOR.env.ie ? doc.createText( '\xa0' )  doc.createElement( 'br' ) ).insertBefore( node );
+					( CKEDITOR.env.ie ? doc.createText( '\xa0' ) : doc.createElement( 'br' ) ).insertBefore( node );
 
 				// Move the selection to the end block.
 				if ( nextBlock )
@@ -183,12 +183,12 @@ provides:
 				if ( CKEDITOR.env.ie && isStartOfBlock && ( !isEndOfBlock || !previousBlock.getChildCount() ) )
 				{
 					// Move the selection to the new block.
-					range.moveToElementEditStart( isEndOfBlock ? previousBlock  newBlock );
+					range.moveToElementEditStart( isEndOfBlock ? previousBlock : newBlock );
 					range.select();
 				}
 
 				// Move the selection to the new block.
-				range.moveToElementEditStart( isStartOfBlock && !isEndOfBlock ? nextBlock  newBlock );
+				range.moveToElementEditStart( isStartOfBlock && !isEndOfBlock ? nextBlock : newBlock );
 		}
 
 			if ( !CKEDITOR.env.ie )
@@ -217,7 +217,7 @@ provides:
 			range.select();
 		},
 
-		enterBr  function( editor, mode, range, forceMode )
+		enterBr : function( editor, mode, range, forceMode )
 		{
 			// Get the range for the current selection.
 			range = range || getRange( editor );
@@ -230,7 +230,7 @@ provides:
 			var doc = range.document;
 
 			// Determine the block element to be used.
-			var blockTag = ( mode == CKEDITOR.ENTER_DIV ? 'div'  'p' );
+			var blockTag = ( mode == CKEDITOR.ENTER_DIV ? 'div' : 'p' );
 
 			var isEndOfBlock = range.checkEndOfBlock();
 
@@ -270,7 +270,7 @@ provides:
 						doc.createText( '' ).insertAfter( startBlock );
 
 					// IE has different behaviors regarding position.
-					range.setStartAt( startBlock.getNext(), CKEDITOR.env.ie ? CKEDITOR.POSITION_BEFORE_START  CKEDITOR.POSITION_AFTER_START );
+					range.setStartAt( startBlock.getNext(), CKEDITOR.env.ie ? CKEDITOR.POSITION_BEFORE_START : CKEDITOR.POSITION_AFTER_START );
 				}
 			}
 			else
@@ -281,7 +281,7 @@ provides:
 
 				// Gecko prefers <br> as line-break inside <pre> (#4711).
 				if ( isPre && !CKEDITOR.env.gecko )
-					lineBreak = doc.createText( CKEDITOR.env.ie ? '\r'  '\n' );
+					lineBreak = doc.createText( CKEDITOR.env.ie ? '\r' : '\n' );
 				else
 					lineBreak = doc.createElement( 'br' );
 
@@ -346,7 +346,7 @@ provides:
 		if ( editor.mode != 'wysiwyg' )
 			return false;
 
-		// On SHIFT+ENTER
+		// On SHIFT+ENTER:
 		// 1. We want to enforce the mode to be respected, instead
 		// of cloning the current block. (#77)
 		// 2. Always perform a block break when inside <pre> (#5402).

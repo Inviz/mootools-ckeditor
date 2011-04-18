@@ -19,7 +19,7 @@ provides:
 // Register a plugin named "sample".
 CKEDITOR.plugins.add( 'keystrokes',
 {
-	beforeInit  function( editor )
+	beforeInit : function( editor )
 	{
 		/**
 		 * Controls keystrokes typing in this editor instance.
@@ -32,7 +32,7 @@ CKEDITOR.plugins.add( 'keystrokes',
 		editor.specialKeys = {};
 	},
 
-	init  function( editor )
+	init : function( editor )
 	{
 		var keystrokesConfig	= editor.config.keystrokes,
 			blockedConfig		= editor.config.blockedKeystrokes;
@@ -78,7 +78,7 @@ CKEDITOR.keystrokeHandler = function( editor )
 
 	this._ =
 	{
-		editor  editor
+		editor : editor
 	};
 
 	return this;
@@ -97,13 +97,13 @@ CKEDITOR.keystrokeHandler = function( editor )
 		var command = this.keystrokes[ keyCombination ];
 		var editor = this._.editor;
 
-		cancel = ( editor.fire( 'key', { keyCode  keyCombination } ) === true );
+		cancel = ( editor.fire( 'key', { keyCode : keyCombination } ) === true );
 
 		if ( !cancel )
 		{
 			if ( command )
 			{
-				var data = { from  'keystrokeHandler' };
+				var data = { from : 'keystrokeHandler' };
 				cancel = ( editor.execCommand( command, data ) !== false );
 			}
 
@@ -141,7 +141,7 @@ CKEDITOR.keystrokeHandler = function( editor )
 		 *		to.
 		 * @example
 		 */
-		attach  function( domObject )
+		attach : function( domObject )
 		{
 			// For most browsers, it is enough to listen to the keydown event
 			// only.
@@ -223,7 +223,7 @@ CKEDITOR.config.keystrokes =
 	[ CKEDITOR.CTRL + 73 /*I*/, 'italic' ],
 	[ CKEDITOR.CTRL + 85 /*U*/, 'underline' ],
 
-	[ CKEDITOR.ALT + ( CKEDITOR.env.ie || CKEDITOR.env.webkit ? 189  109 ) /*-*/, 'toolbarCollapse' ],
+	[ CKEDITOR.ALT + ( CKEDITOR.env.ie || CKEDITOR.env.webkit ? 189 : 109 ) /*-*/, 'toolbarCollapse' ],
 	[ CKEDITOR.ALT + 48 /*0*/, 'a11yHelp' ]
 ];
 

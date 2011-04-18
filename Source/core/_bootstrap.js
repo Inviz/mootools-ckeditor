@@ -40,8 +40,8 @@ provides:
 
 	// Check whether high contrast is active by creating a colored border.
 	var hcDetect = CKEDITOR.dom.element.createFromHtml(
-		'<div style="width0px;height0px;positionabsolute;left-10000px;' +
-			'border 1px solid;border-color red blue;"></div>', CKEDITOR.document );
+		'<div style="width:0px;height:0px;position:absolute;left:-10000px;' +
+			'border: 1px solid;border-color: red blue;"></div>', CKEDITOR.document );
 
 	hcDetect.appendTo( CKEDITOR.document.getHead() );
 

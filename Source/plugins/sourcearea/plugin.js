@@ -21,9 +21,9 @@ provides:
 
 CKEDITOR.plugins.add( 'sourcearea',
 {
-	requires  [ 'editingblock' ],
+	requires : [ 'editingblock' ],
 
-	init  function( editor )
+	init : function( editor )
 	{
 		var sourcearea = CKEDITOR.plugins.sourcearea,
 			win = CKEDITOR.document.getWindow();
@@ -35,7 +35,7 @@ CKEDITOR.plugins.add( 'sourcearea',
 
 				editor.addMode( 'source',
 					{
-						load  function( holderElement, data )
+						load : function( holderElement, data )
 						{
 							if ( CKEDITOR.env.ie && CKEDITOR.env.version < 8 )
 								holderElement.setStyle( 'position', 'relative' );
@@ -44,10 +44,10 @@ CKEDITOR.plugins.add( 'sourcearea',
 							editor.textarea = textarea = new CKEDITOR.dom.element( 'textarea' );
 							textarea.setAttributes(
 								{
-									dir  'ltr',
-									tabIndex  CKEDITOR.env.webkit ? -1  editor.tabIndex,
-									'role'  'textbox',
-									'aria-label'  editor.lang.editorTitle.replace( '%1', editor.name )
+									dir : 'ltr',
+									tabIndex : CKEDITOR.env.webkit ? -1 : editor.tabIndex,
+									'role' : 'textbox',
+									'aria-label' : editor.lang.editorTitle.replace( '%1', editor.name )
 								});
 							textarea.addClass( 'cke_source' );
 							textarea.addClass( 'cke_enable_context_menu' );
@@ -55,14 +55,14 @@ CKEDITOR.plugins.add( 'sourcearea',
 							var styles =
 							{
 								// IE7 has overflow the <textarea> from wrapping table cell.
-								width	 CKEDITOR.env.ie7Compat ?  '99%'  '100%',
-								height	 '100%',
-								resize	 'none',
-								outline	 'none',
-								'text-align'  'left'
+								width	: CKEDITOR.env.ie7Compat ?  '99%' : '100%',
+								height	: '100%',
+								resize	: 'none',
+								outline	: 'none',
+								'text-align' : 'left'
 							};
 
-							// Having to make <textarea> fixed sized to conque the following bugs
+							// Having to make <textarea> fixed sized to conque the following bugs:
 							// 1. The textarea height/width='100%' doesn't constraint to the 'td' in IE6/7.
 							// 2. Unexpected vertical-scrolling behavior happens whenever focus is moving out of editor
 							// if text content within it has overflowed. (#4762)
@@ -117,26 +117,26 @@ CKEDITOR.plugins.add( 'sourcearea',
 								editor.mode = 'source';
 								editor.fire( 'mode' );
 							},
-							( CKEDITOR.env.gecko || CKEDITOR.env.webkit ) ? 100  0 );
+							( CKEDITOR.env.gecko || CKEDITOR.env.webkit ) ? 100 : 0 );
 						},
 
-						loadData  function( data )
+						loadData : function( data )
 						{
 							textarea.setValue( data );
 							editor.fire( 'dataReady' );
 						},
 
-						getData  function()
+						getData : function()
 						{
 							return textarea.getValue();
 						},
 
-						getSnapshotData  function()
+						getSnapshotData : function()
 						{
 							return textarea.getValue();
 						},
 
-						unload  function( holderElement )
+						unload : function( holderElement )
 						{
 							textarea.clearCustomData();
 							editor.textarea = textarea = null;
@@ -151,7 +151,7 @@ CKEDITOR.plugins.add( 'sourcearea',
 								holderElement.removeStyle( 'position' );
 						},
 
-						focus  function()
+						focus : function()
 						{
 							textarea.focus();
 						}
@@ -164,8 +164,8 @@ CKEDITOR.plugins.add( 'sourcearea',
 		{
 			editor.ui.addButton( 'Source',
 				{
-					label  editor.lang.source,
-					command  'source'
+					label : editor.lang.source,
+					command : 'source'
 				});
 		}
 
@@ -173,7 +173,7 @@ CKEDITOR.plugins.add( 'sourcearea',
 			{
 				editor.getCommand( 'source' ).setState(
 					editor.mode == 'source' ?
-						CKEDITOR.TRISTATE_ON 
+						CKEDITOR.TRISTATE_ON :
 						CKEDITOR.TRISTATE_OFF );
 			});
 	}
@@ -186,22 +186,22 @@ CKEDITOR.plugins.add( 'sourcearea',
  */
 CKEDITOR.plugins.sourcearea =
 {
-	commands 
+	commands :
 	{
-		source 
+		source :
 		{
-			modes  { wysiwyg1, source1 },
-			editorFocus  false,
+			modes : { wysiwyg:1, source:1 },
+			editorFocus : false,
 
-			exec  function( editor )
+			exec : function( editor )
 			{
 				if ( editor.mode == 'wysiwyg' )
 					editor.fire( 'saveSnapshot' );
 				editor.getCommand( 'source' ).setState( CKEDITOR.TRISTATE_DISABLED );
-				editor.setMode( editor.mode == 'source' ? 'wysiwyg'  'source' );
+				editor.setMode( editor.mode == 'source' ? 'wysiwyg' : 'source' );
 			},
 
-			canUndo  false
+			canUndo : false
 		}
 	}
 };

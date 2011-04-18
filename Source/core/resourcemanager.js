@@ -82,7 +82,7 @@ CKEDITOR.resourceManager = function( basePath, fileName )
 	this._ =
 	{
 		// List of callbacks waiting for plugins to be loaded.
-		waitingList  {}
+		waitingList : {}
 	};
 };
 
@@ -96,7 +96,7 @@ CKEDITOR.resourceManager.prototype =
 	 * CKEDITOR.plugins.add( 'sample', { ... plugin definition ... } );
 	 * @see CKEDITOR.pluginDefinition
 	 */
-	add  function( name, definition )
+	add : function( name, definition )
 	{
 		if ( this.registered[ name ] )
 			throw '[CKEDITOR.resourceManager.add] The resource name "' + name + '" is already registered.';
@@ -112,7 +112,7 @@ CKEDITOR.resourceManager.prototype =
 	 * @example
 	 * var definition = <b>CKEDITOR.plugins.get( 'sample' )</b>;
 	 */
-	get  function( name )
+	get : function( name )
 	{
 		return this.registered[ name ] || null;
 	},
@@ -124,7 +124,7 @@ CKEDITOR.resourceManager.prototype =
 	 * @example
 	 * alert( <b>CKEDITOR.plugins.getPath( 'sample' )</b> );  // "&lt;editor path&gt;/plugins/sample/"
 	 */
-	getPath  function( name )
+	getPath : function( name )
 	{
 		var external = this.externals[ name ];
 		return CKEDITOR.getUrl( ( external && external.dir ) || this.basePath + name + '/' );
@@ -137,12 +137,12 @@ CKEDITOR.resourceManager.prototype =
 	 * @example
 	 * alert( <b>CKEDITOR.plugins.getFilePath( 'sample' )</b> );  // "&lt;editor path&gt;/plugins/sample/plugin.js"
 	 */
-	getFilePath  function( name )
+	getFilePath : function( name )
 	{
 		var external = this.externals[ name ];
 		return CKEDITOR.getUrl(
 				this.getPath( name ) +
-				( ( external && ( typeof external.file == 'string' ) ) ? external.file  this.fileName + '.js' ) );
+				( ( external && ( typeof external.file == 'string' ) ) ? external.file : this.fileName + '.js' ) );
 	},
 
 	/**
@@ -163,7 +163,7 @@ CKEDITOR.resourceManager.prototype =
 	 * // Loads a plugin from '/myplugin/samples/my_plugin.js'.
 	 * CKEDITOR.plugins.addExternal( 'sample', '/myplugins/sample/my_plugin.js', '' );
 	 */
-	addExternal  function( names, path, fileName )
+	addExternal : function( names, path, fileName )
 	{
 		names = names.split( ',' );
 		for ( var i = 0 ; i < names.length ; i++ )
@@ -172,8 +172,8 @@ CKEDITOR.resourceManager.prototype =
 
 			this.externals[ name ] =
 			{
-				dir  path,
-				file  fileName
+				dir : path,
+				file : fileName
 			};
 		}
 	},
@@ -193,11 +193,11 @@ CKEDITOR.resourceManager.prototype =
 	 *         alert( plugins['myplugin'] );  // "object"
 	 *     });
 	 */
-	load  function( names, callback, scope )
+	load : function( names, callback, scope )
 	{
 		// Ensure that we have an array of names.
 		if ( !CKEDITOR.tools.isArray( names ) )
-			names = names ? [ names ]  [];
+			names = names ? [ names ] : [];
 
 		var loaded = this.loaded,
 			registered = this.registered,

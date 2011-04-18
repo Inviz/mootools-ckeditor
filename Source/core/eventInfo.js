@@ -28,7 +28,7 @@ provides:
  * @name CKEDITOR.eventInfo
  * @example
  * // Do not do this.
- * var myEvent = new CKEDITOR.eventInfo();  // Error CKEDITOR.eventInfo is undefined
+ * var myEvent = new CKEDITOR.eventInfo();  // Error: CKEDITOR.eventInfo is undefined
  */
 
 /**

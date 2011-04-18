@@ -27,10 +27,10 @@ provides:
 			height = realElement.attributes.height;
 
 		if ( typeof width != 'undefined' )
-			fakeStyle += 'width' + CKEDITOR.tools.cssLength( width ) + ';';
+			fakeStyle += 'width:' + CKEDITOR.tools.cssLength( width ) + ';';
 
 		if ( typeof height != 'undefined' )
-			fakeStyle += 'height' + CKEDITOR.tools.cssLength( height ) + ';';
+			fakeStyle += 'height:' + CKEDITOR.tools.cssLength( height ) + ';';
 
 		fakeElement.attributes.style = fakeStyle;
 
@@ -39,8 +39,8 @@ provides:
 
 	CKEDITOR.plugins.add( 'iframe',
 	{
-		requires  [ 'dialog', 'fakeobjects' ],
-		init  function( editor )
+		requires : [ 'dialog', 'fakeobjects' ],
+		init : function( editor )
 		{
 			var pluginName = 'iframe',
 				lang = editor.lang.iframe;
@@ -51,19 +51,19 @@ provides:
 			editor.addCss(
 				'img.cke_iframe' +
 				'{' +
-					'background-image url(' + CKEDITOR.getUrl( this.path + 'images/placeholder.png' ) + ');' +
-					'background-position center center;' +
-					'background-repeat no-repeat;' +
-					'border 1px solid #a9a9a9;' +
-					'width 80px;' +
-					'height 80px;' +
+					'background-image: url(' + CKEDITOR.getUrl( this.path + 'images/placeholder.png' ) + ');' +
+					'background-position: center center;' +
+					'background-repeat: no-repeat;' +
+					'border: 1px solid #a9a9a9;' +
+					'width: 80px;' +
+					'height: 80px;' +
 				'}'
 			);
 
 			editor.ui.addButton( 'Iframe',
 				{
-					label  lang.toolbar,
-					command  pluginName
+					label : lang.toolbar,
+					command : pluginName
 				});
 
 			editor.on( 'doubleclick', function( evt )
@@ -77,11 +77,11 @@ provides:
 			{
 				editor.addMenuItems(
 				{
-					iframe 
+					iframe :
 					{
-						label  lang.title,
-						command  'iframe',
-						group  'image'
+						label : lang.title,
+						command : 'iframe',
+						group : 'image'
 					}
 				});
 			}
@@ -92,11 +92,11 @@ provides:
 				editor.contextMenu.addListener( function( element, selection )
 					{
 						if ( element && element.is( 'img' ) && element.data( 'cke-real-element-type' ) == 'iframe' )
-							return { iframe  CKEDITOR.TRISTATE_OFF };
+							return { iframe : CKEDITOR.TRISTATE_OFF };
 					});
 			}
 		},
-		afterInit  function( editor )
+		afterInit : function( editor )
 		{
 			var dataProcessor = editor.dataProcessor,
 				dataFilter = dataProcessor && dataProcessor.dataFilter;
@@ -105,9 +105,9 @@ provides:
 			{
 				dataFilter.addRules(
 				{
-					elements 
+					elements :
 					{
-						iframe  function( element )
+						iframe : function( element )
 						{
 							return createFakeElement( editor, element );
 						}

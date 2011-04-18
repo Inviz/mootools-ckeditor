@@ -33,7 +33,7 @@ provides:
 			guard,
 			userGuard = this.guard,
 			type = this.type,
-			getSourceNodeFn = ( rtl ? 'getPreviousSourceNode'  'getNextSourceNode' );
+			getSourceNodeFn = ( rtl ? 'getPreviousSourceNode' : 'getNextSourceNode' );
 
 		// This is the first call. Initialize it.
 		if ( !this._.start )
@@ -83,7 +83,7 @@ provides:
 		}
 
 		// Define which guard function to use.
-		var stopGuard = rtl ? this._.guardRTL  this._.guardLTR;
+		var stopGuard = rtl ? this._.guardRTL : this._.guardLTR;
 
 		// Make the user defined guard function participate in the process,
 		// otherwise simply use the boundary guard.
@@ -118,7 +118,7 @@ provides:
 				}
 				else
 					node = ( guard ( node, true ) === false ) ?
-						null  node.getPreviousSourceNode( true, type, guard );
+						null : node.getPreviousSourceNode( true, type, guard );
 			}
 			else
 			{
@@ -132,7 +132,7 @@ provides:
 				}
 				else
 					node = ( guard ( range.startContainer, true ) === false ) ?
-						null  range.startContainer.getNextSourceNode( true, type, guard ) ;
+						null : range.startContainer.getNextSourceNode( true, type, guard ) ;
 			}
 		}
 
@@ -175,13 +175,13 @@ provides:
 		 *
 		 * The walker may return nodes that are not totaly included into the
 		 * range boundaires. Let's take the following range representation,
-		 * where the square brackets indicate the boundaries
+		 * where the square brackets indicate the boundaries:
 		 *
 		 * [&lt;p&gt;Some &lt;b&gt;sample] text&lt;/b&gt;
 		 *
 		 * While walking forward into the above range, the following nodes are
-		 * returned &lt;p&gt;, "Some ", &lt;b&gt; and "sample". Going
-		 * backwards instead we have "sample" and "Some ". So note that the
+		 * returned: &lt;p&gt;, "Some ", &lt;b&gt; and "sample". Going
+		 * backwards instead we have: "sample" and "Some ". So note that the
 		 * walker always returns nodes when "entering" them, but not when
 		 * "leaving" them. The guard function is instead called both when
 		 * entering and leaving nodes.
@@ -189,7 +189,7 @@ provides:
 		 * @constructor
 		 * @param {CKEDITOR.dom.range} range The range within which walk.
 		 */
-		$  function( range )
+		$ : function( range )
 		{
 			this.range = range;
 
@@ -220,7 +220,7 @@ provides:
 			this._ = {};
 		},
 
-//		statics 
+//		statics :
 //		{
 //			/* Creates a CKEDITOR.dom.walker instance to walk inside DOM boundaries set by nodes.
 //			 * @param {CKEDITOR.dom.node} startNode The node from wich the walk
@@ -232,16 +232,16 @@ provides:
 //			 * @returns {CKEDITOR.dom.walker} A DOM walker for the nodes between the
 //			 *		provided nodes.
 //			 */
-//			createOnNodes  function( startNode, endNode, startInclusive, endInclusive )
+//			createOnNodes : function( startNode, endNode, startInclusive, endInclusive )
 //			{
 //				var range = new CKEDITOR.dom.range();
 //				if ( startNode )
-//					range.setStartAt( startNode, startInclusive ? CKEDITOR.POSITION_BEFORE_START  CKEDITOR.POSITION_AFTER_END ) ;
+//					range.setStartAt( startNode, startInclusive ? CKEDITOR.POSITION_BEFORE_START : CKEDITOR.POSITION_AFTER_END ) ;
 //				else
 //					range.setStartAt( startNode.getDocument().getBody(), CKEDITOR.POSITION_AFTER_START ) ;
 //
 //				if ( endNode )
-//					range.setEndAt( endNode, endInclusive ? CKEDITOR.POSITION_AFTER_END  CKEDITOR.POSITION_BEFORE_START ) ;
+//					range.setEndAt( endNode, endInclusive ? CKEDITOR.POSITION_AFTER_END : CKEDITOR.POSITION_BEFORE_START ) ;
 //				else
 //					range.setEndAt( startNode.getDocument().getBody(), CKEDITOR.POSITION_BEFORE_END ) ;
 //
@@ -249,13 +249,13 @@ provides:
 //			}
 //		},
 //
-		proto 
+		proto :
 		{
 			/**
 			 * Stop walking. No more nodes are retrieved if this function gets
 			 * called.
 			 */
-			end  function()
+			end : function()
 			{
 				this._.end = 1;
 			},
@@ -265,7 +265,7 @@ provides:
 			 * @returns {CKEDITOR.dom.node} The next node or null if no more
 			 *		nodes are available.
 			 */
-			next  function()
+			next : function()
 			{
 				return iterate.call( this );
 			},
@@ -275,7 +275,7 @@ provides:
 			 * @returns {CKEDITOR.dom.node} The previous node or null if no more
 			 *		nodes are available.
 			 */
-			previous  function()
+			previous : function()
 			{
 				return iterate.call( this, 1 );
 			},
@@ -285,7 +285,7 @@ provides:
 			 * @returns {Boolean} "false" if the evaluator function returned
 			 *		"false" for any of the matched nodes. Otherwise "true".
 			 */
-			checkForward  function()
+			checkForward : function()
 			{
 				return iterate.call( this, 0, 1 ) !== false;
 			},
@@ -295,7 +295,7 @@ provides:
 			 * @returns {Boolean} "false" if the evaluator function returned
 			 *		"false" for any of the matched nodes. Otherwise "true".
 			 */
-			checkBackward  function()
+			checkBackward : function()
 			{
 				return iterate.call( this, 1, 1 ) !== false;
 			},
@@ -306,7 +306,7 @@ provides:
 			 * @returns {CKEDITOR.dom.node} The last node at the right or null
 			 *		if no valid nodes are available.
 			 */
-			lastForward  function()
+			lastForward : function()
 			{
 				return iterateToLast.call( this );
 			},
@@ -317,12 +317,12 @@ provides:
 			 * @returns {CKEDITOR.dom.node} The last node at the left or null
 			 *		if no valid nodes are available.
 			 */
-			lastBackward  function()
+			lastBackward : function()
 			{
 				return iterateToLast.call( this, 1 );
 			},
 
-			reset  function()
+			reset : function()
 			{
 				delete this.current;
 				this._ = {};
@@ -339,17 +339,17 @@ provides:
 	 */
 	var blockBoundaryDisplayMatch =
 	{
-		block  1,
-		'list-item'  1,
-		table  1,
-		'table-row-group'  1,
-		'table-header-group'  1,
-		'table-footer-group'  1,
-		'table-row'  1,
-		'table-column-group'  1,
-		'table-column'  1,
-		'table-cell'  1,
-		'table-caption'  1
+		block : 1,
+		'list-item' : 1,
+		table : 1,
+		'table-row-group' : 1,
+		'table-header-group' : 1,
+		'table-footer-group' : 1,
+		'table-row' : 1,
+		'table-column-group' : 1,
+		'table-column' : 1,
+		'table-cell' : 1,
+		'table-caption' : 1
 	};
 
 	CKEDITOR.dom.element.prototype.isBlockBoundary = function( customNodeNames )
@@ -372,7 +372,7 @@ provides:
 
 	CKEDITOR.dom.walker.listItemBoundary = function()
 	{
-			return this.blockBoundary( { br  1 } );
+			return this.blockBoundary( { br : 1 } );
 	};
 
 	/**
@@ -399,7 +399,7 @@ provides:
 			isBookmark = ( node && !node.getName && ( parent = node.getParent() )
 						&& isBookmarkNode( parent ) );
 			// Is bookmark node?
-			isBookmark = contentOnly ? isBookmark  isBookmark || isBookmarkNode( node );
+			isBookmark = contentOnly ? isBookmark : isBookmark || isBookmarkNode( node );
 			return !! ( isReject ^ isBookmark );
 		};
 	};
@@ -427,7 +427,7 @@ provides:
 		var whitespace = CKEDITOR.dom.walker.whitespaces();
 		return function( node )
 		{
-			// Nodes that take no spaces in wysiwyg
+			// Nodes that take no spaces in wysiwyg:
 			// 1. White-spaces but not including NBSP;
 			// 2. Empty inline elements, e.g. <b></b> we're checking here
 			// 'offsetHeight' instead of 'offsetWidth' for properly excluding
@@ -445,7 +445,7 @@ provides:
 		};
 	};
 
-	var tailNbspRegex = /^[\t\r\n ]*(?&nbsp;|\xa0)$/,
+	var tailNbspRegex = /^[\t\r\n ]*(?:&nbsp;|\xa0)$/,
 		isWhitespaces = CKEDITOR.dom.walker.whitespaces(),
 		isBookmark = CKEDITOR.dom.walker.bookmark(),
 		toSkip = function( node )
@@ -466,7 +466,7 @@ provides:
 		while ( toSkip( tail ) )
 
 		if ( tail && ( !CKEDITOR.env.ie ? tail.is && tail.is( 'br' )
-				 tail.getText && tailNbspRegex.test( tail.getText() ) ) )
+				: tail.getText && tailNbspRegex.test( tail.getText() ) ) )
 		{
 			return tail;
 		}

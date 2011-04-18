@@ -22,7 +22,7 @@ provides:
 
 CKEDITOR.plugins.add( 'image',
 {
-	init  function( editor )
+	init : function( editor )
 	{
 		var pluginName = 'image';
 
@@ -35,8 +35,8 @@ CKEDITOR.plugins.add( 'image',
 		// Register the toolbar button.
 		editor.ui.addButton( 'Image',
 			{
-				label  editor.lang.common.image,
-				command  pluginName
+				label : editor.lang.common.image,
+				command : pluginName
 			});
 
 		editor.on( 'doubleclick', function( evt )
@@ -52,11 +52,11 @@ CKEDITOR.plugins.add( 'image',
 		{
 			editor.addMenuItems(
 				{
-					image 
+					image :
 					{
-						label  editor.lang.image.menu,
-						command  'image',
-						group  'image'
+						label : editor.lang.image.menu,
+						command : 'image',
+						group : 'image'
 					}
 				});
 		}
@@ -69,7 +69,7 @@ CKEDITOR.plugins.add( 'image',
 					if ( !element || !element.is( 'img' ) || element.data( 'cke-realelement' ) || element.isReadOnly() )
 						return null;
 
-					return { image  CKEDITOR.TRISTATE_OFF };
+					return { image : CKEDITOR.TRISTATE_OFF };
 				});
 		}
 	}

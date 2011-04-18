@@ -22,7 +22,7 @@ provides:
 
 (function()
 {
-	var listNodeNames = { ol  1, ul  1 },
+	var listNodeNames = { ol : 1, ul : 1 },
 		isNotWhitespaces = CKEDITOR.dom.walker.whitespaces( true ),
 		isNotBookmark = CKEDITOR.dom.walker.bookmark( false, true );
 
@@ -73,7 +73,7 @@ provides:
 		this.useIndentClasses = editor.config.indentClasses && editor.config.indentClasses.length > 0;
 		if ( this.useIndentClasses )
 		{
-			this.classNameRegex = new RegExp( '(?^|\\s+)(' + editor.config.indentClasses.join( '|' ) + ')(?=$|\\s)' );
+			this.classNameRegex = new RegExp( '(?:^|\\s+)(' + editor.config.indentClasses.join( '|' ) + ')(?=$|\\s)' );
 			this.indentClassMap = {};
 			for ( var i = 0 ; i < editor.config.indentClasses.length ; i++ )
 				this.indentClassMap[ editor.config.indentClasses[i] ] = i + 1;
@@ -85,7 +85,7 @@ provides:
 	// Returns the CSS property to be used for identing a given element.
 	function getIndentCssProperty( element, dir )
 	{
-		return ( dir || element.getComputedStyle( 'direction' ) ) == 'ltr' ? 'margin-left'  'margin-right';
+		return ( dir || element.getComputedStyle( 'direction' ) ) == 'ltr' ? 'margin-left' : 'margin-right';
 	}
 
 	function isListItem( node )
@@ -94,7 +94,7 @@ provides:
 	}
 
 	indentCommand.prototype = {
-		exec  function( editor )
+		exec : function( editor )
 		{
 			var self = this, database = {};
 
@@ -139,7 +139,7 @@ provides:
 						break;
 					}
 				}
-				var indentOffset = self.name == 'indent' ? 1  -1,
+				var indentOffset = self.name == 'indent' ? 1 : -1,
 					startItem = itemsToMove[0],
 					lastItem = itemsToMove[ itemsToMove.length - 1 ];
 
@@ -220,7 +220,7 @@ provides:
 				iterator.enforceRealBlocks = true;
 				iterator.enlargeBr = enterMode != CKEDITOR.ENTER_BR;
 				var block;
-				while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p'  'div' ) ) )
+				while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' ) ) )
 					indentElement( block );
 			}
 
@@ -263,14 +263,14 @@ provides:
 					if ( isNaN( currentOffset ) )
 						currentOffset = 0;
 					var indentOffset = editor.config.indentOffset || 40;
-					currentOffset += ( self.name == 'indent' ? 1  -1 ) * indentOffset;
+					currentOffset += ( self.name == 'indent' ? 1 : -1 ) * indentOffset;
 
 					if ( currentOffset < 0 )
 						return false;
 
 					currentOffset = Math.max( currentOffset, 0 );
 					currentOffset = Math.ceil( currentOffset / indentOffset ) * indentOffset;
-					element.setStyle( indentCssProperty, currentOffset ? currentOffset + ( editor.config.indentUnit || 'px' )  '' );
+					element.setStyle( indentCssProperty, currentOffset ? currentOffset + ( editor.config.indentUnit || 'px' ) : '' );
 					if ( element.getAttribute( 'style' ) === '' )
 						element.removeAttribute( 'style' );
 				}
@@ -356,7 +356,7 @@ provides:
 
 	CKEDITOR.plugins.add( 'indent',
 	{
-		init  function( editor )
+		init : function( editor )
 		{
 			// Register commands.
 			var indent = editor.addCommand( 'indent', new indentCommand( editor, 'indent' ) ),
@@ -365,13 +365,13 @@ provides:
 			// Register the toolbar buttons.
 			editor.ui.addButton( 'Indent',
 				{
-					label  editor.lang.indent,
-					command  'indent'
+					label : editor.lang.indent,
+					command : 'indent'
 				});
 			editor.ui.addButton( 'Outdent',
 				{
-					label  editor.lang.outdent,
-					command  'outdent'
+					label : editor.lang.outdent,
+					command : 'outdent'
 				});
 
 			// Register the state changing handlers.
@@ -384,8 +384,8 @@ provides:
 				editor.addCss(
 					"ul,ol" +
 					"{" +
-					"	margin-left 0px;" +
-					"	padding-left 40px;" +
+					"	margin-left: 0px;" +
+					"	padding-left: 40px;" +
 					"}" );
 			}
 
@@ -415,7 +415,7 @@ provides:
 						var classes = editor.config.indentClasses;
 						if ( classes )
 						{
-							var suffix = ( e.data.dir == 'ltr' ) ? [ '_rtl', '' ]  [ '', '_rtl' ];
+							var suffix = ( e.data.dir == 'ltr' ) ? [ '_rtl', '' ] : [ '', '_rtl' ];
 							for ( var i = 0; i < classes.length; i++ )
 							{
 								if ( node.hasClass( classes[ i ] + suffix[ 0 ] ) )
@@ -430,14 +430,14 @@ provides:
 						var marginLeft = node.getStyle( 'margin-right' ),
 							marginRight = node.getStyle( 'margin-left' );
 
-						marginLeft ? node.setStyle( 'margin-left', marginLeft )  node.removeStyle( 'margin-left' );
-						marginRight ? node.setStyle( 'margin-right', marginRight )  node.removeStyle( 'margin-right' );
+						marginLeft ? node.setStyle( 'margin-left', marginLeft ) : node.removeStyle( 'margin-left' );
+						marginRight ? node.setStyle( 'margin-right', marginRight ) : node.removeStyle( 'margin-right' );
 					}
 				}
 			});
 		},
 
-		requires  [ 'domiterator', 'list' ]
+		requires : [ 'domiterator', 'list' ]
 	} );
 })();
 

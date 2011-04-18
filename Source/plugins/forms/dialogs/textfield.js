@@ -19,22 +19,22 @@ CKEDITOR.dialog.add( 'textfield', function( editor )
 {
 	var autoAttributes =
 	{
-		value  1,
-		size  1,
-		maxLength  1
+		value : 1,
+		size : 1,
+		maxLength : 1
 	};
 
 	var acceptedTypes =
 	{
-		text  1,
-		password  1
+		text : 1,
+		password : 1
 	};
 
 	return {
-		title  editor.lang.textfield.title,
-		minWidth  350,
-		minHeight  150,
-		onShow  function()
+		title : editor.lang.textfield.title,
+		minWidth : 350,
+		minHeight : 150,
+		onShow : function()
 		{
 			delete this.textField;
 
@@ -46,7 +46,7 @@ CKEDITOR.dialog.add( 'textfield', function( editor )
 				this.setupContent( element );
 			}
 		},
-		onOk  function()
+		onOk : function()
 		{
 			var editor,
 				element = this.textField,
@@ -61,9 +61,9 @@ CKEDITOR.dialog.add( 'textfield', function( editor )
 
 			if ( isInsertMode )
 				editor.insertElement( element );
-			this.commitContent( { element  element } );
+			this.commitContent( { element : element } );
 		},
-		onLoad  function()
+		onLoad : function()
 		{
 			var autoSetup = function( element )
 			{
@@ -91,31 +91,31 @@ CKEDITOR.dialog.add( 'textfield', function( editor )
 					}
 				} );
 		},
-		contents  [
+		contents : [
 			{
-				id  'info',
-				label  editor.lang.textfield.title,
-				title  editor.lang.textfield.title,
-				elements  [
+				id : 'info',
+				label : editor.lang.textfield.title,
+				title : editor.lang.textfield.title,
+				elements : [
 					{
-						type  'hbox',
-						widths  [ '50%', '50%' ],
-						children 
+						type : 'hbox',
+						widths : [ '50%', '50%' ],
+						children :
 						[
 							{
-								id  '_cke_saved_name',
-								type  'text',
-								label  editor.lang.textfield.name,
-								'default'  '',
-								accessKey  'N',
-								setup  function( element )
+								id : '_cke_saved_name',
+								type : 'text',
+								label : editor.lang.textfield.name,
+								'default' : '',
+								accessKey : 'N',
+								setup : function( element )
 								{
 									this.setValue(
 											element.data( 'cke-saved-name' ) ||
 											element.getAttribute( 'name' ) ||
 											'' );
 								},
-								commit  function( data )
+								commit : function( data )
 								{
 									var element = data.element;
 
@@ -129,39 +129,39 @@ CKEDITOR.dialog.add( 'textfield', function( editor )
 								}
 							},
 							{
-								id  'value',
-								type  'text',
-								label  editor.lang.textfield.value,
-								'default'  '',
-								accessKey  'V'
+								id : 'value',
+								type : 'text',
+								label : editor.lang.textfield.value,
+								'default' : '',
+								accessKey : 'V'
 							}
 						]
 					},
 					{
-						type  'hbox',
-						widths  [ '50%', '50%' ],
-						children 
+						type : 'hbox',
+						widths : [ '50%', '50%' ],
+						children :
 						[
 							{
-								id  'size',
-								type  'text',
-								label  editor.lang.textfield.charWidth,
-								'default'  '',
-								accessKey  'C',
-								style  'width50px',
-								validate  CKEDITOR.dialog.validate.integer( editor.lang.common.validateNumberFailed )
+								id : 'size',
+								type : 'text',
+								label : editor.lang.textfield.charWidth,
+								'default' : '',
+								accessKey : 'C',
+								style : 'width:50px',
+								validate : CKEDITOR.dialog.validate.integer( editor.lang.common.validateNumberFailed )
 							},
 							{
-								id  'maxLength',
-								type  'text',
-								label  editor.lang.textfield.maxChars,
-								'default'  '',
-								accessKey  'M',
-								style  'width50px',
-								validate  CKEDITOR.dialog.validate.integer( editor.lang.common.validateNumberFailed )
+								id : 'maxLength',
+								type : 'text',
+								label : editor.lang.textfield.maxChars,
+								'default' : '',
+								accessKey : 'M',
+								style : 'width:50px',
+								validate : CKEDITOR.dialog.validate.integer( editor.lang.common.validateNumberFailed )
 							}
 						],
-						onLoad  function()
+						onLoad : function()
 						{
 							// Repaint the style for IE7 (#6068)
 							if ( CKEDITOR.env.ie7Compat )
@@ -169,21 +169,21 @@ CKEDITOR.dialog.add( 'textfield', function( editor )
 						}
 					},
 					{
-						id  'type',
-						type  'select',
-						label  editor.lang.textfield.type,
-						'default'  'text',
-						accessKey  'M',
-						items 
+						id : 'type',
+						type : 'select',
+						label : editor.lang.textfield.type,
+						'default' : 'text',
+						accessKey : 'M',
+						items :
 						[
 							[ editor.lang.textfield.typeText, 'text' ],
 							[ editor.lang.textfield.typePass, 'password' ]
 						],
-						setup  function( element )
+						setup : function( element )
 						{
 							this.setValue( element.getAttribute( 'type' ) );
 						},
-						commit  function( data )
+						commit : function( data )
 						{
 							var element = data.element;
 
@@ -195,7 +195,7 @@ CKEDITOR.dialog.add( 'textfield', function( editor )
 								if ( elementType != myType )
 								{
 									var replace = CKEDITOR.dom.element.createFromHtml( '<input type="' + myType + '"></input>', editor.document );
-									element.copyAttributes( replace, { type  1 } );
+									element.copyAttributes( replace, { type : 1 } );
 									replace.replace( element );
 									editor.getSelection().selectElement( replace );
 									data.element = replace;

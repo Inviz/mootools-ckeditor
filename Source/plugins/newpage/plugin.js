@@ -23,13 +23,13 @@ provides:
 // Register a plugin named "newpage".
 CKEDITOR.plugins.add( 'newpage',
 {
-	init  function( editor )
+	init : function( editor )
 	{
 		editor.addCommand( 'newpage',
 			{
-				modes  { wysiwyg1, source1 },
+				modes : { wysiwyg:1, source:1 },
 
-				exec  function( editor )
+				exec : function( editor )
 				{
 					var command = this;
 					editor.setData( editor.config.newpage_html || '', function()
@@ -39,8 +39,8 @@ CKEDITOR.plugins.add( 'newpage',
 						{
 							editor.fire( 'afterCommandExec',
 							{
-								name command.name,
-								command command
+								name: command.name,
+								command: command
 							} );
 							editor.selectionChange();
 
@@ -48,13 +48,13 @@ CKEDITOR.plugins.add( 'newpage',
 					} );
 					editor.focus();
 				},
-				async  true
+				async : true
 			});
 
 		editor.ui.addButton( 'NewPage',
 			{
-				label  editor.lang.newPage,
-				command  'newpage'
+				label : editor.lang.newPage,
+				command : 'newpage'
 			});
 	}
 });

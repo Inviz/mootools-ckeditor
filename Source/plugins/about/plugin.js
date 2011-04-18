@@ -18,17 +18,17 @@ provides:
 
 CKEDITOR.plugins.add( 'about',
 {
-	requires  [ 'dialog' ],
-	init  function( editor )
+	requires : [ 'dialog' ],
+	init : function( editor )
 	{
 		var command = editor.addCommand( 'about', new CKEDITOR.dialogCommand( 'about' ) );
-		command.modes = { wysiwyg1, source1 };
+		command.modes = { wysiwyg:1, source:1 };
 		command.canUndo = false;
 
 		editor.ui.addButton( 'About',
 			{
-				label  editor.lang.about.title,
-				command  'about'
+				label : editor.lang.about.title,
+				command : 'about'
 			});
 
 		CKEDITOR.dialog.add( 'about', this.path + 'dialogs/about.js' );

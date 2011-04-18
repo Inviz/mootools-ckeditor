@@ -18,16 +18,16 @@ provides:
 
 CKEDITOR.plugins.add( 'smiley',
 {
-	requires  [ 'dialog' ],
+	requires : [ 'dialog' ],
 
-	init  function( editor )
+	init : function( editor )
 	{
 		editor.config.smiley_path = editor.config.smiley_path || ( this.path + 'images/' );
 		editor.addCommand( 'smiley', new CKEDITOR.dialogCommand( 'smiley' ) );
 		editor.ui.addButton( 'Smiley',
 			{
-				label  editor.lang.smiley.toolbar,
-				command  'smiley'
+				label : editor.lang.smiley.toolbar,
+				command : 'smiley'
 			});
 		CKEDITOR.dialog.add( 'smiley', this.path + 'dialogs/smiley.js' );
 	}
@@ -40,7 +40,7 @@ CKEDITOR.plugins.add( 'smiley',
  * @type String
  * @default {@link CKEDITOR.basePath} + 'plugins/smiley/images/'
  * @example
- * config.smiley_path = 'http//www.example.com/images/smileys/';
+ * config.smiley_path = 'http://www.example.com/images/smileys/';
  * @example
  * config.smiley_path = '/images/smileys/';
  */
@@ -84,9 +84,9 @@ CKEDITOR.config.smiley_images = [
  * // Use textual emoticons as description.
  * config.smiley_descriptions =
  *     [
- *         ')', '(', ';)', 'D', '/', 'P', '*)', '-o',
- *         '|', '>(', 'o)', '8-)', '>-)', ';(', '', '', '',
- *         '', '', '-*', ''
+ *         ':)', ':(', ';)', ':D', ':/', ':P', ':*)', ':-o',
+ *         ':|', '>:(', 'o:)', '8-)', '>:-)', ';(', '', '', '',
+ *         '', '', ':-*', ''
  *     ];
  */
 CKEDITOR.config.smiley_descriptions =

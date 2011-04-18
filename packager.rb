@@ -14,7 +14,7 @@ class CKEditor
   R_DESCRIPTION_SPLITTER = /^\s*\*\s*$/
   R_DESCRIPTION_IDENTER = /\n\s*/
   R_DESCRIPTION_CLEANER = /\*\s+/
-  R_PACKAGER_CLEANER = /(^.*?\/\/ @Packager.RemoveLine.*?$)|\:/
+  R_PACKAGER_CLEANER = /^.*?\/\/ @Packager.RemoveLine.*?$/
   
   def initialize(input = 'ckeditor', output = 'Source')
     self.input = Pathname.new input
@@ -62,14 +62,11 @@ class CKEditor
           gsub(R_DESCRIPTION_IDENTER, "\n" + (" " * 14))  if description && !description.empty?
         ''
       end
-    p header
-    p content
     (header % vars) + content
   end
   
   def extract_dependencies!(path = input + '_source/core/loader.js')
     deps = File.read(path).match(R_DEPENDENCIES)[1].gsub(R_COMMENTS, '').gsub("'", '"')
-    p deps
     self.dependencies = JSON.parse(deps)
   end
   

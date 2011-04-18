@@ -24,21 +24,21 @@ provides:
 
 CKEDITOR.dom.comment = CKEDITOR.tools.createClass(
 {
-	base  CKEDITOR.dom.node,
+	base : CKEDITOR.dom.node,
 
-	$  function( text, ownerDocument )
+	$ : function( text, ownerDocument )
 	{
 		if ( typeof text == 'string' )
-			text = ( ownerDocument ? ownerDocument.$  document ).createComment( text );
+			text = ( ownerDocument ? ownerDocument.$ : document ).createComment( text );
 
 		this.base( text );
 	},
 
-	proto 
+	proto :
 	{
-		type  CKEDITOR.NODE_COMMENT,
+		type : CKEDITOR.NODE_COMMENT,
 
-		getOuterHtml  function()
+		getOuterHtml : function()
 		{
 			return '<!--' + this.$.nodeValue + '-->';
 		}

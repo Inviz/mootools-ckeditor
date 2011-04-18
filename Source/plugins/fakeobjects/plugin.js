@@ -20,9 +20,9 @@ provides:
 {
 	var htmlFilterRules =
 	{
-		elements 
+		elements :
 		{
-			$  function( element )
+			$ : function( element )
 			{
 				var attributes = element.attributes,
 					realHtml = attributes && attributes[ 'data-cke-realelement' ],
@@ -38,11 +38,11 @@ provides:
 					if ( style )
 					{
 						// Get the width from the style.
-						var match = /(?^|\s)width\s*\s*(\d+)/i.exec( style ),
+						var match = /(?:^|\s)width\s*:\s*(\d+)/i.exec( style ),
 							width = match && match[1];
 
 						// Get the height from the style.
-						match = /(?^|\s)height\s*\s*(\d+)/i.exec( style );
+						match = /(?:^|\s)height\s*:\s*(\d+)/i.exec( style );
 						var height = match && match[1];
 
 						if ( width )
@@ -60,9 +60,9 @@ provides:
 
 	CKEDITOR.plugins.add( 'fakeobjects',
 	{
-		requires  [ 'htmlwriter' ],
+		requires : [ 'htmlwriter' ],
 
-		afterInit  function( editor )
+		afterInit : function( editor )
 		{
 			var dataProcessor = editor.dataProcessor,
 				htmlFilter = dataProcessor && dataProcessor.htmlFilter;
@@ -80,13 +80,13 @@ CKEDITOR.editor.prototype.createFakeElement = function( realElement, className, 
 
 	var attributes =
 	{
-		'class'  className,
-		src  CKEDITOR.getUrl( 'images/spacer.gif' ),
-		'data-cke-realelement'  encodeURIComponent( realElement.getOuterHtml() ),
-		'data-cke-real-node-type'  realElement.type,
-		alt  label,
-		title  label,
-		align  realElement.getAttribute( 'align' ) || ''
+		'class' : className,
+		src : CKEDITOR.getUrl( 'images/spacer.gif' ),
+		'data-cke-realelement' : encodeURIComponent( realElement.getOuterHtml() ),
+		'data-cke-real-node-type' : realElement.type,
+		alt : label,
+		title : label,
+		align : realElement.getAttribute( 'align' ) || ''
 	};
 
 	if ( realElementType )
@@ -95,7 +95,7 @@ CKEDITOR.editor.prototype.createFakeElement = function( realElement, className, 
 	if ( isResizable )
 		attributes[ 'data-cke-resizable' ] = isResizable;
 
-	return this.document.createElement( 'img', { attributes  attributes } );
+	return this.document.createElement( 'img', { attributes : attributes } );
 };
 
 CKEDITOR.editor.prototype.createFakeParserElement = function( realElement, className, realElementType, isResizable )
@@ -110,13 +110,13 @@ CKEDITOR.editor.prototype.createFakeParserElement = function( realElement, class
 
 	var attributes =
 	{
-		'class'  className,
-		src  CKEDITOR.getUrl( 'images/spacer.gif' ),
-		'data-cke-realelement'  encodeURIComponent( html ),
-		'data-cke-real-node-type'  realElement.type,
-		alt  label,
-		title  label,
-		align  realElement.attributes.align || ''
+		'class' : className,
+		src : CKEDITOR.getUrl( 'images/spacer.gif' ),
+		'data-cke-realelement' : encodeURIComponent( html ),
+		'data-cke-real-node-type' : realElement.type,
+		alt : label,
+		title : label,
+		align : realElement.attributes.align || ''
 	};
 
 	if ( realElementType )

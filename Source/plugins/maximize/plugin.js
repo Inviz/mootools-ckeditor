@@ -74,7 +74,7 @@ provides:
 
 		retval.inline = $element.style.cssText || '';
 		if ( !isInsideEditor )		// Reset any external styles that might interfere. (#2474)
-			$element.style.cssText = 'position static; overflow visible';
+			$element.style.cssText = 'position: static; overflow: visible';
 
 		restoreFormStyles( data );
 		return retval;
@@ -117,7 +117,7 @@ provides:
 
 	/**
 	 * Adding an iframe shim to this element, OR removing the existing one if already applied.
-	 * Note This will only affect IE version below 7.
+	 * Note: This will only affect IE version below 7.
 	 */
 	 function createIframeShim( element )
 	{
@@ -125,21 +125,21 @@ provides:
 			return null;
 
 		var shim = CKEDITOR.dom.element.createFromHtml( '<iframe frameborder="0" tabindex="-1"' +
-					' src="javascript' +
+					' src="javascript:' +
 					   'void((function(){' +
 						   'document.open();' +
-						   ( CKEDITOR.env.isCustomDomain() ? 'document.domain=\'' + this.getDocument().$.domain + '\';'  '' ) +
+						   ( CKEDITOR.env.isCustomDomain() ? 'document.domain=\'' + this.getDocument().$.domain + '\';' : '' ) +
 						   'document.close();' +
 					   '})())"' +
-					' style="displayblock;positionabsolute;z-index-1;' +
-					'progidDXImageTransform.Microsoft.Alpha(opacity=0);' +
+					' style="display:block;position:absolute;z-index:-1;' +
+					'progid:DXImageTransform.Microsoft.Alpha(opacity=0);' +
 					'"></iframe>' );
 		return element.append( shim, true );
 	}
 
 	CKEDITOR.plugins.add( 'maximize',
 	{
-		init  function( editor )
+		init : function( editor )
 		{
 			var lang = editor.lang;
 			var mainDocument = CKEDITOR.document,
@@ -158,7 +158,7 @@ provides:
 			function resizeHandler()
 			{
 				var viewPaneSize = mainWindow.getViewPaneSize();
-				shim && shim.setStyles( { width  viewPaneSize.width + 'px', height  viewPaneSize.height + 'px' } );
+				shim && shim.setStyles( { width : viewPaneSize.width + 'px', height : viewPaneSize.height + 'px' } );
 				editor.resize( viewPaneSize.width, viewPaneSize.height, null, true );
 			}
 
@@ -167,9 +167,9 @@ provides:
 
 			editor.addCommand( 'maximize',
 				{
-					modes  { wysiwyg  1, source  1 },
-					editorFocus  false,
-					exec  function()
+					modes : { wysiwyg : 1, source : 1 },
+					editorFocus : false,
+					exec : function()
 					{
 						var container = editor.container.getChild( 1 );
 						var contents = editor.getThemeSpace( 'contents' );
@@ -209,9 +209,9 @@ provides:
 							// Hide scroll bars.
 							var styles =
 								{
-									overflow  CKEDITOR.env.webkit ? ''  'hidden',		// #6896
-									width  0,
-									height  0
+									overflow : CKEDITOR.env.webkit ? '' : 'hidden',		// #6896
+									width : 0,
+									height : 0
 								};
 
 							mainDocument.getDocumentElement().setStyles( styles );
@@ -220,18 +220,18 @@ provides:
 
 							// Scroll to the top left (IE needs some time for it - #4923).
 							CKEDITOR.env.ie ?
-								setTimeout( function() { mainWindow.$.scrollTo( 0, 0 ); }, 0 ) 
+								setTimeout( function() { mainWindow.$.scrollTo( 0, 0 ); }, 0 ) :
 								mainWindow.$.scrollTo( 0, 0 );
 
 							// Resize and move to top left.
 							// Special treatment for FF Quirks (#7284)
-							container.setStyle( 'position', CKEDITOR.env.gecko && CKEDITOR.env.quirks ? 'fixed'  'absolute' );
-							container.$.offsetLeft;			// SAFARI BUG See #2066.
+							container.setStyle( 'position', CKEDITOR.env.gecko && CKEDITOR.env.quirks ? 'fixed' : 'absolute' );
+							container.$.offsetLeft;			// SAFARI BUG: See #2066.
 							container.setStyles(
 								{
-									'z-index'  editor.config.baseFloatZIndex - 1,
-									left  '0px',
-									top  '0px'
+									'z-index' : editor.config.baseFloatZIndex - 1,
+									left : '0px',
+									top : '0px'
 								} );
 
 							shim =  createIframeShim( container );		// IE6 select element penetration when maximized. (#4459)
@@ -245,8 +245,8 @@ provides:
 							var offset = container.getDocumentPosition();
 							container.setStyles(
 								{
-									left  ( -1 * offset.x ) + 'px',
-									top  ( -1 * offset.y ) + 'px'
+									left : ( -1 * offset.x ) + 'px',
+									top : ( -1 * offset.y ) + 'px'
 								} );
 
 							// Fixing positioning editor chrome in Firefox break design mode. (#5149)
@@ -275,7 +275,7 @@ provides:
 
 							// Restore the window scroll position.
 							CKEDITOR.env.ie ?
-								setTimeout( function() { mainWindow.$.scrollTo( outerScroll.x, outerScroll.y ); }, 0 ) 
+								setTimeout( function() { mainWindow.$.scrollTo( outerScroll.x, outerScroll.y ); }, 0 ) :
 								mainWindow.$.scrollTo( outerScroll.x, outerScroll.y );
 
 							// Remove cke_maximized class.
@@ -307,11 +307,11 @@ provides:
 						if( button )
 						{
 							var label = ( this.state == CKEDITOR.TRISTATE_OFF )
-								? lang.maximize  lang.minimize;
+								? lang.maximize : lang.minimize;
 							var buttonNode = editor.element.getDocument().getById( button._.id );
 							buttonNode.getChild( 1 ).setHtml( label );
 							buttonNode.setAttribute( 'title', label );
-							buttonNode.setAttribute( 'href', 'javascriptvoid("' + label + '");' );
+							buttonNode.setAttribute( 'href', 'javascript:void("' + label + '");' );
 						}
 
 						// Restore selection and scroll position in editing area.
@@ -344,20 +344,20 @@ provides:
 						savedSelection = savedScroll = null;
 						savedState = this.state;
 					},
-					canUndo  false
+					canUndo : false
 				} );
 
 			editor.ui.addButton( 'Maximize',
 				{
-					label  lang.maximize,
-					command  'maximize'
+					label : lang.maximize,
+					command : 'maximize'
 				} );
 
 			// Restore the command state after mode change, unless it has been changed to disabled (#6467)
 			editor.on( 'mode', function()
 				{
 					var command = editor.getCommand( 'maximize' );
-					command.setState( command.state == CKEDITOR.TRISTATE_DISABLED ? CKEDITOR.TRISTATE_DISABLED  savedState );
+					command.setState( command.state == CKEDITOR.TRISTATE_DISABLED ? CKEDITOR.TRISTATE_DISABLED : savedState );
 				}, null, null, 100 );
 		}
 	} );

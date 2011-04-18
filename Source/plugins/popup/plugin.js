@@ -28,7 +28,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
 	 * @param {String} height Popup window height.
 	 * @param {String} options Popup window features.
 	 */
-	popup  function( url, width, height, options )
+	popup : function( url, width, height, options )
 	{
 		width = width || '80%';
 		height = height || '70%';

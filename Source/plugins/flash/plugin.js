@@ -18,7 +18,7 @@ provides:
 
 (function()
 {
-	var flashFilenameRegex = /\.swf(?$|\?)/i;
+	var flashFilenameRegex = /\.swf(?:$|\?)/i;
 
 	var cssifyLength = CKEDITOR.tools.cssLength;
 
@@ -38,35 +38,35 @@ provides:
 			height = realElement.attributes.height;
 
 		if ( typeof width != 'undefined' )
-			fakeStyle = fakeElement.attributes.style = fakeStyle + 'width' + cssifyLength( width ) + ';';
+			fakeStyle = fakeElement.attributes.style = fakeStyle + 'width:' + cssifyLength( width ) + ';';
 
 		if ( typeof height != 'undefined' )
-			fakeStyle = fakeElement.attributes.style = fakeStyle + 'height' + cssifyLength( height ) + ';';
+			fakeStyle = fakeElement.attributes.style = fakeStyle + 'height:' + cssifyLength( height ) + ';';
 
 		return fakeElement;
 	}
 
 	CKEDITOR.plugins.add( 'flash',
 	{
-		init  function( editor )
+		init : function( editor )
 		{
 			editor.addCommand( 'flash', new CKEDITOR.dialogCommand( 'flash' ) );
 			editor.ui.addButton( 'Flash',
 				{
-					label  editor.lang.common.flash,
-					command  'flash'
+					label : editor.lang.common.flash,
+					command : 'flash'
 				});
 			CKEDITOR.dialog.add( 'flash', this.path + 'dialogs/flash.js' );
 
 			editor.addCss(
 				'img.cke_flash' +
 				'{' +
-					'background-image url(' + CKEDITOR.getUrl( this.path + 'images/placeholder.png' ) + ');' +
-					'background-position center center;' +
-					'background-repeat no-repeat;' +
-					'border 1px solid #a9a9a9;' +
-					'width 80px;' +
-					'height 80px;' +
+					'background-image: url(' + CKEDITOR.getUrl( this.path + 'images/placeholder.png' ) + ');' +
+					'background-position: center center;' +
+					'background-repeat: no-repeat;' +
+					'border: 1px solid #a9a9a9;' +
+					'width: 80px;' +
+					'height: 80px;' +
 				'}'
 				);
 
@@ -75,11 +75,11 @@ provides:
 			{
 				editor.addMenuItems(
 					{
-						flash 
+						flash :
 						{
-							label  editor.lang.flash.properties,
-							command  'flash',
-							group  'flash'
+							label : editor.lang.flash.properties,
+							command : 'flash',
+							group : 'flash'
 						}
 					});
 			}
@@ -99,12 +99,12 @@ provides:
 					{
 						if ( element && element.is( 'img' ) && !element.isReadOnly()
 								&& element.data( 'cke-real-element-type' ) == 'flash' )
-							return { flash  CKEDITOR.TRISTATE_OFF };
+							return { flash : CKEDITOR.TRISTATE_OFF };
 					});
 			}
 		},
 
-		afterInit  function( editor )
+		afterInit : function( editor )
 		{
 			var dataProcessor = editor.dataProcessor,
 				dataFilter = dataProcessor && dataProcessor.dataFilter;
@@ -113,9 +113,9 @@ provides:
 			{
 				dataFilter.addRules(
 					{
-						elements 
+						elements :
 						{
-							'ckeobject'  function( element )
+							'cke:object' : function( element )
 							{
 								var attributes = element.attributes,
 									classId = attributes.classid && String( attributes.classid ).toLowerCase();
@@ -125,7 +125,7 @@ provides:
 									// Look for the inner <embed>
 									for ( var i = 0 ; i < element.children.length ; i++ )
 									{
-										if ( element.children[ i ].name == 'ckeembed' )
+										if ( element.children[ i ].name == 'cke:embed' )
 										{
 											if ( !isFlashEmbed( element.children[ i ] ) )
 												return null;
@@ -139,7 +139,7 @@ provides:
 								return createFakeElement( editor, element );
 							},
 
-							'ckeembed'  function( element )
+							'cke:embed' : function( element )
 							{
 								if ( !isFlashEmbed( element ) )
 									return null;
@@ -152,7 +152,7 @@ provides:
 			}
 		},
 
-		requires  [ 'fakeobjects' ]
+		requires : [ 'fakeobjects' ]
 	});
 })();
 
@@ -163,19 +163,19 @@ CKEDITOR.tools.extend( CKEDITOR.config,
 	 * @type Boolean
 	 * @default false
 	 */
-	flashEmbedTagOnly  false,
+	flashEmbedTagOnly : false,
 
 	/**
-	 * Add EMBED tag as alternative &lt;object&gt&lt;embed&gt&lt;/embed&gt&lt;/object&gt
+	 * Add EMBED tag as alternative: &lt;object&gt&lt;embed&gt&lt;/embed&gt&lt;/object&gt
 	 * @type Boolean
 	 * @default false
 	 */
-	flashAddEmbedTag  true,
+	flashAddEmbedTag : true,
 
 	/**
 	 * Use embedTagOnly and addEmbedTag values on edit.
 	 * @type Boolean
 	 * @default false
 	 */
-	flashConvertOnEdit  false
+	flashConvertOnEdit : false
 } );

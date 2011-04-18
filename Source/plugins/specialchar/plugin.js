@@ -23,9 +23,9 @@ provides:
 CKEDITOR.plugins.add( 'specialchar',
 {
 	// List of available localizations.
-	availableLangs  { en1 },
+	availableLangs : { en:1 },
 
-	init  function( editor )
+	init : function( editor )
 	{
 		var pluginName = 'specialchar',
 			plugin = this;
@@ -35,10 +35,10 @@ CKEDITOR.plugins.add( 'specialchar',
 
 		editor.addCommand( pluginName,
 			{
-				exec  function()
+				exec : function()
 				{
 					var langCode = editor.langCode;
-					langCode = plugin.availableLangs[ langCode ] ? langCode  'en';
+					langCode = plugin.availableLangs[ langCode ] ? langCode : 'en';
 
 					CKEDITOR.scriptLoader.load(
 							CKEDITOR.getUrl( plugin.path + 'lang/' + langCode + '.js' ),
@@ -48,15 +48,15 @@ CKEDITOR.plugins.add( 'specialchar',
 								editor.openDialog( pluginName );
 							});
 				},
-				modes  { wysiwyg1 },
-				canUndo  false
+				modes : { wysiwyg:1 },
+				canUndo : false
 			});
 
 		// Register the toolbar button.
 		editor.ui.addButton( 'SpecialChar',
 			{
-				label  editor.lang.specialChar.toolbar,
-				command  pluginName
+				label : editor.lang.specialChar.toolbar,
+				command : pluginName
 			});
 	}
 } );
@@ -71,7 +71,7 @@ CKEDITOR.plugins.add( 'specialchar',
 CKEDITOR.config.specialChars =
 	[
 		'!','&quot;','#','$','%','&amp;',"'",'(',')','*','+','-','.','/',
-		'0','1','2','3','4','5','6','7','8','9','',';',
+		'0','1','2','3','4','5','6','7','8','9',':',';',
 		'&lt;','=','&gt;','?','@',
 		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
 		'P','Q','R','S','T','U','V','W','X','Y','Z',

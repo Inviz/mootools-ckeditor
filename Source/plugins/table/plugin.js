@@ -18,7 +18,7 @@ provides:
 
 CKEDITOR.plugins.add( 'table',
 {
-	init  function( editor )
+	init : function( editor )
 	{
 		var table = CKEDITOR.plugins.table,
 			lang = editor.lang.table;
@@ -28,8 +28,8 @@ CKEDITOR.plugins.add( 'table',
 
 		editor.ui.addButton( 'Table',
 			{
-				label  lang.toolbar,
-				command  'table'
+				label : lang.toolbar,
+				command : 'table'
 			});
 
 		CKEDITOR.dialog.add( 'table', this.path + 'dialogs/table.js' );
@@ -40,20 +40,20 @@ CKEDITOR.plugins.add( 'table',
 		{
 			editor.addMenuItems(
 				{
-					table 
+					table :
 					{
-						label  lang.menu,
-						command  'tableProperties',
-						group  'table',
-						order  5
+						label : lang.menu,
+						command : 'tableProperties',
+						group : 'table',
+						order : 5
 					},
 
-					tabledelete 
+					tabledelete :
 					{
-						label  lang.deleteTable,
-						command  'tableDelete',
-						group  'table',
-						order  1
+						label : lang.deleteTable,
+						command : 'tableDelete',
+						group : 'table',
+						order : 1
 					}
 				} );
 		}
@@ -79,8 +79,8 @@ CKEDITOR.plugins.add( 'table',
 					if ( isTable )
 					{
 						return {
-							tabledelete  CKEDITOR.TRISTATE_OFF,
-							table  CKEDITOR.TRISTATE_OFF
+							tabledelete : CKEDITOR.TRISTATE_OFF,
+							table : CKEDITOR.TRISTATE_OFF
 						};
 					}
 

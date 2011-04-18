@@ -36,7 +36,7 @@ CKEDITOR.htmlParser.comment = function( value )
 	/** @private */
 	this._ =
 	{
-		isBlockLike  false
+		isBlockLike : false
 	};
 };
 
@@ -47,14 +47,14 @@ CKEDITOR.htmlParser.comment.prototype =
 	 * @type Number
 	 * @example
 	 */
-	type  CKEDITOR.NODE_COMMENT,
+	type : CKEDITOR.NODE_COMMENT,
 
 	/**
 	 * Writes the HTML representation of this comment to a CKEDITOR.htmlWriter.
 	 * @param {CKEDITOR.htmlWriter} writer The writer to which write the HTML.
 	 * @example
 	 */
-	writeHtml  function( writer, filter )
+	writeHtml : function( writer, filter )
 	{
 		var comment = this.value;
 

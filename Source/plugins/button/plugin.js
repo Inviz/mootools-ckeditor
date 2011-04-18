@@ -18,7 +18,7 @@ provides:
 
 CKEDITOR.plugins.add( 'button',
 {
-	beforeInit  function( editor )
+	beforeInit : function( editor )
 	{
 		editor.ui.addHandler( CKEDITOR.UI_BUTTON, CKEDITOR.ui.button.handler );
 	}
@@ -44,9 +44,9 @@ CKEDITOR.ui.button = function( definition )
 	CKEDITOR.tools.extend( this, definition,
 		// Set defaults.
 		{
-			title		 definition.label,
-			className	 definition.className || ( definition.command && 'cke_button_' + definition.command ) || '',
-			click		 definition.click || function( editor )
+			title		: definition.label,
+			className	: definition.className || ( definition.command && 'cke_button_' + definition.command ) || '',
+			click		: definition.click || function( editor )
 				{
 					editor.execCommand( definition.command );
 				}
@@ -62,7 +62,7 @@ CKEDITOR.ui.button = function( definition )
  */
 CKEDITOR.ui.button.handler =
 {
-	create  function( definition )
+	create : function( definition )
 	{
 		return new CKEDITOR.ui.button( definition );
 	}
@@ -74,9 +74,9 @@ CKEDITOR.ui.button.handler =
  */
 CKEDITOR.ui.button._ =
 {
-	instances  [],
+	instances : [],
 
-	keydown  function( index, ev )
+	keydown : function( index, ev )
 	{
 		var instance = CKEDITOR.ui.button._.instances[ index ];
 
@@ -87,7 +87,7 @@ CKEDITOR.ui.button._ =
 		}
 	},
 
-	focus  function( index, ev )
+	focus : function( index, ev )
 	{
 		var instance = CKEDITOR.ui.button._.instances[ index ],
 			retVal;
@@ -95,7 +95,7 @@ CKEDITOR.ui.button._ =
 		if ( instance.onfocus )
 			retVal = ( instance.onfocus( instance, new CKEDITOR.dom.event( ev ) ) !== false );
 
-		// FF2 prevent focus event been bubbled up to editor container, which caused unexpected editor focus.
+		// FF2: prevent focus event been bubbled up to editor container, which caused unexpected editor focus.
 		if ( CKEDITOR.env.gecko && CKEDITOR.env.version < 10900 )
 			ev.preventBubble();
 		return retVal;
@@ -109,7 +109,7 @@ CKEDITOR.ui.button._ =
 
 CKEDITOR.ui.button.prototype =
 {
-	canGroup  true,
+	canGroup : true,
 
 	/**
 	 * Renders the button.
@@ -119,7 +119,7 @@ CKEDITOR.ui.button.prototype =
 	 *		to this button.
 	 * @example
 	 */
-	render  function( editor, output )
+	render : function( editor, output )
 	{
 		var env = CKEDITOR.env,
 			id = this._.id = CKEDITOR.tools.getNextId(),
@@ -132,15 +132,15 @@ CKEDITOR.ui.button.prototype =
 
 		var instance =
 		{
-			id  id,
-			button  this,
-			editor  editor,
-			focus  function()
+			id : id,
+			button : this,
+			editor : editor,
+			focus : function()
 			{
 				var element = CKEDITOR.document.getById( id );
 				element.focus();
 			},
-			execute  function()
+			execute : function()
 			{
 				this.button.click( editor );
 			}
@@ -164,8 +164,8 @@ CKEDITOR.ui.button.prototype =
 					var mode = editor.mode;
 					// Restore saved button state.
 					this.setState( this.modes[ mode ] ?
-						modeStates[ mode ] != undefined ? modeStates[ mode ] 
-							CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED );
+						modeStates[ mode ] != undefined ? modeStates[ mode ] :
+							CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED );
 				}, this);
 		}
 		else if ( command )
@@ -181,8 +181,8 @@ CKEDITOR.ui.button.prototype =
 					}, this);
 
 				classes += 'cke_' + (
-					command.state == CKEDITOR.TRISTATE_ON ? 'on' 
-					command.state == CKEDITOR.TRISTATE_DISABLED ? 'disabled' 
+					command.state == CKEDITOR.TRISTATE_ON ? 'on' :
+					command.state == CKEDITOR.TRISTATE_DISABLED ? 'disabled' :
 					'off' );
 			}
 		}
@@ -194,20 +194,20 @@ CKEDITOR.ui.button.prototype =
 			classes += ' ' + this.className;
 
 		output.push(
-			'<span class="cke_button' + ( this.icon && this.icon.indexOf( '.png' ) == -1 ? ' cke_noalphafix'  '' ) + '">',
+			'<span class="cke_button' + ( this.icon && this.icon.indexOf( '.png' ) == -1 ? ' cke_noalphafix' : '' ) + '">',
 			'<a id="', id, '"' +
 				' class="', classes, '"',
-				env.gecko && env.version >= 10900 && !env.hc  ? ''  '" href="javascriptvoid(\''+ ( this.title || '' ).replace( "'", '' )+ '\')"',
+				env.gecko && env.version >= 10900 && !env.hc  ? '' : '" href="javascript:void(\''+ ( this.title || '' ).replace( "'", '' )+ '\')"',
 				' title="', this.title, '"' +
 				' tabindex="-1"' +
 				' hidefocus="true"' +
 			    ' role="button"' +
 				' aria-labelledby="' + id + '_label"' +
-				( this.hasArrow ?  ' aria-haspopup="true"'  '' ) );
+				( this.hasArrow ?  ' aria-haspopup="true"' : '' ) );
 
 		// Some browsers don't cancel key events in the keydown but in the
 		// keypress.
-		// TODO Check if really needed for Gecko+Mac.
+		// TODO: Check if really needed for Gecko+Mac.
 		if ( env.opera || ( env.gecko && env.mac ) )
 		{
 			output.push(
@@ -231,7 +231,7 @@ CKEDITOR.ui.button.prototype =
 		if ( this.icon )
 		{
 			var offset = ( this.iconOffset || 0 ) * -16;
-			output.push( ' style="background-imageurl(', CKEDITOR.getUrl( this.icon ), ');background-position0 ' + offset + 'px;"' );
+			output.push( ' style="background-image:url(', CKEDITOR.getUrl( this.icon ), ');background-position:0 ' + offset + 'px;"' );
 		}
 
 		output.push(
@@ -243,7 +243,7 @@ CKEDITOR.ui.button.prototype =
 			output.push(
 					'<span class="cke_buttonarrow">'
 					// BLACK DOWN-POINTING TRIANGLE
-					+ ( CKEDITOR.env.hc ? '&#9660;'  '&nbsp;' )
+					+ ( CKEDITOR.env.hc ? '&#9660;' : '&nbsp;' )
 					+ '</span>' );
 		}
 
@@ -257,7 +257,7 @@ CKEDITOR.ui.button.prototype =
 		return instance;
 	},
 
-	setState  function( state )
+	setState : function( state )
 	{
 		if ( this._.state == state )
 			return false;
@@ -270,11 +270,11 @@ CKEDITOR.ui.button.prototype =
 		{
 			element.setState( state );
 			state == CKEDITOR.TRISTATE_DISABLED ?
-				element.setAttribute( 'aria-disabled', true ) 
+				element.setAttribute( 'aria-disabled', true ) :
 				element.removeAttribute( 'aria-disabled' );
 
 			state == CKEDITOR.TRISTATE_ON ?
-				element.setAttribute( 'aria-pressed', true ) 
+				element.setAttribute( 'aria-pressed', true ) :
 				element.removeAttribute( 'aria-pressed' );
 
 			return true;
@@ -293,8 +293,8 @@ CKEDITOR.ui.button.prototype =
  * @example
  * editorInstance.ui.addButton( 'MyBold',
  *     {
- *         label  'My Bold',
- *         command  'bold'
+ *         label : 'My Bold',
+ *         command : 'bold'
  *     });
  */
 CKEDITOR.ui.prototype.addButton = function( name, definition )

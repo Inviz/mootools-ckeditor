@@ -39,7 +39,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.ie )
 			 *     alert( "I'm on IE!" );
 			 */
-			ie		 /*@cc_on!@*/false,
+			ie		: /*@cc_on!@*/false,
 
 			/**
 			 * Indicates that CKEditor is running on Opera.
@@ -48,7 +48,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.opera )
 			 *     alert( "I'm on Opera!" );
 			 */
-			opera	 ( !!opera && opera.version ),
+			opera	: ( !!opera && opera.version ),
 
 			/**
 			 * Indicates that CKEditor is running on a WebKit based browser, like
@@ -58,7 +58,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.webkit )
 			 *     alert( "I'm on WebKit!" );
 			 */
-			webkit	 ( agent.indexOf( ' applewebkit/' ) > -1 ),
+			webkit	: ( agent.indexOf( ' applewebkit/' ) > -1 ),
 
 			/**
 			 * Indicates that CKEditor is running on Adobe AIR.
@@ -67,7 +67,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.air )
 			 *     alert( "I'm on AIR!" );
 			 */
-			air		 ( agent.indexOf( ' adobeair/' ) > -1 ),
+			air		: ( agent.indexOf( ' adobeair/' ) > -1 ),
 
 			/**
 			 * Indicates that CKEditor is running on Macintosh.
@@ -76,7 +76,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.mac )
 			 *     alert( "I love apples!" );
 			 */
-			mac	 ( agent.indexOf( 'macintosh' ) > -1 ),
+			mac	: ( agent.indexOf( 'macintosh' ) > -1 ),
 
 			/**
 			 * Indicates that CKEditor is running on a quirks mode environemnt.
@@ -85,7 +85,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.quirks )
 			 *     alert( "Nooooo!" );
 			 */
-			quirks  ( document.compatMode == 'BackCompat' ),
+			quirks : ( document.compatMode == 'BackCompat' ),
 
 			/**
 			 * Indicates that CKEditor is running on a mobile like environemnt.
@@ -94,7 +94,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.mobile )
 			 *     alert( "I'm running with CKEditor today!" );
 			 */
-			mobile  ( agent.indexOf( 'mobile' ) > -1 ),
+			mobile : ( agent.indexOf( 'mobile' ) > -1 ),
 
 			/**
 			 * Indicates that the browser has a custom domain enabled. This has
@@ -104,7 +104,7 @@ if ( !CKEDITOR.env )
 			 * if ( CKEDITOR.env.isCustomDomain() )
 			 *     alert( "I'm in a custom domain!" );
 			 */
-			isCustomDomain  function()
+			isCustomDomain : function()
 			{
 				if ( !this.ie )
 					return false;
@@ -193,7 +193,7 @@ if ( !CKEDITOR.env )
 		// Gecko.
 		if ( env.gecko )
 		{
-			var geckoRelease = agent.match( /rv([\d\.]+)/ );
+			var geckoRelease = agent.match( /rv:([\d\.]+)/ );
 			if ( geckoRelease )
 			{
 				geckoRelease = geckoRelease[1].split( '.' );
@@ -259,10 +259,10 @@ if ( !CKEDITOR.env )
 		 */
 		env.cssClass =
 			'cke_browser_' + (
-				env.ie ? 'ie' 
-				env.gecko ? 'gecko' 
-				env.opera ? 'opera' 
-				env.webkit ? 'webkit' 
+				env.ie ? 'ie' :
+				env.gecko ? 'gecko' :
+				env.opera ? 'opera' :
+				env.webkit ? 'webkit' :
 				'unknown' );
 
 		if ( env.quirks )
@@ -271,8 +271,8 @@ if ( !CKEDITOR.env )
 		if ( env.ie )
 		{
 			env.cssClass += ' cke_browser_ie' + (
-				env.version < 7 ? '6' 
-				env.version >= 8 ? document.documentMode
+				env.version < 7 ? '6' :
+				env.version >= 8 ? document.documentMode:
 				'7' );
 
 			if ( env.quirks )

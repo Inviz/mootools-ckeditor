@@ -63,24 +63,24 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 	 * @param tabConfig
 	 * id, dir, classes, styles
 	 */
-	createAdvancedTab  function( editor, tabConfig )
+	createAdvancedTab : function( editor, tabConfig )
 	{
 		if ( !tabConfig )
-			tabConfig = { id1, dir1, classes1, styles1 };
+			tabConfig = { id:1, dir:1, classes:1, styles:1 };
 
 		var lang = editor.lang.common;
 
 		var result =
 		{
-			id  'advanced',
-			label  lang.advancedTab,
-			title  lang.advancedTab,
-			elements 
+			id : 'advanced',
+			label : lang.advancedTab,
+			title : lang.advancedTab,
+			elements :
 				[
 					{
-						type  'vbox',
-						padding  1,
-						children  []
+						type : 'vbox',
+						padding : 1,
+						children : []
 					}
 				]
 		};
@@ -93,12 +93,12 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 			{
 				contents.push(
 					{
-						id  'advId',
-						att  'id',
-						type  'text',
-						label  lang.id,
-						setup  setupAdvParams,
-						commit  commitAdvParams
+						id : 'advId',
+						att : 'id',
+						type : 'text',
+						label : lang.id,
+						setup : setupAdvParams,
+						commit : commitAdvParams
 					});
 			}
 
@@ -106,28 +106,28 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 			{
 				contents.push(
 					{
-						id  'advLangDir',
-						att  'dir',
-						type  'select',
-						label  lang.langDir,
-						'default'  '',
-						style  'width100%',
-						items 
+						id : 'advLangDir',
+						att : 'dir',
+						type : 'select',
+						label : lang.langDir,
+						'default' : '',
+						style : 'width:100%',
+						items :
 						[
 							[ lang.notSet, '' ],
 							[ lang.langDirLTR, 'ltr' ],
 							[ lang.langDirRTL, 'rtl' ]
 						],
-						setup  setupAdvParams,
-						commit  commitAdvParams
+						setup : setupAdvParams,
+						commit : commitAdvParams
 					});
 			}
 
 			result.elements[ 0 ].children.push(
 				{
-					type  'hbox',
-					widths  [ '50%', '50%' ],
-					children  [].concat( contents )
+					type : 'hbox',
+					widths : [ '50%', '50%' ],
+					children : [].concat( contents )
 				});
 		}
 
@@ -139,19 +139,19 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 			{
 				contents.push(
 					{
-						id  'advStyles',
-						att  'style',
-						type  'text',
-						label  lang.styles,
-						'default'  '',
+						id : 'advStyles',
+						att : 'style',
+						type : 'text',
+						label : lang.styles,
+						'default' : '',
 
-						getStyle  function( name, defaultValue )
+						getStyle : function( name, defaultValue )
 						{
-							var match = this.getValue().match( new RegExp( name + '\\s*\s*([^;]*)', 'i') );
-							return match ? match[ 1 ]  defaultValue;
+							var match = this.getValue().match( new RegExp( name + '\\s*:\s*([^;]*)', 'i') );
+							return match ? match[ 1 ] : defaultValue;
 						},
 
-						updateStyle  function( name, value )
+						updateStyle : function( name, value )
 						{
 							var styles = this.getValue();
 
@@ -159,7 +159,7 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 							if ( styles )
 							{
 								styles = styles
-									.replace( new RegExp( '\\s*' + name + '\s*[^;]*(?$|;\s*)', 'i' ), '' )
+									.replace( new RegExp( '\\s*' + name + '\s*:[^;]*(?:$|;\s*)', 'i' ), '' )
 									.replace( /^[;\s]+/, '' )
 									.replace( /\s+$/, '' );
 							}
@@ -167,16 +167,16 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 							if ( value )
 							{
 								styles && !(/;\s*$/).test( styles ) && ( styles += '; ' );
-								styles += name + ' ' + value;
+								styles += name + ': ' + value;
 							}
 
 							this.setValue( styles, 1 );
 
 						},
 
-						setup  setupAdvParams,
+						setup : setupAdvParams,
 
-						commit  commitAdvParams
+						commit : commitAdvParams
 
 					});
 			}
@@ -185,18 +185,18 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 			{
 				contents.push(
 					{
-						type  'hbox',
-						widths  [ '45%', '55%' ],
-						children 
+						type : 'hbox',
+						widths : [ '45%', '55%' ],
+						children :
 						[
 							{
-								id  'advCSSClasses',
-								att  'class',
-								type  'text',
-								label  lang.cssClasses,
-								'default'  '',
-								setup  setupAdvParams,
-								commit  commitAdvParams
+								id : 'advCSSClasses',
+								att : 'class',
+								type : 'text',
+								label : lang.cssClasses,
+								'default' : '',
+								setup : setupAdvParams,
+								commit : commitAdvParams
 
 							}
 						]
@@ -205,9 +205,9 @@ CKEDITOR.plugins.add( 'dialogadvtab',
 
 			result.elements[ 0 ].children.push(
 				{
-					type  'hbox',
-					widths  [ '50%', '50%' ],
-					children  [].concat( contents )
+					type : 'hbox',
+					widths : [ '50%', '50%' ],
+					children : [].concat( contents )
 				});
 		}
 

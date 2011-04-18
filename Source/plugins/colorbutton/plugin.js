@@ -18,9 +18,9 @@ provides:
 
 CKEDITOR.plugins.add( 'colorbutton',
 {
-	requires  [ 'panelbutton', 'floatpanel', 'styles' ],
+	requires : [ 'panelbutton', 'floatpanel', 'styles' ],
 
-	init  function( editor )
+	init : function( editor )
 	{
 		var config = editor.config,
 			lang = editor.lang.colorButton;
@@ -38,18 +38,18 @@ CKEDITOR.plugins.add( 'colorbutton',
 			var colorBoxId = CKEDITOR.tools.getNextId() + '_colorBox';
 			editor.ui.add( name, CKEDITOR.UI_PANELBUTTON,
 				{
-					label  title,
-					title  title,
-					className  'cke_button_' + name.toLowerCase(),
-					modes  { wysiwyg  1 },
+					label : title,
+					title : title,
+					className : 'cke_button_' + name.toLowerCase(),
+					modes : { wysiwyg : 1 },
 
-					panel 
+					panel :
 					{
-						css  editor.skin.editor.css,
-						attributes  { role  'listbox', 'aria-label'  lang.panelTitle }
+						css : editor.skin.editor.css,
+						attributes : { role : 'listbox', 'aria-label' : lang.panelTitle }
 					},
 
-					onBlock  function( panel, block )
+					onBlock : function( panel, block )
 					{
 						block.autoSize = true;
 						block.element.addClass( 'cke_colorblock' );
@@ -61,17 +61,17 @@ CKEDITOR.plugins.add( 'colorbutton',
 
 						var keys = block.keys;
 						var rtl = editor.lang.dir == 'rtl';
-						keys[ rtl ? 37  39 ]	= 'next';					// ARROW-RIGHT
+						keys[ rtl ? 37 : 39 ]	= 'next';					// ARROW-RIGHT
 						keys[ 40 ]	= 'next';					// ARROW-DOWN
 						keys[ 9 ]	= 'next';					// TAB
-						keys[ rtl ? 39  37 ]	= 'prev';					// ARROW-LEFT
+						keys[ rtl ? 39 : 37 ]	= 'prev';					// ARROW-LEFT
 						keys[ 38 ]	= 'prev';					// ARROW-UP
 						keys[ CKEDITOR.SHIFT + 9 ]	= 'prev';	// SHIFT + TAB
 						keys[ 32 ]	= 'click';					// SPACE
 					},
 
 					// The automatic colorbox should represent the real color (#6010)
-					onOpen  function()
+					onOpen : function()
 					{
 						var selection = editor.getSelection(),
 							block = selection && selection.getStartElement(),
@@ -84,7 +84,7 @@ CKEDITOR.plugins.add( 'colorbutton',
 						// The background color might be transparent. In that case, look up the color in the DOM tree.
 						do
 						{
-							color = block && block.getComputedStyle( type == 'back' ? 'background-color'  'color' ) || 'transparent';
+							color = block && block.getComputedStyle( type == 'back' ? 'background-color' : 'color' ) || 'transparent';
 						}
 						while ( type == 'back' && color == 'transparent' && block && ( block = block.getParent() ) );
 
@@ -102,7 +102,7 @@ CKEDITOR.plugins.add( 'colorbutton',
 		{
 			var output = [],
 				colors = config.colorButton_colors.split( ',' ),
-				total = colors.length + ( config.colorButton_enableMore ? 2  1 );
+				total = colors.length + ( config.colorButton_enableMore ? 2 : 1 );
 
 			var clickFn = CKEDITOR.tools.addFunction( function( color, type )
 				{
@@ -134,7 +134,7 @@ CKEDITOR.plugins.add( 'colorbutton',
 					editor.fire( 'saveSnapshot' );
 
 					// Clean up any conflicting style within the range.
-					new CKEDITOR.style( config['colorButton_' + type + 'Style'], { color  'inherit' } ).remove( editor.document );
+					new CKEDITOR.style( config['colorButton_' + type + 'Style'], { color : 'inherit' } ).remove( editor.document );
 
 					if ( color )
 					{
@@ -147,14 +147,14 @@ CKEDITOR.plugins.add( 'colorbutton',
 								// Except for "unstylable elements". (#6103)
 								return isUnstylable( element );
 							}
-							
+							:
 							function( element )
 							{
 								// Fore color style must be applied inside links instead of around it.
 								return element.getName() != 'a' || isUnstylable( element );
 							};
 
-						new CKEDITOR.style( colorStyle, { color  color } ).apply( editor.document );
+						new CKEDITOR.style( colorStyle, { color : color } ).apply( editor.document );
 					}
 
 					editor.fire( 'saveSnapshot' );
@@ -165,7 +165,7 @@ CKEDITOR.plugins.add( 'colorbutton',
 				'<a class="cke_colorauto" _cke_focus=1 hidefocus=true' +
 					' title="', lang.auto, '"' +
 					' onclick="CKEDITOR.tools.callFunction(', clickFn, ',null,\'', type, '\');return false;"' +
-					' href="javascriptvoid(\'', lang.auto, '\')"' +
+					' href="javascript:void(\'', lang.auto, '\')"' +
 					' role="option" aria-posinset="1" aria-setsize="', total, '">' +
 					'<table role="presentation" cellspacing=0 cellpadding=0 width="100%">' +
 						'<tr>' +
@@ -202,9 +202,9 @@ CKEDITOR.plugins.add( 'colorbutton',
 						'<a class="cke_colorbox" _cke_focus=1 hidefocus=true' +
 							' title="', colorLabel, '"' +
 							' onclick="CKEDITOR.tools.callFunction(', clickFn, ',\'', colorName, '\',\'', type, '\'); return false;"' +
-							' href="javascriptvoid(\'', colorLabel, '\')"' +
+							' href="javascript:void(\'', colorLabel, '\')"' +
 							' role="option" aria-posinset="', ( i + 2 ), '" aria-setsize="', total, '">' +
-							'<span class="cke_colorbox" style="background-color#', colorCode, '"></span>' +
+							'<span class="cke_colorbox" style="background-color:#', colorCode, '"></span>' +
 						'</a>' +
 					'</td>' );
 			}
@@ -219,7 +219,7 @@ CKEDITOR.plugins.add( 'colorbutton',
 							'<a class="cke_colormore" _cke_focus=1 hidefocus=true' +
 								' title="', lang.more, '"' +
 								' onclick="CKEDITOR.tools.callFunction(', clickFn, ',\'?\',\'', type, '\');return false;"' +
-								' href="javascriptvoid(\'', lang.more, '\')"',
+								' href="javascript:void(\'', lang.more, '\')"',
 								' role="option" aria-posinset="', total, '" aria-setsize="', total, '">',
 								lang.more,
 							'</a>' +
@@ -250,7 +250,7 @@ CKEDITOR.plugins.add( 'colorbutton',
  * Defines the colors to be displayed in the color selectors. It's a string
  * containing the hexadecimal notation for HTML colors, without the "#" prefix.
  *
- * Since 3.3 A name may be optionally defined by prefixing the entries with the
+ * Since 3.3: A name may be optionally defined by prefixing the entries with the
  * name and the slash character. For example, "FontColor1/FF9900" will be
  * displayed as the color #FF9900 in the selector, but will be outputted as "FontColor1".
  * @type String
@@ -275,15 +275,15 @@ CKEDITOR.config.colorButton_colors =
  * // This is basically the default setting value.
  * config.colorButton_foreStyle =
  *     {
- *         element  'span',
- *         styles  { 'color'  '#(color)' }
+ *         element : 'span',
+ *         styles : { 'color' : '#(color)' }
  *     };
  */
 CKEDITOR.config.colorButton_foreStyle =
 	{
-		element		 'span',
-		styles		 { 'color'  '#(color)' },
-		overrides	 [ { element  'font', attributes  { 'color'  null } } ]
+		element		: 'span',
+		styles		: { 'color' : '#(color)' },
+		overrides	: [ { element : 'font', attributes : { 'color' : null } } ]
 	};
 
 /**
@@ -293,12 +293,12 @@ CKEDITOR.config.colorButton_foreStyle =
  * // This is basically the default setting value.
  * config.colorButton_backStyle =
  *     {
- *         element  'span',
- *         styles  { 'background-color'  '#(color)' }
+ *         element : 'span',
+ *         styles : { 'background-color' : '#(color)' }
  *     };
  */
 CKEDITOR.config.colorButton_backStyle =
 	{
-		element		 'span',
-		styles		 { 'background-color'  '#(color)' }
+		element		: 'span',
+		styles		: { 'background-color' : '#(color)' }
 	};

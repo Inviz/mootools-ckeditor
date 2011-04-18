@@ -23,23 +23,23 @@ provides:
 {
 	CKEDITOR.htmlParser.filter = CKEDITOR.tools.createClass(
 	{
-		$  function( rules )
+		$ : function( rules )
 		{
 			this._ =
 			{
-				elementNames  [],
-				attributeNames  [],
-				elements  { $length  0 },
-				attributes  { $length  0 }
+				elementNames : [],
+				attributeNames : [],
+				elements : { $length : 0 },
+				attributes : { $length : 0 }
 			};
 
 			if ( rules )
 				this.addRules( rules, 10 );
 		},
 
-		proto 
+		proto :
 		{
-			addRules  function( rules, priority )
+			addRules : function( rules, priority )
 			{
 				if ( typeof priority != 'number' )
 					priority = 10;
@@ -66,35 +66,35 @@ provides:
 				this._.root = transformNamedItem( this._.root, rules.root, priority ) || this._.root;
 			},
 
-			onElementName  function( name )
+			onElementName : function( name )
 			{
 				return filterName( name, this._.elementNames );
 			},
 
-			onAttributeName  function( name )
+			onAttributeName : function( name )
 			{
 				return filterName( name, this._.attributeNames );
 			},
 
-			onText  function( text )
+			onText : function( text )
 			{
 				var textFilter = this._.text;
-				return textFilter ? textFilter.filter( text )  text;
+				return textFilter ? textFilter.filter( text ) : text;
 			},
 
-			onComment  function( commentText, comment )
+			onComment : function( commentText, comment )
 			{
 				var textFilter = this._.comment;
-				return textFilter ? textFilter.filter( commentText, comment )  commentText;
+				return textFilter ? textFilter.filter( commentText, comment ) : commentText;
 			},
 
-			onFragment  function( element )
+			onFragment : function( element )
 			{
 				var rootFilter = this._.root;
-				return rootFilter ? rootFilter.filter( element )  element;
+				return rootFilter ? rootFilter.filter( element ) : element;
 			},
 
-			onElement  function( element )
+			onElement : function( element )
 			{
 				// We must apply filters set to the specific element name as
 				// well as those set to the generic $ name. So, add both to an
@@ -124,17 +124,17 @@ provides:
 				return element;
 			},
 
-			onNode  function( node )
+			onNode : function( node )
 			{
 				var type = node.type;
 
-				return type == CKEDITOR.NODE_ELEMENT ? this.onElement( node ) 
-					type == CKEDITOR.NODE_TEXT ? new CKEDITOR.htmlParser.text( this.onText( node.value ) ) 
-					type == CKEDITOR.NODE_COMMENT ? new CKEDITOR.htmlParser.comment( this.onComment( node.value ) )
+				return type == CKEDITOR.NODE_ELEMENT ? this.onElement( node ) :
+					type == CKEDITOR.NODE_TEXT ? new CKEDITOR.htmlParser.text( this.onText( node.value ) ) :
+					type == CKEDITOR.NODE_COMMENT ? new CKEDITOR.htmlParser.comment( this.onComment( node.value ) ):
 					null;
 			},
 
-			onAttribute  function( element, name, value )
+			onAttribute : function( element, name, value )
 			{
 				var filter = this._.attributes[ name ];
 
@@ -177,7 +177,7 @@ provides:
 		{
 			// Find the index to insert the items at.
 			for ( i = 0 ; i < listLength && list[ i ].pri < priority ; i++ )
-			{ /*jslpass*/ }
+			{ /*jsl:pass*/ }
 
 			// Add all new items to the list at the specific index.
 			for ( j = itemsLength - 1 ; j >= 0 ; j-- )
@@ -295,9 +295,9 @@ provides:
 // "entities" plugin
 /*
 {
-	text  function( text )
+	text : function( text )
 	{
-		// TODO  Process entities.
+		// TODO : Process entities.
 		return text.toUpperCase();
 	}
 };

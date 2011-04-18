@@ -123,7 +123,7 @@ if ( CKEDITOR.status == 'unloaded' )
 		 *		settings.
 		 * @returns {CKEDITOR.editor} The editor instance created.
 		 * @example
-		 * &lt;textarea id="myfield" name="myfield"&gt;&lt/textarea&gt;
+		 * &lt;textarea id="myfield" name="myfield"&gt;&lt:/textarea&gt;
 		 * ...
 		 * <b>CKEDITOR.replace( 'myfield' )</b>;
 		 * @example
@@ -144,7 +144,7 @@ if ( CKEDITOR.status == 'unloaded' )
 		 * @param {String} [data] Since 3.3. Initial value for the instance.
 		 * @returns {CKEDITOR.editor} The editor instance created.
 		 * @example
-		 * &lt;div id="editorSpace"&gt;&lt/div&gt;
+		 * &lt;div id="editorSpace"&gt;&lt:/div&gt;
 		 * ...
 		 * <b>CKEDITOR.appendTo( 'editorSpace' )</b>;
 		 */
@@ -199,7 +199,7 @@ if ( CKEDITOR.status == 'unloaded' )
 					// The textarea class name could be passed as the function
 					// parameter.
 
-					var classRegex = new RegExp( '(?^|\\s)' + arguments[0] + '(?$|\\s)' );
+					var classRegex = new RegExp( '(?:^|\\s)' + arguments[0] + '(?:$|\\s)' );
 
 					if ( !classRegex.test( textarea.className ) )
 						continue;

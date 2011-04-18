@@ -23,10 +23,10 @@ provides:
 {
 	var commands =
 	{
-		toolbarFocus 
+		toolbarFocus :
 		{
-			editorFocus  false,
-			exec  function( editor )
+			editorFocus : false,
+			exec : function( editor )
 			{
 				var idBase = editor._.elementsPath.idBase;
 				var element = CKEDITOR.document.getById( idBase + '0' );
@@ -42,9 +42,9 @@ provides:
 
 	CKEDITOR.plugins.add( 'elementspath',
 	{
-		requires  [ 'selection' ],
+		requires : [ 'selection' ],
 
-		init  function( editor )
+		init : function( editor )
 		{
 			var spaceId = 'cke_path_' + editor.name;
 			var spaceElement;
@@ -57,7 +57,7 @@ provides:
 
 			var idBase = 'cke_elementspath_' + CKEDITOR.tools.getNextNumber() + '_';
 
-			editor._.elementsPath = { idBase  idBase, filters  [] };
+			editor._.elementsPath = { idBase : idBase, filters : [] };
 
 			editor.on( 'themeSpace', function( event )
 				{
@@ -95,28 +95,28 @@ provides:
 					var rtl = editor.lang.dir == 'rtl';
 					switch ( ev.getKeystroke() )
 					{
-						case rtl ? 39  37 		// LEFT-ARROW
-						case 9 					// TAB
+						case rtl ? 39 : 37 :		// LEFT-ARROW
+						case 9 :					// TAB
 							element = CKEDITOR.document.getById( idBase + ( elementIndex + 1 ) );
 							if ( !element )
 								element = CKEDITOR.document.getById( idBase + '0' );
 							element.focus();
 							return false;
 
-						case rtl ? 37  39 		// RIGHT-ARROW
-						case CKEDITOR.SHIFT + 9 	// SHIFT + TAB
+						case rtl ? 37 : 39 :		// RIGHT-ARROW
+						case CKEDITOR.SHIFT + 9 :	// SHIFT + TAB
 							element = CKEDITOR.document.getById( idBase + ( elementIndex - 1 ) );
 							if ( !element )
 								element = CKEDITOR.document.getById( idBase + ( editor._.elementsPath.list.length - 1 ) );
 							element.focus();
 							return false;
 
-						case 27 					// ESC
+						case 27 :					// ESC
 							editor.focus();
 							return false;
 
-						case 13 					// ENTER	// Opera
-						case 32 					// SPACE
+						case 13 :					// ENTER	// Opera
+						case 32 :					// SPACE
 							onClick( elementIndex );
 							return false;
 					}
@@ -160,7 +160,7 @@ provides:
 
 							// Some browsers don't cancel key events in the keydown but in the
 							// keypress.
-							// TODO Check if really needed for Gecko+Mac.
+							// TODO: Check if really needed for Gecko+Mac.
 							if ( env.opera || ( env.gecko && env.mac ) )
 								extra += ' onkeypress="return false;"';
 
@@ -173,11 +173,11 @@ provides:
 							html.unshift(
 								'<a' +
 									' id="', idBase, index, '"' +
-									' href="javascriptvoid(\'', name, '\')"' +
+									' href="javascript:void(\'', name, '\')"' +
 									' tabindex="-1"' +
 									' title="', label, '"' +
 									( ( CKEDITOR.env.gecko && CKEDITOR.env.version < 10900 ) ?
-									' onfocus="event.preventBubble();"'  '' ) +
+									' onfocus="event.preventBubble();"' : '' ) +
 									' hidefocus="true" ' +
 									' onkeydown="return CKEDITOR.tools.callFunction(', onKeyDownHandler, ',', index, ', event );"' +
 									extra ,
@@ -197,7 +197,7 @@ provides:
 
 					var space = getSpaceElement();
 					space.setHtml( html.join('') + emptyHtml );
-					editor.fire( 'elementsPathUpdate', { space  space } );
+					editor.fire( 'elementsPathUpdate', { space : space } );
 				});
 
 			editor.on( 'contentDomUnload', function()

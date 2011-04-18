@@ -21,18 +21,18 @@ CKEDITOR.addTemplates( 'default',
 {
 	// The name of sub folder which hold the shortcut preview images of the
 	// templates.
-	imagesPath  CKEDITOR.getUrl( CKEDITOR.plugins.getPath( 'templates' ) + 'templates/images/' ),
+	imagesPath : CKEDITOR.getUrl( CKEDITOR.plugins.getPath( 'templates' ) + 'templates/images/' ),
 
 	// The templates definitions.
-	templates 
+	templates :
 		[
 			{
-				title 'Image and Title',
-				image 'template1.gif',
-				description 'One main image with a title and text that surround the image.',
-				html
+				title: 'Image and Title',
+				image: 'template1.gif',
+				description: 'One main image with a title and text that surround the image.',
+				html:
 					'<h3>' +
-						'<img style="margin-right 10px" height="100" width="100" align="left"/>' +
+						'<img style="margin-right: 10px" height="100" width="100" align="left"/>' +
 						'Type the title here'+
 					'</h3>' +
 					'<p>' +
@@ -40,17 +40,17 @@ CKEDITOR.addTemplates( 'default',
 					'</p>'
 			},
 			{
-				title 'Strange Template',
-				image 'template2.gif',
-				description 'A template that defines two colums, each one with a title, and some text.',
-				html
-					'<table cellspacing="0" cellpadding="0" style="width100%" border="0">' +
+				title: 'Strange Template',
+				image: 'template2.gif',
+				description: 'A template that defines two colums, each one with a title, and some text.',
+				html:
+					'<table cellspacing="0" cellpadding="0" style="width:100%" border="0">' +
 						'<tr>' +
-							'<td style="width50%">' +
+							'<td style="width:50%">' +
 								'<h3>Title 1</h3>' +
 							'</td>' +
 							'<td></td>' +
-							'<td style="width50%">' +
+							'<td style="width:50%">' +
 								'<h3>Title 2</h3>' +
 							'</td>' +
 						'</tr>' +
@@ -69,16 +69,16 @@ CKEDITOR.addTemplates( 'default',
 					'</p>'
 			},
 			{
-				title 'Text and Table',
-				image 'template3.gif',
-				description 'A title with some text and a table.',
-				html
-					'<div style="width 80%">' +
+				title: 'Text and Table',
+				image: 'template3.gif',
+				description: 'A title with some text and a table.',
+				html:
+					'<div style="width: 80%">' +
 						'<h3>' +
 							'Title goes here' +
 						'</h3>' +
-						'<table style="width150px;float right" cellspacing="0" cellpadding="0" border="1">' +
-							'<caption style="bordersolid 1px black">' +
+						'<table style="width:150px;float: right" cellspacing="0" cellpadding="0" border="1">' +
+							'<caption style="border:solid 1px black">' +
 								'<strong>Table title</strong>' +
 							'</caption>' +
 							'</tr>' +

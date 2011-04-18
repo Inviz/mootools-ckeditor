@@ -60,7 +60,7 @@ CKEDITOR.skins = (function()
 			return cssStyleText.replace( /url\s*\(([\s'"]*)(.*?)([\s"']*)\)/g,
 					function( match, opener, path, closer )
 					{
-						if ( /^\/|^\w?/.test( path ) )
+						if ( /^\/|^\w?:/.test( path ) )
 							return match;
 						else
 							return 'url(' + baseUrl + opener +  path + closer + ')';
@@ -156,7 +156,7 @@ CKEDITOR.skins = (function()
 		 * @param {Object} skinDefinition The skin definition.
 		 * @example
 		 */
-		add  function( skinName, skinDefinition )
+		add : function( skinName, skinDefinition )
 		{
 			loaded[ skinName ] = skinDefinition;
 
@@ -178,7 +178,7 @@ CKEDITOR.skins = (function()
 		 *		part files are loaded.
 		 * @example
 		 */
-		load  function( editor, skinPart, callback )
+		load : function( editor, skinPart, callback )
 		{
 			var skinName = editor.skinName,
 				skinPath = editor.skinPath;

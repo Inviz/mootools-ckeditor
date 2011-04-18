@@ -24,9 +24,9 @@ provides:
 	var placeholderReplaceRegex = /\[\[[^\]]+\]\]/g;
 	CKEDITOR.plugins.add( 'placeholder',
 	{
-		requires  [ 'dialog' ],
-		lang  [ 'en', 'he' ],
-		init  function( editor )
+		requires : [ 'dialog' ],
+		lang : [ 'en', 'he' ],
+		init : function( editor )
 		{
 			var lang = editor.lang.placeholder;
 
@@ -35,9 +35,9 @@ provides:
 
 			editor.ui.addButton( 'CreatePlaceholder',
 			{
-				label  lang.toolbar,
-				command 'createplaceholder',
-				icon  this.path + 'placeholder.gif'
+				label : lang.toolbar,
+				command :'createplaceholder',
+				icon : this.path + 'placeholder.gif'
 			});
 
 			if ( editor.addMenuItems )
@@ -45,13 +45,13 @@ provides:
 				editor.addMenuGroup( 'placeholder', 20 );
 				editor.addMenuItems(
 					{
-						editplaceholder 
+						editplaceholder :
 						{
-							label  lang.edit,
-							command  'editplaceholder',
-							group  'placeholder',
-							order  1,
-							icon  this.path + 'placeholder.gif'
+							label : lang.edit,
+							command : 'editplaceholder',
+							group : 'placeholder',
+							order : 1,
+							icon : this.path + 'placeholder.gif'
 						}
 					} );
 
@@ -62,7 +62,7 @@ provides:
 							if ( !element || !element.data( 'cke-placeholder' ) )
 								return null;
 
-							return { editplaceholder  CKEDITOR.TRISTATE_OFF };
+							return { editplaceholder : CKEDITOR.TRISTATE_OFF };
 						} );
 				}
 			}
@@ -76,8 +76,8 @@ provides:
 			editor.addCss(
 				'.cke_placeholder' +
 				'{' +
-					'background-color #ffff00;' +
-					( CKEDITOR.env.gecko ? 'cursor default;'  '' ) +
+					'background-color: #ffff00;' +
+					( CKEDITOR.env.gecko ? 'cursor: default;' : '' ) +
 				'}'
 			);
 
@@ -93,7 +93,7 @@ provides:
 			CKEDITOR.dialog.add( 'createplaceholder', this.path + 'dialogs/placeholder.js' );
 			CKEDITOR.dialog.add( 'editplaceholder', this.path + 'dialogs/placeholder.js' );
 		},
-		afterInit  function( editor )
+		afterInit : function( editor )
 		{
 			var dataProcessor = editor.dataProcessor,
 				dataFilter = dataProcessor && dataProcessor.dataFilter,
@@ -103,7 +103,7 @@ provides:
 			{
 				dataFilter.addRules(
 				{
-					text  function( text )
+					text : function( text )
 					{
 						return text.replace( placeholderReplaceRegex, function( match )
 							{
@@ -117,9 +117,9 @@ provides:
 			{
 				htmlFilter.addRules(
 				{
-					elements 
+					elements :
 					{
-						'span'  function( element )
+						'span' : function( element )
 						{
 							if ( element.attributes && element.attributes[ 'data-cke-placeholder' ] )
 								delete element.name;
@@ -133,14 +133,14 @@ provides:
 
 CKEDITOR.plugins.placeholder =
 {
-	createPlaceholder  function( editor, oldElement, text, isGet )
+	createPlaceholder : function( editor, oldElement, text, isGet )
 	{
 		var element = new CKEDITOR.dom.element( 'span', editor.document );
 		element.setAttributes(
 			{
-				contentEditable		 'false',
-				'data-cke-placeholder'	 1,
-				'class'			 'cke_placeholder'
+				contentEditable		: 'false',
+				'data-cke-placeholder'	: 1,
+				'class'			: 'cke_placeholder'
 			}
 		);
 
@@ -170,7 +170,7 @@ CKEDITOR.plugins.placeholder =
 		return null;
 	},
 
-	getSelectedPlaceHoder  function( editor )
+	getSelectedPlaceHoder : function( editor )
 	{
 		var range = editor.getSelection().getRanges()[ 0 ];
 		range.shrink( CKEDITOR.SHRINK_TEXT );

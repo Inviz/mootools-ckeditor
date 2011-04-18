@@ -18,10 +18,10 @@ provides:
 CKEDITOR.dialog.add( 'radio', function( editor )
 {
 	return {
-		title  editor.lang.checkboxAndRadio.radioTitle,
-		minWidth  350,
-		minHeight  140,
-		onShow  function()
+		title : editor.lang.checkboxAndRadio.radioTitle,
+		minWidth : 350,
+		minHeight : 140,
+		onShow : function()
 		{
 			delete this.radioButton;
 
@@ -32,7 +32,7 @@ CKEDITOR.dialog.add( 'radio', function( editor )
 				this.setupContent( element );
 			}
 		},
-		onOk  function()
+		onOk : function()
 		{
 			var editor,
 				element = this.radioButton,
@@ -47,28 +47,28 @@ CKEDITOR.dialog.add( 'radio', function( editor )
 
 			if ( isInsertMode )
 				editor.insertElement( element );
-			this.commitContent( { element  element } );
+			this.commitContent( { element : element } );
 		},
-		contents  [
+		contents : [
 			{
-				id  'info',
-				label  editor.lang.checkboxAndRadio.radioTitle,
-				title  editor.lang.checkboxAndRadio.radioTitle,
-				elements  [
+				id : 'info',
+				label : editor.lang.checkboxAndRadio.radioTitle,
+				title : editor.lang.checkboxAndRadio.radioTitle,
+				elements : [
 					{
-						id  'name',
-						type  'text',
-						label  editor.lang.common.name,
-						'default'  '',
-						accessKey  'N',
-						setup  function( element )
+						id : 'name',
+						type : 'text',
+						label : editor.lang.common.name,
+						'default' : '',
+						accessKey : 'N',
+						setup : function( element )
 						{
 							this.setValue(
 									element.data( 'cke-saved-name' ) ||
 									element.getAttribute( 'name' ) ||
 									'' );
 						},
-						commit  function( data )
+						commit : function( data )
 						{
 							var element = data.element;
 
@@ -82,16 +82,16 @@ CKEDITOR.dialog.add( 'radio', function( editor )
 						}
 					},
 					{
-						id  'value',
-						type  'text',
-						label  editor.lang.checkboxAndRadio.value,
-						'default'  '',
-						accessKey  'V',
-						setup  function( element )
+						id : 'value',
+						type : 'text',
+						label : editor.lang.checkboxAndRadio.value,
+						'default' : '',
+						accessKey : 'V',
+						setup : function( element )
 						{
 							this.setValue( element.getAttribute( 'value' ) || '' );
 						},
-						commit  function( data )
+						commit : function( data )
 						{
 							var element = data.element;
 
@@ -102,17 +102,17 @@ CKEDITOR.dialog.add( 'radio', function( editor )
 						}
 					},
 					{
-						id  'checked',
-						type  'checkbox',
-						label  editor.lang.checkboxAndRadio.selected,
-						'default'  '',
-						accessKey  'S',
-						value  "checked",
-						setup  function( element )
+						id : 'checked',
+						type : 'checkbox',
+						label : editor.lang.checkboxAndRadio.selected,
+						'default' : '',
+						accessKey : 'S',
+						value : "checked",
+						setup : function( element )
 						{
 							this.setValue( element.getAttribute( 'checked' ) );
 						},
-						commit  function( data )
+						commit : function( data )
 						{
 							var element = data.element;
 
@@ -131,9 +131,9 @@ CKEDITOR.dialog.add( 'radio', function( editor )
 								if ( isElementChecked != isChecked )
 								{
 									var replace = CKEDITOR.dom.element.createFromHtml( '<input type="radio"'
-											+ ( isChecked ? ' checked="checked"'  '' )
+											+ ( isChecked ? ' checked="checked"' : '' )
 											+ '></input>', editor.document );
-									element.copyAttributes( replace, { type  1, checked  1 } );
+									element.copyAttributes( replace, { type : 1, checked : 1 } );
 									replace.replace( element );
 									editor.getSelection().selectElement( replace );
 									data.element = replace;

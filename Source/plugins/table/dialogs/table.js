@@ -18,8 +18,8 @@ provides:
 
 (function()
 {
-	var widthPattern = /^(\d+(?\.\d+)?)(px|%)$/,
-		heightPattern = /^(\d+(?\.\d+)?)px$/;
+	var widthPattern = /^(\d+(?:\.\d+)?)(px|%)$/,
+		heightPattern = /^(\d+(?:\.\d+)?)px$/;
 
 	var commitValue = function( data )
 	{
@@ -39,11 +39,11 @@ provides:
 		var dialogadvtab = editor.plugins.dialogadvtab;
 
 		return {
-			title  editor.lang.table.title,
-			minWidth  310,
-			minHeight  CKEDITOR.env.ie ? 310  280,
+			title : editor.lang.table.title,
+			minWidth : 310,
+			minHeight : CKEDITOR.env.ie ? 310 : 280,
 
-			onLoad  function()
+			onLoad : function()
 			{
 				var dialog = this;
 
@@ -66,7 +66,7 @@ provides:
 							}
 
 							txtWidth && txtWidth.setValue( width, true );
-							cmbWidthType && cmbWidthType.setValue( isPx ? 'pixels'  'percents', true );
+							cmbWidthType && cmbWidthType.setValue( isPx ? 'pixels' : 'percents', true );
 
 							// Synchronize height value.
 							var height = this.getStyle( 'height', '' ),
@@ -78,7 +78,7 @@ provides:
 				}
 			},
 
-			onShow  function()
+			onShow : function()
 			{
 				// Detect if there's a selected table.
 				var selection = editor.getSelection(),
@@ -96,7 +96,7 @@ provides:
 						selectedTable = selectedTable.getAscendant( 'table', true );
 					else if ( ranges.length > 0 )
 					{
-						// Webkit could report the following range on cell selection (#4948)
+						// Webkit could report the following range on cell selection (#4948):
 						// <table><tr><td>[&nbsp;</td></tr></table>]
 						if ( CKEDITOR.env.webkit )
 							ranges[ 0 ].shrink( CKEDITOR.NODE_ELEMENT );
@@ -127,7 +127,7 @@ provides:
 				widthInput && widthInput.onChange();
 				heightInput && heightInput.onChange();
 			},
-			onOk  function()
+			onOk : function()
 			{
 				if ( this._.selectedElement )
 				{
@@ -175,7 +175,7 @@ provides:
 						tbody = table.getElementsByTag( 'tbody' ).getItem( 0 );
 						var theRow = tbody.getElementsByTag( 'tr' ).getItem( 0 );
 
-						// Change TD to TH
+						// Change TD to TH:
 						for ( i = 0 ; i < theRow.getChildCount() ; i++ )
 						{
 							var th = theRow.getChild( i );
@@ -191,7 +191,7 @@ provides:
 
 					if ( table.$.tHead !== null && !( headers == 'row' || headers == 'both' ) )
 					{
-						// Move the row out of the THead and put it in the TBody
+						// Move the row out of the THead and put it in the TBody:
 						thead = new CKEDITOR.dom.element( table.$.tHead );
 						tbody = table.getElementsByTag( 'tbody' ).getItem( 0 );
 
@@ -224,7 +224,7 @@ provides:
 						}
 					}
 
-					// Should we make all first TH-cells in a row make TD? If 'yes' we do it the other way round -)
+					// Should we make all first TH-cells in a row make TD? If 'yes' we do it the other way round :-)
 					if ( ( this.hasColumnHeaders ) && !( headers == 'col' || headers == 'both' ) )
 					{
 						for ( i = 0 ; i < table.$.rows.length ; i++ )
@@ -249,7 +249,7 @@ provides:
 					if ( info.txtWidth )
 					{
 						var type = info.cmbWidthType || 'pixels';
-						table.setStyle( 'width', info.txtWidth + ( type == 'pixels' ? 'px'  '%' ) );
+						table.setStyle( 'width', info.txtWidth + ( type == 'pixels' ? 'px' : '%' ) );
 					}
 					else
 						table.removeStyle( 'width' );
@@ -267,31 +267,31 @@ provides:
 
 				return true;
 			},
-			contents  [
+			contents : [
 				{
-					id  'info',
-					label  editor.lang.table.title,
-					elements 
+					id : 'info',
+					label : editor.lang.table.title,
+					elements :
 					[
 						{
-							type  'hbox',
-							widths  [ null, null ],
-							styles  [ 'vertical-aligntop' ],
-							children 
+							type : 'hbox',
+							widths : [ null, null ],
+							styles : [ 'vertical-align:top' ],
+							children :
 							[
 								{
-									type  'vbox',
-									padding  0,
-									children 
+									type : 'vbox',
+									padding : 0,
+									children :
 									[
 										{
-											type  'text',
-											id  'txtRows',
-											'default'  3,
-											label  editor.lang.table.rows,
-											required  true,
-											style  'width5em',
-											validate  function()
+											type : 'text',
+											id : 'txtRows',
+											'default' : 3,
+											label : editor.lang.table.rows,
+											required : true,
+											style : 'width:5em',
+											validate : function()
 											{
 												var pass = true,
 													value = this.getValue();
@@ -304,20 +304,20 @@ provides:
 												}
 												return pass;
 											},
-											setup  function( selectedElement )
+											setup : function( selectedElement )
 											{
 												this.setValue( selectedElement.$.rows.length );
 											},
-											commit  commitValue
+											commit : commitValue
 										},
 										{
-											type  'text',
-											id  'txtCols',
-											'default'  2,
-											label  editor.lang.table.columns,
-											required  true,
-											style  'width5em',
-											validate  function()
+											type : 'text',
+											id : 'txtCols',
+											'default' : 2,
+											label : editor.lang.table.columns,
+											required : true,
+											style : 'width:5em',
+											validate : function()
 											{
 												var pass = true,
 													value = this.getValue();
@@ -330,29 +330,29 @@ provides:
 												}
 												return pass;
 											},
-											setup  function( selectedTable )
+											setup : function( selectedTable )
 											{
 												this.setValue( selectedTable.$.rows[0].cells.length);
 											},
-											commit  commitValue
+											commit : commitValue
 										},
 										{
-											type  'html',
-											html  '&nbsp;'
+											type : 'html',
+											html : '&nbsp;'
 										},
 										{
-											type  'select',
-											id  'selHeaders',
-											'default'  '',
-											label  editor.lang.table.headers,
-											items 
+											type : 'select',
+											id : 'selHeaders',
+											'default' : '',
+											label : editor.lang.table.headers,
+											items :
 											[
 												[ editor.lang.table.headersNone, '' ],
 												[ editor.lang.table.headersRow, 'row' ],
 												[ editor.lang.table.headersColumn, 'col' ],
 												[ editor.lang.table.headersBoth, 'both' ]
 											],
-											setup  function( selectedTable )
+											setup : function( selectedTable )
 											{
 												// Fill in the headers field.
 												var dialog = this.getDialog();
@@ -371,24 +371,24 @@ provides:
 
 												// Check if the table contains <thead>.
 												if ( ( selectedTable.$.tHead !== null) )
-													this.setValue( dialog.hasColumnHeaders ? 'both'  'row' );
+													this.setValue( dialog.hasColumnHeaders ? 'both' : 'row' );
 												else
-													this.setValue( dialog.hasColumnHeaders ? 'col'  '' );
+													this.setValue( dialog.hasColumnHeaders ? 'col' : '' );
 											},
-											commit  commitValue
+											commit : commitValue
 										},
 										{
-											type  'text',
-											id  'txtBorder',
-											'default'  1,
-											label  editor.lang.table.border,
-											style  'width3em',
-											validate  CKEDITOR.dialog.validate['number']( editor.lang.table.invalidBorder ),
-											setup  function( selectedTable )
+											type : 'text',
+											id : 'txtBorder',
+											'default' : 1,
+											label : editor.lang.table.border,
+											style : 'width:3em',
+											validate : CKEDITOR.dialog.validate['number']( editor.lang.table.invalidBorder ),
+											setup : function( selectedTable )
 											{
 												this.setValue( selectedTable.getAttribute( 'border' ) || '' );
 											},
-											commit  function( data, selectedTable )
+											commit : function( data, selectedTable )
 											{
 												if ( this.getValue() )
 													selectedTable.setAttribute( 'border', this.getValue() );
@@ -397,22 +397,22 @@ provides:
 											}
 										},
 										{
-											id  'cmbAlign',
-											type  'select',
-											'default'  '',
-											label  editor.lang.common.align,
-											items 
+											id : 'cmbAlign',
+											type : 'select',
+											'default' : '',
+											label : editor.lang.common.align,
+											items :
 											[
 												[ editor.lang.common.notSet , ''],
 												[ editor.lang.common.alignLeft , 'left'],
 												[ editor.lang.common.alignCenter , 'center'],
 												[ editor.lang.common.alignRight , 'right']
 											],
-											setup  function( selectedTable )
+											setup : function( selectedTable )
 											{
 												this.setValue( selectedTable.getAttribute( 'align' ) || '' );
 											},
-											commit  function( data, selectedTable )
+											commit : function( data, selectedTable )
 											{
 												if ( this.getValue() )
 													selectedTable.setAttribute( 'align', this.getValue() );
@@ -423,25 +423,25 @@ provides:
 									]
 								},
 								{
-									type  'vbox',
-									padding  0,
-									children 
+									type : 'vbox',
+									padding : 0,
+									children :
 									[
 										{
-											type  'hbox',
-											widths  [ '5em' ],
-											children 
+											type : 'hbox',
+											widths : [ '5em' ],
+											children :
 											[
 												{
-													type  'text',
-													id  'txtWidth',
-													style  'width5em',
-													label  editor.lang.common.width,
-													'default'  500,
-													validate  CKEDITOR.dialog.validate['number']( editor.lang.table.invalidWidth ),
+													type : 'text',
+													id : 'txtWidth',
+													style : 'width:5em',
+													label : editor.lang.common.width,
+													'default' : 500,
+													validate : CKEDITOR.dialog.validate['number']( editor.lang.table.invalidWidth ),
 
 													// Extra labelling of width unit type.
-													onLoad  function()
+													onLoad : function()
 													{
 														var widthType = this.getDialog().getContentElement( 'info', 'cmbWidthType' ),
 															labelElement = widthType.getElement(),
@@ -451,7 +451,7 @@ provides:
 														inputElement.setAttribute( 'aria-labelledby', [ ariaLabelledByAttr, labelElement.$.id ].join( ' ' ) );
 													},
 
-													onChange  function()
+													onChange : function()
 													{
 														var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
 
@@ -460,13 +460,13 @@ provides:
 															var value = this.getValue();
 
 															if ( value )
-																value += this.getDialog().getContentElement( 'info', 'cmbWidthType' ).getValue() == 'percents' ? '%'  'px';
+																value += this.getDialog().getContentElement( 'info', 'cmbWidthType' ).getValue() == 'percents' ? '%' : 'px';
 
 															styles.updateStyle( 'width', value );
 														}
 													},
 
-													setup  function( selectedTable )
+													setup : function( selectedTable )
 													{
 														var widthMatch = widthPattern.exec( selectedTable.$.style.width );
 														if ( widthMatch )
@@ -474,48 +474,48 @@ provides:
 														else
 															this.setValue( '' );
 													},
-													commit  commitValue
+													commit : commitValue
 												},
 												{
-													id  'cmbWidthType',
-													type  'select',
-													label  editor.lang.table.widthUnit,
-													labelStyle 'visibilityhidden',
-													'default'  'pixels',
-													items 
+													id : 'cmbWidthType',
+													type : 'select',
+													label : editor.lang.table.widthUnit,
+													labelStyle: 'visibility:hidden',
+													'default' : 'pixels',
+													items :
 													[
 														[ editor.lang.table.widthPx , 'pixels'],
 														[ editor.lang.table.widthPc , 'percents']
 													],
-													setup  function( selectedTable )
+													setup : function( selectedTable )
 													{
 														var widthMatch = widthPattern.exec( selectedTable.$.style.width );
 														if ( widthMatch )
-															this.setValue( widthMatch[2] == 'px' ? 'pixels'  'percents' );
+															this.setValue( widthMatch[2] == 'px' ? 'pixels' : 'percents' );
 													},
-													onChange  function()
+													onChange : function()
 													{
 														this.getDialog().getContentElement( 'info', 'txtWidth' ).onChange();
 													},
-													commit  commitValue
+													commit : commitValue
 												}
 											]
 										},
 										{
-											type  'hbox',
-											widths  [ '5em' ],
-											children 
+											type : 'hbox',
+											widths : [ '5em' ],
+											children :
 											[
 												{
-													type  'text',
-													id  'txtHeight',
-													style  'width5em',
-													label  editor.lang.common.height,
-													'default'  '',
-													validate  CKEDITOR.dialog.validate['number']( editor.lang.table.invalidHeight ),
+													type : 'text',
+													id : 'txtHeight',
+													style : 'width:5em',
+													label : editor.lang.common.height,
+													'default' : '',
+													validate : CKEDITOR.dialog.validate['number']( editor.lang.table.invalidHeight ),
 
 													// Extra labelling of height unit type.
-													onLoad  function()
+													onLoad : function()
 													{
 														var heightType = this.getDialog().getContentElement( 'info', 'htmlHeightType' ),
 															labelElement = heightType.getElement(),
@@ -525,7 +525,7 @@ provides:
 														inputElement.setAttribute( 'aria-labelledby', [ ariaLabelledByAttr, labelElement.$.id ].join( ' ' ) );
 													},
 
-													onChange  function()
+													onChange : function()
 													{
 														var styles = this.getDialog().getContentElement( 'advanced', 'advStyles' );
 
@@ -536,37 +536,37 @@ provides:
 														}
 													},
 
-													setup  function( selectedTable )
+													setup : function( selectedTable )
 													{
 														var heightMatch = heightPattern.exec( selectedTable.$.style.height );
 														if ( heightMatch )
 															this.setValue( heightMatch[1] );
 													},
-													commit  commitValue
+													commit : commitValue
 												},
 												{
-													id  'htmlHeightType',
-													type  'html',
-													html  '<div><br />' + editor.lang.table.widthPx + '</div>'
+													id : 'htmlHeightType',
+													type : 'html',
+													html : '<div><br />' + editor.lang.table.widthPx + '</div>'
 												}
 											]
 										},
 										{
-											type  'html',
-											html  '&nbsp;'
+											type : 'html',
+											html : '&nbsp;'
 										},
 										{
-											type  'text',
-											id  'txtCellSpace',
-											style  'width3em',
-											label  editor.lang.table.cellSpace,
-											'default'  1,
-											validate  CKEDITOR.dialog.validate['number']( editor.lang.table.invalidCellSpacing ),
-											setup  function( selectedTable )
+											type : 'text',
+											id : 'txtCellSpace',
+											style : 'width:3em',
+											label : editor.lang.table.cellSpace,
+											'default' : 1,
+											validate : CKEDITOR.dialog.validate['number']( editor.lang.table.invalidCellSpacing ),
+											setup : function( selectedTable )
 											{
 												this.setValue( selectedTable.getAttribute( 'cellSpacing' ) || '' );
 											},
-											commit  function( data, selectedTable )
+											commit : function( data, selectedTable )
 											{
 												if ( this.getValue() )
 													selectedTable.setAttribute( 'cellSpacing', this.getValue() );
@@ -575,17 +575,17 @@ provides:
 											}
 										},
 										{
-											type  'text',
-											id  'txtCellPad',
-											style  'width3em',
-											label  editor.lang.table.cellPad,
-											'default'  1,
-											validate  CKEDITOR.dialog.validate['number']( editor.lang.table.invalidCellPadding ),
-											setup  function( selectedTable )
+											type : 'text',
+											id : 'txtCellPad',
+											style : 'width:3em',
+											label : editor.lang.table.cellPad,
+											'default' : 1,
+											validate : CKEDITOR.dialog.validate['number']( editor.lang.table.invalidCellPadding ),
+											setup : function( selectedTable )
 											{
 												this.setValue( selectedTable.getAttribute( 'cellPadding' ) || '' );
 											},
-											commit  function( data, selectedTable )
+											commit : function( data, selectedTable )
 											{
 												if ( this.getValue() )
 													selectedTable.setAttribute( 'cellPadding', this.getValue() );
@@ -598,20 +598,20 @@ provides:
 							]
 						},
 						{
-							type  'html',
-							align  'right',
-							html  ''
+							type : 'html',
+							align : 'right',
+							html : ''
 						},
 						{
-							type  'vbox',
-							padding  0,
-							children 
+							type : 'vbox',
+							padding : 0,
+							children :
 							[
 								{
-									type  'text',
-									id  'txtCaption',
-									label  editor.lang.table.caption,
-									setup  function( selectedTable )
+									type : 'text',
+									id : 'txtCaption',
+									label : editor.lang.table.caption,
+									setup : function( selectedTable )
 									{
 										var nodeList = selectedTable.getElementsByTag( 'caption' );
 										if ( nodeList.count() > 0 )
@@ -621,7 +621,7 @@ provides:
 											this.setValue( caption );
 										}
 									},
-									commit  function( data, table )
+									commit : function( data, table )
 									{
 										var caption = this.getValue(),
 											captionElement = table.getElementsByTag( 'caption' );
@@ -650,14 +650,14 @@ provides:
 									}
 								},
 								{
-									type  'text',
-									id  'txtSummary',
-									label  editor.lang.table.summary,
-									setup  function( selectedTable )
+									type : 'text',
+									id : 'txtSummary',
+									label : editor.lang.table.summary,
+									setup : function( selectedTable )
 									{
 										this.setValue( selectedTable.getAttribute( 'summary' ) || '' );
 									},
-									commit  function( data, selectedTable )
+									commit : function( data, selectedTable )
 									{
 										if ( this.getValue() )
 											selectedTable.setAttribute( 'summary', this.getValue() );

@@ -22,26 +22,26 @@ provides:
 
 CKEDITOR.plugins.add( 'forms',
 {
-	init  function( editor )
+	init : function( editor )
 	{
 		var lang = editor.lang;
 
 		editor.addCss(
 			'form' +
 			'{' +
-				'border 1px dotted #FF0000;' +
-				'padding 2px;' +
+				'border: 1px dotted #FF0000;' +
+				'padding: 2px;' +
 			'}\n' );
 
 		editor.addCss(
 			'img.cke_hidden' +
 			'{' +
-				'background-image url(' + CKEDITOR.getUrl( this.path + 'images/hiddenfield.gif' ) + ');' +
-				'background-position center center;' +
-				'background-repeat no-repeat;' +
-				'border 1px solid #a9a9a9;' +
-				'width 16px !important;' +
-				'height 16px !important;' +
+				'background-image: url(' + CKEDITOR.getUrl( this.path + 'images/hiddenfield.gif' ) + ');' +
+				'background-position: center center;' +
+				'background-repeat: no-repeat;' +
+				'border: 1px solid #a9a9a9;' +
+				'width: 16px !important;' +
+				'height: 16px !important;' +
 			'}' );
 
 		// All buttons use the same code to register. So, to avoid
@@ -52,8 +52,8 @@ CKEDITOR.plugins.add( 'forms',
 
 			editor.ui.addButton( buttonName,
 				{
-					label  lang.common[ buttonName.charAt(0).toLowerCase() + buttonName.slice(1) ],
-					command  commandName
+					label : lang.common[ buttonName.charAt(0).toLowerCase() + buttonName.slice(1) ],
+					command : commandName
 				});
 			CKEDITOR.dialog.add( commandName, dialogFile );
 		};
@@ -74,67 +74,67 @@ CKEDITOR.plugins.add( 'forms',
 		{
 			editor.addMenuItems(
 				{
-					form 
+					form :
 					{
-						label  lang.form.menu,
-						command  'form',
-						group  'form'
+						label : lang.form.menu,
+						command : 'form',
+						group : 'form'
 					},
 
-					checkbox 
+					checkbox :
 					{
-						label  lang.checkboxAndRadio.checkboxTitle,
-						command  'checkbox',
-						group  'checkbox'
+						label : lang.checkboxAndRadio.checkboxTitle,
+						command : 'checkbox',
+						group : 'checkbox'
 					},
 
-					radio 
+					radio :
 					{
-						label  lang.checkboxAndRadio.radioTitle,
-						command  'radio',
-						group  'radio'
+						label : lang.checkboxAndRadio.radioTitle,
+						command : 'radio',
+						group : 'radio'
 					},
 
-					textfield 
+					textfield :
 					{
-						label  lang.textfield.title,
-						command  'textfield',
-						group  'textfield'
+						label : lang.textfield.title,
+						command : 'textfield',
+						group : 'textfield'
 					},
 
-					hiddenfield 
+					hiddenfield :
 					{
-						label  lang.hidden.title,
-						command  'hiddenfield',
-						group  'hiddenfield'
+						label : lang.hidden.title,
+						command : 'hiddenfield',
+						group : 'hiddenfield'
 					},
 
-					imagebutton 
+					imagebutton :
 					{
-						label  lang.image.titleButton,
-						command  'imagebutton',
-						group  'imagebutton'
+						label : lang.image.titleButton,
+						command : 'imagebutton',
+						group : 'imagebutton'
 					},
 
-					button 
+					button :
 					{
-						label  lang.button.title,
-						command  'button',
-						group  'button'
+						label : lang.button.title,
+						command : 'button',
+						group : 'button'
 					},
 
-					select 
+					select :
 					{
-						label  lang.select.title,
-						command  'select',
-						group  'select'
+						label : lang.select.title,
+						command : 'select',
+						group : 'select'
 					},
 
-					textarea 
+					textarea :
 					{
-						label  lang.textarea.title,
-						command  'textarea',
-						group  'textarea'
+						label : lang.textarea.title,
+						command : 'textarea',
+						group : 'textarea'
 					}
 				});
 		}
@@ -145,7 +145,7 @@ CKEDITOR.plugins.add( 'forms',
 			editor.contextMenu.addListener( function( element )
 				{
 					if ( element && element.hasAscendant( 'form', true ) && !element.isReadOnly() )
-						return { form  CKEDITOR.TRISTATE_OFF };
+						return { form : CKEDITOR.TRISTATE_OFF };
 				});
 
 			editor.contextMenu.addListener( function( element )
@@ -155,36 +155,36 @@ CKEDITOR.plugins.add( 'forms',
 						var name = element.getName();
 
 						if ( name == 'select' )
-							return { select  CKEDITOR.TRISTATE_OFF };
+							return { select : CKEDITOR.TRISTATE_OFF };
 
 						if ( name == 'textarea' )
-							return { textarea  CKEDITOR.TRISTATE_OFF };
+							return { textarea : CKEDITOR.TRISTATE_OFF };
 
 						if ( name == 'input' )
 						{
 							switch( element.getAttribute( 'type' ) )
 							{
-								case 'button' 
-								case 'submit' 
-								case 'reset' 
-									return { button  CKEDITOR.TRISTATE_OFF };
+								case 'button' :
+								case 'submit' :
+								case 'reset' :
+									return { button : CKEDITOR.TRISTATE_OFF };
 
-								case 'checkbox' 
-									return { checkbox  CKEDITOR.TRISTATE_OFF };
+								case 'checkbox' :
+									return { checkbox : CKEDITOR.TRISTATE_OFF };
 
-								case 'radio' 
-									return { radio  CKEDITOR.TRISTATE_OFF };
+								case 'radio' :
+									return { radio : CKEDITOR.TRISTATE_OFF };
 
-								case 'image' 
-									return { imagebutton  CKEDITOR.TRISTATE_OFF };
+								case 'image' :
+									return { imagebutton : CKEDITOR.TRISTATE_OFF };
 
-								default 
-									return { textfield  CKEDITOR.TRISTATE_OFF };
+								default :
+									return { textfield : CKEDITOR.TRISTATE_OFF };
 							}
 						}
 
 						if ( name == 'img' && element.data( 'cke-real-element-type' ) == 'hiddenfield' )
-							return { hiddenfield  CKEDITOR.TRISTATE_OFF };
+							return { hiddenfield : CKEDITOR.TRISTATE_OFF };
 					}
 				});
 		}
@@ -205,21 +205,21 @@ CKEDITOR.plugins.add( 'forms',
 				{
 					switch ( element.getAttribute( 'type' ) )
 					{
-						case 'button' 
-						case 'submit' 
-						case 'reset' 
+						case 'button' :
+						case 'submit' :
+						case 'reset' :
 							evt.data.dialog = 'button';
 							break;
-						case 'checkbox' 
+						case 'checkbox' :
 							evt.data.dialog = 'checkbox';
 							break;
-						case 'radio' 
+						case 'radio' :
 							evt.data.dialog = 'radio';
 							break;
-						case 'image' 
+						case 'image' :
 							evt.data.dialog = 'imagebutton';
 							break;
-						default 
+						default :
 							evt.data.dialog = 'textfield';
 							break;
 					}
@@ -227,7 +227,7 @@ CKEDITOR.plugins.add( 'forms',
 			});
 	},
 
-	afterInit  function( editor )
+	afterInit : function( editor )
 	{
 		var dataProcessor = editor.dataProcessor,
 			htmlFilter = dataProcessor && dataProcessor.htmlFilter,
@@ -238,9 +238,9 @@ CKEDITOR.plugins.add( 'forms',
 		{
 			htmlFilter && htmlFilter.addRules(
 			{
-				elements 
+				elements :
 				{
-					input  function( input )
+					input : function( input )
 					{
 						var attrs = input.attributes,
 							type = attrs.type;
@@ -258,9 +258,9 @@ CKEDITOR.plugins.add( 'forms',
 		{
 			dataFilter.addRules(
 			{
-				elements 
+				elements :
 				{
-					input  function( element )
+					input : function( element )
 					{
 						if ( element.attributes.type == 'hidden' )
 							return editor.createFakeParserElement( element, 'cke_hidden', 'hiddenfield' );
@@ -269,7 +269,7 @@ CKEDITOR.plugins.add( 'forms',
 			} );
 		}
 	},
-	requires  [ 'image', 'fakeobjects' ]
+	requires : [ 'image', 'fakeobjects' ]
 } );
 
 if ( CKEDITOR.env.ie )
@@ -282,13 +282,13 @@ if ( CKEDITOR.env.ie )
 		{
 			switch ( name )
 			{
-				case 'class' 
+				case 'class' :
 					return this.$.className.length > 0;
-				case 'checked' 
+				case 'checked' :
 					return !!this.$.checked;
-				case 'value' 
+				case 'value' :
 					var type = this.getAttribute( 'type' );
-					return type == 'checkbox' || type == 'radio' ? this.$.value != 'on'  this.$.value;
+					return type == 'checkbox' || type == 'radio' ? this.$.value != 'on' : this.$.value;
 			}
 		}
 

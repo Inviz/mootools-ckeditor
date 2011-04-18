@@ -19,16 +19,16 @@ provides:
 CKEDITOR.skins.add( 'v2', (function()
 {
 	return {
-		editor		 { css  [ 'editor.css' ] },
-		dialog		 { css  [ 'dialog.css' ] },
-		templates	 { css  [ 'templates.css' ] },
-		margins		 [ 0, 14, 18, 14 ]
+		editor		: { css : [ 'editor.css' ] },
+		dialog		: { css : [ 'dialog.css' ] },
+		templates	: { css : [ 'templates.css' ] },
+		margins		: [ 0, 14, 18, 14 ]
 	};
 })() );
 
 (function()
 {
-	CKEDITOR.dialog ? dialogSetup()  CKEDITOR.on( 'dialogPluginReady', dialogSetup );
+	CKEDITOR.dialog ? dialogSetup() : CKEDITOR.on( 'dialogPluginReady', dialogSetup );
 
 	function dialogSetup()
 	{
@@ -45,8 +45,8 @@ CKEDITOR.skins.add( 'v2', (function()
 
 				contents.setStyles(
 					{
-						width  width + 'px',
-						height  height + 'px'
+						width : width + 'px',
+						height : height + 'px'
 					});
 
 				if ( !CKEDITOR.env.ie || CKEDITOR.env.ie9Compat )

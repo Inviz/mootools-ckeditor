@@ -20,8 +20,8 @@ provides:
 {
 	CKEDITOR.plugins.liststyle =
 	{
-		requires  [ 'dialog' ],
-		init  function( editor )
+		requires : [ 'dialog' ],
+		init : function( editor )
 		{
 			editor.addCommand( 'numberedListStyle', new CKEDITOR.dialogCommand( 'numberedListStyle' ) );
 			CKEDITOR.dialog.add( 'numberedListStyle', this.path + 'dialogs/liststyle.js' );
@@ -36,17 +36,17 @@ provides:
 
 				editor.addMenuItems(
 					{
-						numberedlist 
+						numberedlist :
 						{
-							label  editor.lang.list.numberedTitle,
-							group  'list',
-							command 'numberedListStyle'
+							label : editor.lang.list.numberedTitle,
+							group : 'list',
+							command: 'numberedListStyle'
 						},
-						bulletedlist 
+						bulletedlist :
 						{
-							label  editor.lang.list.bulletedTitle,
-							group  'list',
-							command 'bulletedListStyle'
+							label : editor.lang.list.bulletedTitle,
+							group : 'list',
+							command: 'bulletedListStyle'
 						}
 					});
 			}
@@ -63,9 +63,9 @@ provides:
 						{
 							var name = element.getName();
 							if ( name == 'ol' )
-								return { numberedlist CKEDITOR.TRISTATE_OFF };
+								return { numberedlist: CKEDITOR.TRISTATE_OFF };
 							else if ( name == 'ul' )
-								return { bulletedlist CKEDITOR.TRISTATE_OFF };
+								return { bulletedlist: CKEDITOR.TRISTATE_OFF };
 
 							element = element.getParent();
 						}

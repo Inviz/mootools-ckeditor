@@ -20,9 +20,9 @@ provides:
 {
 	CKEDITOR.plugins.add( 'templates',
 		{
-			requires  [ 'dialog' ],
+			requires : [ 'dialog' ],
 
-			init  function( editor )
+			init : function( editor )
 			{
 				CKEDITOR.dialog.add( 'templates', CKEDITOR.getUrl( this.path + 'dialogs/templates.js' ) );
 
@@ -30,8 +30,8 @@ provides:
 
 				editor.ui.addButton( 'Templates',
 					{
-						label  editor.lang.templates.button,
-						command  'templates'
+						label : editor.lang.templates.button,
+						command : 'templates'
 					});
 			}
 		});
@@ -90,7 +90,7 @@ provides:
  * config.templates_files =
  *     [
  *         '/editor_templates/site_default.js',
- *         'http//www.example.com/user_templates.js
+ *         'http://www.example.com/user_templates.js
  *     ];
  *
  */

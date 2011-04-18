@@ -35,31 +35,31 @@ CKEDITOR.dialog.add( 'button', function( editor )
 	}
 
 	return {
-		title  editor.lang.button.title,
-		minWidth  350,
-		minHeight  150,
-		onShow  function()
+		title : editor.lang.button.title,
+		minWidth : 350,
+		minHeight : 150,
+		onShow : function()
 		{
 			delete this.button;
 			var element = this.getParentEditor().getSelection().getSelectedElement();
 			if ( element && element.is( 'input' ) )
 			{
 				var type = element.getAttribute( 'type' );
-				if ( type in { button1, reset1, submit1 } )
+				if ( type in { button:1, reset:1, submit:1 } )
 				{
 					this.button = element;
 					this.setupContent( element );
 				}
 			}
 		},
-		onOk  function()
+		onOk : function()
 		{
 			var editor = this.getParentEditor(),
 				element = this.button,
 				isInsertMode = !element;
 
 			var fake = element ? CKEDITOR.htmlParser.fragment.fromHtml( element.getOuterHtml() ).children[ 0 ]
-					 new CKEDITOR.htmlParser.element( 'input' );
+					: new CKEDITOR.htmlParser.element( 'input' );
 			this.commitContent( fake );
 
 			var writer = new CKEDITOR.htmlParser.basicWriter();
@@ -74,55 +74,55 @@ CKEDITOR.dialog.add( 'button', function( editor )
 				editor.getSelection().selectElement( newElement );
 			}
 		},
-		contents  [
+		contents : [
 			{
-				id  'info',
-				label  editor.lang.button.title,
-				title  editor.lang.button.title,
-				elements  [
+				id : 'info',
+				label : editor.lang.button.title,
+				title : editor.lang.button.title,
+				elements : [
 					{
-						id  'name',
-						type  'text',
-						label  editor.lang.common.name,
-						'default'  '',
-						setup  function( element )
+						id : 'name',
+						type : 'text',
+						label : editor.lang.common.name,
+						'default' : '',
+						setup : function( element )
 						{
 							this.setValue(
 									element.data( 'cke-saved-name' ) ||
 									element.getAttribute( 'name' ) ||
 									'' );
 						},
-						commit  commitAttributes
+						commit : commitAttributes
 					},
 					{
-						id  'value',
-						type  'text',
-						label  editor.lang.button.text,
-						accessKey  'V',
-						'default'  '',
-						setup  function( element )
+						id : 'value',
+						type : 'text',
+						label : editor.lang.button.text,
+						accessKey : 'V',
+						'default' : '',
+						setup : function( element )
 						{
 							this.setValue( element.getAttribute( 'value' ) || '' );
 						},
-						commit  commitAttributes
+						commit : commitAttributes
 					},
 					{
-						id  'type',
-						type  'select',
-						label  editor.lang.button.type,
-						'default'  'button',
-						accessKey  'T',
-						items 
+						id : 'type',
+						type : 'select',
+						label : editor.lang.button.type,
+						'default' : 'button',
+						accessKey : 'T',
+						items :
 						[
 							[ editor.lang.button.typeBtn, 'button' ],
 							[ editor.lang.button.typeSbm, 'submit' ],
 							[ editor.lang.button.typeRst, 'reset' ]
 						],
-						setup  function( element )
+						setup : function( element )
 						{
 							this.setValue( element.getAttribute( 'type' ) || '' );
 						},
-						commit  commitAttributes
+						commit : commitAttributes
 					}
 				]
 			}

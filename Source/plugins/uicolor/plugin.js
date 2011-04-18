@@ -18,10 +18,10 @@ provides:
 
 CKEDITOR.plugins.add( 'uicolor',
 {
-	requires  [ 'dialog' ],
-	lang  [ 'en', 'he' ],
+	requires : [ 'dialog' ],
+	lang : [ 'en', 'he' ],
 
-	init  function( editor )
+	init : function( editor )
 	{
 		if ( CKEDITOR.env.ie6Compat )
 			return;
@@ -29,9 +29,9 @@ CKEDITOR.plugins.add( 'uicolor',
 		editor.addCommand( 'uicolor', new CKEDITOR.dialogCommand( 'uicolor' ) );
 		editor.ui.addButton( 'UIColor',
 			{
-				label  editor.lang.uicolor.title,
-				command  'uicolor',
-				icon  this.path + 'uicolor.gif'
+				label : editor.lang.uicolor.title,
+				command : 'uicolor',
+				icon : this.path + 'uicolor.gif'
 			});
 		CKEDITOR.dialog.add( 'uicolor', this.path + 'dialogs/uicolor.js' );
 

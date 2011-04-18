@@ -65,7 +65,7 @@ CKEDITOR.dom.domObject.prototype = (function()
 
 	return /** @lends CKEDITOR.dom.domObject.prototype */ {
 
-		getPrivate  function()
+		getPrivate : function()
 		{
 			var priv;
 
@@ -78,7 +78,7 @@ CKEDITOR.dom.domObject.prototype = (function()
 		},
 
 		/** @ignore */
-		on   function( eventName )
+		on  : function( eventName )
 		{
 			// We customize the "on" function here. The basic idea is that we'll have
 			// only one listener for a native event, which will then call all listeners
@@ -109,7 +109,7 @@ CKEDITOR.dom.domObject.prototype = (function()
 		},
 
 		/** @ignore */
-		removeListener  function( eventName )
+		removeListener : function( eventName )
 		{
 			// Call the original implementation.
 			CKEDITOR.event.prototype.removeListener.apply( this, arguments );
@@ -136,7 +136,7 @@ CKEDITOR.dom.domObject.prototype = (function()
 		 * To avoid memory leaks we must assure that there are no
 		 * references left after the object is no longer needed.
 		 */
-		removeAllListeners  function()
+		removeAllListeners : function()
 		{
 			var nativeListeners = this.getCustomData( '_cke_nativeListeners' );
 			for ( var eventName in nativeListeners )
@@ -181,9 +181,9 @@ CKEDITOR.dom.domObject.prototype = (function()
 	/**
 	 * Sets a data slot value for this object. These values are shared by all
 	 * instances pointing to that same DOM object.
-	 * <strong>Note</strong> The created data slot is only guarantied to be available on this unique dom node,
+	 * <strong>Note:</strong> The created data slot is only guarantied to be available on this unique dom node,
 	 * thus any wish to continue access it from other element clones (either created by clone node or from innerHtml)
-	 * will fail, for such usage, please use {@link CKEDITOR.dom.elementsetAttribute} instead.
+	 * will fail, for such usage, please use {@link CKEDITOR.dom.element::setAttribute} instead.
 	 * @name CKEDITOR.dom.domObject.prototype.setCustomData
 	 * @function
 	 * @param {String} key A key used to identify the data slot.

@@ -37,7 +37,7 @@ provides:
  * @example
  * CKEDITOR.plugins.add( 'sample',
  * {
- *     requires  [ 'button', 'selection' ]
+ *     requires : [ 'button', 'selection' ]
  * });
  */
 
@@ -53,7 +53,7 @@ provides:
  * @example
  * CKEDITOR.plugins.add( 'sample',
  * {
- *     beforeInit  function( editor )
+ *     beforeInit : function( editor )
  *     {
  *         alert( 'Editor "' + editor.name + '" is to be initialized!' );
  *     }
@@ -69,7 +69,7 @@ provides:
  * @example
  * CKEDITOR.plugins.add( 'sample',
  * {
- *     init  function( editor )
+ *     init : function( editor )
  *     {
  *         alert( 'Editor "' + editor.name + '" is being initialized!' );
  *     }

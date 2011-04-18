@@ -36,8 +36,8 @@ CKEDITOR.dom.documentFragment = function( ownerDocument )
 CKEDITOR.tools.extend( CKEDITOR.dom.documentFragment.prototype,
 	CKEDITOR.dom.element.prototype,
 	{
-		type  CKEDITOR.NODE_DOCUMENT_FRAGMENT,
-		insertAfterNode  function( node )
+		type : CKEDITOR.NODE_DOCUMENT_FRAGMENT,
+		insertAfterNode : function( node )
 		{
 			node = node.$;
 			node.parentNode.insertBefore( this.$, node.nextSibling );
@@ -45,21 +45,21 @@ CKEDITOR.tools.extend( CKEDITOR.dom.documentFragment.prototype,
 	},
 	true,
 	{
-		'append'  1,
-		'appendBogus'  1,
-		'getFirst'  1,
-		'getLast'  1,
-		'appendTo'  1,
-		'moveChildren'  1,
-		'insertBefore'  1,
-		'insertAfterNode'  1,
-		'replace'  1,
-		'trim'  1,
-		'type'  1,
-		'ltrim'  1,
-		'rtrim'  1,
-		'getDocument'  1,
-		'getChildCount'  1,
-		'getChild'  1,
-		'getChildren'  1
+		'append' : 1,
+		'appendBogus' : 1,
+		'getFirst' : 1,
+		'getLast' : 1,
+		'appendTo' : 1,
+		'moveChildren' : 1,
+		'insertBefore' : 1,
+		'insertAfterNode' : 1,
+		'replace' : 1,
+		'trim' : 1,
+		'type' : 1,
+		'ltrim' : 1,
+		'rtrim' : 1,
+		'getDocument' : 1,
+		'getChildCount' : 1,
+		'getChild' : 1,
+		'getChildren' : 1
 	} );

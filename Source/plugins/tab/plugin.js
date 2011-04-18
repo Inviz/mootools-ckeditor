@@ -20,13 +20,13 @@ provides:
 {
 	var meta =
 	{
-		editorFocus  false,
-		modes  { wysiwyg1, source1 }
+		editorFocus : false,
+		modes : { wysiwyg:1, source:1 }
 	};
 
 	var blurCommand =
 		{
-			exec  function( editor )
+			exec : function( editor )
 			{
 				editor.container.focusNext( true, editor.tabIndex );
 			}
@@ -34,7 +34,7 @@ provides:
 
 	var blurBackCommand =
 		{
-			exec  function( editor )
+			exec : function( editor )
 			{
 				editor.container.focusPrevious( true, editor.tabIndex );
 			}
@@ -43,10 +43,10 @@ provides:
 	function selectNextCellCommand( backward )
 	{
 		return {
-			editorFocus  false,
-			canUndo  false,
-			modes  { wysiwyg  1 },
-			exec  function( editor )
+			editorFocus : false,
+			canUndo : false,
+			modes : { wysiwyg : 1 },
+			exec : function( editor )
 			{
 				if ( editor.focusManager.hasFocus )
 				{
@@ -60,7 +60,7 @@ provides:
 								next = CKEDITOR.tools.tryThese( function()
 								{
 									var row = cell.getParent(),
-											next = row.$.cells[ cell.$.cellIndex + ( backward ? - 1  1 ) ];
+											next = row.$.cells[ cell.$.cellIndex + ( backward ? - 1 : 1 ) ];
 
 									// Invalid any empty value.
 									next.parentNode.parentNode;
@@ -70,9 +70,9 @@ provides:
 								{
 									var row = cell.getParent(),
 											table = row.getAscendant( 'table' ),
-											nextRow = table.$.rows[ row.$.rowIndex + ( backward ? - 1  1 ) ];
+											nextRow = table.$.rows[ row.$.rowIndex + ( backward ? - 1 : 1 ) ];
 
-									return nextRow.cells[ backward? nextRow.cells.length -1  0 ];
+									return nextRow.cells[ backward? nextRow.cells.length -1 : 0 ];
 								});
 
 						// Clone one more row at the end of table and select the first newly established cell.
@@ -114,9 +114,9 @@ provides:
 
 	CKEDITOR.plugins.add( 'tab',
 	{
-		requires  [ 'keystrokes' ],
+		requires : [ 'keystrokes' ],
 
-		init  function( editor )
+		init : function( editor )
 		{
 			var tabTools = editor.config.enableTabKeyTools !== false,
 				tabSpaces = editor.config.tabSpaces || 0,
@@ -185,7 +185,7 @@ provides:
 CKEDITOR.dom.element.prototype.focusNext = function( ignoreChildren, indexToUse )
 {
 	var $ = this.$,
-		curTabIndex = ( indexToUse === undefined ? this.getTabIndex()  indexToUse ),
+		curTabIndex = ( indexToUse === undefined ? this.getTabIndex() : indexToUse ),
 		passedCurrent, enteredCurrent,
 		elected, electedTabIndex,
 		element, elementTabIndex;
@@ -210,7 +210,7 @@ CKEDITOR.dom.element.prototype.focusNext = function( ignoreChildren, indexToUse 
 	}
 	else
 	{
-		// If this element has tabindex > 0 then we must look for
+		// If this element has tabindex > 0 then we must look for:
 		//		1. An element following this element with the same tabindex.
 		//		2. The first element in source other with the lowest tabindex
 		//		   that is higher than this element tabindex.
@@ -273,7 +273,7 @@ CKEDITOR.dom.element.prototype.focusNext = function( ignoreChildren, indexToUse 
 CKEDITOR.dom.element.prototype.focusPrevious = function( ignoreChildren, indexToUse )
 {
 	var $ = this.$,
-		curTabIndex = ( indexToUse === undefined ? this.getTabIndex()  indexToUse ),
+		curTabIndex = ( indexToUse === undefined ? this.getTabIndex() : indexToUse ),
 		passedCurrent, enteredCurrent,
 		elected,
 		electedTabIndex = 0,
@@ -306,7 +306,7 @@ CKEDITOR.dom.element.prototype.focusPrevious = function( ignoreChildren, indexTo
 
 		if ( curTabIndex <= 0 )
 		{
-			// If this element has tabindex <= 0 then we must look for
+			// If this element has tabindex <= 0 then we must look for:
 			//		1. An element before this one containing tabindex=0.
 			//		2. The last element with the highest tabindex.
 
@@ -324,7 +324,7 @@ CKEDITOR.dom.element.prototype.focusPrevious = function( ignoreChildren, indexTo
 		}
 		else
 		{
-			// If this element has tabindex > 0 we must look for
+			// If this element has tabindex > 0 we must look for:
 			//		1. An element preceeding this one, with the same tabindex.
 			//		2. The last element in source other with the highest tabindex
 			//		   that is lower than this element tabindex.
@@ -359,8 +359,8 @@ CKEDITOR.dom.element.prototype.focusPrevious = function( ignoreChildren, indexTo
  */
 
 /**
- * Allow context-sensitive tab key behaviors, including the following scenarios
- * <h5>When selection is anchored inside <b>table cells</b></h5>
+ * Allow context-sensitive tab key behaviors, including the following scenarios:
+ * <h5>When selection is anchored inside <b>table cells</b>:</h5>
  * <ul>
  * 		<li>If TAB is pressed, select the contents of the "next" cell. If in the last cell in the table, add a new row to it and focus its first cell.</li>
  * 		<li>If SHIFT+TAB is pressed, select the contents of the "previous" cell. Do nothing when it's in the first cell.</li>
@@ -373,7 +373,7 @@ CKEDITOR.dom.element.prototype.focusPrevious = function( ignoreChildren, indexTo
  */
 
 // If the TAB key is not supposed to be enabled for navigation, the following
-// settings could be used alternatively
+// settings could be used alternatively:
 // config.keystrokes.push(
 //	[ CKEDITOR.ALT + 38 /*Arrow Up*/, 'selectPreviousCell' ],
 //	[ CKEDITOR.ALT + 40 /*Arrow Down*/, 'selectNextCell' ]

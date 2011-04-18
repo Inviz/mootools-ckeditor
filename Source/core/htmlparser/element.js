@@ -54,7 +54,7 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 	var tagName = attributes[ 'data-cke-real-element-type' ] || name || '';
 
 	// Reveal the real semantic of our internal custom tag name (#6639).
-	var internalTag = tagName.match( /^cke(.*)/ );
+	var internalTag = tagName.match( /^cke:(.*)/ );
   	internalTag && ( tagName = internalTag[ 1 ] );
 
 	var dtd			= CKEDITOR.dtd,
@@ -72,8 +72,8 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 	/** @private */
 	this._ =
 	{
-		isBlockLike  isBlockLike,
-		hasInlineStarted  isEmpty || !isBlockLike
+		isBlockLike : isBlockLike,
+		hasInlineStarted : isEmpty || !isBlockLike
 	};
 };
 
@@ -85,7 +85,7 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 	{
 		a = a[0];
 		b = b[0];
-		return a < b ? -1  a > b ? 1  0;
+		return a < b ? -1 : a > b ? 1 : 0;
 	};
 
 	CKEDITOR.htmlParser.element.prototype =
@@ -95,25 +95,25 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 		 * @type Number
 		 * @example
 		 */
-		type  CKEDITOR.NODE_ELEMENT,
+		type : CKEDITOR.NODE_ELEMENT,
 
 		/**
 		 * Adds a node to the element children list.
 		 * @param {Object} node The node to be added. It can be any of of the
-		 *		following types {@link CKEDITOR.htmlParser.element},
+		 *		following types: {@link CKEDITOR.htmlParser.element},
 		 *		{@link CKEDITOR.htmlParser.text} and
 		 *		{@link CKEDITOR.htmlParser.comment}.
 		 * @function
 		 * @example
 		 */
-		add  CKEDITOR.htmlParser.fragment.prototype.add,
+		add : CKEDITOR.htmlParser.fragment.prototype.add,
 
 		/**
 		 * Clone this element.
 		 * @returns {CKEDITOR.htmlParser.element} The element clone.
 		 * @example
 		 */
-		clone  function()
+		clone : function()
 		{
 			return new CKEDITOR.htmlParser.element( this.name, this.attributes );
 		},
@@ -123,11 +123,11 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 		 * @param {CKEDITOR.htmlWriter} writer The writer to which write the HTML.
 		 * @example
 		 */
-		writeHtml  function( writer, filter )
+		writeHtml : function( writer, filter )
 		{
 			var attributes = this.attributes;
 
-			// Ignore cke prefixes when writing HTML.
+			// Ignore cke: prefixes when writing HTML.
 			var element = this,
 				writeName = element.name,
 				a, newAttrName, value;
@@ -180,7 +180,7 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 					// filter but not the children.
 					if ( !writeName )
 					{
-						this.writeChildrenHtml.call( element, writer, isChildrenFiltered ? null  filter );
+						this.writeChildrenHtml.call( element, writer, isChildrenFiltered ? null : filter );
 						return;
 					}
 				}
@@ -250,13 +250,13 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 
 			if ( !element.isEmpty )
 			{
-				this.writeChildrenHtml.call( element, writer, isChildrenFiltered ? null  filter );
+				this.writeChildrenHtml.call( element, writer, isChildrenFiltered ? null : filter );
 				// Close the element.
 				writer.closeTag( writeName );
 			}
 		},
 
-		writeChildrenHtml  function( writer, filter )
+		writeChildrenHtml : function( writer, filter )
 		{
 			// Send children.
 			CKEDITOR.htmlParser.fragment.prototype.writeChildrenHtml.apply( this, arguments );

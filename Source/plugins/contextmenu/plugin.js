@@ -18,35 +18,35 @@ provides:
 
 CKEDITOR.plugins.add( 'contextmenu',
 {
-	requires  [ 'menu' ],
+	requires : [ 'menu' ],
 
 	// Make sure the base class (CKEDITOR.menu) is loaded before it (#3318).
-	onLoad  function()
+	onLoad : function()
 	{
 		CKEDITOR.plugins.contextMenu = CKEDITOR.tools.createClass(
 		{
-			base  CKEDITOR.menu,
+			base : CKEDITOR.menu,
 
-			$  function( editor )
+			$ : function( editor )
 			{
 				this.base.call( this, editor,
 				{
-					panel
+					panel:
 					{
-						className  editor.skinClass + ' cke_contextmenu',
-						attributes 
+						className : editor.skinClass + ' cke_contextmenu',
+						attributes :
 						{
-							'aria-label'  editor.lang.contextmenu.options
+							'aria-label' : editor.lang.contextmenu.options
 						}
 					}
 				});
 			},
 
-			proto 
+			proto :
 			{
-				addTarget  function( element, nativeContextMenuOnCtrl )
+				addTarget : function( element, nativeContextMenuOnCtrl )
 				{
-					// Opera doesn't support 'contextmenu' event, we have duo approaches employed here
+					// Opera doesn't support 'contextmenu' event, we have duo approaches employed here:
 					// 1. Inherit the 'button override' hack we introduced in v2 (#4530), while this require the Opera browser
 					//  option 'Allow script to detect context menu/right click events' to be always turned on.
 					// 2. Considering the fact that ctrl/meta key is not been occupied
@@ -66,7 +66,7 @@ CKEDITOR.plugins.add( 'contextmenu',
 							}
 
 							if ( nativeContextMenuOnCtrl
-								 && ( CKEDITOR.env.mac ? evt.$.metaKey  evt.$.ctrlKey ) )
+								 && ( CKEDITOR.env.mac ? evt.$.metaKey : evt.$.ctrlKey ) )
 								return;
 
 							var target = evt.getTarget();
@@ -79,9 +79,9 @@ CKEDITOR.plugins.add( 'contextmenu',
 								ownerDoc.getBody().append( contextMenuOverrideButton ) ;
 							}
 
-							contextMenuOverrideButton.setAttribute( 'style', 'positionabsolute;top' + ( evt.$.clientY - 2 ) +
-								'px;left' + ( evt.$.clientX - 2 ) +
-								'px;width5px;height5px;opacity0.01' );
+							contextMenuOverrideButton.setAttribute( 'style', 'position:absolute;top:' + ( evt.$.clientY - 2 ) +
+								'px;left:' + ( evt.$.clientX - 2 ) +
+								'px;width:5px;height:5px;opacity:0.01' );
 
 						} );
 
@@ -104,7 +104,7 @@ CKEDITOR.plugins.add( 'contextmenu',
 							if ( nativeContextMenuOnCtrl &&
 								 // Safari on Windows always show 'ctrlKey' as true in 'contextmenu' event,
 								// which make this property unreliable. (#4826)
-								 ( CKEDITOR.env.webkit ? holdCtrlKey  ( CKEDITOR.env.mac ? domEvent.$.metaKey  domEvent.$.ctrlKey ) ) )
+								 ( CKEDITOR.env.webkit ? holdCtrlKey : ( CKEDITOR.env.mac ? domEvent.$.metaKey : domEvent.$.ctrlKey ) ) )
 								return;
 
 
@@ -141,7 +141,7 @@ CKEDITOR.plugins.add( 'contextmenu',
 						var holdCtrlKey,
 							onKeyDown = function( event )
 							{
-								holdCtrlKey = CKEDITOR.env.mac ? event.data.$.metaKey  event.data.$.ctrlKey ;
+								holdCtrlKey = CKEDITOR.env.mac ? event.data.$.metaKey : event.data.$.ctrlKey ;
 							},
 							resetOnKeyUp = function()
 							{
@@ -154,7 +154,7 @@ CKEDITOR.plugins.add( 'contextmenu',
 					}
 				},
 
-				open  function( offsetParent, corner, offsetX, offsetY )
+				open : function( offsetParent, corner, offsetX, offsetY )
 				{
 					this.editor.focus();
 					offsetParent = offsetParent || CKEDITOR.document.getDocumentElement();
@@ -164,13 +164,13 @@ CKEDITOR.plugins.add( 'contextmenu',
 		});
 	},
 
-	beforeInit  function( editor )
+	beforeInit : function( editor )
 	{
 		editor.contextMenu = new CKEDITOR.plugins.contextMenu( editor );
 
 		editor.addCommand( 'contextMenu',
 			{
-				exec  function()
+				exec : function()
 					{
 						editor.contextMenu.open( editor.document.getBody() );
 					}

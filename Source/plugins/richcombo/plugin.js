@@ -18,9 +18,9 @@ provides:
 
 CKEDITOR.plugins.add( 'richcombo',
 {
-	requires  [ 'floatpanel', 'listblock', 'button' ],
+	requires : [ 'floatpanel', 'listblock', 'button' ],
 
-	beforeInit  function( editor )
+	beforeInit : function( editor )
 	{
 		editor.ui.addHandler( CKEDITOR.UI_RICHCOMBO, CKEDITOR.ui.richCombo.handler );
 	}
@@ -35,14 +35,14 @@ CKEDITOR.UI_RICHCOMBO = 3;
 
 CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 {
-	$  function( definition )
+	$ : function( definition )
 	{
 		// Copy all definition properties to this object.
 		CKEDITOR.tools.extend( this, definition,
 			// Set defaults.
 			{
-				title  definition.label,
-				modes  { wysiwyg  1 }
+				title : definition.label,
+				modes : { wysiwyg : 1 }
 			});
 
 		// We don't want the panel definition in this object.
@@ -59,32 +59,32 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 		panelDefinition.className = ( panelDefinition.className || '' ) + ' cke_rcombopanel';
 		panelDefinition.block =
 		{
-			multiSelect  panelDefinition.multiSelect,
-			attributes  panelDefinition.attributes
+			multiSelect : panelDefinition.multiSelect,
+			attributes : panelDefinition.attributes
 		};
 
 		this._ =
 		{
-			panelDefinition  panelDefinition,
-			items  {},
-			state  CKEDITOR.TRISTATE_OFF
+			panelDefinition : panelDefinition,
+			items : {},
+			state : CKEDITOR.TRISTATE_OFF
 		};
 	},
 
-	statics 
+	statics :
 	{
-		handler 
+		handler :
 		{
-			create  function( definition )
+			create : function( definition )
 			{
 				return new CKEDITOR.ui.richCombo( definition );
 			}
 		}
 	},
 
-	proto 
+	proto :
 	{
-		renderHtml  function( editor )
+		renderHtml : function( editor )
 		{
 			var output = [];
 			this.render( editor, output );
@@ -99,7 +99,7 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 		 *		to this button.
 		 * @example
 		 */
-		render  function( editor, output )
+		render : function( editor, output )
 		{
 			var env = CKEDITOR.env;
 
@@ -131,19 +131,19 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 				this );
 
 			var instance = {
-				id  id,
-				combo  this,
-				focus  function()
+				id : id,
+				combo : this,
+				focus : function()
 				{
 					var element = CKEDITOR.document.getById( id ).getChild( 1 );
 					element.focus();
 				},
-				clickFn  clickFn
+				clickFn : clickFn
 			};
 
 			editor.on( 'mode', function()
 				{
-					this.setState( this.modes[ editor.mode ] ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED );
+					this.setState( this.modes[ editor.mode ] ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED );
 					this.setValue( '' );
 				},
 				this );
@@ -155,13 +155,13 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 					var keystroke = ev.getKeystroke();
 					switch ( keystroke )
 					{
-						case 13 	// ENTER
-						case 32 	// SPACE
-						case 40 	// ARROW-DOWN
+						case 13 :	// ENTER
+						case 32 :	// SPACE
+						case 40 :	// ARROW-DOWN
 							// Show panel
 							CKEDITOR.tools.callFunction( clickFn, element );
 							break;
-						default 
+						default :
 							// Delegate the default behavior to toolbar button key handling.
 							instance.onkey( instance,  keystroke );
 					}
@@ -184,12 +184,12 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 				'>',
 					'<span id="' + id+ '_label" class=cke_label>', this.label, '</span>',
 					'<a hidefocus=true title="', this.title, '" tabindex="-1"',
-						env.gecko && env.version >= 10900 && !env.hc ? ''  ' href="javascriptvoid(\'' + this.label + '\')"',
+						env.gecko && env.version >= 10900 && !env.hc ? '' : ' href="javascript:void(\'' + this.label + '\')"',
 						' role="button" aria-labelledby="', id , '_label" aria-describedby="', id, '_text" aria-haspopup="true"' );
 
 			// Some browsers don't cancel key events in the keydown but in the
 			// keypress.
-			// TODO Check if really needed for Gecko+Mac.
+			// TODO: Check if really needed for Gecko+Mac.
 			if ( CKEDITOR.env.opera || ( CKEDITOR.env.gecko && CKEDITOR.env.mac ) )
 			{
 				output.push(
@@ -210,7 +210,7 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 						'<span>' +
 							'<span id="' + id + '_text" class="cke_text cke_inline_label">' + this.label + '</span>' +
 						'</span>' +
-						'<span class=cke_openbutton><span class=cke_icon>' + ( CKEDITOR.env.hc ? '&#9660;'  CKEDITOR.env.air ?  '&nbsp;'  '' ) + '</span></span>' +	// BLACK DOWN-POINTING TRIANGLE
+						'<span class=cke_openbutton><span class=cke_icon>' + ( CKEDITOR.env.hc ? '&#9660;' : CKEDITOR.env.air ?  '&nbsp;' : '' ) + '</span></span>' +	// BLACK DOWN-POINTING TRIANGLE
 					'</a>' +
 				'</span>' +
 				'</span>' );
@@ -221,7 +221,7 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 			return instance;
 		},
 
-		createPanel  function( editor )
+		createPanel : function( editor )
 		{
 			if ( this._.panel )
 				return;
@@ -253,7 +253,7 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 					if ( me.className )
 						this.element.getFirst().removeClass( me.className + '_panel' );
 
-					me.setState( me.modes && me.modes[ editor.mode ] ? CKEDITOR.TRISTATE_OFF  CKEDITOR.TRISTATE_DISABLED );
+					me.setState( me.modes && me.modes[ editor.mode ] ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED );
 
 					me._.on = 0;
 
@@ -298,7 +298,7 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 				this.init();
 		},
 
-		setValue  function( value, text )
+		setValue : function( value, text )
 		{
 			this._.value = value;
 
@@ -313,52 +313,52 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 				else
 					textElement.removeClass( 'cke_inline_label' );
 
-				textElement.setHtml( typeof text != 'undefined' ? text  value );
+				textElement.setHtml( typeof text != 'undefined' ? text : value );
 			}
 		},
 
-		getValue  function()
+		getValue : function()
 		{
 			return this._.value || '';
 		},
 
-		unmarkAll  function()
+		unmarkAll : function()
 		{
 			this._.list.unmarkAll();
 		},
 
-		mark  function( value )
+		mark : function( value )
 		{
 			this._.list.mark( value );
 		},
 
-		hideItem  function( value )
+		hideItem : function( value )
 		{
 			this._.list.hideItem( value );
 		},
 
-		hideGroup  function( groupTitle )
+		hideGroup : function( groupTitle )
 		{
 			this._.list.hideGroup( groupTitle );
 		},
 
-		showAll  function()
+		showAll : function()
 		{
 			this._.list.showAll();
 		},
 
-		add  function( value, html, text )
+		add : function( value, html, text )
 		{
 			this._.items[ value ] = text || value;
 			this._.list.add( value, html, text );
 		},
 
-		startGroup  function( title )
+		startGroup : function( title )
 		{
 			this._.list.startGroup( title );
 		},
 
-		commit  function()
+		commit : function()
 		{
 			if ( !this._.committed )
 			{
@@ -369,7 +369,7 @@ CKEDITOR.ui.richCombo = CKEDITOR.tools.createClass(
 			this._.committed = 1;
 		},
 
-		setState  function( state )
+		setState : function( state )
 		{
 			if ( this._.state == state )
 				return;

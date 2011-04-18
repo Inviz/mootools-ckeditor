@@ -64,12 +64,12 @@ CKEDITOR.config =
 	 * @default '&lt;CKEditor folder&gt;/config.js'
 	 * @example
 	 * // Load a specific configuration file.
-	 * CKEDITOR.replace( 'myfiled', { customConfig  '/myconfig.js' } );
+	 * CKEDITOR.replace( 'myfiled', { customConfig : '/myconfig.js' } );
 	 * @example
 	 * // Do not load any custom configuration file.
-	 * CKEDITOR.replace( 'myfiled', { customConfig  '' } );
+	 * CKEDITOR.replace( 'myfiled', { customConfig : '' } );
 	 */
-	customConfig  'config.js',
+	customConfig : 'config.js',
 
 	/**
 	 * Whether the replaced element (usually a textarea) is to be updated
@@ -79,7 +79,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.autoUpdateElement = true;
 	 */
-	autoUpdateElement  true,
+	autoUpdateElement : true,
 
 	/**
 	 * The base href URL used to resolve relative and absolute URLs in the
@@ -87,9 +87,9 @@ CKEDITOR.config =
 	 * @type String
 	 * @default '' (empty)
 	 * @example
-	 * config.baseHref = 'http//www.example.com/path/';
+	 * config.baseHref = 'http://www.example.com/path/';
 	 */
-	baseHref  '',
+	baseHref : '',
 
 	/**
 	 * The CSS file(s) to be used to apply style to the contents. It should
@@ -101,11 +101,11 @@ CKEDITOR.config =
 	 * config.contentsCss = '/css/mysitestyles.css';
 	 * config.contentsCss = ['/css/mysitestyles.css', '/css/anotherfile.css'];
 	 */
-	contentsCss  CKEDITOR.basePath + 'contents.css',
+	contentsCss : CKEDITOR.basePath + 'contents.css',
 
 	/**
 	 * The writting direction of the language used to write the editor
-	 * contents. Allowed values are
+	 * contents. Allowed values are:
 	 * <ul>
 	 *     <li>'ui' - which indicate content direction will be the same with the user interface language direction;</li>
 	 *     <li>'ltr' - for Left-To-Right language (like English);</li>
@@ -116,7 +116,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.contentsLangDirection = 'rtl';
 	 */
-	contentsLangDirection  'ui',
+	contentsLangDirection : 'ui',
 
 	/**
 	 * Language code of  the writting language which is used to author the editor
@@ -126,7 +126,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.contentsLanguage = 'fr';
 	 */
-	contentsLanguage  '',
+	contentsLanguage : '',
 
 	/**
 	 * The user interface language localization to use. If empty, the editor
@@ -138,7 +138,7 @@ CKEDITOR.config =
 	 * // Load the German interface.
 	 * config.language = 'de';
 	 */
-	language  '',
+	language : '',
 
 	/**
 	 * The language to be used if {@link CKEDITOR.config.language} is left empty and it's not
@@ -148,20 +148,20 @@ CKEDITOR.config =
 	 * @example
 	 * config.defaultLanguage = 'it';
 	 */
-	defaultLanguage  'en',
+	defaultLanguage : 'en',
 
 	/**
 	 * Sets the behavior for the ENTER key. It also dictates other behaviour
 	 * rules in the editor, like whether the &lt;br&gt; element is to be used
 	 * as a paragraph separator when indenting text.
 	 * The allowed values are the following constants, and their relative
-	 * behavior
+	 * behavior:
 	 * <ul>
-	 *     <li>{@link CKEDITOR.ENTER_P} (1) new &lt;p&gt; paragraphs are created;</li>
-	 *     <li>{@link CKEDITOR.ENTER_BR} (2) lines are broken with &lt;br&gt; elements;</li>
-	 *     <li>{@link CKEDITOR.ENTER_DIV} (3) new &lt;div&gt; blocks are created.</li>
+	 *     <li>{@link CKEDITOR.ENTER_P} (1): new &lt;p&gt; paragraphs are created;</li>
+	 *     <li>{@link CKEDITOR.ENTER_BR} (2): lines are broken with &lt;br&gt; elements;</li>
+	 *     <li>{@link CKEDITOR.ENTER_DIV} (3): new &lt;div&gt; blocks are created.</li>
 	 * </ul>
-	 * <strong>Note</strong> It's recommended to use the
+	 * <strong>Note</strong>: It's recommended to use the
 	 * {@link CKEDITOR.ENTER_P} value because of its semantic value and
 	 * correctness. The editor is optimized for this value.
 	 * @type Number
@@ -170,7 +170,7 @@ CKEDITOR.config =
 	 * // Not recommended.
 	 * config.enterMode = CKEDITOR.ENTER_BR;
 	 */
-	enterMode  CKEDITOR.ENTER_P,
+	enterMode : CKEDITOR.ENTER_P,
 
 	/**
 	 * Force the respect of {@link CKEDITOR.config.enterMode} as line break regardless of the context,
@@ -182,23 +182,23 @@ CKEDITOR.config =
 	 * // Not recommended.
 	 * config.forceEnterMode = true;
 	 */
-	forceEnterMode  false,
+	forceEnterMode : false,
 
 	/**
 	 * Just like the {@link CKEDITOR.config.enterMode} setting, it defines the behavior for the SHIFT+ENTER key.
 	 * The allowed values are the following constants, and their relative
-	 * behavior
+	 * behavior:
 	 * <ul>
-	 *     <li>{@link CKEDITOR.ENTER_P} (1) new &lt;p&gt; paragraphs are created;</li>
-	 *     <li>{@link CKEDITOR.ENTER_BR} (2) lines are broken with &lt;br&gt; elements;</li>
-	 *     <li>{@link CKEDITOR.ENTER_DIV} (3) new &lt;div&gt; blocks are created.</li>
+	 *     <li>{@link CKEDITOR.ENTER_P} (1): new &lt;p&gt; paragraphs are created;</li>
+	 *     <li>{@link CKEDITOR.ENTER_BR} (2): lines are broken with &lt;br&gt; elements;</li>
+	 *     <li>{@link CKEDITOR.ENTER_DIV} (3): new &lt;div&gt; blocks are created.</li>
 	 * </ul>
 	 * @type Number
 	 * @default {@link CKEDITOR.ENTER_BR}
 	 * @example
 	 * config.shiftEnterMode = CKEDITOR.ENTER_P;
 	 */
-	shiftEnterMode  CKEDITOR.ENTER_BR,
+	shiftEnterMode : CKEDITOR.ENTER_BR,
 
 	/**
 	 * A comma separated list of plugins that are not related to editor
@@ -209,17 +209,17 @@ CKEDITOR.config =
 	 * @type String
 	 * @example
 	 */
-	corePlugins  '',
+	corePlugins : '',
 
 	/**
 	 * Sets the doctype to be used when loading the editor content as HTML.
 	 * @type String
-	 * @default '&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;'
+	 * @default '&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;'
 	 * @example
 	 * // Set the doctype to the HTML 4 (quirks) mode.
 	 * config.docType = '&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;';
 	 */
-	docType  '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
+	docType : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
 
 	/**
 	 * Sets the "id" attribute to be used on the body element of the editing
@@ -233,7 +233,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.bodyId = 'contents_id';
 	 */
-	bodyId  '',
+	bodyId : '',
 
 	/**
 	 * Sets the "class" attribute to be used on the body element of the editing
@@ -247,7 +247,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.bodyClass = 'contents';
 	 */
-	bodyClass  '',
+	bodyClass : '',
 
 	/**
 	 * Indicates whether the contents to be edited are being inputted as a full
@@ -260,11 +260,11 @@ CKEDITOR.config =
 	 * @example
 	 * config.fullPage = true;
 	 */
-	fullPage  false,
+	fullPage : false,
 
 	/**
 	 * The height of editing area( content ), in relative or absolute, e.g. 30px, 5em.
-	 * Note Percentage unit is not supported yet. e.g. 30%.
+	 * Note: Percentage unit is not supported yet. e.g. 30%.
 	 * @type Number|String
 	 * @default '200'
 	 * @example
@@ -272,7 +272,7 @@ CKEDITOR.config =
 	 * config.height = '25em';
 	 * config.height = '300px';
 	 */
-	height  200,
+	height : 200,
 
 	/**
 	 * Comma separated list of plugins to load and initialize for an editor
@@ -282,7 +282,7 @@ CKEDITOR.config =
 	 * @type String
 	 * @example
 	 */
-	plugins 
+	plugins :
 		'about,' +
 		'a11yhelp,' +
 		'basicstyles,' +
@@ -349,7 +349,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.extraPlugins = 'myplugin,anotherplugin';
 	 */
-	extraPlugins  '',
+	extraPlugins : '',
 
 	/**
 	 * List of plugins that must not be loaded. This is a tool setting which
@@ -360,7 +360,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.removePlugins = 'elementspath,save,font';
 	 */
-	removePlugins  '',
+	removePlugins : '',
 
 	/**
 	 * List of regular expressions to be executed over the input HTML,
@@ -370,9 +370,9 @@ CKEDITOR.config =
 	 * @example
 	 * config.protectedSource.push( /<\?[\s\S]*?\?>/g );   // PHP Code
 	 * config.protectedSource.push( /<%[\s\S]*?%>/g );   // ASP Code
-	 * config.protectedSource.push( /(<asp[^\>]+>[\s|\S]*?<\/asp[^\>]+>)|(<asp[^\>]+\/>)/gi );   // ASP.Net Code
+	 * config.protectedSource.push( /(<asp:[^\>]+>[\s|\S]*?<\/asp:[^\>]+>)|(<asp:[^\>]+\/>)/gi );   // ASP.Net Code
 	 */
-	protectedSource  [],
+	protectedSource : [],
 
 	/**
 	 * The editor tabindex value.
@@ -381,7 +381,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.tabIndex = 1;
 	 */
-	tabIndex  0,
+	tabIndex : 0,
 
 	/**
 	 * The theme to be used to build the UI.
@@ -391,7 +391,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.theme = 'default';
 	 */
-	theme  'default',
+	theme : 'default',
 
 	/**
 	 * The skin to load. It may be the name of the skin folder inside the
@@ -403,7 +403,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.skin = 'myskin,/customstuff/myskin/';
 	 */
-	skin  'kama',
+	skin : 'kama',
 
 	/**
 	 * The editor width in CSS size format or pixel integer.
@@ -414,7 +414,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.width = '75%';
 	 */
-	width  '',
+	width : '',
 
 	/**
 	 * The base Z-index for floating dialogs and popups.
@@ -423,7 +423,7 @@ CKEDITOR.config =
 	 * @example
 	 * config.baseFloatZIndex = 2000
 	 */
-	baseFloatZIndex  10000
+	baseFloatZIndex : 10000
 };
 
 /**
