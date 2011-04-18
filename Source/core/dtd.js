@@ -5,7 +5,7 @@ script: core/dtd
 
 description:  Defines the {@link CKEDITOR.dtd} object, which holds the DTD
               mapping for XHTML 1.0 Transitional. This file was automatically
-              generated from the file: xhtml1-transitional.dtd.
+              generated from the file xhtml1-transitional.dtd.
 
 author: Frederico Knabben
 

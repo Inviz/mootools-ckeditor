@@ -4,7 +4,7 @@
 script: plugins/scayt/plugin
 
 description:  Spell Check As You Type (SCAYT).
-              Button name : Scayt.
+              Button name  Scayt.
 
 author: Frederico Knabben
 

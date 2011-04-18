@@ -13,7 +13,7 @@ class CKEditor
   R_DESCRIPTION = /\/\*\*.*?@fileOverview\s*?(.*?)\s*\*\//m
   R_DESCRIPTION_SPLITTER = /^\s*\*\s*$/
   R_DESCRIPTION_IDENTER = /\n\s*/
-  R_DESCRIPTION_CLEANER = /\*\s+/
+  R_DESCRIPTION_CLEANER = /\*\s+|:/
   R_PACKAGER_CLEANER = /^.*?\/\/ @Packager.RemoveLine.*?$/
   
   def initialize(input = 'ckeditor', output = 'Source')
