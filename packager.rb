@@ -1,11 +1,12 @@
 require 'rubygems'
-require 'active_support'
+require 'json'
 require 'fileutils'
 require 'pathname'
 
 class CKEditor
   attr_accessor :input, :output, :dependencies
   
+  R_NEWLINE = /\r\n/
   R_DEPENDENCIES = /var scripts =[^{]*(.[^}]*?\})\s*;/m
   R_COPYRIGHT = /\/\*\s*Copyright.*?\*\//m
   R_COMMENTS = /\/\*.*?\*\//m
@@ -32,7 +33,7 @@ class CKEditor
         file.write(transform(reading))
       end
       writing
-    end.select {|a| not a.blank? }
+    end.select {|a| a}
     
     puts "#{files.size} files packed"
     File.open('package.yml', 'w').write(package % files.map {|f| %Q|\n - "#{f.to_s}"|}.join(""))
@@ -43,13 +44,14 @@ class CKEditor
     structure = relative.sub('.js', '').to_s
     vars = [structure]
     vars << "Some file that does something" 
-    vars << unless (deps = dependencies[structure]).blank?
+    vars << if (deps = dependencies[structure]) && !deps.empty?
               "\nrequires: #{array(*deps)}\n" 
             end       
     vars << array(relative.to_s.sub('.js', ''))
     content = File.read(path).
-      sub(R_COPYRIGHT, '').
-      sub(R_PACKAGER_CLEANER, '').
+      gsub(R_COPYRIGHT, '').
+      gsub(R_NEWLINE, "\n").
+      gsub(R_PACKAGER_CLEANER, '').
       sub(R_DESCRIPTION) do |description|
         description = description.
           match(R_DESCRIPTION)[1].
@@ -57,16 +59,16 @@ class CKEditor
         
         vars[1] = description.
           gsub(R_DESCRIPTION_CLEANER, '').
-          gsub(R_DESCRIPTION_IDENTER, "\n" + (" " * 14))  unless description.blank?
+          gsub(R_DESCRIPTION_IDENTER, "\n" + (" " * 14))  if description && !description.empty?
         ''
       end
     (header % vars) + content
   end
   
   def extract_dependencies!(path = input + '_source/core/loader.js')
-    #p File.read(path).match(R_DEPENDENCIES)
-    deps = File.read(path).match(R_DEPENDENCIES)[1].gsub(R_COMMENTS, '')
-    self.dependencies = ActiveSupport::JSON.decode(deps)
+    deps = File.read(path).match(R_DEPENDENCIES)[1].gsub(R_COMMENTS, '').gsub(R_NEWLINE, " ").gsub("'", '"')
+    p deps
+    self.dependencies = JSON.parse(deps)
   end
   
   def array(*args)
