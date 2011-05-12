@@ -12,6 +12,7 @@ license: http://ckeditor.com/license
 requires: 
   - core.htmlparser
   - core.htmlparser.fragment
+  - core.htmlparser
 
 provides: 
   - core.htmlparser.element

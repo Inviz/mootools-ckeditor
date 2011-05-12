@@ -12,6 +12,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.dom.domobject
+  - core.dom
 
 provides: 
   - core.dom.window

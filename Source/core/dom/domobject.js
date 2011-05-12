@@ -12,6 +12,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.dom.event
+  - core.dom
 
 provides: 
   - core.dom.domobject

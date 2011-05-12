@@ -13,6 +13,7 @@ license: http://ckeditor.com/license
 requires: 
   - core.dom.domobject
   - core.tools
+  - core.dom
 
 provides: 
   - core.dom.node

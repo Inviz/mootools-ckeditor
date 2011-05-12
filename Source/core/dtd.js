@@ -13,6 +13,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.tools
+  - core.tools
 
 provides: 
   - core.dtd

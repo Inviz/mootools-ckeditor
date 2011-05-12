@@ -12,6 +12,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.ckeditor_base
+  - core.tools
 
 provides: 
   - core.config

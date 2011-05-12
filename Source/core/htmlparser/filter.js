@@ -11,6 +11,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.htmlparser
+  - core.htmlparser
 
 provides: 
   - core.htmlparser.filter

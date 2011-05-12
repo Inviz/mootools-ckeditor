@@ -9,6 +9,9 @@ author: Frederico Knabben
 
 license: http://ckeditor.com/license
 
+requires: 
+  - core.skins
+
 provides: 
   - skins.office2003.skin
 

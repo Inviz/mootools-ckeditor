@@ -11,6 +11,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.dom.range
+  - core.dom
 
 provides: 
   - core.dom.rangelist

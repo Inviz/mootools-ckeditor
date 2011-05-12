@@ -15,11 +15,12 @@ class CKEditor
   R_DESCRIPTION_IDENTER = /\n\s*/
   R_DESCRIPTION_CLEANER = /\*\s+|:/
   R_PACKAGER_CLEANER = /^.*?\/\/ @Packager.RemoveLine.*?$/
+  R_INHERITED_DEPENDENCY = /((core|skins|plugins|lang)(\/[^\/]+)?)\/[^\/+]+?$/
   
-  def initialize(input = 'ckeditor', output = 'Source')
+  def initialize(input = 'ckeditor', output = 'Source', dependencies = input + '/_source/core/loader.js')
     self.input = Pathname.new input
     self.output = Pathname.new output
-    extract_dependencies!
+    extract_dependencies! dependencies
     pack!
   end
   
@@ -35,6 +36,8 @@ class CKEditor
       writing
     end.select {|a| a}
     
+    files << "Source/CKEditor.js"
+    
     puts "#{files.size} files packed"
     File.open('package.yml', 'w').write(package % files.map {|f| %Q|\n - "#{f.to_s}"|}.join(""))
   end
@@ -44,9 +47,41 @@ class CKEditor
     structure = relative.sub('.js', '').to_s
     vars = [structure]
     vars << "Some file that does something" 
-    vars << if (deps = dependencies[structure]) && !deps.empty?
-              "\nrequires: #{array(*deps)}\n" 
-            end       
+    dir = structure.split('/')
+    deps ||= (dependencies[structure] || [])
+    if match = structure.match(R_INHERITED_DEPENDENCY)
+      bit = match[1].sub('/', '.')
+      bit =
+        case bit
+        when "core"
+          if !structure.match(/core\/(ckeditor_bas|editor_basic|_bootstrap|env|event|tools)/)
+            "core.tools"
+          elsif structure.match "tools"
+            "core.ckeditor_basic"
+          elsif structure.match /env|event/
+            "core.ckeditor_base"
+          elsif structure.match "base"
+            "CKEditor"
+          end
+        when "core.dom"
+          if structure.match "walker"
+            "core.dom.element"
+          else
+            bit
+          end
+        when /plugins/
+          "core.plugins"
+        when /skins/
+          "core.skins"
+        when /lang/
+          "core.lang"
+        else
+          bit
+        end
+      deps << bit if bit
+    end
+    vars << (deps.empty? ? "" : "\nrequires: #{array(*deps)}\n")
+    
     vars << array(relative.to_s.sub('.js', ''))
     content = File.read(path).
       sub(R_BOM, "").
@@ -65,7 +100,7 @@ class CKEditor
     (header % vars) + content
   end
   
-  def extract_dependencies!(path = input + '_source/core/loader.js')
+  def extract_dependencies!(path)
     deps = File.read(path).match(R_DEPENDENCIES)[1].gsub(R_COMMENTS, '').gsub("'", '"')
     self.dependencies = JSON.parse(deps)
   end

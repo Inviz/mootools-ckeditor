@@ -11,6 +11,9 @@ author: Frederico Knabben
 
 license: http://ckeditor.com/license
 
+requires: 
+  - core.ckeditor_base
+
 provides: 
   - core.eventInfo
 

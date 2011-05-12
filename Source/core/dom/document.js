@@ -14,6 +14,7 @@ requires:
   - core.dom
   - core.dom.domobject
   - core.dom.window
+  - core.dom
 
 provides: 
   - core.dom.document

@@ -11,6 +11,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.dom.element
+  - core.dom
 
 provides: 
   - core.dom.elementpath

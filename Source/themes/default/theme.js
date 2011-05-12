@@ -92,6 +92,7 @@ CKEDITOR.themes.add( 'default', (function()
 	return /** @lends CKEDITOR.theme */ {
 		build : function( editor, themePath )
 		{
+		  console.error('build')
 			var name = editor.name,
 				element = editor.element,
 				elementMode = editor.elementMode;
@@ -300,7 +301,7 @@ CKEDITOR.themes.add( 'default', (function()
  */
 CKEDITOR.editor.prototype.getThemeSpace = function( spaceName )
 {
-	var spacePrefix = 'cke_' + spaceName;
+  var spacePrefix = 'cke_' + spaceName;
 	var space = this._[ spacePrefix ] ||
 		( this._[ spacePrefix ] = CKEDITOR.document.getById( spacePrefix + '_' + this.name ) );
 	return space;

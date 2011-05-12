@@ -14,6 +14,7 @@ requires:
   - core.dom.documentfragment
   - core.dom.element
   - core.dom.walker
+  - core.dom
 
 provides: 
   - core.dom.range

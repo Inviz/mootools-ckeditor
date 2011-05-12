@@ -10,6 +10,9 @@ author: Frederico Knabben
 
 license: http://ckeditor.com/license
 
+requires: 
+  - CKEditor
+
 provides: 
   - core.ckeditor_base
 
@@ -115,7 +118,6 @@ if ( !window.CKEDITOR )
 
 				// Find out the editor directory path, based on its <script> tag.
 				var path = window.CKEDITOR_BASEPATH || '';
-
 				if ( !path )
 				{
 					var scripts = document.getElementsByTagName( 'script' );

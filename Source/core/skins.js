@@ -12,6 +12,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.scriptloader
+  - core.tools
 
 provides: 
   - core.skins

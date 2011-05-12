@@ -24,6 +24,7 @@ requires:
   - core.htmlparser.filter
   - core.htmlparser.basicwriter
   - core.tools
+  - core.tools
 
 provides: 
   - core.ckeditor

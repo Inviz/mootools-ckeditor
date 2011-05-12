@@ -17,6 +17,7 @@ requires:
   - core.dom.node
   - core.dom.nodelist
   - core.tools
+  - core.dom
 
 provides: 
   - core.dom.element

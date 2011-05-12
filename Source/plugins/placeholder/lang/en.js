@@ -9,6 +9,9 @@ author: Frederico Knabben
 
 license: http://ckeditor.com/license
 
+requires: 
+  - core.lang
+
 provides: 
   - plugins.placeholder.lang.en
 

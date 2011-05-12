@@ -14,6 +14,7 @@ requires:
   - core.htmlparser.comment
   - core.htmlparser.text
   - core.htmlparser.cdata
+  - core.htmlparser
 
 provides: 
   - core.htmlparser.fragment

@@ -239,3 +239,4 @@ sources:
  - "Source/skins/office2003/skin.js"
  - "Source/skins/v2/skin.js"
  - "Source/themes/default/theme.js"
+ - "Source/CKEditor.js"

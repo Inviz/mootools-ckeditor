@@ -9,6 +9,9 @@ author: Frederico Knabben
 
 license: http://ckeditor.com/license
 
+requires: 
+  - core.plugins
+
 provides: 
   - plugins.panelbutton.plugin
 

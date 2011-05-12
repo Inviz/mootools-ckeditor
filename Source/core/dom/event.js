@@ -10,6 +10,9 @@ author: Frederico Knabben
 
 license: http://ckeditor.com/license
 
+requires: 
+  - core.dom
+
 provides: 
   - core.dom.event
 

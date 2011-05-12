@@ -11,6 +11,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.dom.node
+  - core.dom.element
 
 provides: 
   - core.dom.walker
