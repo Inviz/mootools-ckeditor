@@ -245,5 +245,6 @@ sources:
  - "Source/skins/kama/skin.js"
  - "Source/skins/office2003/skin.js"
  - "Source/skins/v2/skin.js"
+ - "Source/skins/ias/skin.js"
  - "Source/themes/default/theme.js"
  - "Source/CKEditor.js"
