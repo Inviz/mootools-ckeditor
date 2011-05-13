@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -36,7 +35,7 @@ CKEDITOR.plugins.add( 'panelbutton',
  */
 CKEDITOR.UI_PANELBUTTON = 'panelbutton';
 
-(function()
+;(function()
 {
 	var clickFn = function( editor )
 	{

@@ -20,7 +20,7 @@
 
 
 
-(function()
+;(function()
 {
 	/**
 	 * Allows CKEditor to override jQuery.fn.val(), making it possible to use the val()

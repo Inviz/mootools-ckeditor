@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -20,7 +19,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	// Regex to scan for &nbsp; at the end of blocks, which are actually placeholders.
 	// Safari transforms the &nbsp; to \xa0. (#4172)

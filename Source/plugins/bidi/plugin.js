@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -20,7 +19,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	var guardElements = { table:1, ul:1, ol:1, blockquote:1, div:1 },
 		directSelectionGuardElements = {},

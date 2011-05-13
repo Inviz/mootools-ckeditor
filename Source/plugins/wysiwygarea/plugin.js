@@ -11,8 +11,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
-  - core.dom.walker
   - core.plugins
 
 provides: 
@@ -24,7 +22,7 @@ provides:
 
 
 
-(function()
+;(function()
 {
 	// Matching an empty paragraph at the end of document.
 	var emptyParagraphRegexp = /(^|<body\b[^>]*>)\s*<(p|div|address|h\d|center|pre)[^>]*>\s*(?:<br[^>]*>|&nbsp;|\u00A0|&#160;)?\s*(:?<\/\2>)?\s*(?=$|<\/body>)/gi;

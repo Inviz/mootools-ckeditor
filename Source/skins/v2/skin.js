@@ -30,7 +30,7 @@ CKEDITOR.skins.add( 'v2', (function()
 	};
 })() );
 
-(function()
+;(function()
 {
 	CKEDITOR.dialog ? dialogSetup() : CKEDITOR.on( 'dialogPluginReady', dialogSetup );
 

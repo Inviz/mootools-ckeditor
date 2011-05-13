@@ -11,7 +11,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -23,7 +22,7 @@ provides:
 
 
 
-(function()
+;(function()
 {
 	var placeholderReplaceRegex = /\[\[[^\]]+\]\]/g;
 	CKEDITOR.plugins.add( 'placeholder',

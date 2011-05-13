@@ -16,7 +16,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	var widthPattern = /^(\d+(?:\.\d+)?)(px|%)$/,
 		heightPattern = /^(\d+(?:\.\d+)?)px$/;

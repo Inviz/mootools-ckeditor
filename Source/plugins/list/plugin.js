@@ -10,8 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
-  - core.dom.walker
   - core.plugins
 
 provides: 
@@ -25,7 +23,7 @@ provides:
  * @file Insert and remove numbered and bulleted lists.
  */
 
-(function()
+;(function()
 {
 	var listNodeNames = { ol : 1, ul : 1 },
 		emptyTextRegex = /^[\n\r\t ]*$/;

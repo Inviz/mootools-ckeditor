@@ -78,7 +78,7 @@ CKEDITOR.htmlParser.element = function( name, attributes )
 	};
 };
 
-(function()
+;(function()
 {
 	// Used to sort attribute entries in an array, where the first element of
 	// each object is the attribute name.

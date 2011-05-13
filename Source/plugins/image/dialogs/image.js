@@ -16,7 +16,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	var imageDialog = function( editor, dialogType )
 	{

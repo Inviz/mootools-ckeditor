@@ -16,7 +16,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	/*
 	 * It is possible to set things in three different places.

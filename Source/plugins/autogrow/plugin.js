@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -23,7 +22,7 @@ provides:
 /**
  * @file AutoGrow plugin
  */
-(function(){
+;(function(){
 	var resizeEditor = function( editor )
 	{
 		if ( !editor.window )

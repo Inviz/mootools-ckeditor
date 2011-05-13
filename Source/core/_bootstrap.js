@@ -29,7 +29,7 @@ provides:
 
 
 
-(function()
+;(function()
 {
 	// Disable HC detaction in WebKit. (#5429)
 	if ( CKEDITOR.env.webkit )

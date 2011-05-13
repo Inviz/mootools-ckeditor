@@ -20,7 +20,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	CKEDITOR.htmlParser.filter = CKEDITOR.tools.createClass(
 	{

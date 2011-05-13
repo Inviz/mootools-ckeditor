@@ -20,7 +20,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	/**
 	 * Represents a list os CKEDITOR.dom.range objects, which can be easily

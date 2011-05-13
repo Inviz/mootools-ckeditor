@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -46,7 +45,7 @@ CKEDITOR.DIALOG_RESIZE_HEIGHT = 2;
  */
 CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 
-(function()
+;(function()
 {
 	var cssLength = CKEDITOR.tools.cssLength;
 	function isTabVisible( tabId )

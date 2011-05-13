@@ -211,7 +211,7 @@ CKEDITOR.skins.add( 'kama', (function()
 	};
 })() );
 
-(function()
+;(function()
 {
 	CKEDITOR.dialog ? dialogSetup() : CKEDITOR.on( 'dialogPluginReady', dialogSetup );
 

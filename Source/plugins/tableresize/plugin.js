@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -20,7 +19,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	var pxUnit = CKEDITOR.tools.cssLength,
 		needsIEHacks = CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.quirks || CKEDITOR.env.version < 7 );

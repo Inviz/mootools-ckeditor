@@ -210,7 +210,7 @@ CKEDITOR.skins.add( 'ias', (function()
 	};
 })() );
 
-(function()
+;(function()
 {
 	CKEDITOR.dialog ? dialogSetup() : CKEDITOR.on( 'dialogPluginReady', dialogSetup );
 

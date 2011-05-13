@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -88,7 +87,7 @@ CKEDITOR.keystrokeHandler = function( editor )
 	return this;
 };
 
-(function()
+;(function()
 {
 	var cancel;
 

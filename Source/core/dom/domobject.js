@@ -154,7 +154,7 @@ CKEDITOR.dom.domObject.prototype = (function()
 	};
 })();
 
-(function( domObjectProto )
+;(function( domObjectProto )
 {
 	var customData = {};
 

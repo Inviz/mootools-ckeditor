@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -26,7 +25,7 @@ provides:
 
 CKEDITOR.plugins.add( 'domiterator' );
 
-(function()
+;(function()
 {
 	/**
 	 * @name CKEDITOR.dom.iterator

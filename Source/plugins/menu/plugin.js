@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -59,7 +58,7 @@ CKEDITOR.plugins.add( 'menu',
 	requires : [ 'floatpanel' ]
 });
 
-(function()
+;(function()
 {
 	CKEDITOR.menu = CKEDITOR.tools.createClass(
 	{

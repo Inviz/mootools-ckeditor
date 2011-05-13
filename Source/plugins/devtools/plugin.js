@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -37,7 +36,7 @@ CKEDITOR.plugins.add( 'devtools',
 	}
 });
 
-(function()
+;(function()
 {
 	function defaultCallback( editor, dialog, element, tabName )
 	{

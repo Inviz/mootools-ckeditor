@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -19,7 +18,7 @@ provides:
 ...
 */
 
-(function()
+;(function()
 {
 	function forceHtmlMode( evt ) { evt.data.mode = 'html'; }
 

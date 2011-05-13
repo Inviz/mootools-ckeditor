@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - plugins.dialog.plugin
   - core.plugins
 
@@ -25,7 +24,7 @@ provides:
 
 CKEDITOR.plugins.add( 'dialogui' );
 
-(function()
+;(function()
 {
 	var initPrivateObject = function( elementDefinition )
 	{

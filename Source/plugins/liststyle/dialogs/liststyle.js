@@ -19,7 +19,7 @@ provides:
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
 
-(function()
+;(function()
 {
 	function getListElement( editor, listTag )
 	{

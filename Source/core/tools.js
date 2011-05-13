@@ -23,7 +23,7 @@ provides:
 
 
 
-(function()
+;(function()
 {
 	var functions = [];
 

@@ -34,7 +34,7 @@ provides:
 
 
 
-(function()
+;(function()
 {
 	// The counter for automatic instance names.
 	var nameCounter = 0;

@@ -16,7 +16,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	// Map 'true' and 'false' values to match W3C's specifications
 	// http://www.w3.org/TR/REC-html40/present/frames.html#h-16.5

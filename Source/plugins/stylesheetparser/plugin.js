@@ -10,8 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
-  - core.dom.walker
   - core.plugins
 
 provides: 
@@ -25,7 +23,7 @@ provides:
  * @stylesheetParser plugin.
  */
 
-(function()
+;(function()
 {
 	// We want to extract only the elements with classes defined in the stylesheets:
 	function parseClasses( aRules, skipSelectors, validSelectors )

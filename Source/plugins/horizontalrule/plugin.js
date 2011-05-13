@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -24,7 +23,7 @@ provides:
  * @file Horizontal Rule plugin.
  */
 
-(function()
+;(function()
 {
 	var horizontalruleCmd =
 	{

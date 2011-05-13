@@ -108,7 +108,7 @@ CKEDITOR.dom.range = function( document )
 	this.document = document;
 };
 
-(function()
+;(function()
 {
 	// Updates the "collapsed" property for the given range object.
 	var updateCollapsed = function( range )

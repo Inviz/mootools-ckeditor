@@ -16,7 +16,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	CKEDITOR.dialog.add( 'pastetext', function( editor )
 		{

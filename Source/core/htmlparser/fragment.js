@@ -55,7 +55,7 @@ CKEDITOR.htmlParser.fragment = function()
 	};
 };
 
-(function()
+;(function()
 {
 	// Block-level elements whose internal structure should be respected during
 	// parser fixing.

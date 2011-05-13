@@ -10,7 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
   - core.plugins
 
 provides: 
@@ -24,7 +23,7 @@ provides:
  * @file Clipboard support
  */
 
-(function()
+;(function()
 {
 	// Tries to execute any of the paste, cut or copy commands in IE. Returns a
 	// boolean indicating that the operation succeeded.

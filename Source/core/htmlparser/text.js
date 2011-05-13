@@ -20,7 +20,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	var spacesRegex = /[\t\r\n ]{2,}|[\t\r\n]/g;
 

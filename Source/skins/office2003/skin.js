@@ -30,7 +30,7 @@ CKEDITOR.skins.add( 'office2003', (function()
 	};
 })() );
 
-(function()
+;(function()
 {
 	CKEDITOR.dialog ? dialogSetup() : CKEDITOR.on( 'dialogPluginReady', dialogSetup );
 

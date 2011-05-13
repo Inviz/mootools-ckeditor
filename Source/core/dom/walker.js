@@ -20,7 +20,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	// This function is to be called under a "walker" instance scope.
 	function iterate( rtl, breakOnFalse )

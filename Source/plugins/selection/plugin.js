@@ -22,7 +22,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	// #### checkSelectionChange : START
 

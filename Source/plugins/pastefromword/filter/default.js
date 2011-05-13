@@ -16,7 +16,7 @@ provides:
 */
 
 
-(function()
+;(function()
 {
 	var fragmentPrototype = CKEDITOR.htmlParser.fragment.prototype,
 		elementPrototype = CKEDITOR.htmlParser.element.prototype;

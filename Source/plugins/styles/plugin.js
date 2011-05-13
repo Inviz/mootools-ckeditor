@@ -10,8 +10,6 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - core.config
-  - core.dom.walker
   - core.plugins
 
 provides: 
@@ -95,7 +93,7 @@ CKEDITOR.STYLE_BLOCK = 1;
 CKEDITOR.STYLE_INLINE = 2;
 CKEDITOR.STYLE_OBJECT = 3;
 
-(function()
+;(function()
 {
 	var blockElements	= { address:1,div:1,h1:1,h2:1,h3:1,h4:1,h5:1,h6:1,p:1,pre:1 },
 		objectElements	= { a:1,embed:1,hr:1,img:1,li:1,object:1,ol:1,table:1,td:1,tr:1,th:1,ul:1,dl:1,dt:1,dd:1,form:1};
