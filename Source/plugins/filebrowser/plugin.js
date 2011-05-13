@@ -12,6 +12,7 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
+  - core.config
   - core.plugins
 
 provides: 

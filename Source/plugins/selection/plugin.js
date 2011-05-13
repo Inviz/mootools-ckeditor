@@ -10,6 +10,9 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
+  - core.config
+  - core.dom.rangelist
+  - core.dom.walker
   - core.plugins
 
 provides: 

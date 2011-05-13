@@ -78,6 +78,11 @@ class CKEditor
             deps << "plugins.dialog.plugin"
           elsif structure.match "htmlwriter"
             deps << "core.htmlparser"
+          elsif structure.match "selection"
+            deps << "core.dom.rangelist"
+          end
+          if structure.match /\/(indent|wysiwygarea|removeformat|list|selection)/
+            deps << "core.dom.walker"
           end
           "core.plugins"
         when /skins/
