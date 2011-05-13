@@ -14,6 +14,7 @@ requires:
   - core.dom.element
   - core.env
   - core.dtd
+  - core.ui
   - core.tools
 
 provides: 

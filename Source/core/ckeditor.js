@@ -25,6 +25,7 @@ requires:
   - core.htmlparser.basicwriter
   - core.tools
   - core.dtd
+  - core.ui
   - core.tools
 
 provides: 

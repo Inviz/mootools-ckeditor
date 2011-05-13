@@ -14,6 +14,7 @@ requires:
   - core.scriptloader
   - core.tools
   - core.dtd
+  - core.ui
   - core.tools
 
 provides: 

@@ -10,6 +10,7 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
+  - core.htmlparser
   - core.plugins
 
 provides: 

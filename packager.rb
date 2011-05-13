@@ -54,13 +54,16 @@ class CKEditor
       bit =
         case bit
         when "core"
-          if !structure.match(/core\/(ckeditor_bas|editor_basic|_bootstrap|env|event|tools|dtd)/)
+          if !structure.match(/core\/(ckeditor_bas|editor_basic|_bootstrap|env|event|tools|dtd|ui)/)
             deps << "core.dtd"
+            deps << "core.ui"
             "core.tools"
           elsif structure.match "tools"
             "core.ckeditor_basic"
           elsif structure.match /env|event/
             "core.ckeditor_base"
+          elsif structure.match "/ui"
+            "core.tools"
           elsif structure.match "base"
             "CKEditor"
           end
@@ -71,6 +74,11 @@ class CKEditor
             bit
           end
         when /plugins/
+          if structure.match "dialogui"
+            deps << "plugins.dialog.plugin"
+          elsif structure.match "htmlwriter"
+            deps << "core.htmlparser"
+          end
           "core.plugins"
         when /skins/
           "core.skins"

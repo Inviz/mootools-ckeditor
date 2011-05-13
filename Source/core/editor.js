@@ -22,6 +22,7 @@ requires:
   - core.tools
   - core.ui
   - core.dtd
+  - core.ui
   - core.tools
 
 provides: 
