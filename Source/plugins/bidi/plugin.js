@@ -38,6 +38,10 @@ provides:
 	{
 		var editor = evt.editor,
 			path = evt.data.path;
+
+		if ( editor.readOnly )
+			return;
+
 		var useComputedState = editor.config.useComputedState,
 			selectedElement;
 

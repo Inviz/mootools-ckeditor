@@ -421,6 +421,7 @@ CKEDITOR.dialog.add( 'select', function( editor )
 								[
 									{
 										type : 'button',
+										id : 'btnAdd',
 										style : '',
 										label : editor.lang.select.btnAdd,
 										title : editor.lang.select.btnAdd,
@@ -444,6 +445,7 @@ CKEDITOR.dialog.add( 'select', function( editor )
 									},
 									{
 										type : 'button',
+										id : 'btnModify',
 										label : editor.lang.select.btnModify,
 										title : editor.lang.select.btnModify,
 										style : 'width:100%;',
@@ -466,6 +468,7 @@ CKEDITOR.dialog.add( 'select', function( editor )
 									},
 									{
 										type : 'button',
+										id : 'btnUp',
 										style : 'width:100%;',
 										label : editor.lang.select.btnUp,
 										title : editor.lang.select.btnUp,
@@ -482,6 +485,7 @@ CKEDITOR.dialog.add( 'select', function( editor )
 									},
 									{
 										type : 'button',
+										id : 'btnDown',
 										style : 'width:100%;',
 										label : editor.lang.select.btnDown,
 										title : editor.lang.select.btnDown,
@@ -507,6 +511,7 @@ CKEDITOR.dialog.add( 'select', function( editor )
 						[
 							{
 								type : 'button',
+								id : 'btnSetValue',
 								label : editor.lang.select.btnSetValue,
 								title : editor.lang.select.btnSetValue,
 								onClick : function()
@@ -520,6 +525,7 @@ CKEDITOR.dialog.add( 'select', function( editor )
 							},
 							{
 								type : 'button',
+								id : 'btnDelete',
 								label : editor.lang.select.btnDelete,
 								title : editor.lang.select.btnDelete,
 								onClick : function()

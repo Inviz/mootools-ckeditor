@@ -299,7 +299,9 @@ provides:
 		// keyboard paste or execCommand ) (#4874).
 		CKEDITOR.env.ie && ( depressBeforeEvent = 1 );
 
-		var retval = editor.document.$.queryCommandEnabled( command ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED;
+		var retval = CKEDITOR.TRISTATE_OFF;
+		try { retval = editor.document.$.queryCommandEnabled( command ) ? CKEDITOR.TRISTATE_OFF : CKEDITOR.TRISTATE_DISABLED; }catch( er ){}
+
 		depressBeforeEvent = 0;
 		return retval;
 	}
@@ -389,7 +391,7 @@ provides:
 				editor.on( 'contentDom', function()
 				{
 					var body = editor.document.getBody();
-					body.on( 'beforepaste', function( evt )
+					body.on( CKEDITOR.env.webkit ? 'paste' : 'beforepaste', function( evt )
 						{
 							if ( depressBeforeEvent )
 								return;
@@ -403,7 +405,7 @@ provides:
 							{
 								// The very last guard to make sure the
 								// paste has successfully happened.
-								if ( !CKEDITOR.tools.trim( data.toLowerCase().replace( /<span[^>]+data-cke-bookmark[^<]*?<\/span>/g,'' ) ) )
+								if ( !( data = CKEDITOR.tools.trim( data.replace( /<span[^>]+data-cke-bookmark[^<]*?<\/span>/ig,'' ) ) ) )
 									return;
 
 								var dataTransfer = {};

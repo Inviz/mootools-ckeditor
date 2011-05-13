@@ -15,7 +15,7 @@ class CKEditor
   R_DESCRIPTION_IDENTER = /\n\s*/
   R_DESCRIPTION_CLEANER = /\*\s+|:/
   R_PACKAGER_CLEANER = /^.*?\/\/ @Packager.RemoveLine.*?$/
-  R_INHERITED_DEPENDENCY = /((core|skins|plugins|lang)(\/[^\/]+)?)\/[^\/+]+?$/
+  R_INHERITED_DEPENDENCY = /((core|skins|plugins|lang|themes)(\/[^\/]+)?)\/[^\/+]+?$/
   
   def initialize(input = 'ckeditor', output = 'Source', dependencies = input + '/_source/core/loader.js')
     self.input = Pathname.new input
@@ -76,6 +76,8 @@ class CKEditor
           "core.skins"
         when /lang/
           "core.lang"
+        when /themes/
+          "core.themes"
         else
           bit
         end

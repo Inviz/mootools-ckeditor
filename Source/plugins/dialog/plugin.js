@@ -873,6 +873,16 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 			return function(){ this.foreach( fn ); return this; };
 		})(),
 
+
+		/**
+		 * Calls the {@link CKEDITOR.dialog.definition.uiElement#setup} method of each of the UI elements, with the arguments passed through it.
+		 * It is usually being called when the dialog is opened, to put the initial value inside the field.
+		 * @example
+		 * dialogObj.setupContent();
+		 * @example
+		 * var timestamp = ( new Date() ).valueOf();
+		 * dialogObj.setupContent( timestamp );
+		 */
 		setupContent : function()
 		{
 			var args = arguments;
@@ -883,6 +893,15 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 				});
 		},
 
+		/**
+		 * Calls the {@link CKEDITOR.dialog.definition.uiElement#commit} method of each of the UI elements, with the arguments passed through it.
+		 * It is usually being called when the user confirms the dialog, to process the values.
+		 * @example
+		 * dialogObj.commitContent();
+		 * @example
+		 * var timestamp = ( new Date() ).valueOf();
+		 * dialogObj.commitContent( timestamp );
+		 */
 		commitContent : function()
 		{
 			var args = arguments;
@@ -1153,6 +1172,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 		 * @param {String} pageId id of dialog page.
 		 * @param {String} elementId id of UI element.
 		 * @example
+		 * dialogObj.getContentElement( 'tabId', 'elementId' ).setValue( 'Example' );
 		 * @returns {CKEDITOR.ui.dialog.uiElement} The dialog UI element.
 		 */
 		getContentElement : function( pageId, elementId )
@@ -1166,6 +1186,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 		 * @param {String} pageId id of dialog page.
 		 * @param {String} elementId id of UI element.
 		 * @example
+		 * alert( dialogObj.getValueOf( 'tabId', 'elementId' ) );
 		 * @returns {Object} The value of the UI element.
 		 */
 		getValueOf : function( pageId, elementId )
@@ -1179,6 +1200,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 		 * @param {String} elementId id of the UI element.
 		 * @param {Object} value The new value of the UI element.
 		 * @example
+		 * dialogObj.setValueOf( 'tabId', 'elementId', 'Example' );
 		 */
 		setValueOf : function( pageId, elementId, value )
 		{
@@ -2233,6 +2255,9 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 					classes[ 'cke_dialog_ui_' + elementDefinition.type ] = 1;
 				if ( elementDefinition.className )
 					classes[ elementDefinition.className ] = 1;
+				if ( elementDefinition.disabled )
+					classes[ 'cke_disabled' ] = 1;
+
 				var attributeClasses = ( attributes['class'] && attributes['class'].split ) ? attributes['class'].split( ' ' ) : [];
 				for ( i = 0 ; i < attributeClasses.length ; i++ )
 				{
@@ -2717,7 +2742,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 		 */
 		disable : function()
 		{
-			var element = this.getInputElement();
+			var element = this.getElement();
 			element.setAttribute( 'disabled', 'true' );
 			element.addClass( 'cke_disabled' );
 		},
@@ -2728,7 +2753,7 @@ CKEDITOR.DIALOG_RESIZE_BOTH = 3;
 		 */
 		enable : function()
 		{
-			var element = this.getInputElement();
+			var element = this.getElement();
 			element.removeAttribute( 'disabled' );
 			element.removeClass( 'cke_disabled' );
 		},

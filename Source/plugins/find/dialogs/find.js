@@ -641,6 +641,7 @@ provides:
 								},
 								{
 									type : 'button',
+									id : 'btnFind',
 									align : 'left',
 									style : 'width:100%',
 									label : lang.find,
@@ -706,6 +707,7 @@ provides:
 								},
 								{
 									type : 'button',
+									id : 'btnFindReplace',
 									align : 'left',
 									style : 'width:100%',
 									label : lang.replace,
@@ -739,6 +741,7 @@ provides:
 								},
 								{
 									type : 'button',
+									id : 'btnReplaceAll',
 									align : 'left',
 									style : 'width:100%',
 									label : lang.replaceAll,
@@ -864,6 +867,8 @@ provides:
 				finder.searchRange = getSearchRange();
 
 				this.selectPage( startupPage );
+
+				this[ ( startupPage == 'find' && this._.editor.readOnly? 'hide' : 'show' ) + 'Page' ]( 'replace');
 			},
 			onHide : function()
 			{

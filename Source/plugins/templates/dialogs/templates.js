@@ -181,6 +181,7 @@ provides:
 								children :
 								[
 									{
+										id : 'selectTplText',
 										type : 'html',
 										html :
 											'<span>'  +

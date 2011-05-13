@@ -31,6 +31,7 @@ CKEDITOR.plugins.add( 'find',
 			});
 		var findCommand = editor.addCommand( 'find', new CKEDITOR.dialogCommand( 'find' ) );
 		findCommand.canUndo = false;
+		findCommand.readOnly = 1;
 
 		editor.ui.addButton( 'Replace',
 			{

@@ -101,7 +101,7 @@ provides:
 		for ( var i in all )
 		{
 			var one = all[ i ];
-			if ( one.mode == 'wysiwyg' )
+			if ( one.mode == 'wysiwyg' && !one.readOnly )
 			{
 				var body = one.document.getBody();
 				// Refresh 'contentEditable' otherwise
@@ -171,6 +171,7 @@ provides:
 			editor.addCommand( 'maximize',
 				{
 					modes : { wysiwyg : 1, source : 1 },
+					readOnly : 1,
 					editorFocus : false,
 					exec : function()
 					{

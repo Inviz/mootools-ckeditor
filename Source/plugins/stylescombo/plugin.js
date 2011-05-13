@@ -30,7 +30,8 @@ provides:
 			var config = editor.config,
 				lang = editor.lang.stylesCombo,
 				styles = {},
-				stylesList = [];
+				stylesList = [],
+				combo;
 
 			function loadStylesSet( callback )
 			{
@@ -78,7 +79,7 @@ provides:
 
 					init : function()
 					{
-						var combo = this;
+						combo = this;
 
 						loadStylesSet( function()
 							{
@@ -197,6 +198,22 @@ provides:
 
 						if ( !counter[ CKEDITOR.STYLE_OBJECT ] )
 							this.hideGroup( lang[ 'panelTitle' + String( CKEDITOR.STYLE_OBJECT ) ] );
+					},
+
+					// Force a reload of the data
+					reset: function()
+					{
+						if ( combo )
+						{
+							delete combo._.panel;
+							delete combo._.list;
+							combo._.committed = 0;
+							combo._.items = {};
+							combo._.state = CKEDITOR.TRISTATE_OFF;
+						}
+						styles = {};
+						stylesList = [];
+						loadStylesSet();
 					}
 				});
 

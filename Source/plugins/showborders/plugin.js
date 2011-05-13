@@ -54,6 +54,7 @@ provides:
 	{
 		preserveState : true,
 		editorFocus : false,
+		readOnly: 1,
 
 		exec : function ( editor )
 		{
@@ -63,8 +64,11 @@ provides:
 
 		refresh : function( editor )
 		{
-			var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
-			editor.document.getBody()[ funcName ]( 'cke_show_borders' );
+			if ( editor.document )
+			{
+				var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
+				editor.document.getBody()[ funcName ]( 'cke_show_borders' );
+			}
 		}
 	};
 

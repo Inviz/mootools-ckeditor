@@ -33,7 +33,7 @@ CKEDITOR.plugins.add( 'menubutton',
  * @constant
  * @example
  */
-CKEDITOR.UI_MENUBUTTON = 5;
+CKEDITOR.UI_MENUBUTTON = 'menubutton';
 
 (function()
 {

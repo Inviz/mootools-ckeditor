@@ -301,6 +301,24 @@ provides:
  * @example
  */
 
+/**
+ * Function to execute whenever the UI element's parent dialog's {@link CKEDITOR.dialog.definition.setupContent} method is executed.
+ * It usually takes care of the respective UI element as a standalone element.
+ * @name CKEDITOR.dialog.definition.uiElement.prototype.setup
+ * @field
+ * @type Function
+ * @example
+ */
+
+/**
+ * Function to execute whenever the UI element's parent dialog's {@link CKEDITOR.dialog.definition.commitContent} method is executed.
+ * It usually takes care of the respective UI element as a standalone element.
+ * @name CKEDITOR.dialog.definition.uiElement.prototype.commit
+ * @field
+ * @type Function
+ * @example
+ */
+
 // ----- hbox -----
 
 /**

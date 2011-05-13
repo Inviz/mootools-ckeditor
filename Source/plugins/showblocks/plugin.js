@@ -103,6 +103,7 @@ provides:
 
 	var commandDefinition =
 	{
+		readOnly : 1,
 		preserveState : true,
 		editorFocus : false,
 
@@ -114,8 +115,11 @@ provides:
 
 		refresh : function( editor )
 		{
-			var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
-			editor.document.getBody()[ funcName ]( 'cke_show_blocks' );
+			if ( editor.document )
+			{
+				var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
+				editor.document.getBody()[ funcName ]( 'cke_show_blocks' );
+			}
 		}
 	};
 

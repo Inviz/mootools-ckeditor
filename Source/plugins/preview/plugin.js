@@ -29,6 +29,7 @@ provides:
 	{
 		modes : { wysiwyg:1, source:1 },
 		canUndo : false,
+		readOnly : 1,
 		exec : function( editor )
 		{
 			var sHTML,

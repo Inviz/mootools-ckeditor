@@ -128,6 +128,9 @@ provides:
 
 		var switchLockRatio = function( dialog, value )
 		{
+			if ( !dialog.getContentElement( 'info', 'ratioLock' ) )
+				return null;
+
 			var oImageOriginal = dialog.originalElement;
 
 			// Dialog may already closed. (#5505)
@@ -182,8 +185,10 @@ provides:
 			var oImageOriginal = dialog.originalElement;
 			if ( oImageOriginal.getCustomData( 'isReady' ) == 'true' )
 			{
-				dialog.setValueOf( 'info', 'txtWidth', oImageOriginal.$.width );
-				dialog.setValueOf( 'info', 'txtHeight', oImageOriginal.$.height );
+				var widthField = dialog.getContentElement( 'info', 'txtWidth' ),
+					heightField = dialog.getContentElement( 'info', 'txtHeight' );
+				widthField && widthField.setValue( oImageOriginal.$.width );
+				heightField && heightField.setValue( oImageOriginal.$.height );
 			}
 			updatePreview( dialog );
 		};
@@ -464,8 +469,12 @@ provides:
 				if ( dialogType != 'image' )
 					this.hidePage( 'Link' );		//Hide Link tab.
 				var doc = this._.element.getDocument();
-				this.addFocusable( doc.getById( btnResetSizeId ), 5 );
-				this.addFocusable( doc.getById( btnLockSizesId ), 5 );
+
+				if ( this.getContentElement( 'info', 'ratioLock' ) )
+				{
+					this.addFocusable( doc.getById( btnResetSizeId ), 5 );
+					this.addFocusable( doc.getById( btnLockSizesId ), 5 );
+				}
 
 				this.commitContent = commitContent;
 			},
@@ -625,6 +634,7 @@ provides:
 							children :
 							[
 								{
+									id : 'basic',
 									type : 'vbox',
 									children :
 									[
@@ -741,6 +751,7 @@ provides:
 													]
 												},
 												{
+													id : 'ratioLock',
 													type : 'html',
 													style : 'margin-top:30px;width:40px;height:40px;',
 													onLoad : function()
@@ -1072,6 +1083,7 @@ provides:
 									[
 										{
 											type : 'html',
+											id : 'htmlPreview',
 											style : 'width:95%;',
 											html : '<div>' + CKEDITOR.tools.htmlEncode( editor.lang.common.preview ) +'<br>'+
 											'<div id="' + imagePreviewLoaderId + '" class="ImagePreviewLoader" style="display:none"><div class="loading">&nbsp;</div></div>'+
