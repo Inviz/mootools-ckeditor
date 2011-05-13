@@ -74,6 +74,7 @@ class CKEditor
             bit
           end
         when /plugins/
+          deps << "core.config"
           if structure.match "dialogui"
             deps << "plugins.dialog.plugin"
           elsif structure.match "htmlwriter"
@@ -81,7 +82,7 @@ class CKEditor
           elsif structure.match "selection"
             deps << "core.dom.rangelist"
           end
-          if structure.match /\/(indent|wysiwygarea|removeformat|list|selection)/
+          if structure.match /\/(indent|wysiwygarea|removeformat|list|selection|styles)/
             deps << "core.dom.walker"
           end
           "core.plugins"
