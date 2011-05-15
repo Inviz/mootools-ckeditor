@@ -21,6 +21,7 @@ requires:
   - core.themes
   - core.tools
   - core.ui
+  - core.dtd
   - core.tools
 
 provides: 

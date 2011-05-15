@@ -54,7 +54,8 @@ class CKEditor
       bit =
         case bit
         when "core"
-          if !structure.match(/core\/(ckeditor_bas|editor_basic|_bootstrap|env|event|tools)/)
+          if !structure.match(/core\/(ckeditor_bas|editor_basic|_bootstrap|env|event|tools|dtd)/)
+            deps << "core.dtd"
             "core.tools"
           elsif structure.match "tools"
             "core.ckeditor_basic"
