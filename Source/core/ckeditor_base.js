@@ -11,7 +11,7 @@ author: Frederico Knabben
 license: http://ckeditor.com/license
 
 requires: 
-  - CKEditor
+  - CKEDITOR.Basepath
 
 provides: 
   - core.ckeditor_base

@@ -36,7 +36,9 @@ class CKEditor
       writing
     end.select {|a| a}
     
-    files << "Source/CKEditor.js"
+    files << "Source/CKEDITOR.Basepath.js"
+    files << "Source/CKEDITOR.js"
+    files << "Source/skins/ias/skin.js"
     
     puts "#{files.size} files packed"
     File.open('package.yml', 'w').write(package % files.map {|f| %Q|\n - "#{f.to_s}"|}.join(""))
@@ -65,7 +67,7 @@ class CKEditor
           elsif structure.match "/ui"
             "core.tools"
           elsif structure.match "base"
-            "CKEditor"
+            "CKEDITOR.Basepath"
           end
         when "core.dom"
           if structure.match "walker"
@@ -79,6 +81,8 @@ class CKEditor
             deps << "plugins.dialog.plugin"
           elsif structure.match "htmlwriter"
             deps << "core.htmlparser"
+          elsif structure.match "domiterator"
+            deps << "core.dom.range"
           elsif structure.match "selection"
             deps << "core.dom.rangelist"
           end

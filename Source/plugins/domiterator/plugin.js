@@ -11,6 +11,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.config
+  - core.dom.range
   - core.plugins
 
 provides: 
