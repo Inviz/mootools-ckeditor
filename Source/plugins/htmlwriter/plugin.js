@@ -11,7 +11,7 @@ license: http://ckeditor.com/license
 
 requires: 
   - core.config
-  - core.htmlparser
+  - core.htmlparser.basicwriter
   - core.plugins
 
 provides: 

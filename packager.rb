@@ -80,7 +80,7 @@ class CKEditor
           if structure.match "dialogui"
             deps << "plugins.dialog.plugin"
           elsif structure.match "htmlwriter"
-            deps << "core.htmlparser"
+            deps << "core.htmlparser.basicwriter"
           elsif structure.match "domiterator"
             deps << "core.dom.range"
           elsif structure.match "selection"
